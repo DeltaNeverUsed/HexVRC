@@ -1,0 +1,17 @@
+{
+    "name": "Varneon.VUdon.Logger.Runtime",
+    "references": [
+        "UdonSharp.Runtime",
+        "VRC.Udon",
+        "Varneon.V-Inspector.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

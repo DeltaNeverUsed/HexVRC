@@ -1,0 +1,17 @@
+{
+    "name": "Varneon.V-Inspector.Editor",
+    "references": [
+        "Varneon.V-Inspector.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

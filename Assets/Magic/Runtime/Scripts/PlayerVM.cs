@@ -1,0 +1,153 @@
+﻿using System;
+using System.Collections.Generic;
+using BefuddledLabs.Magic.Debug.VUdon;
+using UdonSharp;
+using UnityEngine;
+using Varneon.VUdon.Logger;
+using VRC.SDK3.UdonNetworkCalling;
+using VRC.SDKBase;
+using VRC.Udon.Common.Interfaces;
+
+
+/*
+
+type status = Ok | Err(string)
+
+exec_instr :: instr -> stack -> (stack, status)
+
+exec_instr (div) ([0, 0]) = ([0, 0], Err("can't div by 0"))
+
+exec_instr (plus) ([a, b, ...]) =
+    is_arithmetic(a) -> if false return Err("???")
+    is_same_type(a, b) -> if false return Err("???")
+    return ([a + b, ...], Ok)
+
+enum instr_t {
+    add,
+    mul,
+}
+
+map = {
+    instr_t.add: typeof(InstrAdd), 
+    instr_t.mul: typeof(InstrMul), 
+}
+
+map[instr]().exec(state)
+
+class instr {
+    (stack,  status) exec(state) {
+        return ....;
+    }
+}
+
+*/
+
+// ReSharper disable once CheckNamespace
+namespace BefuddledLabs.Magic {
+    // ReSharper disable once InconsistentNaming
+    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+    public class PlayerVM : UdonSharpBehaviour {
+        public UdonConsole _console;
+        private VRCPlayerApi _localPlayer;
+        private Stack<StackItem> _stack = new Stack<StackItem>();
+        
+        public GlyphSpace glyphSpace;
+        
+        private ExecutionInfo _info;
+        
+        public void Start() {
+            _info = new ExecutionInfo(this, _stack, "");
+            this.Log("Hello World!");
+            if (Networking.IsOwner(gameObject))
+                if (Utilities.IsValid(GetComponentInParent<VMManager>()))
+                    GetComponentInParent<VMManager>().localVM = this;
+        }
+
+        private bool RaycastPlayer(Vector3 origin, Vector3 direction, out VRCPlayerApi player) {
+            const float distance = 10;
+            
+            VRCPlayerApi[] players = new VRCPlayerApi[80];
+            VRCPlayerApi.GetPlayers(players);
+
+            player = null;
+
+            if (!Physics.Raycast(origin, direction, out RaycastHit hit, distance))
+                return false;
+            
+            foreach (VRCPlayerApi tPlayer in players)
+            {
+                if (!Utilities.IsValid(tPlayer))
+                    break;
+
+                Vector3 playerPos = tPlayer.GetPosition();
+                if (!(Vector3.Distance(new Vector3(hit.point.x, 0, hit.point.z),
+                          new Vector3(playerPos.x, 0, playerPos.z)) <
+                      3f))
+                    continue;
+                player = tPlayer;
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool GetPlayerFromId(int id, out VRCPlayerApi player) {
+            player = VRCPlayerApi.GetPlayerById(id);
+            return Utilities.IsValid(player) && player.IsValid();
+        }
+
+        [NetworkCallable]
+        private void Impulse(int playerId, Vector3 impulse) {
+            if (!GetPlayerFromId(playerId, out VRCPlayerApi player))
+                return;
+            if (!player.isLocal)
+                return;
+
+            Vector3 vel = player.GetVelocity();
+            vel += impulse;
+            player.SetVelocity(vel);
+        }
+
+        private bool DoImpulse(VRCPlayerApi player, Vector3 impulse) {
+            if (!Utilities.IsValid(player) || !player.IsValid())
+                return false;
+            SendCustomNetworkEvent(NetworkEventTarget.All, nameof(Impulse), player.playerId, impulse * 10);
+            return true;
+        }
+
+        public void PrintStack() {
+            StackItem[] wholeStack = _stack.ToArray();
+            
+            this.Log("Printing stack!");
+
+            foreach (StackItem t in wholeStack) {
+                this.Log("  " + t.ToString());
+            }
+        }
+
+        public void ResetVM() {
+            if (!Utilities.IsValid(_localPlayer) || !Networking.IsOwner(_localPlayer, gameObject))
+                return;
+            
+            _stack.Clear();
+            glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.Clear));
+        }
+
+        public ExecutionState Execute(List<Instruction> instructions) {
+            _localPlayer = Networking.LocalPlayer;
+            
+            if (!Utilities.IsValid(_localPlayer) || !Networking.IsOwner(_localPlayer, gameObject))
+                return ExecutionState.Err("Not the owner of this VM");
+
+            foreach (Instruction instruction in instructions) {
+                this.Log($"Executing {instruction.ToString()}");
+
+                ExecutionState result = instruction.Execute(_info);
+                if (!result.Success)
+                    return result;
+            }
+            
+            return ExecutionState.Ok();
+        }
+    }
+}
