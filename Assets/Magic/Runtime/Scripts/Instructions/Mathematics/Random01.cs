@@ -2,8 +2,7 @@ using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.Mathematics {
-    public static class Random01
-    {
+    public static class Random01 {
         public const string Path = "eqqq";
 
         #region Docs
@@ -16,7 +15,7 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(StackItem.CreateStackItem(Random.value));
+            info.Stack.Push(Random.value);
             return ExecutionState.Ok();
         }
     }

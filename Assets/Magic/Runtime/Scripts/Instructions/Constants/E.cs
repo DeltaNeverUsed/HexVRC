@@ -1,9 +1,7 @@
-using UnityEngine;
-
 // ReSharper disable once CheckNamespace
+
 namespace BefuddledLabs.Magic.Instructions.Constants {
-    public static class E
-    {
+    public static class E {
         public const string Path = "aaq";
 
         #region Docs
@@ -16,7 +14,7 @@ namespace BefuddledLabs.Magic.Instructions.Constants {
 
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(StackItem.CreateStackItem(2.7182817f));
+            info.Stack.Push(2.7182817f);
             return ExecutionState.Ok();
         }
     }

@@ -1,10 +1,8 @@
 using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.StackManipulation
-{
-    public static class Pop
-    {
+namespace BefuddledLabs.Magic.Instructions.StackManipulation {
+    public static class Pop {
         public const string Path = "a";
 
         #region Docs
@@ -15,8 +13,7 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation
 
         #endregion
 
-        public static ExecutionState Execute(ExecutionInfo info, object top)
-        {
+        public static ExecutionState Execute(ExecutionInfo info, object top) {
             return ExecutionState.Ok();
         }
     }

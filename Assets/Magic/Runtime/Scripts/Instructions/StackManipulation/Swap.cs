@@ -1,10 +1,8 @@
 using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.StackManipulation
-{
-    public static class Swap
-    {
+namespace BefuddledLabs.Magic.Instructions.StackManipulation {
+    public static class Swap {
         public const string Path = "aawdd";
 
         #region Docs
@@ -15,10 +13,9 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation
 
         #endregion
 
-        public static ExecutionState Execute(ExecutionInfo info, object bot, object top)
-        {
-            info.Stack.Push(StackItem.CreateStackItem(top));
-            info.Stack.Push(StackItem.CreateStackItem(bot));
+        public static ExecutionState Execute(ExecutionInfo info, object bot, object top) {
+            info.Stack.Push(top);
+            info.Stack.Push(bot);
             return ExecutionState.Ok();
         }
     }

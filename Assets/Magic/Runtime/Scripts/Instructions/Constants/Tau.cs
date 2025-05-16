@@ -2,8 +2,7 @@ using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.Constants {
-    public static class Tau
-    {
+    public static class Tau {
         public const string Path = "eawae";
 
         #region Docs
@@ -16,7 +15,7 @@ namespace BefuddledLabs.Magic.Instructions.Constants {
 
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(StackItem.CreateStackItem(Mathf.PI * 2f));
+            info.Stack.Push(Mathf.PI * 2f);
             return ExecutionState.Ok();
         }
     }

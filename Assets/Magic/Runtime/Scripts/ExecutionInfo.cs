@@ -4,10 +4,10 @@
 namespace BefuddledLabs.Magic {
     public class ExecutionInfo {
         public readonly PlayerVM VM;
-        public readonly Stack<StackItem> Stack;
+        public readonly Stack<object> Stack;
         public string Path;
         
-        public ExecutionInfo(PlayerVM vm, Stack<StackItem> stack, string path) {
+        public ExecutionInfo(PlayerVM vm, Stack<object> stack, string path) {
             VM = vm;
             Stack = stack;
             Path = path;

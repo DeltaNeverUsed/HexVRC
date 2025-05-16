@@ -14,11 +14,11 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
         #endregion
         
         public static ExecutionState Execute(ExecutionInfo info) {
-            StackItem[] wholeStack = info.Stack.ToArray();
+            object[] wholeStack = info.Stack.ToArray();
             
             info.VM.Log("Printing stack!");
 
-            foreach (StackItem t in wholeStack) {
+            foreach (object t in wholeStack) {
                 info.VM.Log("  " + t.ToString());
             }
             

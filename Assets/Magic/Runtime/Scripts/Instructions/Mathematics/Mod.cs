@@ -19,7 +19,7 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
             if (b == 0)
                 return ExecutionState.Err("Division by zero");
 
-            info.Stack.Push(StackItem.CreateStackItem(a % b));
+            info.Stack.Push(a % b);
             return ExecutionState.Ok();
         }
         
@@ -27,7 +27,7 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
             if (b.x == 0 || b.y == 0 || b.z == 0)
                 return ExecutionState.Err("Division by zero");
 
-            info.Stack.Push(StackItem.CreateStackItem(new Vector3(a.x % b.x, a.y % b.y, a.z % b.z)));
+            info.Stack.Push(new Vector3(a.x % b.x, a.y % b.y, a.z % b.z));
             return ExecutionState.Ok();
         }
     }

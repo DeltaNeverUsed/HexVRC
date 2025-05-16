@@ -6,15 +6,15 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
         public const string Path = "qaq";
 
         #region Docs
-        
+
         public const string Description = "Adds yourself to the stack";
         public const string Input = "";
         public const string Output = "Player";
 
         #endregion
-        
+
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(StackItem.CreateStackItem(Networking.LocalPlayer));
+            info.Stack.Push(Networking.LocalPlayer);
             return ExecutionState.Ok();
         }
     }

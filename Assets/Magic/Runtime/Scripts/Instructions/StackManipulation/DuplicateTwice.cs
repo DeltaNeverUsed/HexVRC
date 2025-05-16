@@ -1,4 +1,3 @@
-using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.StackManipulation {
@@ -14,10 +13,10 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
         #endregion
 
         public static ExecutionState Execute(ExecutionInfo info, object bot, object top) {
-            info.Stack.Push(StackItem.CreateStackItem(bot));
-            info.Stack.Push(StackItem.CreateStackItem(top));
-            info.Stack.Push(StackItem.CreateStackItem(bot));
-            info.Stack.Push(StackItem.CreateStackItem(top));
+            info.Stack.Push(bot);
+            info.Stack.Push(top);
+            info.Stack.Push(bot);
+            info.Stack.Push(top);
             return ExecutionState.Ok();
         }
     }

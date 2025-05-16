@@ -2,8 +2,7 @@ using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.Constants {
-    public static class VectorZero
-    {
+    public static class VectorZero {
         public const string Path = "qqqqq";
 
         #region Docs
@@ -16,7 +15,7 @@ namespace BefuddledLabs.Magic.Instructions.Constants {
 
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(StackItem.CreateStackItem(Vector3.zero));
+            info.Stack.Push(Vector3.zero);
             return ExecutionState.Ok();
         }
     }

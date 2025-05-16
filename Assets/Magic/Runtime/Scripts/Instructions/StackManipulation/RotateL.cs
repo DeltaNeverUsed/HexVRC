@@ -1,10 +1,8 @@
 using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.StackManipulation
-{
-    public static class RotateL
-    {
+namespace BefuddledLabs.Magic.Instructions.StackManipulation {
+    public static class RotateL {
         public const string Path = "ddqdd";
 
         #region Docs
@@ -15,11 +13,10 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation
 
         #endregion
 
-        public static ExecutionState Execute(ExecutionInfo info, object bot, object mid, object top)
-        {
-            info.Stack.Push(StackItem.CreateStackItem(top));
-            info.Stack.Push(StackItem.CreateStackItem(bot));
-            info.Stack.Push(StackItem.CreateStackItem(mid));
+        public static ExecutionState Execute(ExecutionInfo info, object bot, object mid, object top) {
+            info.Stack.Push(top);
+            info.Stack.Push(bot);
+            info.Stack.Push(mid);
             return ExecutionState.Ok();
         }
     }

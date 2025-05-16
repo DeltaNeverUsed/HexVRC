@@ -1,10 +1,8 @@
-using VRC.SDKBase;
 using System.Collections.Generic;
+
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.ListManipulation
-{
-    public static class ReverseList
-    {
+namespace BefuddledLabs.Magic.Instructions.ListManipulation {
+    public static class ReverseList {
         public const string Path = "qqqaede";
 
         #region Docs
@@ -15,11 +13,10 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation
 
         #endregion
 
-        public static ExecutionState Execute(ExecutionInfo info, List<object> original)
-        {
+        public static ExecutionState Execute(ExecutionInfo info, List<object> original) {
             original.Reverse();
-            info.Stack.Push(StackItem.CreateStackItem(original));
+            info.Stack.Push(original);
             return ExecutionState.Ok();
         }
     }
-} 
+}

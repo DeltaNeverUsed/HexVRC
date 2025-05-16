@@ -16,8 +16,8 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
         public static ExecutionState Execute(ExecutionInfo info, VRCPlayerApi player) {
             if (!Utilities.IsValid(player) || !player.IsValid())
                 return ExecutionState.Err("Invalid player");
-            
-            info.Stack.Push(StackItem.CreateStackItem(player.GetAvatarEyeHeightAsMeters()));
+
+            info.Stack.Push(player.GetAvatarEyeHeightAsMeters());
             return ExecutionState.Ok();
         }
     }

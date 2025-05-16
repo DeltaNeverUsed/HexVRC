@@ -1,31 +1,29 @@
-using VRC.SDKBase;
+using System.Collections.Generic;
 
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.StackManipulation
-{
-    public static class MoveCopy
-    {
+namespace BefuddledLabs.Magic.Instructions.StackManipulation {
+    public static class MoveCopy {
         public const string Path = "aada";
 
         #region Docs
 
-        public const string Description = "Grabs the element in the stack indexed by the number and brings it to the top. If the number is negative, instead moves the top element of the stack down that many elements.";
+        public const string Description =
+            "Grabs the element in the stack indexed by the number and brings it to the top. If the number is negative, instead moves the top element of the stack down that many elements.";
+
         public const string Input = "Numer";
         public const string Output = "Any";
 
         #endregion
 
-        public static ExecutionState Execute(ExecutionInfo info, float index)
-        {
+        public static ExecutionState Execute(ExecutionInfo info, float index) {
             // Implementation of the move instruction
-            var stack = info.Stack;
+            Stack<object> stack = info.Stack;
             int idx = (int)index;
 
-            System.Collections.Generic.Stack<StackItem> scratch = new System.Collections.Generic.Stack<StackItem>();
+            Stack<object> scratch = new Stack<object>();
 
             // If the index is positive, move the element at that index to the top of the stack
-            if (idx >= 0)
-            {
+            if (idx >= 0) {
                 if (stack.Count < idx)
                     return ExecutionState.Err("Index out of range");
 
@@ -34,25 +32,24 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation
                     scratch.Push(stack.Pop());
 
                 // Pop the element at the index and keep it for later
-                StackItem indexedElement = stack.Peek();
+                object indexedElement = stack.Peek();
 
                 // Push all elements from the scratch stack back onto the original stack
                 while (scratch.Count > 0)
                     stack.Push(scratch.Pop());
-                
+
                 // Push the element at the index back onto the top of the stack
                 stack.Push(indexedElement);
             }
             // If the index is negative, move the top element of the stack down that many elements
-            else
-            {
+            else {
                 // Convert the index to a positive value
                 idx = -idx;
 
                 if (stack.Count < idx)
                     return ExecutionState.Err("Index out of range");
-                
-                StackItem topElement = stack.Peek();
+
+                object topElement = stack.Peek();
 
                 // Pop all elements up to the index into the scratch stack
                 for (int i = 0; i <= idx; i++)
@@ -65,6 +62,7 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation
                 while (scratch.Count > 0)
                     stack.Push(scratch.Pop());
             }
+
             return ExecutionState.Ok();
         }
     }

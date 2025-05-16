@@ -2,8 +2,7 @@ using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.Mathematics {
-    public static class ExpOrVectorProjection
-    {
+    public static class ExpOrVectorProjection {
         public const string Path = "wedew";
 
         #region Docs
@@ -16,12 +15,12 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
 
         public static ExecutionState Execute(ExecutionInfo info, float a, float b) {
-            info.Stack.Push(StackItem.CreateStackItem(Mathf.Pow(a, b)));
+            info.Stack.Push(Mathf.Pow(a, b));
             return ExecutionState.Ok();
         }
-        
+
         public static ExecutionState Execute(ExecutionInfo info, Vector3 a, Vector3 b) {
-            info.Stack.Push(StackItem.CreateStackItem(Vector3.Project(a, b)));
+            info.Stack.Push(Vector3.Project(a, b));
             return ExecutionState.Ok();
         }
     }

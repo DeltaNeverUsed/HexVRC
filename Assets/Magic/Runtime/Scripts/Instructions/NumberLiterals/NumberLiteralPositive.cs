@@ -1,12 +1,11 @@
-using VRC.SDKBase;
-
 // ReSharper disable once CheckNamespace
+
 namespace BefuddledLabs.Magic.Instructions.NumberLiterals {
     public static class NumberLiteralPositive {
         public const string Path = "aqaa*";
 
         #region Docs
-        
+
         public const string Description = "Adds a positive Number to the stack";
         public const string Input = "";
         public const string Output = "Number";
@@ -19,8 +18,7 @@ namespace BefuddledLabs.Magic.Instructions.NumberLiterals {
             float number = 0f;
 
             foreach (char direction in numberPath) {
-                switch (direction)
-                {
+                switch (direction) {
                     case 'a':
                         number *= 2f;
                         break;
@@ -41,9 +39,9 @@ namespace BefuddledLabs.Magic.Instructions.NumberLiterals {
 
             return number;
         }
-        
+
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(StackItem.CreateStackItem(PathToNumber(info.Path)));
+            info.Stack.Push(PathToNumber(info.Path));
 
             return ExecutionState.Ok();
         }

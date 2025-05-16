@@ -49,7 +49,7 @@ namespace BefuddledLabs.Magic {
     public class PlayerVM : UdonSharpBehaviour {
         public UdonConsole _console;
         private VRCPlayerApi _localPlayer;
-        private Stack<StackItem> _stack = new Stack<StackItem>();
+        private Stack<object> _stack = new Stack<object>();
 
         public GlyphSpace glyphSpace;
 
@@ -112,16 +112,6 @@ namespace BefuddledLabs.Magic {
                 return false;
             SendCustomNetworkEvent(NetworkEventTarget.All, nameof(Impulse), player.playerId, impulse * 10);
             return true;
-        }
-
-        public void PrintStack() {
-            StackItem[] wholeStack = _stack.ToArray();
-
-            this.Log("Printing stack!");
-
-            foreach (StackItem t in wholeStack) {
-                this.Log("  " + t.ToString());
-            }
         }
 
         public void ResetVM() {

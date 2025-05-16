@@ -19,7 +19,7 @@ namespace BefuddledLabs.Magic.Instructions {
             if (!Utilities.IsValid(player) || !player.IsValid())
                 return ExecutionState.Err("Invalid player");
 
-            info.VM.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(info.VM.ApplyImpulse), impulse);
+            info.VM.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(info.VM.ApplyImpulse), player, impulse);
 
             return ExecutionState.Ok();
         }

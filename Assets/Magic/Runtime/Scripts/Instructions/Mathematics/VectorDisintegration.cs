@@ -2,8 +2,7 @@ using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.Mathematics {
-    public static class VectorDisintegration
-    {
+    public static class VectorDisintegration {
         public const string Path = "qeeeee";
 
         #region Docs
@@ -16,9 +15,9 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
 
         public static ExecutionState Execute(ExecutionInfo info, Vector3 vec) {
-            info.Stack.Push(StackItem.CreateStackItem(vec.x));
-            info.Stack.Push(StackItem.CreateStackItem(vec.y));
-            info.Stack.Push(StackItem.CreateStackItem(vec.z));
+            info.Stack.Push(vec.x);
+            info.Stack.Push(vec.y);
+            info.Stack.Push(vec.z);
             return ExecutionState.Ok();
         }
     }

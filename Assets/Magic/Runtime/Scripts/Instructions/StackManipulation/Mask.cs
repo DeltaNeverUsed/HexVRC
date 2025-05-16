@@ -1,56 +1,53 @@
 using System.Collections.Generic;
-using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.StackManipulation
-{
-    public static class Mask
-    {
+namespace BefuddledLabs.Magic.Instructions.StackManipulation {
+    public static class Mask {
         public const string Path = "*";
 
         #region Docs
 
-        public const string Description = "An infinite family of actions that keep or remove elements at the top of the stack based on the sequence of dips and lines.";
+        public const string Description =
+            "An infinite family of actions that keep or remove elements at the top of the stack based on the sequence of dips and lines.";
+
         public const string Input = "Many, Number";
         public const string Output = "Many";
 
         #endregion
 
 
-        const int DIR_E = 0;
-        const int DIR_SE = 1;
+        private const int DirE = 0;
+        private const int DirSe = 1;
 
-        public static ExecutionState Execute(ExecutionInfo info)
-        {
-
+        public static ExecutionState Execute(ExecutionInfo info) {
             int index = 0;
             string path = info.Path;
             char start = path[index];
-            var stack = info.Stack;
+            Stack<object> stack = info.Stack;
 
-            var keepStack = new Stack<bool>();
+            Stack<bool> keepStack = new Stack<bool>();
 
             if (start != 'a' || start != 'w' || start != 'e')
                 return ExecutionState.Err("Not a valid Bookkeeper's Gambit");
 
-            int direction = DIR_E;
-            if(path[index] == 'a')
-                direction = DIR_SE;
+            int direction = DirE;
+            if (path[index] == 'a')
+                direction = DirSe;
 
-            while (index < path.Length)
-            {
-                if (direction == DIR_E) {
+            while (index < path.Length) {
+                if (direction == DirE) {
                     keepStack.Push(true);
                     if (path[index] == 'e')
-                        direction = DIR_SE;
+                        direction = DirSe;
                     else if (path[index] == 'w')
-                        direction = DIR_E;
+                        direction = DirE;
                     else
                         return ExecutionState.Err("Not a valid Bookkeeper's Gambit");
                     index++;
-                } else if (direction == DIR_SE) {
+                }
+                else if (direction == DirSe) {
                     keepStack.Push(false);
-                    
+
                     if (path[index] != 'a')
                         return ExecutionState.Err("Not a valid Bookkeeper's Gambit");
                     // Parsed 'a' so went from SE to NE
@@ -58,17 +55,17 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation
                     if (index >= path.Length)
                         break;
                     if (path[index] == 'e')
-                        direction = DIR_E;
-                    else if(path[index] == 'd')
-                        direction = DIR_SE;
+                        direction = DirE;
+                    else if (path[index] == 'd')
+                        direction = DirSe;
                     index++;
                 }
             }
 
-            var scratch = new Stack<StackItem>();
+            Stack<object> scratch = new Stack<object>();
 
             while (keepStack.Count > 0) {
-                StackItem item = stack.Pop();
+                object item = stack.Pop();
                 if (keepStack.Pop())
                     scratch.Push(item);
             }

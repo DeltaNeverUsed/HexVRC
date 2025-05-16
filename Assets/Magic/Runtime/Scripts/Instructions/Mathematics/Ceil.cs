@@ -16,12 +16,12 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
 
         public static ExecutionState Execute(ExecutionInfo info, float a) {
-            info.Stack.Push(StackItem.CreateStackItem(Mathf.Ceil(a)));
+            info.Stack.Push(Mathf.Ceil(a));
             return ExecutionState.Ok();
         }
         
         public static ExecutionState Execute(ExecutionInfo info, Vector3 a) {
-            info.Stack.Push(StackItem.CreateStackItem(new Vector3(Mathf.Ceil(a.x), Mathf.Ceil(a.y), Mathf.Ceil(a.z))));
+            info.Stack.Push(new Vector3(Mathf.Ceil(a.x), Mathf.Ceil(a.y), Mathf.Ceil(a.z)));
             return ExecutionState.Ok();
         }
     }
