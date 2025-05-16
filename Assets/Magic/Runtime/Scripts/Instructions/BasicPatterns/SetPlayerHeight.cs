@@ -1,5 +1,5 @@
 ﻿using VRC.SDKBase;
-using System.Collections.Generic;
+using VRC.Udon.Common.Interfaces;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
@@ -14,11 +14,11 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
 
         #endregion
 
-        public static ExecutionState Execute(Stack<StackItem> stack, VRCPlayerApi player, float height) {
+        public static ExecutionState Execute(ExecutionInfo info, VRCPlayerApi player, float height) {
             if (!Utilities.IsValid(player) || !player.IsValid())
                 return ExecutionState.Err("Invalid player");
             
-            player.SetAvatarEyeHeightByMeters(height);
+            info.VM.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(info.VM.SetHeight), height);
             return ExecutionState.Ok();
         }
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: Wand
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: d4661d3bf06e74a4b9364a5feb6f9606, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 878a91bc375c809a6a275f5921eaec75, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 720de7d418be0eb4f9dc4e5d59fa5c48, type: 3}

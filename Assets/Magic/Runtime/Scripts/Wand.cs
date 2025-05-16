@@ -159,25 +159,26 @@ namespace BefuddledLabs.Magic {
                 int angle = Mathf.RoundToInt(Vector2.SignedAngle(forward, next) / 60f);
                 switch (angle) {
                     case -2:
-                        _notation.Append('a');
+                        direction = 'a';
                         break;
                     case -1:
-                        _notation.Append('q');
+                        direction = 'q';
                         break;
                     case 0:
-                        _notation.Append('w');
+                        direction = 'w';
                         break;
                     case 1:
-                        _notation.Append('e');
+                        direction = 'e';
                         break;
                     case 2:
-                        _notation.Append('d');
+                        direction = 'd';
                         break;
                 }
             }
             
             _points.Add(qr);
-            _notation.Append(direction);
+            if (direction != ' ')
+                _notation.Append(direction);
             
             return true;
         }
@@ -258,7 +259,7 @@ namespace BefuddledLabs.Magic {
         public void PickupUseUp() {
             vmManager.localVM.glyphSpace = glyphSpace;
             _gridFrozen = !_gridFrozen;
-            if (!_gridFrozen) {
+            if (!_gridFrozen && _points.Count >= 2) {
                 Vector3[] arr = new Vector3[_points.Count];
                 for (int i = 0; i < _points.Count; i++) {
                     arr[i] = AxialToWorldPosition(_points[i].x, _points[i].y, grid);

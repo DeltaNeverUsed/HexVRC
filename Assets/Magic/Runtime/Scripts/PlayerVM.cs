@@ -28,8 +28,8 @@ enum instr_t {
 }
 
 map = {
-    instr_t.add: typeof(InstrAdd), 
-    instr_t.mul: typeof(InstrMul), 
+    instr_t.add: typeof(InstrAdd),
+    instr_t.mul: typeof(InstrMul),
 }
 
 map[instr]().exec(state)
@@ -50,11 +50,11 @@ namespace BefuddledLabs.Magic {
         public UdonConsole _console;
         private VRCPlayerApi _localPlayer;
         private Stack<StackItem> _stack = new Stack<StackItem>();
-        
+
         public GlyphSpace glyphSpace;
-        
+
         private ExecutionInfo _info;
-        
+
         public void Start() {
             _info = new ExecutionInfo(this, _stack, "");
             this.Log("Hello World!");
@@ -65,7 +65,7 @@ namespace BefuddledLabs.Magic {
 
         private bool RaycastPlayer(Vector3 origin, Vector3 direction, out VRCPlayerApi player) {
             const float distance = 10;
-            
+
             VRCPlayerApi[] players = new VRCPlayerApi[80];
             VRCPlayerApi.GetPlayers(players);
 
@@ -73,9 +73,8 @@ namespace BefuddledLabs.Magic {
 
             if (!Physics.Raycast(origin, direction, out RaycastHit hit, distance))
                 return false;
-            
-            foreach (VRCPlayerApi tPlayer in players)
-            {
+
+            foreach (VRCPlayerApi tPlayer in players) {
                 if (!Utilities.IsValid(tPlayer))
                     break;
 
@@ -117,7 +116,7 @@ namespace BefuddledLabs.Magic {
 
         public void PrintStack() {
             StackItem[] wholeStack = _stack.ToArray();
-            
+
             this.Log("Printing stack!");
 
             foreach (StackItem t in wholeStack) {
@@ -128,14 +127,14 @@ namespace BefuddledLabs.Magic {
         public void ResetVM() {
             if (!Utilities.IsValid(_localPlayer) || !Networking.IsOwner(_localPlayer, gameObject))
                 return;
-            
+
             _stack.Clear();
             glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.Clear));
         }
 
         public ExecutionState Execute(List<Instruction> instructions) {
             _localPlayer = Networking.LocalPlayer;
-            
+
             if (!Utilities.IsValid(_localPlayer) || !Networking.IsOwner(_localPlayer, gameObject))
                 return ExecutionState.Err("Not the owner of this VM");
 
@@ -146,8 +145,37 @@ namespace BefuddledLabs.Magic {
                 if (!result.Success)
                     return result;
             }
-            
+
             return ExecutionState.Ok();
         }
+
+
+        #region Networked Functions
+
+        [NetworkCallable]
+        public void ApplyImpulse(int playerId, Vector3 impulse) {
+            VRCPlayerApi player = VRCPlayerApi.GetPlayerById(playerId);
+            if (!Utilities.IsValid(player) || !player.IsValid())
+                return;
+            if (!player.isLocal)
+                return;
+
+            Vector3 velocity = player.GetVelocity();
+            velocity += impulse;
+            player.SetVelocity(velocity);
+        }
+
+        [NetworkCallable]
+        public void SetHeight(int playerId, float height) {
+            VRCPlayerApi player = VRCPlayerApi.GetPlayerById(playerId);
+            if (!Utilities.IsValid(player) || !player.IsValid())
+                return;
+            if (!player.isLocal)
+                return;
+
+            player.SetAvatarEyeHeightByMeters(height);
+        }
+
+        #endregion
     }
 }

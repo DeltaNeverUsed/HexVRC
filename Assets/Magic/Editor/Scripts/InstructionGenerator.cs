@@ -43,8 +43,8 @@ namespace BefuddledLabs.Magic.Editor {
                 return;
             
             result.Append("if (Path.StartsWith(\"");
-            result.Append(path[..1]);
-            result.Append("\", StringComparison.InvariantCulture) {");
+            result.Append(path[..^1]);
+            result.Append("\", StringComparison.InvariantCulture)) {");
             result.Append("return ");
             result.Append(GetTypeName(executionMethod.DeclaringType));
             result.Append(".Execute(info);\n");
@@ -114,10 +114,20 @@ namespace BefuddledLabs.Magic.Editor {
                         if (i != 0)
                             result.Append(" && ");
 
-                        result.Append(paramName);
-                        result.Append(".ItemType == typeof(");
-                        result.Append(GetTypeName(parameters[i + 1].ParameterType));
-                        result.Append(")");
+                        if (parameters[i + 1].ParameterType == typeof(object))
+                            result.Append("true");
+                        else if (!parameters[i + 1].ParameterType.IsValueType) {
+                            result.Append(paramName);
+                            result.Append(".ItemType.IsAssignableFrom(typeof(");
+                            result.Append(GetTypeName(parameters[i + 1].ParameterType));
+                            result.Append("))");
+                        }
+                        else {
+                            result.Append(paramName);
+                            result.Append(".ItemType == typeof(");
+                            result.Append(GetTypeName(parameters[i + 1].ParameterType));
+                            result.Append(")");
+                        }
                     }
 
                     result.Append(") {\n");
@@ -185,27 +195,29 @@ namespace BefuddledLabs.Magic {
         }
         
         public ExecutionState Execute(ExecutionInfo info) {
-            info.path = Path;
+            info.Path = Path;
             Stack<StackItem> stack = info.Stack;
             int stackSize = stack.Count;
             switch (Path) {
 ");
-            IEnumerable<Type> classes = Assembly.GetAssembly(typeof(PlayerVM))
+            List<Type> classes = Assembly.GetAssembly(typeof(PlayerVM))
                 .GetTypes()
                 .Where(t => t.IsClass && t.Namespace != null && t.Namespace.StartsWith("BefuddledLabs.Magic.Instructions")).ToList();
             foreach (Type c in classes)
                 GenerateCase(result, c);
 
             result.Append(@"
-            }
+            }");
 
+            classes.Sort((c1, c2) => GetPath(c2).Length.CompareTo(GetPath(c1).Length));
+            foreach (Type c in classes)
+                GeneratePathMatch(result, c);
+            
+            result.Append(@"
             return ExecutionState.Err(""Path was not a valid instruction."");
         }
 ");
-            foreach (Type c in classes) {
-                GeneratePathMatch(result, c);
-            }
-            
+
             result.Append(@"
     }
 }

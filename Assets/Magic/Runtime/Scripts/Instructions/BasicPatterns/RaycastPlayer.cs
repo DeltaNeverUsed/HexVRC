@@ -13,7 +13,7 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
             public const string Output = "Player | Null";
 
             #endregion
-
+            
             public static ExecutionState Execute(ExecutionInfo info, Vector3 position, Vector3 lookDirection) {
                 lookDirection = lookDirection.normalized;
 
