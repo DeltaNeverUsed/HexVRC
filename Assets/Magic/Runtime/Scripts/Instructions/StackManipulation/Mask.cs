@@ -21,15 +21,19 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
 
         public static ExecutionState Execute(ExecutionInfo info) {
             int index = 0;
+            
+            
             string path = info.Path;
+            if (path.Length > index)
+                return ExecutionState.Err("Not a valid Bookkeeper's Gambit");
+            
             char start = path[index];
-            Stack<object> stack = info.Stack;
-
-            Stack<bool> keepStack = new Stack<bool>();
 
             if (start != 'a' || start != 'w' || start != 'e')
                 return ExecutionState.Err("Not a valid Bookkeeper's Gambit");
 
+            Stack<object> stack = info.Stack;
+            Stack<bool> keepStack = new Stack<bool>();
             int direction = DirE;
             if (path[index] == 'a')
                 direction = DirSe;

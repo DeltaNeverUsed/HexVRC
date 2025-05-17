@@ -49,13 +49,17 @@ namespace BefuddledLabs.Magic {
     public class PlayerVM : UdonSharpBehaviour {
         public UdonConsole _console;
         private VRCPlayerApi _localPlayer;
-        private Stack<object> _stack = new Stack<object>();
+        private Stack<object> _stack;
 
         public GlyphSpace glyphSpace;
 
         private ExecutionInfo _info;
 
+        [NonSerialized] public bool EscapeNext;
+        [NonSerialized] public int IntrospectionDepth = 0;
+
         public void Start() {
+            _stack = new Stack<object>();
             _info = new ExecutionInfo(this, _stack, "");
             this.Log("Hello World!");
             if (Networking.IsOwner(gameObject))
@@ -118,10 +122,14 @@ namespace BefuddledLabs.Magic {
             if (!Utilities.IsValid(_localPlayer) || !Networking.IsOwner(_localPlayer, gameObject))
                 return;
 
+            IntrospectionDepth = 0;
+            EscapeNext = false;
+
             _stack.Clear();
             glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.Clear));
         }
 
+        [RecursiveMethod]
         public ExecutionState Execute(List<Instruction> instructions) {
             _localPlayer = Networking.LocalPlayer;
 
@@ -129,11 +137,33 @@ namespace BefuddledLabs.Magic {
                 return ExecutionState.Err("Not the owner of this VM");
 
             foreach (Instruction instruction in instructions) {
+                // Should probably do this in a more elegant way, but this will do for now.
+                if (IntrospectionDepth > 0 && !string.Equals(instruction.Path,
+                        Instructions.EscapingPatterns.Retrospection.Path, StringComparison.OrdinalIgnoreCase) &&
+                    !string.Equals(
+                        instruction.Path, Instructions.Clear.Path, StringComparison.OrdinalIgnoreCase) &&
+                    !string.Equals(
+                        instruction.Path, Instructions.EscapingPatterns.Undo.Path,
+                        StringComparison.OrdinalIgnoreCase)) {
+                    ((List<Instruction>)_stack.Peek()).Add(instruction);
+                    continue;
+                }
+
+                if (EscapeNext) {
+                    EscapeNext = false;
+                    List<Instruction> i = new List<Instruction>(1);
+                    i.Add(instruction);
+                    _stack.Push(i);
+                    continue;
+                }
+
                 this.Log($"Executing {instruction.ToString()}");
 
                 ExecutionState result = instruction.Execute(_info);
-                if (!result.Success)
+                if (!result.Success || result.EarlyReturnDepth > 0) {
+                    result.EarlyReturnDepth--;
                     return result;
+                }
             }
 
             return ExecutionState.Ok();

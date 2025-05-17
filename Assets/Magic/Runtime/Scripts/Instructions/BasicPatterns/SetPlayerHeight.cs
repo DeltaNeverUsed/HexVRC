@@ -18,7 +18,7 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
             if (!Utilities.IsValid(player) || !player.IsValid())
                 return ExecutionState.Err("Invalid player");
             
-            info.VM.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(info.VM.SetHeight), player, height);
+            info.VM.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(info.VM.SetHeight), player.playerId, height);
             return ExecutionState.Ok();
         }
     }

@@ -26,7 +26,7 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
             if (b == 0)
                 return ExecutionState.Err("Division by zero");
 
-            info.Stack.Push(a / b);
+            info.Stack.Push(new Vector3(a.x / b, a.y / b, a.z / b));
             return ExecutionState.Ok();
         }
 

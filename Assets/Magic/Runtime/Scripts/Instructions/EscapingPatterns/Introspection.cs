@@ -1,0 +1,23 @@
+using System.Collections.Generic;
+
+// ReSharper disable once CheckNamespace
+namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
+    public static class Introspection {
+        public const string Path = "qqq";
+
+        #region Docs
+
+        public const string Description = "Escapes all symbols until a Retrospection is reached";
+        public const string Input = "";
+        public const string Output = "";
+
+        #endregion
+
+
+        public static ExecutionState Execute(ExecutionInfo info) {
+            info.Stack.Push(new List<Instruction>());
+            info.VM.IntrospectionDepth++;
+            return ExecutionState.Ok();
+        }
+    }
+}

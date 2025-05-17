@@ -117,12 +117,20 @@ namespace BefuddledLabs.Magic.Editor {
                         if (parameters[i + 1].ParameterType == typeof(object))
                             result.Append("true");
                         else if (!parameters[i + 1].ParameterType.IsValueType) {
+                            result.Append("Utilities.IsValid(");
+                            result.Append(paramName);
+                            result.Append(") && ");
+                            
                             result.Append(paramName);
                             result.Append(".GetType().IsAssignableFrom(typeof(");
                             result.Append(GetTypeName(parameters[i + 1].ParameterType));
                             result.Append("))");
                         }
                         else {
+                            result.Append("Utilities.IsValid(");
+                            result.Append(paramName);
+                            result.Append(") && ");
+                            
                             result.Append(paramName);
                             result.Append(".GetType() == typeof(");
                             result.Append(GetTypeName(parameters[i + 1].ParameterType));
@@ -166,6 +174,7 @@ namespace BefuddledLabs.Magic.Editor {
 using System;
 using System.Collections.Generic;
 using System.Text;
+using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic {

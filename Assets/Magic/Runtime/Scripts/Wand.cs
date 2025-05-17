@@ -4,6 +4,7 @@ using System.Text;
 using BefuddledLabs.Magic.Debug.VUdon;
 using UdonSharp;
 using UnityEngine;
+using Varneon.VUdon.Logger;
 using VRC.SDKBase;
 using VRC.Udon.Common.Enums;
 using VRC.Udon.Common.Interfaces;
@@ -22,6 +23,7 @@ namespace BefuddledLabs.Magic {
     public class Wand : UdonSharpBehaviour {
         public GlyphSpace glyphSpace;
         public VMManager vmManager;
+        public UdonConsole _console;
 
         public VRC_Pickup pickup;
         public Transform grid;
@@ -86,6 +88,7 @@ namespace BefuddledLabs.Magic {
             if (Networking.IsOwner(gameObject))
                 SendCustomEventDelayedFrames(nameof(LocalUpdateLoop), 1);
             else {
+                lineRenderer.gameObject.SetActive(false);
                 grid.gameObject.SetActive(false);
                 pickup.pickupable = false;
             }

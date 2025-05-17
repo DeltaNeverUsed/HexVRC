@@ -1448,6 +1448,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 1902855612}
   glyphSpace: {fileID: 456989007}
   vmManager: {fileID: 1387301301}
+  _console: {fileID: 0}
   pickup: {fileID: 581235855}
   grid: {fileID: 2146426877}
   gridSnapPoint: {fileID: 964525081}
