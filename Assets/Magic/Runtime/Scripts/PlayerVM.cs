@@ -157,10 +157,15 @@ namespace BefuddledLabs.Magic {
                     continue;
                 }
 
-                this.Log($"Executing {instruction.ToString()}");
+                ExecutionInfo infoCopy = (ExecutionInfo)((object[])(object)_info).Clone();
+                ExecutionState result = instruction.Execute(infoCopy);
+                glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus), infoCopy.GlyphId, result.Success, result.Error);
 
-                ExecutionState result = instruction.Execute(_info);
-                if (!result.Success || result.EarlyReturnDepth > 0) {
+                if (!result.Success) {
+                    return result;
+                }
+                
+                if (result.EarlyReturnDepth > 0) {
                     result.EarlyReturnDepth--;
                     return result;
                 }

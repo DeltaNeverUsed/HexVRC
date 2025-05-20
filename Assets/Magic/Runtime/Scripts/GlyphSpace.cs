@@ -2,6 +2,7 @@
 using UdonSharp;
 using UnityEngine;
 using VRC.SDK3.UdonNetworkCalling;
+using VRC.Udon.Common.Interfaces;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic {
@@ -10,7 +11,7 @@ namespace BefuddledLabs.Magic {
         public Transform glyphContainer;
         public GameObject glyphTemplate;
 
-        List<Glyph> _glyphs = new List<Glyph>();
+        Dictionary<int, Glyph> _glyphs = new Dictionary<int, Glyph>();
 
         /// <summary>
         /// 
@@ -20,13 +21,22 @@ namespace BefuddledLabs.Magic {
         /// <param name="rotation"></param>
         /// <returns>Glyph Index</returns>
         [NetworkCallable]
-        public int InstantiateGlyph(Vector3[] points) {
+        private void NetworkInstantiateGlyph(Vector3[] points, int id) {
             GameObject glyph = Instantiate(glyphTemplate, glyphContainer);
             Glyph glyphComponent = glyph.GetComponent<Glyph>();
             glyphComponent.RenderPoints(points);
-            _glyphs.Add(glyphComponent);
+            _glyphs.Add(id, glyphComponent);
+        }
+        
+        public int InstantiateGlyph(Vector3[] points) {
+            int id = Random.Range(0, int.MaxValue);
+            while (_glyphs.ContainsKey(id))
+                id = Random.Range(0, int.MaxValue);
+            
+            SendCustomNetworkEvent(NetworkEventTarget.Others, nameof(NetworkInstantiateGlyph), points, id);
 
-            return _glyphs.Count - 1;
+            NetworkInstantiateGlyph(points, id);
+            return id;
         }
 
         [NetworkCallable]
@@ -34,6 +44,20 @@ namespace BefuddledLabs.Magic {
             foreach (Transform child in glyphContainer.transform)
                 Destroy(child.gameObject);
             _glyphs.Clear();
+        }
+        
+        [NetworkCallable]
+        public void UpdateGlyphStatus(int glyphId, bool success, string msg) {
+            if (!_glyphs.TryGetValue(glyphId, out Glyph glyph))
+                return;
+            glyph.UpdateState(success, msg);
+        }
+        
+        [NetworkCallable]
+        public void DestroyGlyph(int glyphId) {
+            if (!_glyphs.Remove(glyphId, out Glyph glyph))
+                return;
+            Destroy(glyph.gameObject);
         }
     }
 }

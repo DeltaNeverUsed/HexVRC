@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: VMManager
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: b0e190e1bec403c61b2aba8dd780acaf, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 948759d113d59774fbbe6b3d6b8cf4b6, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: f246ee2a864eff1479a86477a64ae12f, type: 3}

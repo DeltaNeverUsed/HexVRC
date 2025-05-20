@@ -158,6 +158,14 @@ namespace BefuddledLabs.Magic.Editor {
                     result.Append("}\n");
                 }
 
+                result.Append("// Restore stack if failed\n");
+                for (int i = paramNames.Count - 1; i >= 0; i--) {
+                    string paramName = paramNames[i];
+                    result.Append("stack.Push(");
+                    result.Append(paramName);
+                    result.Append(");\n");
+                }
+
                 if (paramCount > 0)
                     result.Append("}\n");
             }
@@ -180,15 +188,15 @@ using VRC.SDKBase;
 namespace BefuddledLabs.Magic {
     public class Instruction {
         public readonly string Path;
-        public readonly int SymbolIndex = -1;
+        public readonly int GlyphId = -1;
 
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
             sb.Append(Path.ToString());
             sb.Append("":\n"");
             
-            sb.Append(""  SymbolIndex: "");
-            sb.Append(SymbolIndex.ToString());
+            sb.Append(""  GlyphId: "");
+            sb.Append(GlyphId.ToString());
             
             return sb.ToString();
         }
@@ -197,13 +205,14 @@ namespace BefuddledLabs.Magic {
             Path = path;
         }
 
-        public Instruction(string path, int symbolIndex) {
-            SymbolIndex = symbolIndex;
+        public Instruction(string path, int glyphId) {
+            GlyphId = glyphId;
             Path = path;
         }
         
         public ExecutionState Execute(ExecutionInfo info) {
             info.Path = Path;
+            info.GlyphId = GlyphId;
             Stack<object> stack = info.Stack;
             int stackSize = stack.Count;
             switch (Path) {

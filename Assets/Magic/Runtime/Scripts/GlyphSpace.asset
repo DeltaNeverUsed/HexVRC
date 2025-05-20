@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: GlyphSpace
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 9703f98f2d5bf67049619d746921c7f3, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: b38495a71aed83344876ce6affb3e3d0, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: a4ab79b1e75ff6c498452cee109157b3, type: 3}
@@ -20,13 +20,29 @@ MonoBehaviour:
   compiledVersion: 2
   networkEntrypointMetadata:
   - _maxEventsPerSecond: 5
-    _name: InstantiateGlyph
+    _name: NetworkInstantiateGlyph
     _parameters:
     - _name: __0_points__param
       _type: 32
+    - _name: __0_id__param
+      _type: 11
   - _maxEventsPerSecond: 5
     _name: Clear
     _parameters: []
+  - _maxEventsPerSecond: 5
+    _name: UpdateGlyphStatus
+    _parameters:
+    - _name: __0_glyphId__param
+      _type: 11
+    - _name: __0_success__param
+      _type: 9
+    - _name: __0_msg__param
+      _type: 37
+  - _maxEventsPerSecond: 5
+    _name: DestroyGlyph
+    _parameters:
+    - _name: __1_glyphId__param
+      _type: 11
   behaviourSyncMode: 4
   hasInteractEvent: 0
   scriptID: -7359082269404236812
@@ -178,8 +194,8 @@ MonoBehaviour:
       Data: 9|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: System.Collections.Generic.List`1[[BefuddledLabs.Magic.Glyph, Assembly-CSharp]],
-        mscorlib
+      Data: System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[BefuddledLabs.Magic.Glyph,
+        Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 8
       Data: 

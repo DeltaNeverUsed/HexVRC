@@ -45,11 +45,11 @@ namespace BefuddledLabs.Magic {
         
         private StringBuilder _notation = new StringBuilder();
 
-        private static Vector2Int GetNextAxial(Vector2Int previous, Vector2Int current, RotationDirection direction) {
+        public static Vector2Int GetNextAxial(Vector2Int previous, Vector2Int current, RotationDirection direction) {
             return current + RotateVector(current - previous, GetRotationAngle(direction));
         }
 
-        private static Vector2Int RotateVector(Vector2Int vec, int degrees) {
+        public static Vector2Int RotateVector(Vector2Int vec, int degrees) {
             // Convert degrees to hexagonal rotation steps (60° increments)
             int steps = degrees / 60;
             for (int i = 0; i < Mathf.Abs(steps); i++) {
@@ -59,7 +59,7 @@ namespace BefuddledLabs.Magic {
             return vec;
         }
 
-        private static int GetRotationAngle(RotationDirection direction) {
+        public static int GetRotationAngle(RotationDirection direction) {
             switch (direction) {
                 case RotationDirection.Straight:
                     return 0;
@@ -268,11 +268,10 @@ namespace BefuddledLabs.Magic {
                     arr[i] = AxialToWorldPosition(_points[i].x, _points[i].y, grid);
                 }
 
-                glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.Others, nameof(glyphSpace.InstantiateGlyph), arr);
-                int glyphIndex = glyphSpace.InstantiateGlyph(arr);
+                int glyphId = glyphSpace.InstantiateGlyph(arr);
                 
                 List<Instruction> instructions = new List<Instruction>(1);
-                instructions.Add(new Instruction(_notation.ToString(), glyphIndex));
+                instructions.Add(new Instruction(_notation.ToString(), glyphId));
                 ExecutionState result = vmManager.localVM.Execute(instructions);
                 
                 this.Log("execution state was " + result.ToString());
