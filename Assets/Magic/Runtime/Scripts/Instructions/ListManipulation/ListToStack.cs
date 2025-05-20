@@ -15,10 +15,10 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         #endregion
 
-        public static ExecutionState Execute(ExecutionInfo info, List<object> stackitems) {
+        public static ExecutionState Execute(ExecutionInfo info, List<StackItem> stackItems) {
             // Push each element in order
-            for (int i = 0; i < stackitems.Count; i++) {
-                info.Stack.Push(stackitems[i]);
+            foreach (StackItem t in stackItems) {
+                info.Stack.Push(t);
             }
 
             return ExecutionState.Ok();

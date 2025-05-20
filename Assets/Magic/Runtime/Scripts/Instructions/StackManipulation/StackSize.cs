@@ -15,8 +15,8 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
 
         #endregion
 
-        public static ExecutionState Execute(ExecutionInfo info, object top, float number) {
-            info.Stack.Push((float)info.Stack.Count);
+        public static ExecutionState Execute(ExecutionInfo info) {
+            info.Stack.Push(new StackItem(info.Stack.Count));
             return ExecutionState.Ok();
         }
     }

@@ -90,7 +90,7 @@ namespace BefuddledLabs.Magic.Editor {
 
                 for (int i = paramNames.Count - 1; i >= 0; i--) {
                     string paramName = paramNames[i];
-                    result.Append("object ");
+                    result.Append("StackItem ");
                     result.Append(paramName);
                     result.Append(" = stack.Pop();\n");
                 }
@@ -114,27 +114,17 @@ namespace BefuddledLabs.Magic.Editor {
                         if (i != 0)
                             result.Append(" && ");
 
-                        if (parameters[i + 1].ParameterType == typeof(object))
+                        if (parameters[i + 1].ParameterType == typeof(StackItem))
                             result.Append("true");
                         else if (!parameters[i + 1].ParameterType.IsValueType) {
-                            result.Append("Utilities.IsValid(");
                             result.Append(paramName);
-                            result.Append(") && ");
-                            
-                            result.Append(paramName);
-                            result.Append(".GetType().IsAssignableFrom(typeof(");
-                            result.Append(GetTypeName(parameters[i + 1].ParameterType));
-                            result.Append("))");
+                            result.Append(".Type == ItemType.");
+                            result.Append(StackItem.GetItemType(parameters[i + 1].ParameterType).ToString());
                         }
                         else {
-                            result.Append("Utilities.IsValid(");
                             result.Append(paramName);
-                            result.Append(") && ");
-                            
-                            result.Append(paramName);
-                            result.Append(".GetType() == typeof(");
-                            result.Append(GetTypeName(parameters[i + 1].ParameterType));
-                            result.Append(")");
+                            result.Append(".Type == ItemType.");
+                            result.Append(StackItem.GetItemType(parameters[i + 1].ParameterType).ToString());
                         }
                     }
 
@@ -150,6 +140,7 @@ namespace BefuddledLabs.Magic.Editor {
                         result.Append(GetTypeName(parameters[i + 1].ParameterType));
                         result.Append(')');
                         result.Append(paramName);
+                        result.Append(".Value");
                     }
 
                     result.Append(");\n");
@@ -213,7 +204,7 @@ namespace BefuddledLabs.Magic {
         public ExecutionState Execute(ExecutionInfo info) {
             info.Path = Path;
             info.GlyphId = GlyphId;
-            Stack<object> stack = info.Stack;
+            Stack<StackItem> stack = info.Stack;
             int stackSize = stack.Count;
             switch (Path) {
 ");

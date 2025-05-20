@@ -197,7 +197,8 @@ MonoBehaviour:
       Data: 10|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: System.Collections.Generic.Stack`1[[System.Object, mscorlib]], mscorlib
+      Data: System.Collections.Generic.Stack`1[[BefuddledLabs.Magic.StackItem, Assembly-CSharp]],
+        mscorlib
     - Name: 
       Entry: 8
       Data: 

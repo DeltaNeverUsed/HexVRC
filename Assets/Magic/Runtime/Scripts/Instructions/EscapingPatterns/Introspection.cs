@@ -15,7 +15,7 @@ namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
 
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(new List<Instruction>());
+            info.Stack.Push(new StackItem(new List<StackItem>()));
             info.VM.IntrospectionDepth++;
             return ExecutionState.Ok();
         }

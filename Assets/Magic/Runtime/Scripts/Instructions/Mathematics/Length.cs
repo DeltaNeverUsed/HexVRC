@@ -15,12 +15,12 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
 
         public static ExecutionState Execute(ExecutionInfo info, float a) {
-            info.Stack.Push(Mathf.Abs(a));
+            info.Stack.Push(new StackItem(Mathf.Abs(a)));
             return ExecutionState.Ok();
         }
 
         public static ExecutionState Execute(ExecutionInfo info, Vector3 a) {
-            info.Stack.Push(a.magnitude);
+            info.Stack.Push(new StackItem(a.magnitude));
             return ExecutionState.Ok();
         }
     }

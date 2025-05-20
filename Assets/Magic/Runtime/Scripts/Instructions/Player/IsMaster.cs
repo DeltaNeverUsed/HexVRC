@@ -17,7 +17,7 @@ namespace BefuddledLabs.Magic.Instructions.Player {
             if (!Utilities.IsValid(player) || !player.IsValid())
                 return ExecutionState.Err("Invalid player");
             
-            info.Stack.Push(player.isMaster);
+            info.Stack.Push(new StackItem(player.isMaster));
             return ExecutionState.Ok();
         }
     }

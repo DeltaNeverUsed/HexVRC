@@ -20,7 +20,7 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
             lookDirection = lookDirection.normalized;
 
             if (!Physics.Raycast(position, lookDirection, out RaycastHit hit, 100)) {
-                info.Stack.Push(null);
+                info.Stack.Push(new StackItem());
                 return ExecutionState.Ok();
             }
 
@@ -43,11 +43,11 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
             }
 
             if (closestDistance >= 3) { // return null if player isn't close
-                info.Stack.Push(null);
+                info.Stack.Push(new StackItem());
                 return ExecutionState.Ok();
             }
 
-            info.Stack.Push(closestPlayer);
+            info.Stack.Push(new StackItem(closestPlayer));
             return ExecutionState.Ok();
         }
     }

@@ -13,9 +13,9 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         #endregion
 
-        public static ExecutionState Execute(ExecutionInfo info, List<object> original) {
+        public static ExecutionState Execute(ExecutionInfo info, List<StackItem> original) {
             original.Reverse();
-            info.Stack.Push(original);
+            info.Stack.Push(new StackItem(original));
             return ExecutionState.Ok();
         }
     }

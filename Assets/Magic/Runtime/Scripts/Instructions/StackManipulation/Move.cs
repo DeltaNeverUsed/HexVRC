@@ -17,10 +17,10 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
 
         public static ExecutionState Execute(ExecutionInfo info, float index) {
             // Implementation of the move instruction
-            Stack<object> stack = info.Stack;
+            Stack<StackItem> stack = info.Stack;
             int idx = (int)index;
 
-            Stack<object> scratch = new Stack<object>();
+            Stack<StackItem> scratch = new Stack<StackItem>();
 
             // If the index is positive, move the element at that index to the top of the stack
             if (idx >= 0) {
@@ -32,7 +32,7 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
                     scratch.Push(stack.Pop());
 
                 // Pop the element at the index and keep it for later
-                object indexedElement = stack.Pop();
+                StackItem indexedElement = stack.Pop();
 
                 // Push all elements from the scratch stack back onto the original stack
                 while (scratch.Count > 0)
@@ -49,7 +49,7 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
                 if (stack.Count < idx)
                     return ExecutionState.Err("Index out of range");
 
-                object topElement = stack.Pop();
+                StackItem topElement = stack.Pop();
 
                 // Pop all elements up to the index into the scratch stack
                 for (int i = 0; i < idx; i++)

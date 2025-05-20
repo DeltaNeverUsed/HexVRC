@@ -14,8 +14,14 @@ namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
         #endregion
 
 
-        public static ExecutionState Execute(ExecutionInfo info, List<Instruction> symbols) {
-            ExecutionState success = info.VM.Execute(symbols);
+        public static ExecutionState Execute(ExecutionInfo info, List<StackItem> symbols) {
+            List<Instruction> instructions = new List<Instruction>(symbols.Count);
+            foreach (StackItem item in symbols) {
+                if (item.Type == ItemType.Instruction)
+                    instructions.Add((Instruction)item.Value);
+            }
+            
+            ExecutionState success = info.VM.Execute(instructions);
             return success;
         }
     }

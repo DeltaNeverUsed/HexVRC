@@ -17,7 +17,7 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
             if (!Utilities.IsValid(player) || !player.IsValid())
                 return ExecutionState.Err("Invalid player");
 
-            info.Stack.Push(player.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position);
+            info.Stack.Push(new StackItem(player.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position));
             return ExecutionState.Ok();
         }
     }

@@ -13,7 +13,7 @@ namespace BefuddledLabs.Magic.Instructions.NumberLiterals {
         #endregion
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(-NumberLiteralPositive.PathToNumber(info.Path));
+            info.Stack.Push(new StackItem(-NumberLiteralPositive.PathToNumber(info.Path)));
 
             return ExecutionState.Ok();
         }

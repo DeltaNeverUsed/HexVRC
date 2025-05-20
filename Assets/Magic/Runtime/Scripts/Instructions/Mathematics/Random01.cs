@@ -15,7 +15,7 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(Random.value);
+            info.Stack.Push(new StackItem(Random.value));
             return ExecutionState.Ok();
         }
     }

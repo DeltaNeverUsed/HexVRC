@@ -49,7 +49,7 @@ namespace BefuddledLabs.Magic {
     public class PlayerVM : UdonSharpBehaviour {
         public UdonConsole _console;
         private VRCPlayerApi _localPlayer;
-        private Stack<object> _stack;
+        private Stack<StackItem> _stack;
 
         public GlyphSpace glyphSpace;
 
@@ -59,7 +59,7 @@ namespace BefuddledLabs.Magic {
         [NonSerialized] public int IntrospectionDepth = 0;
 
         public void Start() {
-            _stack = new Stack<object>();
+            _stack = new Stack<StackItem>();
             _info = new ExecutionInfo(this, _stack, "");
             this.Log("Hello World!");
             if (Networking.IsOwner(gameObject))
@@ -145,15 +145,15 @@ namespace BefuddledLabs.Magic {
                     !string.Equals(
                         instruction.Path, Instructions.EscapingPatterns.Undo.Path,
                         StringComparison.OrdinalIgnoreCase)) {
-                    ((List<Instruction>)_stack.Peek()).Add(instruction);
+                    ((List<StackItem>)_stack.Peek().Value).Add(new StackItem(instruction));
                     continue;
                 }
 
                 if (EscapeNext) {
                     EscapeNext = false;
-                    List<Instruction> i = new List<Instruction>(1);
-                    i.Add(instruction);
-                    _stack.Push(i);
+                    List<StackItem> i = new List<StackItem>(1);
+                    i.Add(new StackItem(instruction));
+                    _stack.Push(new StackItem(i));
                     continue;
                 }
 

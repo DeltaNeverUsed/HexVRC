@@ -15,9 +15,9 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
 
         public static ExecutionState Execute(ExecutionInfo info, Vector3 vec) {
-            info.Stack.Push(vec.x);
-            info.Stack.Push(vec.y);
-            info.Stack.Push(vec.z);
+            info.Stack.Push(new StackItem(vec.x));
+            info.Stack.Push(new StackItem(vec.y));
+            info.Stack.Push(new StackItem(vec.z));
             return ExecutionState.Ok();
         }
     }

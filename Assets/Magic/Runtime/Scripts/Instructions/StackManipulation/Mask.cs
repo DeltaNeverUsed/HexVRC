@@ -31,7 +31,7 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
             if (start != 'a' || start != 'w' || start != 'e')
                 return ExecutionState.Err("Not a valid Bookkeeper's Gambit");
 
-            Stack<object> stack = info.Stack;
+            Stack<StackItem> stack = info.Stack;
             Stack<bool> keepStack = new Stack<bool>();
             int direction = DirE;
             if (path[index] == 'a')
@@ -65,10 +65,10 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
                 }
             }
 
-            Stack<object> scratch = new Stack<object>();
+            Stack<StackItem> scratch = new Stack<StackItem>();
 
             while (keepStack.Count > 0) {
-                object item = stack.Pop();
+                StackItem item = stack.Pop();
                 if (keepStack.Pop())
                     scratch.Push(item);
             }

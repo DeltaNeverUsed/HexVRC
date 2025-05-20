@@ -15,16 +15,17 @@ namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
         #endregion
 
 
-        public static ExecutionState Execute(ExecutionInfo info, List<Instruction> patterns) {
+        public static ExecutionState Execute(ExecutionInfo info, List<StackItem> patterns) {
             if (patterns.Count - 1 < 0 || patterns.Count - 1 >= patterns.Count)
                 return ExecutionState.Err("List was Empty");
-            
-            int id = patterns[patterns.Count - 1].GlyphId;
+
+            StackItem lastItem = patterns[patterns.Count - 1];
             patterns.RemoveAt(patterns.Count - 1);
             
-            info.VM.glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(info.VM.glyphSpace.DestroyGlyph), id);
+            if (lastItem.Type == ItemType.Instruction)
+                info.VM.glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(info.VM.glyphSpace.DestroyGlyph), ((Instruction)lastItem.Value).GlyphId);
             
-            info.Stack.Push(patterns);
+            info.Stack.Push(new StackItem(patterns));
             return ExecutionState.Ok();
         }
     }

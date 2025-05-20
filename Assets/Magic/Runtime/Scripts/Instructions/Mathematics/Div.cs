@@ -18,7 +18,7 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
             if (b == 0)
                 return ExecutionState.Err("Division by zero");
 
-            info.Stack.Push(a / b);
+            info.Stack.Push(new StackItem(a / b));
             return ExecutionState.Ok();
         }
 
@@ -26,12 +26,12 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
             if (b == 0)
                 return ExecutionState.Err("Division by zero");
 
-            info.Stack.Push(new Vector3(a.x / b, a.y / b, a.z / b));
+            info.Stack.Push(new StackItem(new Vector3(a.x / b, a.y / b, a.z / b)));
             return ExecutionState.Ok();
         }
 
         public static ExecutionState Execute(ExecutionInfo info, Vector3 a, Vector3 b) {
-            info.Stack.Push(Vector3.Cross(a, b));
+            info.Stack.Push(new StackItem(Vector3.Cross(a, b)));
             return ExecutionState.Ok();
         }
     }

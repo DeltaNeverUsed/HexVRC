@@ -14,7 +14,7 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
         #endregion
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(Networking.LocalPlayer);
+            info.Stack.Push(new StackItem(Networking.LocalPlayer));
             return ExecutionState.Ok();
         }
     }

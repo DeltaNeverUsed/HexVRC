@@ -19,9 +19,9 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
             lookDirection = lookDirection.normalized;
 
             if (Physics.Raycast(position, lookDirection, out RaycastHit hit, 100))
-                info.Stack.Push(hit.point);
+                info.Stack.Push(new StackItem(hit.point));
             else
-                info.Stack.Push(null);
+                info.Stack.Push(new StackItem());
 
             return ExecutionState.Ok();
         }

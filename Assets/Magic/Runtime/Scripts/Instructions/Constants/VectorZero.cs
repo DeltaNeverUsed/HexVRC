@@ -15,7 +15,7 @@ namespace BefuddledLabs.Magic.Instructions.Constants {
 
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(Vector3.zero);
+            info.Stack.Push(new StackItem(Vector3.zero));
             return ExecutionState.Ok();
         }
     }

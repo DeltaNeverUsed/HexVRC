@@ -33,13 +33,13 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
                     $"Not enough elements on the stack. Needed {size}, but only {info.Stack.Count} available.");
 
             // Create a new array and add the elements from the stack to it
-            List<object> array = new List<object>(size);
+            List<StackItem> array = new List<StackItem>(size);
             for (int i = size - 1; i >= 0; i--) {
                 array[i] = info.Stack.Pop();
             }
 
             // Push the list onto the stack
-            info.Stack.Push(array);
+            info.Stack.Push(new StackItem(array));
             return ExecutionState.Ok();
         }
     }

@@ -41,7 +41,7 @@ namespace BefuddledLabs.Magic.Instructions.NumberLiterals {
         }
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(PathToNumber(info.Path));
+            info.Stack.Push(new StackItem(PathToNumber(info.Path)));
 
             return ExecutionState.Ok();
         }

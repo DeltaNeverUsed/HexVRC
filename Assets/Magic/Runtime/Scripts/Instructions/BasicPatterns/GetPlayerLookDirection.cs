@@ -18,8 +18,8 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
             if (!Utilities.IsValid(player) || !player.IsValid())
                 return ExecutionState.Err("Invalid player");
 
-            info.Stack.Push(player.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).rotation *
-                            Vector3.forward);
+            info.Stack.Push(new StackItem(player.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).rotation *
+                                          Vector3.forward));
             return ExecutionState.Ok();
         }
     }

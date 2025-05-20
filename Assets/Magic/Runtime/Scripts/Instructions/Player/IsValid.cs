@@ -15,12 +15,12 @@ namespace BefuddledLabs.Magic.Instructions.Player {
 
         public static ExecutionState Execute(ExecutionInfo info, object playerObject) {
             if (playerObject.GetType() != typeof(VRCPlayerApi)) {
-                info.Stack.Push(false);
+                info.Stack.Push(new StackItem(false));
                 return ExecutionState.Ok();
             }
             
             VRCPlayerApi player = (VRCPlayerApi)playerObject;
-            info.Stack.Push(Utilities.IsValid(player) && player.IsValid());
+            info.Stack.Push(new StackItem(Utilities.IsValid(player) && player.IsValid()));
             return ExecutionState.Ok();
         }
     }

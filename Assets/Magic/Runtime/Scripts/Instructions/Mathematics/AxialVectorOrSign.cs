@@ -19,13 +19,13 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
         public static ExecutionState Execute(ExecutionInfo info, float a) {
             switch (a) {
                 case < 0:
-                    info.Stack.Push(-1);
+                    info.Stack.Push(new StackItem(-1));
                     break;
                 case > 0:
-                    info.Stack.Push(1);
+                    info.Stack.Push(new StackItem(1));
                     break;
                 default:
-                    info.Stack.Push(0);
+                    info.Stack.Push(new StackItem(0));
                     break;
             }
 
@@ -38,11 +38,11 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
             float zAbs = Mathf.Abs(a.z);
 
             if (xAbs >= yAbs && xAbs >= zAbs)
-                info.Stack.Push(new Vector3(a.x, 0, 0));
+                info.Stack.Push(new StackItem(new Vector3(a.x, 0, 0)));
             else if (yAbs >= xAbs && yAbs >= zAbs)
-                info.Stack.Push(new Vector3(0, a.y, 0));
+                info.Stack.Push(new StackItem(new Vector3(0, a.y, 0)));
             else
-                info.Stack.Push(new Vector3(0, 0, a.z));
+                info.Stack.Push(new StackItem(new Vector3(0, 0, a.z)));
 
             return ExecutionState.Ok();
         }
