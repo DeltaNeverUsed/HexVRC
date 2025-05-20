@@ -21,8 +21,8 @@ namespace BefuddledLabs.Magic {
     public class StackItem {
         public readonly ItemType Type;
         public readonly object Value;
-        
-        #if !UDONSHARP_COMPILER
+
+#if !UDONSHARP_COMPILER
 
         public static ItemType GetItemType(Type type) {
             if (type == null)
@@ -41,8 +41,8 @@ namespace BefuddledLabs.Magic {
                 return ItemType.List;
             return ItemType.Null;
         }
-            
-        #endif
+
+#endif
 
         public StackItem() {
             Type = ItemType.Null;
@@ -57,7 +57,7 @@ namespace BefuddledLabs.Magic {
             Type = Utilities.IsValid(data) ? ItemType.Number : ItemType.Null;
             Value = data;
         }
-        
+
         public StackItem(bool data) {
             Type = Utilities.IsValid(data) ? ItemType.Boolean : ItemType.Null;
             Value = data;
@@ -77,6 +77,7 @@ namespace BefuddledLabs.Magic {
             Type = Utilities.IsValid(data) ? ItemType.Instruction : ItemType.Null;
             Value = data;
         }
+
         private StackItem(StackItem data) {
             Type = Utilities.IsValid(data) ? data.Type : ItemType.Null;
             if (Type != ItemType.Null)
@@ -86,35 +87,47 @@ namespace BefuddledLabs.Magic {
         public StackItem Copy() {
             return new StackItem(this);
         }
-        
+
 
         [RecursiveMethod]
-        public static StackItem Deserialize(DataDictionary serializedData) {
+        public static StackItem Deserialize(string json) {
+            bool deserialize = VRCJson.TryDeserializeFromJson(json, out DataToken token);
+            if (!deserialize || token.TokenType != TokenType.DataDictionary)
+                return new StackItem();
+
+            DataDictionary serializedData = token.DataDictionary;
             ItemType type = (ItemType)(int)serializedData["t"].Number;
 
             switch (type) {
                 case ItemType.Vector:
-                    DataList vectorList = serializedData["t"].DataList;
+                    DataList vectorList = serializedData["v"].DataList;
                     return new StackItem(new Vector3((float)vectorList[0].Number, (float)vectorList[1].Number,
                         (float)vectorList[2].Number));
                 case ItemType.Number:
-                    return new StackItem((float)serializedData["t"].Number);
+                    return new StackItem((float)serializedData["v"].Number);
                 case ItemType.Player:
-                    VRCPlayerApi player = VRCPlayerApi.GetPlayerById((int)serializedData["t"].Number);
-                    return !Utilities.IsValid(player) ? new StackItem() : new StackItem(player);
+                    VRCPlayerApi[] players = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
+                    VRCPlayerApi.GetPlayers(players);
+                    foreach (VRCPlayerApi player in players) {
+                        if (player.IsValid() &&
+                            player.displayName.Equals(serializedData["v"].String, StringComparison.InvariantCultureIgnoreCase))
+                            return new StackItem(player);
+                    }
+
+                    return new StackItem();
                 case ItemType.List:
-                    DataList serializedList = serializedData["t"].DataList;
+                    DataList serializedList = serializedData["v"].DataList;
                     List<StackItem> list = new List<StackItem>(serializedList.Count);
 
                     for (int i = 0; i < serializedList.Count; i++)
-                        list.Add(Deserialize(serializedList[i].DataDictionary));
+                        list.Add(Deserialize(serializedList[i].String));
 
                     return new StackItem(list);
 
                 case ItemType.Instruction:
-                    return new StackItem(new Instruction(serializedData["t"].String));
+                    return new StackItem(new Instruction(serializedData["v"].String));
                 case ItemType.Boolean:
-                    return new StackItem(serializedData["t"].Boolean);
+                    return new StackItem(serializedData["v"].Boolean);
                 case ItemType.Null:
                 default:
                     return new StackItem();
@@ -124,7 +137,7 @@ namespace BefuddledLabs.Magic {
         [RecursiveMethod]
         public string Serialize() {
             DataDictionary dict = new DataDictionary();
-            dict["t"] = (int)Type;
+            dict["t"] = new DataToken((int)Type);
 
             switch (Type) {
                 case ItemType.Vector:
@@ -136,14 +149,14 @@ namespace BefuddledLabs.Magic {
                     dict["v"] = tempList;
                     break;
                 case ItemType.Number:
-                    dict["v"] = (float)Value;
+                    dict["v"] = new DataToken((float)Value);
                     break;
                 case ItemType.Player:
                     VRCPlayerApi player = (VRCPlayerApi)Value;
                     if (!Utilities.IsValid(player) || !player.IsValid())
-                        dict["v"] = -1;
+                        dict["v"] = new DataToken("");
                     else
-                        dict["v"] = player.playerId;
+                        dict["v"] = new DataToken(player.displayName);
                     break;
                 case ItemType.List:
                     List<StackItem> list = (List<StackItem>)Value;
@@ -156,14 +169,14 @@ namespace BefuddledLabs.Magic {
                     break;
 
                 case ItemType.Instruction:
-                    dict["v"] = ((Instruction)Value).Path;
+                    dict["v"] = new DataToken(((Instruction)Value).Path);
                     break;
                 case ItemType.Boolean:
-                    dict["v"] = (bool)Value;
+                    dict["v"] = new DataToken((bool)Value);
                     break;
                 case ItemType.Null:
                 default:
-                    dict["t"] = (int)ItemType.Null;
+                    dict["t"] = new DataToken((int)ItemType.Null);
                     break;
             }
 
@@ -175,10 +188,10 @@ namespace BefuddledLabs.Magic {
         [RecursiveMethod]
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
-            
+
             UnityEngine.Debug.Log($"Type is null? {!Utilities.IsValid(Type)}");
             UnityEngine.Debug.Log($"Type is {Type}");
-            
+
             UnityEngine.Debug.Log($"Value is null? {!Utilities.IsValid(Value)}");
             UnityEngine.Debug.Log($"Value is {Value}");
 
@@ -204,6 +217,7 @@ namespace BefuddledLabs.Magic {
                         sb.Append("Invalid Player");
                         break;
                     }
+
                     VRCPlayerApi player = (VRCPlayerApi)Value;
                     if (!player.IsValid())
                         sb.Append("Invalid Player");
@@ -225,6 +239,7 @@ namespace BefuddledLabs.Magic {
                             sb.Append(", ");
                         sb.Append(list[i].ToString());
                     }
+
                     sb.Append(']');
                     break;
                 case ItemType.Boolean:

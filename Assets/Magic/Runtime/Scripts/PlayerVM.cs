@@ -8,7 +8,6 @@ using VRC.SDK3.UdonNetworkCalling;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
-
 /*
 
 type status = Ok | Err(string)
@@ -57,6 +56,8 @@ namespace BefuddledLabs.Magic {
 
         [NonSerialized] public bool EscapeNext;
         [NonSerialized] public int IntrospectionDepth = 0;
+
+        [NonSerialized] public StorageMedium LastInteractedStorageMedium;
 
         public void Start() {
             _stack = new Stack<StackItem>();

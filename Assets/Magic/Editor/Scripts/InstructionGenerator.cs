@@ -116,11 +116,6 @@ namespace BefuddledLabs.Magic.Editor {
 
                         if (parameters[i + 1].ParameterType == typeof(StackItem))
                             result.Append("true");
-                        else if (!parameters[i + 1].ParameterType.IsValueType) {
-                            result.Append(paramName);
-                            result.Append(".Type == ItemType.");
-                            result.Append(StackItem.GetItemType(parameters[i + 1].ParameterType).ToString());
-                        }
                         else {
                             result.Append(paramName);
                             result.Append(".Type == ItemType.");
@@ -140,7 +135,8 @@ namespace BefuddledLabs.Magic.Editor {
                         result.Append(GetTypeName(parameters[i + 1].ParameterType));
                         result.Append(')');
                         result.Append(paramName);
-                        result.Append(".Value");
+                        if (parameters[i + 1].ParameterType != typeof(StackItem))
+                            result.Append(".Value");
                     }
 
                     result.Append(");\n");

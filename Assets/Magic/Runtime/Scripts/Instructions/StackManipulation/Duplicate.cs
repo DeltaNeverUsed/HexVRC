@@ -13,8 +13,8 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
         #endregion
 
         public static ExecutionState Execute(ExecutionInfo info, StackItem top) {
-            info.Stack.Push(top.Copy());
-            info.Stack.Push(top.Copy());
+            info.Stack.Push(top);
+            info.Stack.Push(top);
             return ExecutionState.Ok();
         }
     }

@@ -13,7 +13,7 @@ namespace BefuddledLabs.Magic.Instructions.LogicalOperators {
         #endregion
 
 
-        public static ExecutionState Execute(ExecutionInfo info, object any) {
+        public static ExecutionState Execute(ExecutionInfo info, StackItem any) {
 
             return ExecutionState.Ok();
         }
