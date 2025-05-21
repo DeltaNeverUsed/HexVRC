@@ -52,7 +52,7 @@ namespace BefuddledLabs.Magic {
 
         public GlyphSpace glyphSpace;
 
-        private ExecutionInfo _info;
+        [NonSerialized] public ExecutionInfo Info;
 
         [NonSerialized] public bool EscapeNext;
         [NonSerialized] public int IntrospectionDepth = 0;
@@ -61,7 +61,7 @@ namespace BefuddledLabs.Magic {
 
         public void Start() {
             _stack = new Stack<StackItem>();
-            _info = new ExecutionInfo(this, _stack, "");
+            Info = new ExecutionInfo(this, _stack, "");
             this.Log("Hello World!");
             if (Networking.IsOwner(gameObject))
                 if (Utilities.IsValid(GetComponentInParent<VMManager>()))
@@ -158,7 +158,7 @@ namespace BefuddledLabs.Magic {
                     continue;
                 }
 
-                ExecutionInfo infoCopy = (ExecutionInfo)((object[])(object)_info).Clone();
+                ExecutionInfo infoCopy = (ExecutionInfo)((object[])(object)Info).Clone();
                 ExecutionState result = instruction.Execute(infoCopy);
                 glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus), infoCopy.GlyphId, result.Success, result.Error);
 
