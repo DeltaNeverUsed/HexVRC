@@ -16,6 +16,7 @@ namespace BefuddledLabs.Magic {
         Player,
         Instruction,
         List,
+        Any,
     }
 
     public class StackItem {
@@ -39,6 +40,8 @@ namespace BefuddledLabs.Magic {
                 return ItemType.Instruction;
             if (typeof(List<StackItem>).IsAssignableFrom(type))
                 return ItemType.List;
+            if (typeof(StackItem).IsAssignableFrom(type))
+                return ItemType.Any;
             return ItemType.Null;
         }
 

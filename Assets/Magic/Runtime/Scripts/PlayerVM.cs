@@ -142,7 +142,7 @@ namespace BefuddledLabs.Magic {
                 if (IntrospectionDepth > 0 && !string.Equals(instruction.Path,
                         Instructions.EscapingPatterns.Retrospection.Path, StringComparison.OrdinalIgnoreCase) &&
                     !string.Equals(
-                        instruction.Path, Instructions.Clear.Path, StringComparison.OrdinalIgnoreCase) &&
+                        instruction.Path, Instructions.BasicPatterns.Clear.Path, StringComparison.OrdinalIgnoreCase) &&
                     !string.Equals(
                         instruction.Path, Instructions.EscapingPatterns.Undo.Path,
                         StringComparison.OrdinalIgnoreCase)) {

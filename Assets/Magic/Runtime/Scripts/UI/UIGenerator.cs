@@ -2,8 +2,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using TMPro;
 using UdonSharpEditor;
 using UnityEditor;
@@ -41,11 +43,16 @@ namespace BefuddledLabs.Magic.UI {
 
             // Step 2: Compute scale factor to fit in -40 to +40
             float maxOriginalSize = Mathf.Max(width, height);
-            float scaleFactor = 95f / maxOriginalSize; // since -40 to 40 is 80 units
+            float scaleFactor = 1f / maxOriginalSize; // since -40 to 40 is 80 units
 
             // Step 3: Scale and translate
 
-            return (from p in points select new Vector2(p.x, p.y) - center into shifted select shifted * scaleFactor into scaled select new Vector3(scaled.x, scaled.y, 0)).ToList();
+            return (from p in points
+                select new Vector2(p.x, p.y) - center
+                into shifted
+                select shifted * scaleFactor
+                into scaled
+                select new Vector3(scaled.x, scaled.y, 0)).ToList();
         }
 
         private static Vector3[] GetLinePoints(string notation) {
@@ -96,6 +103,92 @@ namespace BefuddledLabs.Magic.UI {
             return new Vector2(x, y);
         }
 
+        private void GeneratePathImages(string[] paths) {
+            GameObject lineRendererObject = new GameObject("TempRenderer") {
+                layer = LayerMask.NameToLayer("reserved7")
+            };
+            LineRenderer lineRenderer = lineRendererObject.AddComponent<LineRenderer>();
+            
+            lineRenderer.material = ((UIGenerator)target).lineMaterial;
+            lineRenderer.colorGradient = ((UIGenerator)target).lineGradient;
+            lineRenderer.textureMode = LineTextureMode.Stretch;
+            lineRenderer.widthMultiplier = 0.01f;
+            lineRenderer.numCapVertices = 16;
+            lineRenderer.numCornerVertices = 16;
+            
+            GameObject camGo = new GameObject("TempRenderCam");
+            Camera cam = camGo.AddComponent<Camera>();
+            cam.clearFlags = CameraClearFlags.Color;
+            cam.backgroundColor = Color.clear;
+            cam.orthographic = true;
+            cam.orthographicSize = 1;
+            cam.transform.position = new Vector3(0, 0, -10);
+            cam.cullingMask = 1 << lineRenderer.gameObject.layer;
+
+            const int res = 512;
+            
+            RenderTexture rt = new RenderTexture(res, res, 24, RenderTextureFormat.ARGB32);
+            cam.targetTexture = rt;
+            RenderTexture.active = rt;
+
+            foreach (string path in paths) {
+                Vector3[] points = GetLinePoints(path);
+
+                lineRenderer.positionCount = points.Length;
+                lineRenderer.SetPositions(ScaleToFitXY(points.ToList()).ToArray());
+                
+                cam.Render();
+                
+                Texture2D tex = new Texture2D(res, res, TextureFormat.ARGB32, false);
+                tex.ReadPixels(new Rect(0, 0, res, res), 0, 0);
+
+                Color[] pixels = tex.GetPixels();
+                for (int i = 0; i < pixels.Length; i++) {
+                    if (pixels[i].a == 0 && (pixels[i].r > 0 || pixels[i].g > 0 || pixels[i].b > 0))
+                        pixels[i].a = 1; // or compute based on brightness
+                }
+
+                tex.SetPixels(pixels);
+                tex.Apply();
+
+                string relativePath = "/Magic/Runtime/GeneratedDocTextures/";
+                string fullPath = Application.dataPath + relativePath;
+                string filePath = relativePath + path + ".png";
+                string fullFilePath = fullPath + path + ".png";
+                
+                if (!Directory.Exists(fullPath))
+                    Directory.CreateDirectory(fullPath);
+                
+                byte[] pngData = tex.EncodeToPNG();
+                File.WriteAllBytes(fullFilePath, pngData);
+
+                // Refresh the asset database
+                AssetDatabase.Refresh();
+
+                // Modify import settings
+                TextureImporter importer = AssetImporter.GetAtPath(filePath) as TextureImporter;
+                if (importer) {
+                    importer.textureType = TextureImporterType.GUI;
+                    importer.alphaSource = TextureImporterAlphaSource.FromInput;
+                    importer.alphaIsTransparency = true;
+                    importer.textureCompression = TextureImporterCompression.CompressedHQ;
+                    importer.maxTextureSize = 512;
+                    importer.filterMode = FilterMode.Bilinear; // or Bilinear, Trilinear
+                    importer.mipmapEnabled = false;
+
+                    EditorUtility.SetDirty(importer);
+                    importer.SaveAndReimport();
+                }
+
+            }
+            
+            RenderTexture.active = null;
+            cam.targetTexture = null;
+            DestroyImmediate(rt);
+            DestroyImmediate(camGo);
+            DestroyImmediate(lineRendererObject);
+        }
+
         public override void OnInspectorGUI() {
             DrawDefaultInspector();
 
@@ -103,6 +196,14 @@ namespace BefuddledLabs.Magic.UI {
             if (GUILayout.Button("Clear"))
                 foreach (Transform children in data.groupParent)
                     DestroyImmediate(children.gameObject);
+
+            if (GUILayout.Button("Generate Images")) {
+                string[] paths = Assembly.GetAssembly(typeof(PlayerVM))
+                    .GetTypes()
+                    .Where(t => t.IsClass && t.Namespace != null &&
+                                t.Namespace.StartsWith("BefuddledLabs.Magic.Instructions")).Select(c => GetPath(c).Replace("*", "")).Where(p => !string.IsNullOrWhiteSpace(p)).ToArray();
+                GeneratePathImages(paths);
+            }
 
             if (GUILayout.Button("Generate Doc UI")) {
                 if (!data) return;
@@ -131,10 +232,12 @@ namespace BefuddledLabs.Magic.UI {
                 foreach (KeyValuePair<string, List<Type>> p in _patterns) {
                     GameObject group = Instantiate(data.groupPrefab, data.groupParent);
                     group.GetComponentInChildren<Text>().text = p.Key;
+                    group.name = p.Key;
 
                     Transform content = group.transform.Find("Content");
                     foreach (Type patternClass in p.Value) {
                         GameObject pattern = Instantiate(data.patternPrefab, content);
+                        pattern.name = patternClass.Name;
 
                         TextMeshProUGUI name = pattern.transform.Find("PatternInfo/PatternName")
                             .GetComponent<TextMeshProUGUI>();
@@ -142,6 +245,34 @@ namespace BefuddledLabs.Magic.UI {
                             .GetComponent<TextMeshProUGUI>();
                         TextMeshProUGUI description = pattern.transform.Find("PatternDescription")
                             .GetComponent<TextMeshProUGUI>();
+
+                        StringBuilder descriptionBuilder = new StringBuilder();
+                        descriptionBuilder.Append(patternClass
+                            .GetField("Description", BindingFlags.Static | BindingFlags.Public)
+                            ?.GetRawConstantValue().ToString());
+
+                        foreach (MethodInfo method in patternClass.GetMethods()
+                                     .Where(m => string.Equals(m.Name, "Execute", StringComparison.OrdinalIgnoreCase))
+                                     .ToList()) {
+                            descriptionBuilder.AppendLine("\n");
+
+                            descriptionBuilder.Append("Inputs: ");
+                            for (int i = 1; i < method.GetParameters().Length; i++) {
+                                if (i != 1)
+                                    descriptionBuilder.Append(", ");
+                                descriptionBuilder.Append("<color=#f097eb>");
+                                descriptionBuilder.Append(Enum.GetName(typeof(ItemType), StackItem.GetItemType(method.GetParameters()[i].ParameterType)));
+                                descriptionBuilder.Append("</color>");
+                            }
+                        }
+                        
+                        descriptionBuilder.Append("\nOutputs: ");
+                        descriptionBuilder.AppendLine(patternClass
+                            .GetField("Output", BindingFlags.Static | BindingFlags.Public)
+                            ?.GetRawConstantValue().ToString());
+
+
+                        description.text = descriptionBuilder.ToString();
 
                         LineRenderer line = pattern.GetComponentInChildren<LineRenderer>();
                         notation.text = GetPath(patternClass);
@@ -173,6 +304,9 @@ namespace BefuddledLabs.Magic.UI {
         public GameObject patternPrefab;
 
         public Transform groupParent;
+        
+        public Material lineMaterial;
+        public Gradient lineGradient;
     }
 }
 

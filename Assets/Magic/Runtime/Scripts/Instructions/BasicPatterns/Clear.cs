@@ -1,6 +1,6 @@
 ﻿
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions {
+namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
     public static class Clear {
         public const string Path = "eeeeedw";
         
