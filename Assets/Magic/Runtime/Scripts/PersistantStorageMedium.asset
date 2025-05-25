@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
-  m_Name: TemporaryStorageMedium
+  m_Name: PersistantStorageMedium
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 813603f1215c2de44b03c3e8b862d989, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 7632677689e84ad80aa08067a4670e44, type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: 7bb893b1c3efff64896354d73cdc4381, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: 15e6c7d71bff2bb7bb26e6f2f75538ab, type: 3}
   scriptVersion: 2
   compiledVersion: 2
   networkEntrypointMetadata: []
   behaviourSyncMode: 4
   hasInteractEvent: 0
-  scriptID: 4903296425190811025
+  scriptID: 2423781961397662518
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 

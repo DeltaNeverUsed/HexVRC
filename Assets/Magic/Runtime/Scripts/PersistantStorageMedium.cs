@@ -4,10 +4,16 @@ using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic {
-    public class TemporaryStorageMedium : StorageMedium {
+    public class PersistantStorageMedium : StorageMedium {
         public VRCPickup pickup;
         
         [UdonSynced] private string _data = "";
+
+        public void Start() {
+            if (!Utilities.IsValid(pickup))
+                return;
+            pickup.pickupable = Networking.IsOwner(gameObject);
+        }
 
         public override bool Write(StackItem data) {
             Networking.SetOwner(Networking.LocalPlayer, gameObject);
@@ -26,7 +32,8 @@ namespace BefuddledLabs.Magic {
             data = StackItem.Deserialize(_data);
             return true;
         }
-        
+
+        public override void OnPlayerRestored(VRCPlayerApi player) => UpdatePickup();
         public override void OnDeserialization() => UpdatePickup();
 
         private void UpdatePickup() {
