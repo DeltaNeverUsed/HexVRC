@@ -301,6 +301,26 @@
         "com.unity.ai.navigation": "1.1.5"
       }
     },
+    "sh.orels.shaders": {
+      "version": "file:sh.orels.shaders",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "sh.orels.shaders.generator": {
+      "version": "file:sh.orels.shaders.generator",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "sh.orels.shaders.inspector": {
+      "version": "file:sh.orels.shaders.inspector",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "2.0.2"
+      }
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

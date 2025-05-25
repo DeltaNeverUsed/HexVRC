@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: AttachablesGlobalOnHold
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 3ca0c586fee1b864a8a73e853edbf360, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 94c0fda3bd0bf0b498f75c1517538111, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: f28275e455948164cb35bb7934e90cfe, type: 3}

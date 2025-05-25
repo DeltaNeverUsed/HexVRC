@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: TutorialPin
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: c49e4144c6b781a4ab629c4c786a4aff, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 215f42628da298c4792bf3a54d62dd2e, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 1742ec4779e43804cbc6fad840abce52, type: 3}

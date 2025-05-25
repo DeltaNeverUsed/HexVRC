@@ -166,14 +166,18 @@ PrefabInstance:
     - target: {fileID: 7199656522724573948, guid: b92f704e86255e1449c9fc851f688f39, type: 3}
       propertyPath: serializedProgramAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 0ffd11e46fa8f8681875cce44c8f5676, type: 2}
+      objectReference: {fileID: 11400000, guid: 215f42628da298c4792bf3a54d62dd2e, type: 2}
     - target: {fileID: 7199656522724573949, guid: b92f704e86255e1449c9fc851f688f39, type: 3}
       propertyPath: m_Name
       value: TM-SelectPlayer Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8514320128748524640, guid: b92f704e86255e1449c9fc851f688f39, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8514320128748524640, guid: b92f704e86255e1449c9fc851f688f39, type: 3}
+    - target: {fileID: 8514320128748524640, guid: b92f704e86255e1449c9fc851f688f39, type: 3}
       propertyPath: serializationData.SerializedFormat
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

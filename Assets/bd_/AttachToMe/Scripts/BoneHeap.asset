@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: BoneHeap
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: b4e8012023eb1c84ca0bcdd40f523695, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 34c2bb61fbf3802428b58b9232cb6ebf, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 851e1b43c2f168a45b1cd4aae56e7c43, type: 3}

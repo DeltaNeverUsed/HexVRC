@@ -1,10 +1,16 @@
 {
   "dependencies": {
+    "com.vrchat.base": {
+      "version": "3.8.1-beta.4"
+    },
     "com.vrchat.worlds": {
-      "version": "3.8.0"
+      "version": "3.8.1-beta.4"
     },
     "befuddledlabs.linuxvrchatsdkpatch-worlds": {
       "version": "0.1.0"
+    },
+    "sh.orels.shaders": {
+      "version": "7.0.0-dev.16"
     }
   },
   "locked": {
@@ -21,8 +27,8 @@
     "befuddledlabs.linuxvrchatsdkpatch-worlds": {
       "version": "0.1.0",
       "dependencies": {
-        "befuddledlabs.linuxvrchatsdkpatch-base": "0.1.0",
-        "com.vrchat.worlds": "^3.7.6"
+        "com.vrchat.worlds": "^3.7.6",
+        "befuddledlabs.linuxvrchatsdkpatch-base": "0.1.0"
       }
     },
     "befuddledlabs.linuxvrchatsdkpatch-base": {
@@ -30,6 +36,21 @@
       "dependencies": {
         "com.vrchat.base": "^3.7.6"
       }
+    },
+    "sh.orels.shaders": {
+      "version": "7.0.0-dev.16",
+      "dependencies": {
+        "sh.orels.shaders.generator": "^7.0.0-dev.16",
+        "sh.orels.shaders.inspector": "^7.0.0-dev.16"
+      }
+    },
+    "sh.orels.shaders.generator": {
+      "version": "7.0.0-dev.16",
+      "dependencies": {}
+    },
+    "sh.orels.shaders.inspector": {
+      "version": "7.0.0-dev.16",
+      "dependencies": {}
     }
   }
 }

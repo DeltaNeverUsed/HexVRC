@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: PickupProxy
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 63a8493fe126c8d49a6d2516172b996f, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: c01a96afbdcfa974bb1e00e08cfc8e33, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 18ad885d8ecacc148a06ed6cc1f32b20, type: 3}

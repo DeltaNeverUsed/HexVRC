@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UpdateLoop
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 1fc6d98b951867140a9a603d68b97f5c, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: bb8b1e93c49aea74bbf6199ea901bcb4, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 03a04f60998891f47aada631bd1ac61b, type: 3}
