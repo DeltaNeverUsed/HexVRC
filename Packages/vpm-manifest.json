@@ -15,13 +15,13 @@
   },
   "locked": {
     "com.vrchat.base": {
-      "version": "3.8.1-beta.4",
+      "version": "3.8.1",
       "dependencies": {}
     },
     "com.vrchat.worlds": {
-      "version": "3.8.1-beta.4",
+      "version": "3.8.1",
       "dependencies": {
-        "com.vrchat.base": "3.8.1-beta.4"
+        "com.vrchat.base": "3.8.1"
       }
     },
     "befuddledlabs.linuxvrchatsdkpatch-worlds": {
