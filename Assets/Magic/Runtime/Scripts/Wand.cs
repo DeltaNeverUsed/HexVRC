@@ -42,7 +42,7 @@ namespace BefuddledLabs.Magic {
         private bool _gridFrozen;
 
         private bool _desktopInput;
-        
+
         private StringBuilder _notation = new StringBuilder();
 
         public static Vector2Int GetNextAxial(Vector2Int previous, Vector2Int current, RotationDirection direction) {
@@ -122,7 +122,7 @@ namespace BefuddledLabs.Magic {
         private bool CheckValidPoint(Vector2Int qr) {
             int pointCount = _points.Count;
 
-            var points = _points.ToArray();
+            Vector2Int[] points = _points.ToArray();
 
             Vector2Int lastQr = points[pointCount - 1];
             if (qr == lastQr)
@@ -156,8 +156,10 @@ namespace BefuddledLabs.Magic {
             if (direction == ' ' && _points.Count >= 2) {
                 Vector2Int lastPoint = _points[_points.Count - 2];
                 Vector2Int currentPoint = _points[_points.Count - 1];
-                Vector2 forward = (AxialTo2DPosition(lastPoint.x, lastPoint.y) - AxialTo2DPosition(currentPoint.x, currentPoint.y)).normalized;
-                Vector2 next = (AxialTo2DPosition(currentPoint.x, currentPoint.y) - AxialTo2DPosition(qr.x, qr.y)).normalized;
+                Vector2 forward = (AxialTo2DPosition(lastPoint.x, lastPoint.y) -
+                                   AxialTo2DPosition(currentPoint.x, currentPoint.y)).normalized;
+                Vector2 next = (AxialTo2DPosition(currentPoint.x, currentPoint.y) - AxialTo2DPosition(qr.x, qr.y))
+                    .normalized;
 
                 int angle = Mathf.RoundToInt(Vector2.SignedAngle(forward, next) / 60f);
                 switch (angle) {
@@ -178,11 +180,11 @@ namespace BefuddledLabs.Magic {
                         break;
                 }
             }
-            
+
             _points.Add(qr);
             if (direction != ' ')
                 _notation.Append(direction);
-            
+
             return true;
         }
 
@@ -269,11 +271,11 @@ namespace BefuddledLabs.Magic {
                 }
 
                 int glyphId = glyphSpace.InstantiateGlyph(arr);
-                
+
                 List<Instruction> instructions = new List<Instruction>(1);
                 instructions.Add(new Instruction(_notation.ToString(), glyphId));
                 ExecutionState result = vmManager.localVM.Execute(instructions);
-                
+
                 this.Log("execution state was " + result.ToString());
             }
 
@@ -282,8 +284,17 @@ namespace BefuddledLabs.Magic {
                 Networking.LocalPlayer.Immobilize(_gridFrozen);
         }
 
+        private readonly Vector2Int[] _neighbors = new Vector2Int[] {
+            new Vector2Int(1, 0),
+            new Vector2Int(1, -1),
+            new Vector2Int(0, -1),
+            new Vector2Int(-1, 0),
+            new Vector2Int(-1, 1),
+            new Vector2Int(0, 1)
+        };
+
         private bool IsNeighbor(Vector2Int qr1, Vector2Int qr2) {
-            return Mathf.Max(Mathf.Abs(qr1.x - qr2.x), Mathf.Abs(qr1.y - qr2.y)) < 2;
+            return Array.IndexOf(_neighbors, qr1 - qr2) != -1;
         }
 
         public Vector2 AxialTo2DPosition(int q, int r) {
