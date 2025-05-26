@@ -189,15 +189,7 @@ namespace BefuddledLabs.Magic {
         }
 
         [RecursiveMethod]
-        public override string ToString() {
-            StringBuilder sb = new StringBuilder();
-
-            UnityEngine.Debug.Log($"Type is null? {!Utilities.IsValid(Type)}");
-            UnityEngine.Debug.Log($"Type is {Type}");
-
-            UnityEngine.Debug.Log($"Value is null? {!Utilities.IsValid(Value)}");
-            UnityEngine.Debug.Log($"Value is {Value}");
-
+        public void ToString(StringBuilder sb) {
             switch (Type) {
                 case ItemType.Null:
                     sb.Append("Null");
@@ -240,7 +232,7 @@ namespace BefuddledLabs.Magic {
                     for (int i = 0; i < list.Count; i++) {
                         if (i > 0)
                             sb.Append(", ");
-                        sb.Append(list[i].ToString());
+                        list[i].ToString(sb);
                     }
 
                     sb.Append(']');
@@ -248,10 +240,18 @@ namespace BefuddledLabs.Magic {
                 case ItemType.Boolean:
                     sb.Append(((bool)Value).ToString());
                     break;
+                case ItemType.Any:
+                    sb.Append("This value should not be possible to get, please report this to me @deltaneverused");
+                    break;
                 default:
                     sb.Append("Invalid item type");
                     break;
             }
+        }
+
+        public override string ToString() {
+            StringBuilder sb = new StringBuilder();
+            ToString(sb);
 
             return sb.ToString();
         }
