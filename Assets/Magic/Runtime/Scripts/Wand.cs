@@ -6,9 +6,7 @@ using UdonSharp;
 using UnityEngine;
 using Varneon.VUdon.Logger;
 using VRC.SDKBase;
-using VRC.Udon.Common;
 using VRC.Udon.Common.Enums;
-using VRC.Udon.Common.Interfaces;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic {
@@ -87,6 +85,9 @@ namespace BefuddledLabs.Magic {
         }
 
         public void Start() {
+            /*GameObject profiler = GameObject.Find("Profiler");
+            if (Utilities.IsValid(profiler))
+                profiler.GetComponent<UdonSharpProfiler.ProfilerDataReader>().Add(this);*/
             if (Networking.IsOwner(gameObject))
                 SendCustomEventDelayedFrames(nameof(LocalUpdateLoop), 1);
             else {
@@ -289,7 +290,7 @@ namespace BefuddledLabs.Magic {
                 instructions.Add(new Instruction(_notation.ToString(), glyphId));
                 ExecutionState result = vmManager.localVM.Execute(instructions);
 
-                this.Log("execution state was " + result.ToString());
+                this.Log($"execution state was {result.ToString()} and took {vmManager.localVM.GetLastExecutionTimeMs()}ms");
             }
 
             ResetGrid();

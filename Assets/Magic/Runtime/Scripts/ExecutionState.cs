@@ -26,6 +26,8 @@ namespace BefuddledLabs.Magic {
             Success = false;
             EarlyReturnDepth = 0;
         }
+        
+        public bool IsOk() => Success;
 
         public static ExecutionState Ok() {
             return new ExecutionState();

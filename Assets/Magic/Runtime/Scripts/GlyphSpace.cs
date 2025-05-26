@@ -47,10 +47,12 @@ namespace BefuddledLabs.Magic {
         }
         
         [NetworkCallable]
-        public void UpdateGlyphStatus(int glyphId, bool success, string msg) {
-            if (!_glyphs.TryGetValue(glyphId, out Glyph glyph))
-                return;
-            glyph.UpdateState(success, msg);
+        public void UpdateGlyphStatus(int[] glyphId, bool[] success, string[] msg) {
+            for (int i = 0; i < glyphId.Length; i++) {
+                if (!_glyphs.TryGetValue(glyphId[i], out Glyph glyph))
+                    return;
+                glyph.UpdateState(success[i], msg[i]);
+            }
         }
         
         [NetworkCallable]

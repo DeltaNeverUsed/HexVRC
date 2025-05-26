@@ -301,6 +301,12 @@
         "com.unity.ai.navigation": "1.1.5"
       }
     },
+    "deltaneverused.udonsharpprofiler": {
+      "version": "file:deltaneverused.udonsharpprofiler",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "sh.orels.shaders": {
       "version": "file:sh.orels.shaders",
       "depth": 0,

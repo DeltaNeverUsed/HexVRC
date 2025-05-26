@@ -19,6 +19,10 @@ namespace BefuddledLabs.Magic.Instructions.Player {
             if (!Utilities.IsValid(player) || !player.IsValid())
                 return ExecutionState.Err("Invalid player");
 
+            ExecutionState manaResult = info.VM.ConsumeMana(Mathf.Floor(Vector3.Magnitude(impulse) * 3));
+            if (!manaResult.IsOk())
+                return manaResult;
+
             info.VM.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(info.VM.ApplyImpulse), player.playerId, impulse);
 
             return ExecutionState.Ok();

@@ -41,10 +41,7 @@ namespace BefuddledLabs.Magic {
         }
 
         public void UpdateState(bool success, string msg) {
-            if (success)
-                lineRenderer.material.mainTexture = CreateTextureFromGradient(successColor);
-            else
-                lineRenderer.material.mainTexture = CreateTextureFromGradient(failureColor);
+            lineRenderer.colorGradient = success ? successColor : failureColor;
         }
     }
 }

@@ -146,7 +146,7 @@ namespace BefuddledLabs.Magic.Editor {
                 }
 
                 result.Append("// Restore stack if failed\n");
-                for (int i = paramNames.Count - 1; i >= 0; i--) {
+                for (int i = 0; i < paramNames.Count; i++) {
                     string paramName = paramNames[i];
                     result.Append("stack.Push(");
                     result.Append(paramName);

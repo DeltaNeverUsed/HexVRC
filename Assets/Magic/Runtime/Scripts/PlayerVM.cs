@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using BefuddledLabs.Magic.Debug.VUdon;
 using UdonSharp;
 using UnityEngine;
@@ -52,6 +53,10 @@ namespace BefuddledLabs.Magic {
 
         public GlyphSpace glyphSpace;
 
+        public float maxMana;
+
+        public int stackSizeLimit = 1024;
+
         [NonSerialized] public ExecutionInfo Info;
 
         [NonSerialized] public bool EscapeNext;
@@ -59,7 +64,30 @@ namespace BefuddledLabs.Magic {
 
         [NonSerialized] public StorageMedium LastInteractedStorageMedium;
 
+        private readonly Stopwatch _executionTimer = new Stopwatch();
+
+        public float GetLastExecutionTimeMs() => (float)_executionTimer.Elapsed.TotalMilliseconds;
+
+        private float _mana;
+
+        public void SetMana(float value) {
+            _mana = value;
+        }
+
+        public ExecutionState ConsumeMana(float amount) {
+            _mana -= amount;
+            bool ok = _mana >= 0;
+
+            return ok
+                ? ExecutionState.Ok()
+                : ExecutionState.Err($"Not enough mana, you'd need at least {Mathf.Abs(_mana)} more mana to do this");
+        }
+
         public void Start() {
+            /*GameObject profiler = GameObject.Find("Profiler");
+            if (Utilities.IsValid(profiler))
+                profiler.GetComponent<UdonSharpProfiler.ProfilerDataReader>().Add(this);*/
+
             _stack = new Stack<StackItem>();
             Info = new ExecutionInfo(this, _stack, "");
             this.Log("Hello World!");
@@ -132,12 +160,42 @@ namespace BefuddledLabs.Magic {
 
         [RecursiveMethod]
         public ExecutionState Execute(List<Instruction> instructions) {
+            ExecutionInfo infoCopy = (ExecutionInfo)((object[])(object)Info).Clone();
+            SetMana(maxMana);
+            return Execute(instructions, infoCopy);
+        }
+
+        [RecursiveMethod]
+        public ExecutionState Execute(List<Instruction> instructions, ExecutionInfo infoCopy) {
             _localPlayer = Networking.LocalPlayer;
+
+            if (!_executionTimer.IsRunning)
+                _executionTimer.Restart();
 
             if (!Utilities.IsValid(_localPlayer) || !Networking.IsOwner(_localPlayer, gameObject))
                 return ExecutionState.Err("Not the owner of this VM");
 
+            List<int> glyphId = new List<int>();
+            List<bool> success = new List<bool>();
+            List<string> msg = new List<string>();
+
+            ExecutionState result = ExecutionState.Ok();
+
             foreach (Instruction instruction in instructions) {
+                if (_executionTimer.ElapsedMilliseconds > 33) {
+                    _executionTimer.Stop();
+                    glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus),
+                        glyphId.ToArray(), success.ToArray(), msg.ToArray());
+                    return ExecutionState.Err("Max execution time of 33ms reached.");
+                }
+
+                if (_stack.Count > stackSizeLimit) {
+                    _executionTimer.Stop();
+                    glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus),
+                        glyphId.ToArray(), success.ToArray(), msg.ToArray());
+                    return ExecutionState.Err("Stack size limit exceeded");
+                }
+
                 // Should probably do this in a more elegant way, but this will do for now.
                 if (IntrospectionDepth > 0 && !string.Equals(instruction.Path,
                         Instructions.EscapingPatterns.Retrospection.Path, StringComparison.OrdinalIgnoreCase) &&
@@ -158,20 +216,28 @@ namespace BefuddledLabs.Magic {
                     continue;
                 }
 
-                ExecutionInfo infoCopy = (ExecutionInfo)((object[])(object)Info).Clone();
-                ExecutionState result = instruction.Execute(infoCopy);
-                glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus), infoCopy.GlyphId, result.Success, result.Error);
+                result = instruction.Execute(infoCopy);
+
+                if (infoCopy.GlyphId != -1) {
+                    glyphId.Add(infoCopy.GlyphId);
+                    success.Add(result.Success);
+                    msg.Add(result.Success ? "" : result.Error);
+                }
 
                 if (!result.Success) {
-                    return result;
+                    break;
                 }
-                
+
                 if (result.EarlyReturnDepth > 0) {
                     result.EarlyReturnDepth--;
-                    return result;
+                    break;
                 }
             }
 
+            glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus),
+                glyphId.ToArray(), success.ToArray(), msg.ToArray());
+
+            _executionTimer.Stop();
             return ExecutionState.Ok();
         }
 

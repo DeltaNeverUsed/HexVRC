@@ -11,6 +11,9 @@
     },
     "sh.orels.shaders": {
       "version": "7.0.0-dev.16"
+    },
+    "deltaneverused.udonsharpprofiler": {
+      "version": "0.0.5"
     }
   },
   "locked": {
@@ -51,6 +54,12 @@
     "sh.orels.shaders.inspector": {
       "version": "7.0.0-dev.16",
       "dependencies": {}
+    },
+    "deltaneverused.udonsharpprofiler": {
+      "version": "0.0.7",
+      "dependencies": {
+        "com.vrchat.worlds": "^3.6.x"
+      }
     }
   }
 }

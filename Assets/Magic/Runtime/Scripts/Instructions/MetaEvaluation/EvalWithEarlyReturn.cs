@@ -26,7 +26,7 @@ namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
             List<StackItem> haltInstructionList = new List<StackItem>();
             haltInstructionList.Add(new StackItem(new Instruction(Halt.Path)));
             info.Stack.Push(new StackItem(haltInstructionList));
-            ExecutionState success = info.VM.Execute(instructions);
+            ExecutionState success = info.VM.Execute(instructions, info);
             return success;
         }
     }

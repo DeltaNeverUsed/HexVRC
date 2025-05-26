@@ -44,8 +44,8 @@ if (true && true) {
 return BefuddledLabs.Magic.Instructions.StackManipulation.Bury.Execute(info, (BefuddledLabs.Magic.StackItem)_param_0, (BefuddledLabs.Magic.StackItem)_param_1);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "aadaadaa":
@@ -56,8 +56,8 @@ if (true && _param_1.Type == ItemType.Number) {
 return BefuddledLabs.Magic.Instructions.StackManipulation.Copy.Execute(info, (BefuddledLabs.Magic.StackItem)_param_0, (System.Single)_param_1.Value);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "aadaa":
@@ -78,8 +78,8 @@ if (true && true) {
 return BefuddledLabs.Magic.Instructions.StackManipulation.DuplicateSecond.Execute(info, (BefuddledLabs.Magic.StackItem)_param_0, (BefuddledLabs.Magic.StackItem)_param_1);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "aadadaaw":
@@ -90,8 +90,8 @@ if (true && true) {
 return BefuddledLabs.Magic.Instructions.StackManipulation.DuplicateTwice.Execute(info, (BefuddledLabs.Magic.StackItem)_param_0, (BefuddledLabs.Magic.StackItem)_param_1);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "ddad":
@@ -143,9 +143,9 @@ if (true && true && true) {
 return BefuddledLabs.Magic.Instructions.StackManipulation.RotateL.Execute(info, (BefuddledLabs.Magic.StackItem)_param_0, (BefuddledLabs.Magic.StackItem)_param_1, (BefuddledLabs.Magic.StackItem)_param_2);
 }
 // Restore stack if failed
-stack.Push(_param_2);
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
+stack.Push(_param_2);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "aaeaa":
@@ -157,9 +157,9 @@ if (true && true && true) {
 return BefuddledLabs.Magic.Instructions.StackManipulation.RotateR.Execute(info, (BefuddledLabs.Magic.StackItem)_param_0, (BefuddledLabs.Magic.StackItem)_param_1, (BefuddledLabs.Magic.StackItem)_param_2);
 }
 // Restore stack if failed
-stack.Push(_param_2);
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
+stack.Push(_param_2);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "qwaeawqaeaqa":
@@ -174,8 +174,8 @@ if (true && true) {
 return BefuddledLabs.Magic.Instructions.StackManipulation.Swap.Execute(info, (BefuddledLabs.Magic.StackItem)_param_0, (BefuddledLabs.Magic.StackItem)_param_1);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "aqqqqq":
@@ -200,8 +200,8 @@ if (_param_0.Type == ItemType.Player && _param_1.Type == ItemType.Vector) {
 return BefuddledLabs.Magic.Instructions.Player.Impulse.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value, (UnityEngine.Vector3)_param_1.Value);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "qaaqqed":
@@ -284,10 +284,10 @@ if (_param_0.Type == ItemType.Player && _param_1.Type == ItemType.Number && _par
 return BefuddledLabs.Magic.Instructions.Player.PlayHapticEventInLeftHand.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value, (System.Single)_param_1.Value, (System.Single)_param_2.Value, (System.Single)_param_3.Value);
 }
 // Restore stack if failed
-stack.Push(_param_3);
-stack.Push(_param_2);
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
+stack.Push(_param_2);
+stack.Push(_param_3);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "qaaqeada":
@@ -300,10 +300,10 @@ if (_param_0.Type == ItemType.Player && _param_1.Type == ItemType.Number && _par
 return BefuddledLabs.Magic.Instructions.Player.PlayHapticEventInRightHand.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value, (System.Single)_param_1.Value, (System.Single)_param_2.Value, (System.Single)_param_3.Value);
 }
 // Restore stack if failed
-stack.Push(_param_3);
-stack.Push(_param_2);
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
+stack.Push(_param_2);
+stack.Push(_param_3);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "waaw":
@@ -320,8 +320,8 @@ if (_param_0.Type == ItemType.Number && _param_1.Type == ItemType.Number) {
 return BefuddledLabs.Magic.Instructions.Mathematics.Add.Execute(info, (System.Single)_param_0.Value, (System.Single)_param_1.Value);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "qqqqqaww":
@@ -364,8 +364,8 @@ if (_param_0.Type == ItemType.Number && _param_1.Type == ItemType.Number) {
 return BefuddledLabs.Magic.Instructions.Mathematics.Div.Execute(info, (System.Single)_param_0.Value, (System.Single)_param_1.Value);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "wedew":
@@ -379,8 +379,8 @@ if (_param_0.Type == ItemType.Number && _param_1.Type == ItemType.Number) {
 return BefuddledLabs.Magic.Instructions.Mathematics.ExpOrVectorProjection.Execute(info, (System.Single)_param_0.Value, (System.Single)_param_1.Value);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "ewq":
@@ -420,8 +420,8 @@ if (_param_0.Type == ItemType.Number && _param_1.Type == ItemType.Number) {
 return BefuddledLabs.Magic.Instructions.Mathematics.Mod.Execute(info, (System.Single)_param_0.Value, (System.Single)_param_1.Value);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "waqaw":
@@ -438,8 +438,8 @@ if (_param_0.Type == ItemType.Number && _param_1.Type == ItemType.Number) {
 return BefuddledLabs.Magic.Instructions.Mathematics.Mult.Execute(info, (System.Single)_param_0.Value, (System.Single)_param_1.Value);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "eqqq":
@@ -460,8 +460,8 @@ if (_param_0.Type == ItemType.Number && _param_1.Type == ItemType.Number) {
 return BefuddledLabs.Magic.Instructions.Mathematics.Sub.Execute(info, (System.Single)_param_0.Value, (System.Single)_param_1.Value);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "eqqqqq":
@@ -473,9 +473,9 @@ if (_param_0.Type == ItemType.Number && _param_1.Type == ItemType.Number && _par
 return BefuddledLabs.Magic.Instructions.Mathematics.VectorConstruct.Execute(info, (System.Single)_param_0.Value, (System.Single)_param_1.Value, (System.Single)_param_2.Value);
 }
 // Restore stack if failed
-stack.Push(_param_2);
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
+stack.Push(_param_2);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "qeeeee":
@@ -666,8 +666,8 @@ if (_param_0.Type == ItemType.Vector && _param_1.Type == ItemType.Vector) {
 return BefuddledLabs.Magic.Instructions.BasicPatterns.RaycastPlayer.Execute(info, (UnityEngine.Vector3)_param_0.Value, (UnityEngine.Vector3)_param_1.Value);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "wqaawdd":
@@ -678,8 +678,8 @@ if (_param_0.Type == ItemType.Vector && _param_1.Type == ItemType.Vector) {
 return BefuddledLabs.Magic.Instructions.BasicPatterns.RaycastPosition.Execute(info, (UnityEngine.Vector3)_param_0.Value, (UnityEngine.Vector3)_param_1.Value);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "dwe":
@@ -690,8 +690,8 @@ if (_param_0.Type == ItemType.Player && _param_1.Type == ItemType.Number) {
 return BefuddledLabs.Magic.Instructions.BasicPatterns.SetPlayerHeight.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value, (System.Single)_param_1.Value);
 }
 // Restore stack if failed
-stack.Push(_param_1);
 stack.Push(_param_0);
+stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 

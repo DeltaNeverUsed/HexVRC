@@ -21,7 +21,7 @@ namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
                     instructions.Add((Instruction)item.Value);
             }
             
-            ExecutionState success = info.VM.Execute(instructions);
+            ExecutionState success = info.VM.Execute(instructions, info);
             return success;
         }
     }
