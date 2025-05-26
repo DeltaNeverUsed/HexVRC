@@ -134,7 +134,7 @@ Material:
     - SHADING_MODE: 0
     - SPIN: 1
     - UI_AdvancedSettingsDepthHeader: 1
-    - UI_AdvancedSettingsHeader: 1
+    - UI_AdvancedSettingsHeader: 0
     - UI_AdvancedSettingsStancilHeader: 0
     - UI_ApplyColorCorrectionNote: 0
     - UI_BakedSpecularOcclusionNote: 0
@@ -161,7 +161,7 @@ Material:
     - UI_IgnoreRealtimeGINote: 0
     - UI_InternalHeader: 0
     - UI_LightmappingDocs: 0
-    - UI_LightmappingHeader: 1
+    - UI_LightmappingHeader: 0
     - UI_MainHeader: 1
     - UI_MobileTweaks: 1
     - UI_ParallaxDocs: 0
@@ -183,7 +183,7 @@ Material:
     - UI_VRCHideMainViewHeader: 0
     - UI_VRCLightVolumesHeader: 0
     - UI_VertexAnimDocs: 0
-    - UI_VertexAnimHeader: 1
+    - UI_VertexAnimHeader: 0
     - _AOChannel: 1
     - _AlbedoChannel: 0
     - _ApplyColorCorrection: 0
