@@ -6,6 +6,7 @@ using UdonSharp;
 using UnityEngine;
 using Varneon.VUdon.Logger;
 using VRC.SDKBase;
+using VRC.Udon.Common;
 using VRC.Udon.Common.Enums;
 using VRC.Udon.Common.Interfaces;
 
@@ -35,6 +36,7 @@ namespace BefuddledLabs.Magic {
 
         public int dotCount = 16;
 
+        [UdonSynced] private Vector3[] _networkedPoints = Array.Empty<Vector3>();
         private List<Vector2Int> _points = new List<Vector2Int>();
         private int _shaderId = -1;
         private int _pointCount;
@@ -88,7 +90,7 @@ namespace BefuddledLabs.Magic {
             if (Networking.IsOwner(gameObject))
                 SendCustomEventDelayedFrames(nameof(LocalUpdateLoop), 1);
             else {
-                lineRenderer.gameObject.SetActive(false);
+                //lineRenderer.gameObject.SetActive(false);
                 grid.gameObject.SetActive(false);
                 pickup.pickupable = false;
             }
@@ -100,15 +102,19 @@ namespace BefuddledLabs.Magic {
 #endif
         }
 
+        private void PointArrayModified() => RequestSerialization();
+
         private void ResetDesktop() {
             _points.Clear();
             _points.Add(new Vector2Int(0, 0));
             _points.Add(new Vector2Int(1, 0));
+            PointArrayModified();
         }
 
         private void ResetVR() {
             _points.Clear();
             _points.Add(new Vector2Int(0, 0));
+            PointArrayModified();
         }
 
         private void ResetGrid() {
@@ -184,7 +190,8 @@ namespace BefuddledLabs.Magic {
             _points.Add(qr);
             if (direction != ' ')
                 _notation.Append(direction);
-
+            
+            PointArrayModified();
             return true;
         }
 
@@ -193,6 +200,7 @@ namespace BefuddledLabs.Magic {
                 ResetGrid();
 
             if (_points.Count >= 2) {
+                int pointCount = _points.Count;
                 if (Input.GetKeyDown(KeyCode.W))
                     TryAddPoint(GetNextAxial(_points[_points.Count - 2], _points[_points.Count - 1],
                         RotationDirection.Straight), 'w');
@@ -212,6 +220,9 @@ namespace BefuddledLabs.Magic {
                     _points.RemoveAt(_points.Count - 1);
                     _notation.Remove(_notation.Length - 1, 1);
                 }
+                
+                if (pointCount != _points.Count)
+                    PointArrayModified();
             }
             else {
                 ResetGrid();
@@ -225,8 +236,10 @@ namespace BefuddledLabs.Magic {
             int pointCount = _points.Count;
             if (pointCount > 1 && qr == _points[pointCount - 2]) {
                 _points.RemoveAt(pointCount - 1);
-                if (_points.Count >= 2)
+                if (_points.Count >= 2) {
                     _notation.Remove(_notation.Length - 1, 1);
+                    PointArrayModified();
+                }
             }
             else
                 TryAddPoint(qr, ' ');
@@ -365,13 +378,21 @@ namespace BefuddledLabs.Magic {
 
             if (snapToWand)
                 arr[_pointCount - 1] = gridSnapPoint.position;
-
+            
+            lineRenderer.positionCount = _pointCount;
             lineRenderer.SetPositions(arr);
-            SendCustomEventDelayedFrames(nameof(LateUpdateRenderer), 1);
+            lineRenderer.positionCount = _pointCount;
         }
 
-        public void LateUpdateRenderer() {
-            lineRenderer.positionCount = _pointCount;
+        public override void OnPreSerialization() {
+            _networkedPoints = new Vector3[lineRenderer.positionCount - (!_desktopInput && _gridFrozen ? 1 : 0)];
+            lineRenderer.GetPositions(_networkedPoints);
+        }
+
+        public override void OnDeserialization() {
+            lineRenderer.positionCount = _networkedPoints.Length;
+            lineRenderer.SetPositions(_networkedPoints);
+            lineRenderer.positionCount = _networkedPoints.Length;
         }
     }
 }
