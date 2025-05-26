@@ -23,28 +23,28 @@
 				"Position": {
 					"T": "V3",
 					"x": 0.9420108,
-					"y": 0.1125585,
+					"y": -2537382,
 					"z": -2.155986
 				},
 				"Rotation": {
 					"T": "Q",
-					"x": 2.10297E-08,
-					"y": 3.433114E-05,
-					"z": -6.072659E-08,
-					"w": 1
+					"x": -7.620052E-05,
+					"y": -2.138035E-05,
+					"z": 0.0005033278,
+					"w": 0.9999999
 				},
 				"Velocity": {
 					"T": "V3",
 					"x": 0,
-					"y": 0,
+					"y": -7052.355,
 					"z": 0
 				},
 				"IsKinematic": false,
 				"UseGravity": true,
 				"Discontinuity": "not available",
 				"DiscontinuityCounter": "not available",
-				"WasSleeping": true,
-				"Time": 6.039425,
+				"WasSleeping": false,
+				"Time": 113.2489,
 				"HeldInHand": "not available"
 			}
 		]

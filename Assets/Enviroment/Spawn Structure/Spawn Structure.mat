@@ -8,15 +8,18 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Spawn Structure
-  m_Shader: {fileID: -8512187303908658807, guid: bb1fc5fc14b648debb2f566068d58f43, type: 3}
+  m_Shader: {fileID: -8512187303908658807, guid: 5664541c8a9b2bc489c9fa4f3d3e81f8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - BAKERY_SHNONLINEAR
   - DETAILS_MODE_SEPARATED
+  - FLOATING_NONE
   - GSAA
   - MOBILE_TONEMAP_ACES
+  - SCALE_NONE
   - SHADING_MODE_DEFAULT
+  - SPIN_NONE
   - _EMISSION
   - _PARALLAXSTEPS_EIGHT
   m_InvalidKeywords:
@@ -123,10 +126,13 @@ Material:
     m_Floats:
     - BAKERY: 0
     - DETAILS_MODE: 1
+    - FLOATING: 0
     - INTERNAL_MaterialShaderVersion: 0
     - INTERNAL_ShaderVersion: 700
     - MOBILE_TONEMAP: 0
+    - SCALE: 0
     - SHADING_MODE: 0
+    - SPIN: 0
     - UI_AdvancedSettingsDepthHeader: 1
     - UI_AdvancedSettingsHeader: 1
     - UI_AdvancedSettingsStancilHeader: 0
@@ -145,6 +151,8 @@ Material:
     - UI_DetailsHeader: 0
     - UI_DetailsMapNote: 0
     - UI_DetailsMapNoteSeparate: 0
+    - UI_FloatHeader: 0
+    - UI_FloatNote: 0
     - UI_GITweaksHeader: 0
     - UI_GSAAHeader: 0
     - UI_GSAAIncludeNormalMapsNote: 0
@@ -160,15 +168,22 @@ Material:
     - UI_ParallaxHeader: 0
     - UI_ParallaxScaleBasedOnAngleNote: 0
     - UI_RealtimeShadowSpecularOcclusionNote: 0
+    - UI_ScaleFlowCyclePauseNote: 1
+    - UI_ScaleHeader: 0
     - UI_ShadeVertexLightsNote: 0
     - UI_ShadingModeHeader: 0
     - UI_SpecOcclusionNote: 0
+    - UI_SpinHeader: 0
+    - UI_SpinOffsetsHeader: 0
+    - UI_SpinOriginNote: 0
     - UI_VRCDocs: 0
     - UI_VRCFeaturesHeader: 0
     - UI_VRCHideCameraHeader: 0
     - UI_VRCHideInMirrorHeader: 0
     - UI_VRCHideMainViewHeader: 0
     - UI_VRCLightVolumesHeader: 0
+    - UI_VertexAnimDocs: 0
+    - UI_VertexAnimHeader: 1
     - _AOChannel: 1
     - _AlbedoChannel: 0
     - _ApplyColorCorrection: 0
@@ -217,6 +232,13 @@ Material:
     - _EnableGSAA: 1
     - _EnableParallax: 0
     - _FlipBumpY: 0
+    - _FloatAmount: 0.2
+    - _FloatPhaseOffset: 0
+    - _FloatPositionOffset: 0
+    - _FloatPositionOffsetAxis: 0
+    - _FloatPositionOffsetScale: 1
+    - _FloatSpeed: 1
+    - _FloatTwoWay: 1
     - _ForceBoxProjection: 0
     - _GIEmissiveBoost: 1
     - _GSAAIncludeNormalMaps: 0
@@ -230,9 +252,11 @@ Material:
     - _IgnoreRealtimeGI: 0
     - _MappingSpace: 0
     - _MetalChannel: 0
-    - _Metallic: 0
+    - _Metallic: 0.842
     - _Mode: 0
     - _NonlinearSH: 0
+    - _NormalizeFloatAxis: 1
+    - _NormalizeSpinAxis: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ParallaxScaleBasedOnAngle: 0
@@ -243,13 +267,33 @@ Material:
     - _RealtimeShadowSpecOcclusion: 0
     - _RenderType: -1
     - _RoughnessMode: 0
+    - _ScaleAmount: 0.5
+    - _ScaleFlowAxis: 0
+    - _ScaleFlowCyclePause: 1
+    - _ScaleFlowSmoothing: 2
+    - _ScaleFlowType: 0
+    - _ScaleFlowUVChannel: 0
+    - _ScaleFlowWidth: 0.05
+    - _ScalePhaseOffset: 0
+    - _ScalePositionOffset: 0
+    - _ScalePositionOffsetAxis: 0
+    - _ScalePositionOffsetScale: 1
+    - _ScaleSpeed: 1
     - _ShadeVertexLights: 0
     - _SmoothChannel: 3
-    - _Smoothness: 0.5
+    - _Smoothness: 0.659
     - _SmoothnessTextureChannel: 0
     - _SpecOcclusion: 0.25
     - _SpecularHighlights: 1
     - _SpecularRoughnessMod: 1
+    - _SpinPhaseOffset: 0
+    - _SpinPositionOffset: 0
+    - _SpinPositionOffsetAxis: 0
+    - _SpinPositionOffsetScale: 1
+    - _SpinPositionOffsetSpeed: 0.1
+    - _SpinSpeed: 1
+    - _SpinStoppedChance: 0
+    - _SpinStoppedChanceSeed: 0
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _StencilComp: 8
@@ -274,8 +318,11 @@ Material:
     - _ClothSubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FloatAxis: {r: 0, g: 1, b: 0, a: 0}
     - _MetallicRemap: {r: 0, g: 1, b: 0, a: 1}
     - _SmoothnessRemap: {r: 0, g: 1, b: 0, a: 1}
+    - _SpinAxis: {r: 0, g: 1, b: 0, a: 0}
+    - _SpinOrigin: {r: 0, g: 0, b: 0, a: 0}
     - _VolumeInvSize: {r: 1000001, g: 1000001, b: 1000001, a: 1}
     - _VolumeMin: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
