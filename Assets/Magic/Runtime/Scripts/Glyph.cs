@@ -6,6 +6,7 @@ using UnityEngine;
 namespace BefuddledLabs.Magic {
     public class Glyph : UdonSharpBehaviour {
         public LineRenderer lineRenderer;
+        public ParticleSystem particleSystem;
 
         public Gradient successColor = new Gradient();
         public Gradient failureColor = new Gradient();
@@ -21,6 +22,11 @@ namespace BefuddledLabs.Magic {
             lineRenderer.SetPositions(_points);
             lineRenderer.positionCount = _points.Length;
             lineRenderer.SetPositions(_points);
+            
+            Mesh bakedMesh = new Mesh();
+            lineRenderer.BakeMesh(bakedMesh, true);
+            ParticleSystem.ShapeModule shape = particleSystem.shape;
+            shape.mesh = bakedMesh;
         }
         
         public Texture2D CreateTextureFromGradient(Gradient gradient, int width = 64, int height = 1)
@@ -41,7 +47,12 @@ namespace BefuddledLabs.Magic {
         }
 
         public void UpdateState(bool success, string msg) {
-            lineRenderer.colorGradient = success ? successColor : failureColor;
+            if (success)
+                lineRenderer.colorGradient = successColor;
+            else {
+                lineRenderer.colorGradient = failureColor;
+                particleSystem.Play();
+            }
         }
     }
 }

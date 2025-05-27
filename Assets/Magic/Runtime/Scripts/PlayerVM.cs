@@ -219,7 +219,7 @@ namespace BefuddledLabs.Magic {
                 result = instruction.Execute(infoCopy);
 
                 if (infoCopy.GlyphId != -1) {
-                    glyphId.Add(infoCopy.GlyphId);
+                    glyphId.Add(instruction.GlyphId);
                     success.Add(result.Success);
                     msg.Add(result.Success ? "" : result.Error);
                 }
