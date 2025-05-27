@@ -27,6 +27,7 @@ namespace BefuddledLabs.Magic {
         public VRC_Pickup pickup;
         public Transform grid;
         public Transform gridSnapPoint;
+        public Transform executionTransform;
 
         public LineRenderer lineRenderer;
 
@@ -288,6 +289,7 @@ namespace BefuddledLabs.Magic {
 
                 List<Instruction> instructions = new List<Instruction>(1);
                 instructions.Add(new Instruction(_notation.ToString(), glyphId));
+                vmManager.localVM.ExecutionTransform = Utilities.IsValid(executionTransform) ? executionTransform : transform;
                 ExecutionState result = vmManager.localVM.Execute(instructions);
 
                 this.Log($"execution state was {result.ToString()} and took {vmManager.localVM.GetLastExecutionTimeMs()}ms");

@@ -10,9 +10,8 @@ namespace BefuddledLabs.Magic {
             return false;
         }
 
-        public virtual bool Read(out StackItem data) {
-            data = new StackItem();
-            return false;
+        public virtual StackItem Read() {
+            return new StackItem();
         }
 
         public void Pickup() {

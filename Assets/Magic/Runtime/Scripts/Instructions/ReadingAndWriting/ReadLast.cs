@@ -21,10 +21,7 @@ namespace BefuddledLabs.Magic.Instructions.ReadingAndWriting {
             if (Vector3.Distance(medium.transform.position, Networking.LocalPlayer.GetPosition()) > 5)
                 return ExecutionState.Err("Too far away from last held storage medium");
 
-            if (!medium.Read(out StackItem data))
-                return ExecutionState.Err("Failed to read?");
-
-            info.Stack.Push(data);
+            info.Stack.Push(medium.Read());
             return ExecutionState.Ok();
         }
     }

@@ -63,6 +63,7 @@ namespace BefuddledLabs.Magic {
         [NonSerialized] public int IntrospectionDepth = 0;
 
         [NonSerialized] public StorageMedium LastInteractedStorageMedium;
+        [NonSerialized] public Transform ExecutionTransform;
 
         private readonly Stopwatch _executionTimer = new Stopwatch();
 
@@ -234,7 +235,8 @@ namespace BefuddledLabs.Magic {
                 }
             }
 
-            glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus),
+            if (glyphId.Count > 0)
+                glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus),
                 glyphId.ToArray(), success.ToArray(), msg.ToArray());
 
             _executionTimer.Stop();

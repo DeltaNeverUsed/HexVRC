@@ -614,21 +614,19 @@ case "qaq":
 return BefuddledLabs.Magic.Instructions.BasicPatterns.GetLocalPlayer.Execute(info);
 // Restore stack if failed
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "eeeeawa":
+return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPickupDirection.Execute(info);
+// Restore stack if failed
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "eeeeaa":
+return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPickupPosition.Execute(info);
+// Restore stack if failed
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "aa":
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player) {
 return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPlayerEyePosition.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value);
-}
-// Restore stack if failed
-stack.Push(_param_0);
-}
-return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "dd":
-if (stackSize >= 1) {
-StackItem _param_0 = stack.Pop();
-if (_param_0.Type == ItemType.Player) {
-return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPlayerEyeRotation.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value);
 }
 // Restore stack if failed
 stack.Push(_param_0);
@@ -695,9 +693,9 @@ stack.Push(_param_1);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 
-            }if (Path.StartsWith("dedd", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.NumberLiterals.NumberLiteralNegative.Execute(info);
+            }if (Path.StartsWith("aqaa", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.NumberLiterals.NumberLiteralPositive.Execute(info);
 }
-if (Path.StartsWith("aqaa", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.NumberLiterals.NumberLiteralPositive.Execute(info);
+if (Path.StartsWith("dedd", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.NumberLiterals.NumberLiteralNegative.Execute(info);
 }
 if (Path.StartsWith("", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.StackManipulation.Mask.Execute(info);
 }

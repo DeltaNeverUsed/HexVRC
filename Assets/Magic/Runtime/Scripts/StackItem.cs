@@ -91,6 +91,20 @@ namespace BefuddledLabs.Magic {
             return new StackItem(this);
         }
 
+        public List<Instruction> ToInstructionList() {
+            List<Instruction> instructions = new List<Instruction>();
+            if (Type != ItemType.List)
+                return instructions;
+            
+            List<StackItem> list = (List<StackItem>)Value;
+            foreach (StackItem value in list) {
+                if (value.Type == ItemType.Instruction)
+                    instructions.Add((Instruction)value.Value);
+            }
+            
+            return instructions;
+        }
+
 
         [RecursiveMethod]
         public static StackItem Deserialize(string json) {

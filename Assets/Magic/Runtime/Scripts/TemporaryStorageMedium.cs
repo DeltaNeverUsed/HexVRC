@@ -8,31 +8,28 @@ namespace BefuddledLabs.Magic {
         public VRCPickup pickup;
         
         [UdonSynced] private string _data = "";
+        private StackItem _item = new StackItem();
 
         public override bool Write(StackItem data) {
             Networking.SetOwner(Networking.LocalPlayer, gameObject);
-            _data = data.Serialize();
+            _item = data;
+            _data = _item.Serialize();
             RequestSerialization();
             UpdatePickup();
             return true;
         }
 
-        public override bool Read(out StackItem data) {
-            if (string.IsNullOrWhiteSpace(_data)) {
-                data = new StackItem();
-                return false;
-            }
+        public override StackItem Read() => _item;
 
-            data = StackItem.Deserialize(_data);
-            return true;
+        public override void OnDeserialization() {
+            _item = StackItem.Deserialize(_data);
+            UpdatePickup();
         }
-        
-        public override void OnDeserialization() => UpdatePickup();
 
         private void UpdatePickup() {
             if (!Utilities.IsValid(pickup))
                 return;
-            pickup.InteractionText = _data;
+            pickup.InteractionText = _item.ToString();
         }
     }
 }
