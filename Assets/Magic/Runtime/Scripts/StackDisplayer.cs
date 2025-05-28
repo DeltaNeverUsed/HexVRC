@@ -8,7 +8,7 @@ namespace BefuddledLabs.Magic {
         public TextMeshProUGUI stackDisplay;
         public VMManager vmManager;
         
-        private void Start() {
+        private void OnEnable() {
             SendCustomEventDelayedSeconds(nameof(UpdateLoop), 0.5f);
         }
 

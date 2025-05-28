@@ -59,6 +59,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 6796280967215018176}
   lineRenderer: {fileID: 4101907685840517185}
   particleSystem: {fileID: 7239723725978256118}
+  messageDisplayPrefab: {fileID: 4231421840869041235, guid: b5d88f201cbe5f2449589aeb67398dd6, type: 3}
   successColor:
     serializedVersion: 2
     key0: {r: 1, g: 0.4077568, b: 0.9588041, a: 1}

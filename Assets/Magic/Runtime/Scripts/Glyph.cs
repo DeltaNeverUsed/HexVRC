@@ -1,12 +1,15 @@
 ﻿using System;
 using UdonSharp;
 using UnityEngine;
+using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic {
     public class Glyph : UdonSharpBehaviour {
         public LineRenderer lineRenderer;
         public ParticleSystem particleSystem;
+        
+        public GameObject messageDisplayPrefab;
 
         public Gradient successColor = new Gradient();
         public Gradient failureColor = new Gradient();
@@ -52,6 +55,16 @@ namespace BefuddledLabs.Magic {
             else {
                 lineRenderer.colorGradient = failureColor;
                 particleSystem.Play();
+
+                Vector3 middle = _points[0];
+                for (int i = 1; i < _points.Length; i++)
+                    middle += _points[i];
+                middle /= _points.Length;
+                
+                GameObject message = Instantiate(messageDisplayPrefab, middle, Quaternion.identity);
+                message.transform.rotation = Quaternion.LookRotation( middle - Networking.LocalPlayer.GetBonePosition(HumanBodyBones.Head), Vector3.up);
+                TimedMessageDisplayer messageDisplayer = message.GetComponent<TimedMessageDisplayer>();
+                messageDisplayer.Display(msg, 0.5f, 5, 2);
             }
         }
     }
