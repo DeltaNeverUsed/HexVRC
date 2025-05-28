@@ -30,18 +30,19 @@ namespace BefuddledLabs.Magic.Editor {
             return instructionType.GetField("Path", BindingFlags.Static | BindingFlags.Public)
                 ?.GetRawConstantValue().ToString();
         }
-        
+
         private static void GeneratePathMatch(StringBuilder result, Type instructionType) {
             string path = GetPath(instructionType);
             if (!path.Contains('*'))
                 return;
-            
+
             MethodInfo executionMethod = instructionType.GetMethods()
-                .Where(m => string.Equals(m.Name, "Execute", StringComparison.OrdinalIgnoreCase)).FirstOrDefault(m => m.GetParameters().Length == 1);
-            
+                .Where(m => string.Equals(m.Name, "Execute", StringComparison.OrdinalIgnoreCase))
+                .FirstOrDefault(m => m.GetParameters().Length == 1);
+
             if (executionMethod == null)
                 return;
-            
+
             result.Append("if (Path.StartsWith(\"");
             result.Append(path[..^1]);
             result.Append("\", StringComparison.InvariantCulture)) {");
@@ -49,14 +50,13 @@ namespace BefuddledLabs.Magic.Editor {
             result.Append(GetTypeName(executionMethod.DeclaringType));
             result.Append(".Execute(info);\n");
             result.Append("}\n");
-
         }
 
         private static void GenerateCase(StringBuilder result, Type instructionType) {
             string path = GetPath(instructionType);
             if (path.Contains('*'))
                 return;
-            
+
             UnityEngine.Debug.Log($"Generating case for {instructionType.Name} with path {path}");
 
             List<MethodInfo> executionMethods = instructionType.GetMethods()
@@ -99,10 +99,9 @@ namespace BefuddledLabs.Magic.Editor {
                 for (int index = methods.Count - 1; index >= 0; index--) {
                     MethodInfo method = methods[index];
                     ParameterInfo[] parameters = method.GetParameters();
+                    string resultName = $"__result_{instructionType.Name}_{index}";
 
                     if (parameters.Length == 1) {
-                        string resultName = $"__result_{instructionType.Name}_{index}";
-                        
                         result.Append("ExecutionState ");
                         result.Append(resultName);
                         result.Append(" = ");
@@ -117,6 +116,7 @@ namespace BefuddledLabs.Magic.Editor {
                             result.Append(paramName);
                             result.Append(");\n");
                         }
+
                         result.Append("}\n");
                         result.Append("return ");
                         result.Append(resultName);
@@ -141,10 +141,11 @@ namespace BefuddledLabs.Magic.Editor {
                     }
 
                     result.Append(") {\n");
-                    result.Append("return ");
+                    result.Append("ExecutionState ");
+                    result.Append(resultName);
+                    result.Append(" = ");
                     result.Append(GetTypeName(method.DeclaringType));
                     result.Append(".Execute(info");
-
                     for (int i = 0; i < paramNames.Count; i++) {
                         string paramName = paramNames[i];
 
@@ -155,10 +156,23 @@ namespace BefuddledLabs.Magic.Editor {
                         if (parameters[i + 1].ParameterType != typeof(StackItem))
                             result.Append(".Value");
                     }
-
-                    result.Append(");\n");
-
                     
+                    result.Append(");\nif (!");
+                    result.Append(resultName);
+                    result.Append(".Success) {\n");
+                    
+                    result.Append("// Restore stack if execution failed\n");
+                    foreach (string paramName in paramNames) {
+                        result.Append("stack.Push(");
+                        result.Append(paramName);
+                        result.Append(");\n");
+                    }
+
+                    result.Append("}\n");
+                    result.Append("return ");
+                    result.Append(resultName);
+                    result.Append(";\n");
+
                     result.Append("}\n");
                 }
 
@@ -172,7 +186,7 @@ namespace BefuddledLabs.Magic.Editor {
                 if (paramCount > 0)
                     result.Append("}\n");
             }
-            
+
             result.Append(
                 "return ExecutionState.Err(\"Not enough items on Stack for any matching execution function\");\n");
         }
@@ -222,7 +236,8 @@ namespace BefuddledLabs.Magic {
 ");
             List<Type> classes = Assembly.GetAssembly(typeof(PlayerVM))
                 .GetTypes()
-                .Where(t => t.IsClass && t.Namespace != null && t.Namespace.StartsWith("BefuddledLabs.Magic.Instructions")).ToList();
+                .Where(t => t.IsClass && t.Namespace != null &&
+                            t.Namespace.StartsWith("BefuddledLabs.Magic.Instructions")).ToList();
             foreach (Type c in classes)
                 GenerateCase(result, c);
 
@@ -232,7 +247,7 @@ namespace BefuddledLabs.Magic {
             classes.Sort((c1, c2) => GetPath(c2).Length.CompareTo(GetPath(c1).Length));
             foreach (Type c in classes)
                 GeneratePathMatch(result, c);
-            
+
             result.Append(@"
             return ExecutionState.Err(""Path was not a valid instruction."");
         }

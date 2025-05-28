@@ -28,7 +28,11 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
                     info.Stack.Push(new StackItem(new List<StackItem>()));
                     return ExecutionState.Ok();
                 default:
-                    info.Stack.Push(new StackItem(stackItems.GetRange(start, count)));
+                    List<StackItem> newStackItems = new List<StackItem>();
+                    for (int i = 0; i < count; i++)
+                        newStackItems.Add(stackItems[i + start]);
+                    
+                    info.Stack.Push(new StackItem(newStackItems));
                     return ExecutionState.Ok();
             }
         }
