@@ -89,8 +89,11 @@ namespace BefuddledLabs.Magic {
             /*GameObject profiler = GameObject.Find("Profiler");
             if (Utilities.IsValid(profiler))
                 profiler.GetComponent<UdonSharpProfiler.ProfilerDataReader>().Add(this);*/
-            if (Networking.IsOwner(gameObject))
+            if (Networking.IsOwner(gameObject)) {
+                pickup.transform.position = Networking.LocalPlayer
+                    .GetTrackingData(VRCPlayerApi.TrackingDataType.RightHand).position;
                 SendCustomEventDelayedFrames(nameof(LocalUpdateLoop), 1);
+            }
             else {
                 //lineRenderer.gameObject.SetActive(false);
                 grid.gameObject.SetActive(false);
