@@ -101,9 +101,26 @@ namespace BefuddledLabs.Magic.Editor {
                     ParameterInfo[] parameters = method.GetParameters();
 
                     if (parameters.Length == 1) {
-                        result.Append("return ");
+                        string resultName = $"__result_{instructionType.Name}_{index}";
+                        
+                        result.Append("ExecutionState ");
+                        result.Append(resultName);
+                        result.Append(" = ");
                         result.Append(GetTypeName(method.DeclaringType));
                         result.Append(".Execute(info);\n");
+                        result.Append("if (!");
+                        result.Append(resultName);
+                        result.Append(".Success) {\n");
+                        result.Append("// Restore stack if execution failed\n");
+                        foreach (string paramName in paramNames) {
+                            result.Append("stack.Push(");
+                            result.Append(paramName);
+                            result.Append(");\n");
+                        }
+                        result.Append("}\n");
+                        result.Append("return ");
+                        result.Append(resultName);
+                        result.Append(";\n");
                         continue;
                     }
 
@@ -146,8 +163,7 @@ namespace BefuddledLabs.Magic.Editor {
                 }
 
                 result.Append("// Restore stack if failed\n");
-                for (int i = 0; i < paramNames.Count; i++) {
-                    string paramName = paramNames[i];
+                foreach (string paramName in paramNames) {
                     result.Append("stack.Push(");
                     result.Append(paramName);
                     result.Append(");\n");
