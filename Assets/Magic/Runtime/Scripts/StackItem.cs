@@ -19,7 +19,7 @@ namespace BefuddledLabs.Magic {
         Any,
     }
 
-    public class StackItem {
+    public class StackItem : IEquatable<StackItem> {
         public readonly ItemType Type;
         public readonly object Value;
 
@@ -261,6 +261,23 @@ namespace BefuddledLabs.Magic {
                     sb.Append("Invalid item type");
                     break;
             }
+        }
+
+        public bool Equals(StackItem other) {
+            if (!Utilities.IsValid(other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Type == other.Type && Equals(Value, other.Value);
+        }
+
+        public override bool Equals(object obj) {
+            if (!Utilities.IsValid(obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((StackItem)obj);
+        }
+
+        public override int GetHashCode() {
+            return HashCode.Combine((int)Type, Value);
         }
 
         public override string ToString() {
