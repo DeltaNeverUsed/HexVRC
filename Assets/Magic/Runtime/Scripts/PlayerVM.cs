@@ -204,6 +204,9 @@ namespace BefuddledLabs.Magic {
                         instruction.Path, Instructions.BasicPatterns.Clear.Path, StringComparison.OrdinalIgnoreCase) &&
                     !string.Equals(
                         instruction.Path, Instructions.EscapingPatterns.Undo.Path,
+                        StringComparison.OrdinalIgnoreCase) &&
+                    !string.Equals(
+                        instruction.Path, Instructions.EscapingPatterns.Introspection.Path,
                         StringComparison.OrdinalIgnoreCase)) {
                     ((List<StackItem>)_stack.Peek().Value).Add(new StackItem(instruction));
                     continue;
