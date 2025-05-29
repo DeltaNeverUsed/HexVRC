@@ -15,7 +15,10 @@ namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
 
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.Stack.Push(new StackItem(new List<StackItem>()));
+            if (info.VM.IntrospectionDepth == 0)
+                info.Stack.Push(new StackItem(new List<StackItem>()));
+            else
+                ((List<StackItem>)info.Stack.Peek().Value).Add(new StackItem(new Instruction(Path)));
             info.VM.IntrospectionDepth++;
             return ExecutionState.Ok();
         }

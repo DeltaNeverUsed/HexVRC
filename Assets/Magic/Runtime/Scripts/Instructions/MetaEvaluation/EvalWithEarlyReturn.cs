@@ -29,5 +29,11 @@ namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
             ExecutionState success = info.VM.Execute(instructions, info);
             return success;
         }
+        
+        public static ExecutionState Execute(ExecutionInfo info, Instruction symbol) {
+            List<StackItem> list = new List<StackItem>();
+            list.Add(new StackItem(symbol));
+            return Execute(info, list);
+        }
     }
 }

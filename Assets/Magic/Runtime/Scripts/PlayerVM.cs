@@ -214,9 +214,7 @@ namespace BefuddledLabs.Magic {
 
                 if (EscapeNext) {
                     EscapeNext = false;
-                    List<StackItem> i = new List<StackItem>(1);
-                    i.Add(new StackItem(instruction));
-                    _stack.Push(new StackItem(i));
+                    _stack.Push(new StackItem(instruction));
                     continue;
                 }
 
