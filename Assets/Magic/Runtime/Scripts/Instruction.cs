@@ -469,6 +469,68 @@ stack.Push(_param_2);
 stack.Push(_param_3);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "deaqq":
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Instruction) {
+ExecutionState __result_Eval_1 = BefuddledLabs.Magic.Instructions.MetaEvaluation.Eval.Execute(info, (BefuddledLabs.Magic.Instruction)_param_0.Value);
+if (!__result_Eval_1.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+}
+return __result_Eval_1;
+}
+if (_param_0.Type == ItemType.List) {
+ExecutionState __result_Eval_0 = BefuddledLabs.Magic.Instructions.MetaEvaluation.Eval.Execute(info, (System.Collections.Generic.List<BefuddledLabs.Magic.StackItem>)_param_0.Value);
+if (!__result_Eval_0.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+}
+return __result_Eval_0;
+}
+// Restore stack if failed
+stack.Push(_param_0);
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "qwaqde":
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Instruction) {
+ExecutionState __result_EvalWithEarlyReturn_1 = BefuddledLabs.Magic.Instructions.MetaEvaluation.EvalWithEarlyReturn.Execute(info, (BefuddledLabs.Magic.Instruction)_param_0.Value);
+if (!__result_EvalWithEarlyReturn_1.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+}
+return __result_EvalWithEarlyReturn_1;
+}
+if (_param_0.Type == ItemType.List) {
+ExecutionState __result_EvalWithEarlyReturn_0 = BefuddledLabs.Magic.Instructions.MetaEvaluation.EvalWithEarlyReturn.Execute(info, (System.Collections.Generic.List<BefuddledLabs.Magic.StackItem>)_param_0.Value);
+if (!__result_EvalWithEarlyReturn_0.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+}
+return __result_EvalWithEarlyReturn_0;
+}
+// Restore stack if failed
+stack.Push(_param_0);
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "None":
+ExecutionState __result_Halt_0 = BefuddledLabs.Magic.Instructions.MetaEvaluation.Halt.Execute(info);
+if (!__result_Halt_0.Success) {
+// Restore stack if execution failed
+}
+return __result_Halt_0;
+// Restore stack if failed
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "aqdee":
+ExecutionState __result_Skip_0 = BefuddledLabs.Magic.Instructions.MetaEvaluation.Skip.Execute(info);
+if (!__result_Skip_0.Success) {
+// Restore stack if execution failed
+}
+return __result_Skip_0;
+// Restore stack if failed
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "waaw":
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
@@ -1317,68 +1379,6 @@ return __result_Undo_0;
 // Restore stack if failed
 stack.Push(_param_0);
 }
-return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "deaqq":
-if (stackSize >= 1) {
-StackItem _param_0 = stack.Pop();
-if (_param_0.Type == ItemType.Instruction) {
-ExecutionState __result_Eval_1 = BefuddledLabs.Magic.Instructions.EscapingPatterns.Eval.Execute(info, (BefuddledLabs.Magic.Instruction)_param_0.Value);
-if (!__result_Eval_1.Success) {
-// Restore stack if execution failed
-stack.Push(_param_0);
-}
-return __result_Eval_1;
-}
-if (_param_0.Type == ItemType.List) {
-ExecutionState __result_Eval_0 = BefuddledLabs.Magic.Instructions.EscapingPatterns.Eval.Execute(info, (System.Collections.Generic.List<BefuddledLabs.Magic.StackItem>)_param_0.Value);
-if (!__result_Eval_0.Success) {
-// Restore stack if execution failed
-stack.Push(_param_0);
-}
-return __result_Eval_0;
-}
-// Restore stack if failed
-stack.Push(_param_0);
-}
-return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qwaqde":
-if (stackSize >= 1) {
-StackItem _param_0 = stack.Pop();
-if (_param_0.Type == ItemType.Instruction) {
-ExecutionState __result_EvalWithEarlyReturn_1 = BefuddledLabs.Magic.Instructions.EscapingPatterns.EvalWithEarlyReturn.Execute(info, (BefuddledLabs.Magic.Instruction)_param_0.Value);
-if (!__result_EvalWithEarlyReturn_1.Success) {
-// Restore stack if execution failed
-stack.Push(_param_0);
-}
-return __result_EvalWithEarlyReturn_1;
-}
-if (_param_0.Type == ItemType.List) {
-ExecutionState __result_EvalWithEarlyReturn_0 = BefuddledLabs.Magic.Instructions.EscapingPatterns.EvalWithEarlyReturn.Execute(info, (System.Collections.Generic.List<BefuddledLabs.Magic.StackItem>)_param_0.Value);
-if (!__result_EvalWithEarlyReturn_0.Success) {
-// Restore stack if execution failed
-stack.Push(_param_0);
-}
-return __result_EvalWithEarlyReturn_0;
-}
-// Restore stack if failed
-stack.Push(_param_0);
-}
-return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "None":
-ExecutionState __result_Halt_0 = BefuddledLabs.Magic.Instructions.EscapingPatterns.Halt.Execute(info);
-if (!__result_Halt_0.Success) {
-// Restore stack if execution failed
-}
-return __result_Halt_0;
-// Restore stack if failed
-return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aqdee":
-ExecutionState __result_Skip_0 = BefuddledLabs.Magic.Instructions.EscapingPatterns.Skip.Execute(info);
-if (!__result_Skip_0.Success) {
-// Restore stack if execution failed
-}
-return __result_Skip_0;
-// Restore stack if failed
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "ddwwddwa":
 if (stackSize >= 1) {
