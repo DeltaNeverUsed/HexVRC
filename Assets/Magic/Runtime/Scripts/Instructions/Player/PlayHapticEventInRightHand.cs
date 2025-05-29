@@ -20,14 +20,14 @@ namespace BefuddledLabs.Magic.Instructions.Player {
             float frequency) {
             if (!Utilities.IsValid(player) || !player.IsValid())
                 return ExecutionState.Err("Invalid player");
-            
-            ExecutionState manaResult = info.VM.ConsumeMana(duration * amplitude);
-            if (!manaResult.IsOk())
-                return manaResult;
 
             duration = Mathf.Clamp(duration, 0f, 1f);
             amplitude = Mathf.Clamp(amplitude, 0f, 1f);
             frequency = Mathf.Clamp(frequency, 0f, 1f);
+            
+            ExecutionState manaResult = info.VM.ConsumeMana(duration * amplitude);
+            if (!manaResult.IsOk())
+                return manaResult;
 
             player.PlayHapticEventInHand(VRC_Pickup.PickupHand.Right, duration, amplitude, frequency);
             return ExecutionState.Ok();
