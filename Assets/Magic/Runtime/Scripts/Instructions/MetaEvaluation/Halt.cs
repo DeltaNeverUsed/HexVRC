@@ -1,6 +1,6 @@
 
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
+namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
     public static class Halt {
         public const string Path = "None";
 

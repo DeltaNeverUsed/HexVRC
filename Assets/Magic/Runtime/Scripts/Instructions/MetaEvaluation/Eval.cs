@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
+namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
     public static class Eval {
         public const string Path = "deaqq";
 
