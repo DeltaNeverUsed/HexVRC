@@ -21,7 +21,7 @@ namespace BefuddledLabs.Magic {
             float angle = Mathf.Atan2(localDirection.x, localDirection.y) * Mathf.Rad2Deg;
 
             // Only rotate around local Z axis
-            transform.localRotation = Quaternion.Euler(0, 0, -angle + 180);
+            //transform.localRotation = Quaternion.Euler(0, 0, -angle);
         }
 
         public void Drop() {
