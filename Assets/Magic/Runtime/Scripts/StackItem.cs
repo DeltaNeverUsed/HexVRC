@@ -17,6 +17,7 @@ namespace BefuddledLabs.Magic {
         Instruction,
         List,
         Any,
+        Drone,
     }
 
     public class StackItem : IEquatable<StackItem> {
@@ -40,6 +41,8 @@ namespace BefuddledLabs.Magic {
                 return ItemType.Instruction;
             if (typeof(List<StackItem>).IsAssignableFrom(type))
                 return ItemType.List;
+            if (typeof(VRCDroneApi).IsAssignableFrom(type))
+                return ItemType.Drone;
             if (typeof(StackItem).IsAssignableFrom(type))
                 return ItemType.Any;
             return ItemType.Null;
@@ -78,6 +81,11 @@ namespace BefuddledLabs.Magic {
 
         public StackItem(Instruction data) {
             Type = Utilities.IsValid(data) ? ItemType.Instruction : ItemType.Null;
+            Value = data;
+        }
+        
+        public StackItem(VRCDroneApi data) {
+            Type = Utilities.IsValid(data) ? ItemType.Drone : ItemType.Null;
             Value = data;
         }
 
@@ -145,6 +153,16 @@ namespace BefuddledLabs.Magic {
                     return new StackItem(new Instruction(serializedData["v"].String));
                 case ItemType.Boolean:
                     return new StackItem(serializedData["v"].Boolean);
+                case ItemType.Drone:
+                    players = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
+                    VRCPlayerApi.GetPlayers(players);
+                    foreach (VRCPlayerApi player in players) {
+                        if (player.IsValid() &&
+                            player.displayName.Equals(serializedData["v"].String, StringComparison.InvariantCultureIgnoreCase))
+                            return new StackItem(player.GetDrone());
+                    }
+
+                    return new StackItem();
                 case ItemType.Null:
                 default:
                     return new StackItem();
@@ -190,6 +208,20 @@ namespace BefuddledLabs.Magic {
                     break;
                 case ItemType.Boolean:
                     dict["v"] = new DataToken((bool)Value);
+                    break;
+                case ItemType.Drone:
+                    VRCDroneApi drone = (VRCDroneApi)Value;
+                    if (!Utilities.IsValid(drone)) {
+                        dict["t"] = new DataToken((int)ItemType.Null);
+                        break;
+                    }
+
+                    player = drone.GetPlayer();
+                    
+                    if (!Utilities.IsValid(player) || !player.IsValid())
+                        dict["v"] = new DataToken("");
+                    else
+                        dict["v"] = new DataToken(player.displayName);
                     break;
                 case ItemType.Null:
                 default:

@@ -33,6 +33,8 @@ MonoBehaviour:
       _type: 11
     - _name: __2_impulse__param
       _type: 14
+    - _name: __0_isDrone__param
+      _type: 9
   - _maxEventsPerSecond: 5
     _name: SetHeight
     _parameters:

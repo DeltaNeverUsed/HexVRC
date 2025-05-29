@@ -293,6 +293,15 @@ case "awqqqwaqw":
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Drone && _param_1.Type == ItemType.Vector) {
+ExecutionState __result_Impulse_1 = BefuddledLabs.Magic.Instructions.Player.Impulse.Execute(info, (VRC.SDKBase.VRCDroneApi)_param_0.Value, (UnityEngine.Vector3)_param_1.Value);
+if (!__result_Impulse_1.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+stack.Push(_param_1);
+}
+return __result_Impulse_1;
+}
 if (_param_0.Type == ItemType.Player && _param_1.Type == ItemType.Vector) {
 ExecutionState __result_Impulse_0 = BefuddledLabs.Magic.Instructions.Player.Impulse.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value, (UnityEngine.Vector3)_param_1.Value);
 if (!__result_Impulse_0.Success) {
@@ -1312,6 +1321,14 @@ return ExecutionState.Err("Not enough items on Stack for any matching execution 
 case "deaqq":
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Instruction) {
+ExecutionState __result_Eval_1 = BefuddledLabs.Magic.Instructions.EscapingPatterns.Eval.Execute(info, (BefuddledLabs.Magic.Instruction)_param_0.Value);
+if (!__result_Eval_1.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+}
+return __result_Eval_1;
+}
 if (_param_0.Type == ItemType.List) {
 ExecutionState __result_Eval_0 = BefuddledLabs.Magic.Instructions.EscapingPatterns.Eval.Execute(info, (System.Collections.Generic.List<BefuddledLabs.Magic.StackItem>)_param_0.Value);
 if (!__result_Eval_0.Success) {
@@ -1327,6 +1344,14 @@ return ExecutionState.Err("Not enough items on Stack for any matching execution 
 case "qwaqde":
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Instruction) {
+ExecutionState __result_EvalWithEarlyReturn_1 = BefuddledLabs.Magic.Instructions.EscapingPatterns.EvalWithEarlyReturn.Execute(info, (BefuddledLabs.Magic.Instruction)_param_0.Value);
+if (!__result_EvalWithEarlyReturn_1.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+}
+return __result_EvalWithEarlyReturn_1;
+}
 if (_param_0.Type == ItemType.List) {
 ExecutionState __result_EvalWithEarlyReturn_0 = BefuddledLabs.Magic.Instructions.EscapingPatterns.EvalWithEarlyReturn.Execute(info, (System.Collections.Generic.List<BefuddledLabs.Magic.StackItem>)_param_0.Value);
 if (!__result_EvalWithEarlyReturn_0.Success) {
@@ -1354,6 +1379,81 @@ if (!__result_Skip_0.Success) {
 }
 return __result_Skip_0;
 // Restore stack if failed
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "ddwwddwa":
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Player) {
+ExecutionState __result_GetDrone_0 = BefuddledLabs.Magic.Instructions.Drone.GetDrone.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value);
+if (!__result_GetDrone_0.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+}
+return __result_GetDrone_0;
+}
+// Restore stack if failed
+stack.Push(_param_0);
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "ddwwdded":
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Drone) {
+ExecutionState __result_GetPosition_0 = BefuddledLabs.Magic.Instructions.Drone.GetPosition.Execute(info, (VRC.SDKBase.VRCDroneApi)_param_0.Value);
+if (!__result_GetPosition_0.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+}
+return __result_GetPosition_0;
+}
+// Restore stack if failed
+stack.Push(_param_0);
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "ddwwddwewa":
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Drone) {
+ExecutionState __result_GetRotation_0 = BefuddledLabs.Magic.Instructions.Drone.GetRotation.Execute(info, (VRC.SDKBase.VRCDroneApi)_param_0.Value);
+if (!__result_GetRotation_0.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+}
+return __result_GetRotation_0;
+}
+// Restore stack if failed
+stack.Push(_param_0);
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "ddwwddad":
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Drone) {
+ExecutionState __result_GetVelocity_0 = BefuddledLabs.Magic.Instructions.Drone.GetVelocity.Execute(info, (VRC.SDKBase.VRCDroneApi)_param_0.Value);
+if (!__result_GetVelocity_0.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+}
+return __result_GetVelocity_0;
+}
+// Restore stack if failed
+stack.Push(_param_0);
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "ddwwddweqq":
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Drone) {
+ExecutionState __result_IsDeployed_0 = BefuddledLabs.Magic.Instructions.Drone.IsDeployed.Execute(info, (VRC.SDKBase.VRCDroneApi)_param_0.Value);
+if (!__result_IsDeployed_0.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+}
+return __result_IsDeployed_0;
+}
+// Restore stack if failed
+stack.Push(_param_0);
+}
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "aaq":
 ExecutionState __result_E_0 = BefuddledLabs.Magic.Instructions.Constants.E.Execute(info);
@@ -1483,6 +1583,21 @@ if (!__result_GetPlayerLookDirection_0.Success) {
 stack.Push(_param_0);
 }
 return __result_GetPlayerLookDirection_0;
+}
+// Restore stack if failed
+stack.Push(_param_0);
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "dd":
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Player) {
+ExecutionState __result_GetPlayerPosition_0 = BefuddledLabs.Magic.Instructions.BasicPatterns.GetPlayerPosition.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value);
+if (!__result_GetPlayerPosition_0.Success) {
+// Restore stack if execution failed
+stack.Push(_param_0);
+}
+return __result_GetPlayerPosition_0;
 }
 // Restore stack if failed
 stack.Push(_param_0);

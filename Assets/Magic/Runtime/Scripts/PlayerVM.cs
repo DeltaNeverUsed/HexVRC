@@ -248,16 +248,22 @@ namespace BefuddledLabs.Magic {
         #region Networked Functions
 
         [NetworkCallable]
-        public void ApplyImpulse(int playerId, Vector3 impulse) {
+        public void ApplyImpulse(int playerId, Vector3 impulse, bool isDrone) {
             VRCPlayerApi player = VRCPlayerApi.GetPlayerById(playerId);
             if (!Utilities.IsValid(player) || !player.IsValid())
                 return;
             if (!player.isLocal)
                 return;
 
-            Vector3 velocity = player.GetVelocity();
-            velocity += impulse;
-            player.SetVelocity(velocity);
+            if (isDrone) {
+                VRCDroneApi drone = player.GetDrone();
+                if (drone.IsDeployed())
+                    drone.SetVelocity(impulse + drone.GetVelocity());
+            }
+            else {
+                Vector3 velocity = player.GetVelocity();
+                player.SetVelocity(velocity + impulse);
+            }
         }
 
         [NetworkCallable]
@@ -268,7 +274,7 @@ namespace BefuddledLabs.Magic {
             if (!player.isLocal)
                 return;
 
-            player.SetAvatarEyeHeightByMeters(height);
+            player.SetAvatarEyeHeightByMeters(Mathf.Clamp(height, 0.2f, 10f));
         }
 
         #endregion
