@@ -2,7 +2,9 @@
 using UdonSharp;
 using UnityEngine;
 using VRC.SDK3.UdonNetworkCalling;
+using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
+using Random = UnityEngine.Random;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic {
@@ -12,6 +14,33 @@ namespace BefuddledLabs.Magic {
         public GameObject glyphTemplate;
 
         Dictionary<int, Glyph> _glyphs = new Dictionary<int, Glyph>();
+        
+        private Stack<int> _ids = new Stack<int>();
+
+        public override void OnPlayerJoined(VRCPlayerApi player) {
+            if (!Networking.IsOwner(gameObject) && !player.isLocal)
+                return;
+            if (_glyphs.Count <= 0)
+                return;
+            _ids.Clear();
+            foreach (KeyValuePair<int, Glyph> valuePair in _glyphs)
+                _ids.Push(valuePair.Key);
+            LateGlyphUpdate();
+        }
+
+        public void LateGlyphUpdate() {
+            if (_ids.Count <= 0)
+                return;
+
+            int glyphId = _ids.Pop();
+            Glyph glyph = _glyphs[glyphId];
+
+            SendCustomNetworkEvent(NetworkEventTarget.Others, nameof(NetworkInstantiateGlyph), glyph.points, glyphId);
+            if (glyph.Status != -1)
+                SendCustomNetworkEvent(NetworkEventTarget.Others, nameof(UpdateGlyphStatus), new int[] {glyphId}, new bool[] {glyph.Status == 1}, new string[] {""});
+            
+            SendCustomEventDelayedSeconds(nameof(LateGlyphUpdate), 0.1f);
+        }
 
         /// <summary>
         /// 
@@ -22,6 +51,8 @@ namespace BefuddledLabs.Magic {
         /// <returns>Glyph Index</returns>
         [NetworkCallable]
         private void NetworkInstantiateGlyph(Vector3[] points, int id) {
+            if (_glyphs.ContainsKey(id))
+                return;
             GameObject glyph = Instantiate(glyphTemplate, glyphContainer);
             Glyph glyphComponent = glyph.GetComponent<Glyph>();
             glyphComponent.RenderPoints(points);
@@ -34,7 +65,6 @@ namespace BefuddledLabs.Magic {
                 id = Random.Range(0, int.MaxValue);
             
             SendCustomNetworkEvent(NetworkEventTarget.Others, nameof(NetworkInstantiateGlyph), points, id);
-
             NetworkInstantiateGlyph(points, id);
             return id;
         }

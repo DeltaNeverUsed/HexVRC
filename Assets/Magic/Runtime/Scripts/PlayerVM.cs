@@ -97,6 +97,12 @@ namespace BefuddledLabs.Magic {
                     GetComponentInParent<VMManager>().localVM = this;
         }
 
+        public Stack<StackItem> ReplaceStack(Stack<StackItem> stack) {
+            Stack<StackItem> oldStack = _stack;
+            _stack = stack;
+            return oldStack;
+        }
+
         private bool RaycastPlayer(Vector3 origin, Vector3 direction, out VRCPlayerApi player) {
             const float distance = 10;
 

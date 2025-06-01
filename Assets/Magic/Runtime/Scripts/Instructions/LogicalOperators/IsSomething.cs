@@ -17,6 +17,11 @@ namespace BefuddledLabs.Magic.Instructions.LogicalOperators {
         #endregion
 
 
+        public static ExecutionState Execute(ExecutionInfo info) {
+            info.Stack.Push(new StackItem(false));
+            return ExecutionState.Ok();
+        }
+
         public static ExecutionState Execute(ExecutionInfo info, StackItem any) {
             switch (any.Type) {
                 case ItemType.Null:

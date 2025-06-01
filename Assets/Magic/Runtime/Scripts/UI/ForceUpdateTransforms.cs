@@ -7,7 +7,11 @@ namespace BefuddledLabs.Magic.UI {
     public class ForceUpdateTransforms : UdonSharpBehaviour {
         public RectTransform rect;
 
-        public void OnEnable() => LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
-        public void OnDisable() => LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
+        public void OnEnable() => SendCustomEventDelayedFrames(nameof(DelayedRebuild), 1);
+        public void OnDisable() => DelayedRebuild();
+
+        public void DelayedRebuild() {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
+        }
     }
 }

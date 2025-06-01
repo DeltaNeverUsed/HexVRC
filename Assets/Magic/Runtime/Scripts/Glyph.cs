@@ -14,17 +14,19 @@ namespace BefuddledLabs.Magic {
         public Gradient successColor = new Gradient();
         public Gradient failureColor = new Gradient();
 
-        private Vector3[] _points = Array.Empty<Vector3>();
+        [NonSerialized] public int Status = -1;
 
-        public void RenderPoints(Vector3[] points) {
-            _points = points;
+        public Vector3[] points = Array.Empty<Vector3>();
+
+        public void RenderPoints(Vector3[] p) {
+            points = p;
             
-            if (_points.Length > 0)
-                lineRenderer.transform.position = _points[0];
+            if (points.Length > 0)
+                lineRenderer.transform.position = points[0];
 
-            lineRenderer.SetPositions(_points);
-            lineRenderer.positionCount = _points.Length;
-            lineRenderer.SetPositions(_points);
+            lineRenderer.SetPositions(points);
+            lineRenderer.positionCount = points.Length;
+            lineRenderer.SetPositions(points);
             
             Mesh bakedMesh = new Mesh();
             lineRenderer.BakeMesh(bakedMesh, true);
@@ -50,16 +52,20 @@ namespace BefuddledLabs.Magic {
         }
 
         public void UpdateState(bool success, string msg) {
+            Status = success ? 1 : 0;
             if (success)
                 lineRenderer.colorGradient = successColor;
             else {
                 lineRenderer.colorGradient = failureColor;
                 particleSystem.Play();
 
-                Vector3 middle = _points[0];
-                for (int i = 1; i < _points.Length; i++)
-                    middle += _points[i];
-                middle /= _points.Length;
+                Vector3 middle = points[0];
+                for (int i = 1; i < points.Length; i++)
+                    middle += points[i];
+                middle /= points.Length;
+                
+                if (string.IsNullOrWhiteSpace(msg))
+                    return;
                 
                 GameObject message = Instantiate(messageDisplayPrefab, middle, Quaternion.identity);
                 message.transform.rotation = Quaternion.LookRotation( middle - Networking.LocalPlayer.GetBonePosition(HumanBodyBones.Head), Vector3.up);

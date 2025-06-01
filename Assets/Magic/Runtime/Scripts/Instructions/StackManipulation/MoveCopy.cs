@@ -24,7 +24,7 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
 
             // If the index is positive, move the element at that index to the top of the stack
             if (idx >= 0) {
-                if (stack.Count < idx)
+                if (stack.Count <= idx)
                     return ExecutionState.Err("Index out of range");
 
                 // Pop all elements up to the index into the scratch stack
@@ -46,7 +46,7 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
                 // Convert the index to a positive value
                 idx = -idx;
 
-                if (stack.Count < idx)
+                if (stack.Count <= idx)
                     return ExecutionState.Err("Index out of range");
 
                 StackItem topElement = stack.Peek();

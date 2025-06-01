@@ -63,12 +63,15 @@ namespace BefuddledLabs.Magic.Editor {
                 .Where(m => string.Equals(m.Name, "Execute", StringComparison.OrdinalIgnoreCase)).ToList();
 
             SortedDictionary<int, List<MethodInfo>> methodParamCounts = new();
-
+            
             foreach (MethodInfo method in executionMethods) {
-                if (!methodParamCounts.ContainsKey(method.GetParameters().Length - 1))
-                    methodParamCounts.Add(method.GetParameters().Length - 1, new List<MethodInfo>() { method });
+                int paramCount = method.GetParameters().Length - 1;
+                if (paramCount == 0)
+                    paramCount = 99; // so that functions without any params always gets used last.
+                if (!methodParamCounts.ContainsKey(paramCount))
+                    methodParamCounts.Add(paramCount, new List<MethodInfo>() { method });
                 else
-                    methodParamCounts[method.GetParameters().Length - 1].Add(method);
+                    methodParamCounts[paramCount].Add(method);
             }
 
             result.Append("case \"");
@@ -76,7 +79,10 @@ namespace BefuddledLabs.Magic.Editor {
             result.Append("\":\n");
 
 
-            foreach (int paramCount in methodParamCounts.Keys) {
+            foreach (int paramCountTemp in methodParamCounts.Keys) {
+                int paramCount = paramCountTemp;
+                if (paramCount == 99)
+                    paramCount = 0;
                 if (paramCount > 0) {
                     result.Append("if (stackSize >= ");
                     result.Append(paramCount);
@@ -95,14 +101,14 @@ namespace BefuddledLabs.Magic.Editor {
                     result.Append(" = stack.Pop();\n");
                 }
 
-                List<MethodInfo> methods = methodParamCounts[paramCount];
+                List<MethodInfo> methods = methodParamCounts[paramCountTemp];
                 for (int index = methods.Count - 1; index >= 0; index--) {
                     MethodInfo method = methods[index];
                     ParameterInfo[] parameters = method.GetParameters();
                     string resultName = $"__result_{instructionType.Name}_{index}";
 
                     if (parameters.Length == 1) {
-                        result.Append("ExecutionState ");
+                        result.Append("{\nExecutionState ");
                         result.Append(resultName);
                         result.Append(" = ");
                         result.Append(GetTypeName(method.DeclaringType));
@@ -120,7 +126,7 @@ namespace BefuddledLabs.Magic.Editor {
                         result.Append("}\n");
                         result.Append("return ");
                         result.Append(resultName);
-                        result.Append(";\n");
+                        result.Append(";\n}\n");
                         continue;
                     }
 
