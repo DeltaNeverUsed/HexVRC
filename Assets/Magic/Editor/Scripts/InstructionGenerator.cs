@@ -63,7 +63,7 @@ namespace BefuddledLabs.Magic.Editor {
                 .Where(m => string.Equals(m.Name, "Execute", StringComparison.OrdinalIgnoreCase)).ToList();
 
             SortedDictionary<int, List<MethodInfo>> methodParamCounts = new();
-            
+
             foreach (MethodInfo method in executionMethods) {
                 int paramCount = method.GetParameters().Length - 1;
                 if (paramCount == 0)
@@ -105,28 +105,13 @@ namespace BefuddledLabs.Magic.Editor {
                 for (int index = methods.Count - 1; index >= 0; index--) {
                     MethodInfo method = methods[index];
                     ParameterInfo[] parameters = method.GetParameters();
-                    string resultName = $"__result_{instructionType.Name}_{index}";
 
                     if (parameters.Length == 1) {
-                        result.Append("{\nExecutionState ");
-                        result.Append(resultName);
-                        result.Append(" = ");
+                        result.Append("{\n");
+                        result.Append("return ");
                         result.Append(GetTypeName(method.DeclaringType));
                         result.Append(".Execute(info);\n");
-                        result.Append("if (!");
-                        result.Append(resultName);
-                        result.Append(".Success) {\n");
-                        result.Append("// Restore stack if execution failed\n");
-                        foreach (string paramName in paramNames) {
-                            result.Append("stack.Push(");
-                            result.Append(paramName);
-                            result.Append(");\n");
-                        }
-
                         result.Append("}\n");
-                        result.Append("return ");
-                        result.Append(resultName);
-                        result.Append(";\n}\n");
                         continue;
                     }
 
@@ -147,9 +132,7 @@ namespace BefuddledLabs.Magic.Editor {
                     }
 
                     result.Append(") {\n");
-                    result.Append("ExecutionState ");
-                    result.Append(resultName);
-                    result.Append(" = ");
+                    result.Append("return ");
                     result.Append(GetTypeName(method.DeclaringType));
                     result.Append(".Execute(info");
                     for (int i = 0; i < paramNames.Count; i++) {
@@ -162,31 +145,19 @@ namespace BefuddledLabs.Magic.Editor {
                         if (parameters[i + 1].ParameterType != typeof(StackItem))
                             result.Append(".Value");
                     }
+
                     
-                    result.Append(");\nif (!");
-                    result.Append(resultName);
-                    result.Append(".Success) {\n");
-                    
-                    result.Append("// Restore stack if execution failed\n");
-                    foreach (string paramName in paramNames) {
-                        result.Append("stack.Push(");
-                        result.Append(paramName);
-                        result.Append(");\n");
-                    }
-
-                    result.Append("}\n");
-                    result.Append("return ");
-                    result.Append(resultName);
-                    result.Append(";\n");
-
-                    result.Append("}\n");
-                }
-
-                result.Append("// Restore stack if failed\n");
-                foreach (string paramName in paramNames) {
-                    result.Append("stack.Push(");
-                    result.Append(paramName);
                     result.Append(");\n");
+                    result.Append("}\n");
+
+                    if (methodParamCounts.Count - (methodParamCounts.ContainsKey(99) ? 1 : 0) > 1) {
+                        result.Append("// Restore stack if no matching function was found\n"); // only restore it if there's multiple execution functions that take different amounts of parameters
+                        foreach (string paramName in paramNames) {
+                            result.Append("stack.Push(");
+                            result.Append(paramName);
+                            result.Append(");\n");
+                        }
+                    }
                 }
 
                 if (paramCount > 0)

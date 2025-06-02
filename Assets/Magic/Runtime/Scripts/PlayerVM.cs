@@ -228,13 +228,14 @@ namespace BefuddledLabs.Magic {
 
                 if (infoCopy.GlyphId != -1) {
                     glyphId.Add(instruction.GlyphId);
-                    success.Add(result.Success);
-                    msg.Add(result.Success ? "" : result.Error);
+                    success.Add(result.IsOk());
+                    msg.Add(result.IsOk() ? "" : result.Error);
                 }
 
-                if (!result.Success) {
+                if (result.Success == ExecutionError.Halt)
                     break;
-                }
+                if (result.Success == ExecutionError.Garbage)
+                    _stack.Push(new StackItem(result.Error));
 
                 if (result.EarlyReturnDepth > 0) {
                     result.EarlyReturnDepth--;

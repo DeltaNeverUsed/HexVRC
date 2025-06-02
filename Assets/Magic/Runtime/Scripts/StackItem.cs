@@ -18,6 +18,7 @@ namespace BefuddledLabs.Magic {
         List,
         Any,
         Drone,
+        Garbage
     }
 
     public class StackItem : IEquatable<StackItem> {
@@ -43,15 +44,22 @@ namespace BefuddledLabs.Magic {
                 return ItemType.List;
             if (typeof(VRCDroneApi).IsAssignableFrom(type))
                 return ItemType.Drone;
+            if (typeof(string).IsAssignableFrom(type))
+                return ItemType.Garbage;
             if (typeof(StackItem).IsAssignableFrom(type))
                 return ItemType.Any;
             return ItemType.Null;
         }
 
 #endif
-
+        
         public StackItem() {
             Type = ItemType.Null;
+        }
+        
+        public StackItem(string error) {
+            Type = ItemType.Garbage;
+            Value = error;
         }
 
         public StackItem(Vector3 data) {
@@ -93,10 +101,6 @@ namespace BefuddledLabs.Magic {
             Type = Utilities.IsValid(data) ? data.Type : ItemType.Null;
             if (Type != ItemType.Null)
                 Value = data.Value;
-        }
-
-        public StackItem Copy() {
-            return new StackItem(this);
         }
 
         public List<Instruction> ToInstructionList() {
@@ -163,6 +167,9 @@ namespace BefuddledLabs.Magic {
                     }
 
                     return new StackItem();
+                case ItemType.Garbage:
+                    return new StackItem(serializedData["v"].ToString());
+                case ItemType.Any:
                 case ItemType.Null:
                 default:
                     return new StackItem();
@@ -223,6 +230,10 @@ namespace BefuddledLabs.Magic {
                     else
                         dict["v"] = new DataToken(player.displayName);
                     break;
+                case ItemType.Garbage:
+                    dict["v"] = (string)Value;
+                    break;
+                case ItemType.Any:
                 case ItemType.Null:
                 default:
                     dict["t"] = new DataToken((int)ItemType.Null);
@@ -287,10 +298,18 @@ namespace BefuddledLabs.Magic {
                     sb.Append(((bool)Value).ToString());
                     break;
                 case ItemType.Any:
-                    sb.Append("This value should not be possible to get, please report this to me @deltaneverused");
+                    sb.Append("This value should not be possible to get. please report this to me @deltaneverused");
+                    break;
+                case ItemType.Drone:
+                    sb.Append(Value.ToString());
+                    break;
+                case ItemType.Garbage:
+                    sb.Append("Garbage (");
+                    sb.Append(Value.ToString());
+                    sb.Append(")");
                     break;
                 default:
-                    sb.Append("Invalid item type");
+                    sb.Append("Invalid item type. please report this to me @deltaneverused");
                     break;
             }
         }
@@ -317,6 +336,19 @@ namespace BefuddledLabs.Magic {
             ToString(sb);
 
             return sb.ToString();
+        }
+
+        public StackItem Clone() {
+            if (Type != ItemType.List)
+                return this;
+            
+            // if it's a list we do a shallow clone of the whole list
+            // would have been nice if we could do a deep clone, but that's not really possibly in a performant manner
+            List<StackItem> currentList = (List<StackItem>)Value;
+            StackItem[] newArray = new StackItem[currentList.Count];
+            Array.Copy(currentList.ToArray(), newArray, currentList.Count);
+            return new StackItem(new List<StackItem>(newArray));
+
         }
     }
 }
