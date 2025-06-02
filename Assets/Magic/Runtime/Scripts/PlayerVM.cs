@@ -189,11 +189,11 @@ namespace BefuddledLabs.Magic {
             ExecutionState result = ExecutionState.Ok();
 
             foreach (Instruction instruction in instructions) {
-                if (_executionTimer.ElapsedMilliseconds > 33) {
+                if (_executionTimer.ElapsedMilliseconds > 500) {
                     _executionTimer.Stop();
                     glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus),
                         glyphId.ToArray(), success.ToArray(), msg.ToArray());
-                    return ExecutionState.Err("Max execution time of 33ms reached.");
+                    return ExecutionState.Err("Max execution time of 500ms reached.");
                 }
 
                 if (_stack.Count > stackSizeLimit) {
