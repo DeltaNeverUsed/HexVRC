@@ -19,13 +19,13 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
         public static ExecutionState Execute(ExecutionInfo info, float a) {
             switch (a) {
                 case < 0:
-                    info.Stack.Push(new StackItem(-1));
+                    info.Stack.Push(new StackItem(-1f));
                     break;
                 case > 0:
-                    info.Stack.Push(new StackItem(1));
+                    info.Stack.Push(new StackItem(1f));
                     break;
                 default:
-                    info.Stack.Push(new StackItem(0));
+                    info.Stack.Push(new StackItem(0f));
                     break;
             }
 
