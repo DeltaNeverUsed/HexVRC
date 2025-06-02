@@ -15,8 +15,8 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
         public static ExecutionState Execute(ExecutionInfo info, StackItem bot, StackItem top) {
             info.Stack.Push(bot);
             info.Stack.Push(top);
-            info.Stack.Push(bot);
-            info.Stack.Push(top);
+            info.Stack.Push(bot.Clone());
+            info.Stack.Push(top.Clone());
             return ExecutionState.Ok();
         }
     }
