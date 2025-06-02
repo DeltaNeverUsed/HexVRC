@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
+    SerializedFormat: 0
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -120,6 +120,7 @@ MonoBehaviour:
     m_ColorSpace: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  points: []
 --- !u!114 &6796280967215018176
 MonoBehaviour:
   m_ObjectHideFlags: 0

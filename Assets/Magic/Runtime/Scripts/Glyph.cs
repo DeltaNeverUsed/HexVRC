@@ -20,18 +20,17 @@ namespace BefuddledLabs.Magic {
 
         public void RenderPoints(Vector3[] p) {
             points = p;
-            
-            if (points.Length > 0)
-                lineRenderer.transform.position = points[0];
 
             lineRenderer.SetPositions(points);
             lineRenderer.positionCount = points.Length;
             lineRenderer.SetPositions(points);
             
-            Mesh bakedMesh = new Mesh();
-            lineRenderer.BakeMesh(bakedMesh, true);
-            ParticleSystem.ShapeModule shape = particleSystem.shape;
-            shape.mesh = bakedMesh;
+            if (Utilities.IsValid(particleSystem)) {
+                Mesh bakedMesh = new Mesh();
+                lineRenderer.BakeMesh(bakedMesh, true);
+                ParticleSystem.ShapeModule shape = particleSystem.shape;
+                shape.mesh = bakedMesh;
+            }
         }
         
         public Texture2D CreateTextureFromGradient(Gradient gradient, int width = 64, int height = 1)
