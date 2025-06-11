@@ -9,8 +9,8 @@ namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
         #region Docs
 
         public const string Description = "Removes the last Symbol from the Symbol list";
-        public const string Input = "";
-        public const string Output = "";
+        public const string Input = "List";
+        public const string Output = "List";
 
         #endregion
 

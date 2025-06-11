@@ -7,13 +7,13 @@ namespace BefuddledLabs.Magic {
         VR,
         Desktop
     }
-    
+
     public class ModeOnly : UdonSharpBehaviour {
         public Mode mode = Mode.VR;
-        
+
         private void Start() {
             bool isVR = Networking.LocalPlayer.IsUserInVR();
-            switch(mode) {
+            switch (mode) {
                 case Mode.VR:
                     gameObject.SetActive(isVR);
                     break;

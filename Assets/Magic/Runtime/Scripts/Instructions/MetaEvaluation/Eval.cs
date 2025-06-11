@@ -15,7 +15,6 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
         #endregion
 
 
-        [RecursiveMethod]
         public static ExecutionState Execute(ExecutionInfo info, List<StackItem> symbols) {
             List<Instruction> instructions = new List<Instruction>(symbols.Count);
             foreach (StackItem item in symbols) {
@@ -23,11 +22,11 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
                     instructions.Add((Instruction)item.Value);
             }
             
-            ExecutionState success = info.VM.Execute(instructions, info);
-            return success;
+            ListHelpers.InsertList(ref info.VM.CurrentInstructions, instructions, info.CurrentInstructionIndex + 1);
+            info.VM.SkipIndexes.Push(info.CurrentInstructionIndex + 1 + instructions.Count);
+            return ExecutionState.Ok();
         }
         
-        [RecursiveMethod]
         public static ExecutionState Execute(ExecutionInfo info, Instruction symbol) {
             List<StackItem> list = new List<StackItem>();
             list.Add(new StackItem(symbol));

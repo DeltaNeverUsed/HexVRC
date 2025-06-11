@@ -1,12 +1,12 @@
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
-    public static class Halt {
-        public const string Path = "aqdee";
+    public static class SaveStack {
+        public const string Path = "SaveStack";
 
         #region Docs
 
-        public const string Description = "breaks out of the current executing pattern list while still executing any parent pattern lists";
+        public const string Description = "Special Instruction";
         public const string Input = "";
         public const string Output = "";
 
@@ -14,7 +14,8 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
 
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            return ExecutionState.OkEarlyReturn(9999);
+            info.VM.SaveStack();
+            return ExecutionState.Ok();
         }
     }
 }

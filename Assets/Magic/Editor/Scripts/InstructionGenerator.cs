@@ -183,6 +183,7 @@ namespace BefuddledLabs.Magic {
     public class Instruction {
         public readonly string Path;
         public readonly int GlyphId = -1;
+        public object ExtraData;
 
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
@@ -197,6 +198,11 @@ namespace BefuddledLabs.Magic {
 
         public Instruction(string path) {
             Path = path;
+        }
+
+        public Instruction(string path, object extraData) {
+            Path = path;
+            ExtraData = extraData;
         }
 
         public Instruction(string path, int glyphId) {

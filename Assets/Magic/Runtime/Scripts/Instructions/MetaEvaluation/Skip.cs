@@ -2,11 +2,11 @@
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
     public static class Skip {
-        public const string Path = "aqdee";
+        public const string Path = "Skip";
 
         #region Docs
 
-        public const string Description = "breaks out of the current executing pattern list while still executing any parent pattern lists";
+        public const string Description = "Special Instruction";
         public const string Input = "";
         public const string Output = "";
 

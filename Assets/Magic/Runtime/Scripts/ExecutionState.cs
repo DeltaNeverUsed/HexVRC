@@ -3,7 +3,8 @@ namespace BefuddledLabs.Magic {
     public enum ExecutionError {
         Ok,
         Garbage,
-        Halt
+        Halt,
+        Paused
     }
     
     public class ExecutionState {

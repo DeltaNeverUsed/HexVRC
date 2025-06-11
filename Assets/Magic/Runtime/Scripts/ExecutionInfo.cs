@@ -5,6 +5,7 @@ namespace BefuddledLabs.Magic {
     public class ExecutionInfo {
         public readonly PlayerVM VM;
         public Stack<StackItem> Stack;
+        public int CurrentInstructionIndex;
         public int GlyphId;
         public string Path;
         
@@ -12,11 +13,6 @@ namespace BefuddledLabs.Magic {
             VM = vm;
             Stack = stack;
             Path = path;
-        }
-
-        public Stack<StackItem> ReplaceStack(Stack<StackItem> stack) {
-            Stack = stack;
-            return VM.ReplaceStack(Stack);
         }
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using BefuddledLabs.Magic.Instructions.EscapingPatterns;
 using UdonSharp;
 
 // ReSharper disable once CheckNamespace
@@ -18,7 +17,6 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
         #endregion
 
 
-        [RecursiveMethod]
         public static ExecutionState Execute(ExecutionInfo info, List<StackItem> symbols) {
             List<Instruction> instructions = new List<Instruction>(symbols.Count);
             foreach (StackItem item in symbols) {
@@ -27,13 +25,14 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
             }
 
             List<StackItem> haltInstructionList = new List<StackItem>();
-            haltInstructionList.Add(new StackItem(new Instruction(Halt.Path)));
+            haltInstructionList.Add(new StackItem(new Instruction(Skip.Path)));
             info.Stack.Push(new StackItem(haltInstructionList));
-            ExecutionState success = info.VM.Execute(instructions, info);
-            return success;
+            
+            ListHelpers.InsertList(ref info.VM.CurrentInstructions, instructions, info.CurrentInstructionIndex + 1);
+            info.VM.SkipIndexes.Push(info.CurrentInstructionIndex + 1 + instructions.Count);
+            return ExecutionState.Ok();
         }
         
-        [RecursiveMethod]
         public static ExecutionState Execute(ExecutionInfo info, Instruction symbol) {
             List<StackItem> list = new List<StackItem>();
             list.Add(new StackItem(symbol));

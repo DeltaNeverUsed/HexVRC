@@ -58,18 +58,38 @@ namespace BefuddledLabs.Magic {
         public int stackSizeLimit = 1024;
 
         [NonSerialized] public ExecutionInfo Info;
+        [NonSerialized] public Stack<StackItem[]> StackStack = new Stack<StackItem[]>();
 
         [NonSerialized] public bool EscapeNext;
         [NonSerialized] public int IntrospectionDepth = 0;
+        [NonSerialized] public readonly Stack<int> SkipIndexes = new Stack<int>();
 
         [NonSerialized] public StorageMedium LastInteractedStorageMedium;
         [NonSerialized] public Transform ExecutionTransform;
+        
+        [NonSerialized] public List<Instruction> CurrentInstructions = new List<Instruction>();
+        
 
         private readonly Stopwatch _executionTimer = new Stopwatch();
 
         public float GetLastExecutionTimeMs() => (float)_executionTimer.Elapsed.TotalMilliseconds;
 
         private float _mana;
+
+        public void SaveStack() {
+            StackStack.Push(_stack.ToArray());
+        }
+
+        public bool RestoreStack() {
+            if (StackStack.Count <= 0)
+                return false;
+            StackItem[] tempItems = StackStack.Pop();
+            _stack = new Stack<StackItem>();
+            Info.Stack = _stack;
+            foreach (StackItem item in tempItems)
+                _stack.Push(item); // stupid U#
+            return true;
+        }
 
         public void SetMana(float value) {
             _mana = value;
@@ -95,12 +115,6 @@ namespace BefuddledLabs.Magic {
             if (Networking.IsOwner(gameObject))
                 if (Utilities.IsValid(GetComponentInParent<VMManager>()))
                     GetComponentInParent<VMManager>().localVM = this;
-        }
-
-        public Stack<StackItem> ReplaceStack(Stack<StackItem> stack) {
-            Stack<StackItem> oldStack = _stack;
-            _stack = stack;
-            return oldStack;
         }
 
         private bool RaycastPlayer(Vector3 origin, Vector3 direction, out VRCPlayerApi player) {
@@ -162,18 +176,19 @@ namespace BefuddledLabs.Magic {
             EscapeNext = false;
 
             _stack.Clear();
+            StackStack.Clear();
+            CurrentInstructions.Clear();
+            SkipIndexes.Clear();
             glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.Clear));
         }
 
-        [RecursiveMethod]
         public ExecutionState Execute(List<Instruction> instructions) {
-            ExecutionInfo infoCopy = (ExecutionInfo)((object[])(object)Info).Clone();
             SetMana(maxMana);
-            return Execute(instructions, infoCopy);
+            CurrentInstructions = instructions;
+            return Execute();
         }
 
-        [RecursiveMethod]
-        public ExecutionState Execute(List<Instruction> instructions, ExecutionInfo infoCopy) {
+        private ExecutionState Execute() {
             _localPlayer = Networking.LocalPlayer;
 
             if (!_executionTimer.IsRunning)
@@ -188,7 +203,9 @@ namespace BefuddledLabs.Magic {
 
             ExecutionState result = ExecutionState.Ok();
 
-            foreach (Instruction instruction in instructions) {
+            for (int index = 0; index < CurrentInstructions.Count; index++) {
+                Info.CurrentInstructionIndex = index;
+                Instruction instruction = CurrentInstructions[index];
                 if (_executionTimer.ElapsedMilliseconds > 500) {
                     _executionTimer.Stop();
                     glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus),
@@ -224,9 +241,10 @@ namespace BefuddledLabs.Magic {
                     continue;
                 }
 
-                result = instruction.Execute(infoCopy);
+                result = instruction.Execute(Info);
+                //instructions = infoCopy.CurrentExecutingInstructionList;
 
-                if (infoCopy.GlyphId != -1) {
+                if (Info.GlyphId != -1) {
                     glyphId.Add(instruction.GlyphId);
                     success.Add(result.IsOk());
                     msg.Add(result.IsOk() ? "" : result.Error);
@@ -239,7 +257,23 @@ namespace BefuddledLabs.Magic {
 
                 if (result.EarlyReturnDepth > 0) {
                     result.EarlyReturnDepth--;
-                    break;
+
+                    bool completelyBreak = false;
+                    while (true) {
+                        if (SkipIndexes.Count > 0) {
+                            int skipIndex = SkipIndexes.Pop();
+                            if (skipIndex <= index) // clear out old already passed ones
+                                continue;
+                            index = skipIndex;
+                        }
+                        else
+                            completelyBreak = true;
+
+                        break;
+                    }
+                    
+                    if (completelyBreak)
+                        break; // stop completely if not in eval
                 }
             }
 
