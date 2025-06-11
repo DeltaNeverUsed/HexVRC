@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
+using VRC.Udon.Common.Interfaces;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic {
@@ -128,7 +129,7 @@ namespace BefuddledLabs.Magic {
 
         public override void OnDrop() {
             _displaying = false;
-            localGlyphSpace.Clear();
+            localGlyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(localGlyphSpace.Clear));
         }
     }
 }
