@@ -7,7 +7,6 @@ using UnityEngine;
 using Varneon.VUdon.Logger;
 using VRC.SDK3.UdonNetworkCalling;
 using VRC.SDKBase;
-using VRC.Udon.Common.Enums;
 using VRC.Udon.Common.Interfaces;
 
 /*
@@ -57,6 +56,7 @@ namespace BefuddledLabs.Magic {
         public float maxMana;
 
         public int stackSizeLimit = 1024;
+        public int recursionLimit = 32;
 
         [NonSerialized] public ExecutionInfo Info;
         [NonSerialized] public Stack<StackItem[]> StackStack = new Stack<StackItem[]>();
@@ -79,8 +79,12 @@ namespace BefuddledLabs.Magic {
 
         private float _mana;
 
-        public void SaveStack() {
+        public ExecutionState SaveStack() {
+            if (StackStack.Count >= recursionLimit)
+                return ExecutionState.Err("Recursion limit hit.");
+            
             StackStack.Push(_stack.ToArray());
+            return ExecutionState.Ok();
         }
 
         public bool RestoreStack() {

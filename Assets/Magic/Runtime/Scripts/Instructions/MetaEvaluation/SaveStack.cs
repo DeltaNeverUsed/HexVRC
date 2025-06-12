@@ -14,8 +14,7 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
 
 
         public static ExecutionState Execute(ExecutionInfo info) {
-            info.VM.SaveStack();
-            return ExecutionState.Ok();
+            return info.VM.SaveStack();
         }
     }
 }
