@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.StackManipulation {
@@ -8,73 +9,88 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
         #region Docs
 
         public const string Description =
-            "An infinite family of actions that keep or remove elements at the top of the stack based on the sequence of dips and lines.";
+            @"An infinite family of actions that keep or remove elements at the top of the stack based on the sequence of dips and lines.
+
+Assuming that I draw a Bookkeeper's Gambit pattern left-to-right, the number of iotas the action will require is determined by the horizontal distance covered by the pattern. From deepest in the stack to shallowest, a flat line will keep the iota, whereas a triangle dipping down will remove it.";
 
         public const string Input = "Many, Number";
         public const string Output = "Many";
 
         #endregion
 
-
-        private const int DirE = 0;
-        private const int DirSe = 1;
-
         public static ExecutionState Execute(ExecutionInfo info) {
-            int index = 0;
-            
             string path = info.Path;
             if (path.Length <= 0)
-                return ExecutionState.Err("Not a valid Bookkeeper's Gambit");
+                return ExecutionState.Ok(); // technically just going forward once would be valid, but it does nothing
             
-            char start = path[index];
+            char start = path[0];
+            if (start != 'a' && start != 'w' && start != 'e')
+                return ExecutionState.Err("Path was not a valid instruction.");
 
-            if (start != 'a' || start != 'w' || start != 'e')
-                return ExecutionState.Err("Not a valid Bookkeeper's Gambit");
+            List<bool> keep = new List<bool>(info.Stack.Count);
+            bool wasLastSkip = start == 'a'; // if we go left after the first symbol we skip the first one.
+            keep.Add(!wasLastSkip);
+            
+            for (int i = (wasLastSkip ? 1 : 0); i < path.Length; i++) {
+                char c = path[i];
+                if (wasLastSkip) {
+                    switch (c) {
+                        case 'e':
+                            wasLastSkip = false;
+                            keep.Add(true);
+                            break;
+                        case 'd': {
+                            i++;
+                            if (i >= path.Length)
+                                return ExecutionState.Err("Mask was invalid, pattern ended in 'd' expected 'a'");
+                            c = path[i];
+                            if (c == 'a') {
+                                keep.Add(false);
+                            }
+                            else
+                                return ExecutionState.Err($"Mask was invalid, pattern expected 'd' but got '{c}'");
+                            break;
+                        }
+                        default:
+                            return ExecutionState.Err($"Mask was invalid, pattern expected 'e' or 'd' but got '{c}'");
+                    }
+                }
+                else {
+                    switch (c) {
+                        case 'w':
+                            keep.Add(true);
+                            break;
+                        case 'e': {
+                            i++;
+                            if (i >= path.Length)
+                                return ExecutionState.Err("Mask was invalid, pattern ended in 'e' expected 'a'");
+                            c = path[i];
+                            if (c == 'a') {
+                                wasLastSkip = true;
+                                keep.Add(false);
+                            }
+                            else
+                                return ExecutionState.Err($"Mask was invalid, pattern expected 'a' but got '{c}'");
+                            break;
+                        }
+                        default:
+                            return ExecutionState.Err($"Mask was invalid, pattern expected 'w' or 'a' but got '{c}'");
+                    }
+                }
+            }
 
             Stack<StackItem> stack = info.Stack;
-            Stack<bool> keepStack = new Stack<bool>();
-            int direction = DirE;
-            if (path[index] == 'a')
-                direction = DirSe;
+            int stackCount = stack.Count;
+            int toGoThrough = Mathf.Min(stackCount, keep.Count);
+            StackItem[] currentStack = stack.ToArray();
+            stack.Clear();
 
-            while (index < path.Length) {
-                if (direction == DirE) {
-                    keepStack.Push(true);
-                    if (path[index] == 'e')
-                        direction = DirSe;
-                    else if (path[index] == 'w')
-                        direction = DirE;
-                    else
-                        return ExecutionState.Err("Not a valid Bookkeeper's Gambit");
-                    index++;
-                }
-                else if (direction == DirSe) {
-                    keepStack.Push(false);
-
-                    if (path[index] != 'a')
-                        return ExecutionState.Err("Not a valid Bookkeeper's Gambit");
-                    // Parsed 'a' so went from SE to NE
-                    index++;
-                    if (index >= path.Length)
-                        break;
-                    if (path[index] == 'e')
-                        direction = DirE;
-                    else if (path[index] == 'd')
-                        direction = DirSe;
-                    index++;
-                }
-            }
-
-            Stack<StackItem> scratch = new Stack<StackItem>();
-
-            while (keepStack.Count > 0) {
-                StackItem item = stack.Pop();
-                if (keepStack.Pop())
-                    scratch.Push(item);
-            }
-
-            while (scratch.Count > 0)
-                stack.Push(scratch.Pop());
+            for (int i = 0; i < toGoThrough; i++)
+                if (keep[i])
+                    stack.Push(currentStack[i]);
+            
+            for (int i = toGoThrough; i < stackCount; i++)
+                stack.Push(currentStack[i]);
 
             return ExecutionState.Ok();
         }
