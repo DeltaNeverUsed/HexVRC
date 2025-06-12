@@ -138,7 +138,12 @@ namespace BefuddledLabs.Magic.UI {
 
             List<string> filesToSetImportsFor = new List<string>();
 
+            char[] validCharacters = { 'a', 'q', 'w', 'e', 'd' };
+
             foreach (string path in paths) {
+                if (path.Count(c => validCharacters.Contains(c)) != path.Length)
+                    continue; // invalid path
+                
                 Vector3[] points = GetLinePoints(path);
 
                 lineRenderer.positionCount = points.Length;
