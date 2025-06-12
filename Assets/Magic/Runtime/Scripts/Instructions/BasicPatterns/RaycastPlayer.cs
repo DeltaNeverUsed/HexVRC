@@ -26,14 +26,14 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
 
             Vector3 hitPosition = hit.point;
 
-            VRCPlayerApi[] players = new VRCPlayerApi[84];
+            VRCPlayerApi[] players = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
             VRCPlayerApi.GetPlayers(players);
 
             VRCPlayerApi closestPlayer = Networking.LocalPlayer;
             float closestDistance = float.MaxValue;
             foreach (VRCPlayerApi player in players) {
                 if (!Utilities.IsValid(player) || !Utilities.IsValid(player))
-                    break;
+                    continue;
 
                 Vector3 playerPosition = player.GetPosition();
                 float distance = Vector3.Distance(playerPosition, hitPosition);

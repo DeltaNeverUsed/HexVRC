@@ -18,7 +18,8 @@ namespace BefuddledLabs.Magic {
         List,
         Any,
         Drone,
-        Garbage
+        Garbage,
+        Entity
     }
 
     public class StackItem : IEquatable<StackItem> {
@@ -46,17 +47,19 @@ namespace BefuddledLabs.Magic {
                 return ItemType.Drone;
             if (typeof(string).IsAssignableFrom(type))
                 return ItemType.Garbage;
+            if (typeof(Entity).IsAssignableFrom(type))
+                return ItemType.Entity;
             if (typeof(StackItem).IsAssignableFrom(type))
                 return ItemType.Any;
             return ItemType.Null;
         }
 
 #endif
-        
+
         public StackItem() {
             Type = ItemType.Null;
         }
-        
+
         public StackItem(string error) {
             Type = ItemType.Garbage;
             Value = error;
@@ -91,9 +94,14 @@ namespace BefuddledLabs.Magic {
             Type = Utilities.IsValid(data) ? ItemType.Instruction : ItemType.Null;
             Value = data;
         }
-        
+
         public StackItem(VRCDroneApi data) {
             Type = Utilities.IsValid(data) ? ItemType.Drone : ItemType.Null;
+            Value = data;
+        }
+
+        public StackItem(Entity data) {
+            Type = Utilities.IsValid(data) ? ItemType.Entity : ItemType.Null;
             Value = data;
         }
 
@@ -107,13 +115,13 @@ namespace BefuddledLabs.Magic {
             List<Instruction> instructions = new List<Instruction>();
             if (Type != ItemType.List)
                 return instructions;
-            
+
             List<StackItem> list = (List<StackItem>)Value;
             foreach (StackItem value in list) {
                 if (value.Type == ItemType.Instruction)
                     instructions.Add((Instruction)value.Value);
             }
-            
+
             return instructions;
         }
 
@@ -139,7 +147,8 @@ namespace BefuddledLabs.Magic {
                     VRCPlayerApi.GetPlayers(players);
                     foreach (VRCPlayerApi player in players) {
                         if (player.IsValid() &&
-                            player.displayName.Equals(serializedData["v"].String, StringComparison.InvariantCultureIgnoreCase))
+                            player.displayName.Equals(serializedData["v"].String,
+                                StringComparison.InvariantCultureIgnoreCase))
                             return new StackItem(player);
                     }
 
@@ -162,13 +171,32 @@ namespace BefuddledLabs.Magic {
                     VRCPlayerApi.GetPlayers(players);
                     foreach (VRCPlayerApi player in players) {
                         if (player.IsValid() &&
-                            player.displayName.Equals(serializedData["v"].String, StringComparison.InvariantCultureIgnoreCase))
+                            player.displayName.Equals(serializedData["v"].String,
+                                StringComparison.InvariantCultureIgnoreCase))
                             return new StackItem(player.GetDrone());
                     }
 
                     return new StackItem();
                 case ItemType.Garbage:
                     return new StackItem(serializedData["v"].ToString());
+                case ItemType.Entity:
+                    int entityIndex = (int)serializedData["v"].Number;
+                    if (entityIndex == -1)
+                        return new StackItem();
+
+                    EntityManager entityManager = GameObject.Find("EntityManager").GetComponent<EntityManager>();
+                    if (!Utilities.IsValid(entityManager)) {
+                        UnityEngine.Debug.LogError("Failed to get EntityManager");
+                        return new StackItem();
+                    }
+
+                    Dictionary<int, Entity> entities = entityManager.Entities;
+                    // ReSharper disable once CanSimplifyDictionaryLookupWithTryGetValue
+                    if (entities.ContainsKey(entityIndex)) // can't use try get, because udon doesn't support it in recursive functions
+                        return new StackItem(entities[entityIndex]);
+
+                    UnityEngine.Debug.LogError("Entity index out of range");
+                    return new StackItem();
                 case ItemType.Any:
                 case ItemType.Null:
                 default:
@@ -224,7 +252,7 @@ namespace BefuddledLabs.Magic {
                     }
 
                     player = drone.GetPlayer();
-                    
+
                     if (!Utilities.IsValid(player) || !player.IsValid())
                         dict["v"] = new DataToken("");
                     else
@@ -232,6 +260,9 @@ namespace BefuddledLabs.Magic {
                     break;
                 case ItemType.Garbage:
                     dict["v"] = (string)Value;
+                    break;
+                case ItemType.Entity:
+                    dict["v"] = ((Entity)Value).GetId();
                     break;
                 case ItemType.Any:
                 case ItemType.Null:
@@ -308,6 +339,11 @@ namespace BefuddledLabs.Magic {
                     sb.Append(Value.ToString());
                     sb.Append(")");
                     break;
+                case ItemType.Entity:
+                    sb.Append("Entity (");
+                    sb.Append(Value.ToString());
+                    sb.Append(")");
+                    break;
                 default:
                     sb.Append("Invalid item type. please report this to me @deltaneverused");
                     break;
@@ -341,14 +377,13 @@ namespace BefuddledLabs.Magic {
         public StackItem Clone() {
             if (Type != ItemType.List)
                 return this;
-            
+
             // if it's a list we do a shallow clone of the whole list
             // would have been nice if we could do a deep clone, but that's not really possibly in a performant manner
             List<StackItem> currentList = (List<StackItem>)Value;
             StackItem[] newArray = new StackItem[currentList.Count];
             Array.Copy(currentList.ToArray(), newArray, currentList.Count);
             return new StackItem(new List<StackItem>(newArray));
-
         }
     }
 }

@@ -9,8 +9,8 @@ namespace BefuddledLabs.Magic.Instructions.Player {
 
         #region Docs
 
-        public const string Description = "";
-        public const string Input = "";
+        public const string Description = "Remove an Player, Drone, or Entity and a direction from the stack, then give a shove to the given entity in the given direction. The strength of the impulse is determined by the length of the vector.";
+        public const string Input = "Player | Drone | Entity, Vector";
         public const string Output = "";
 
         #endregion
@@ -43,6 +43,14 @@ namespace BefuddledLabs.Magic.Instructions.Player {
             info.VM.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(info.VM.ApplyImpulse), drone.GetPlayer().playerId, impulse, true);
 
             return ExecutionState.Ok();
+        }
+        
+        public static ExecutionState Execute(ExecutionInfo info, Entity entity, Vector3 impulse) {
+            ExecutionState manaResult = info.VM.ConsumeMana(Mathf.Floor(Vector3.Magnitude(impulse) * 3));
+            if (!manaResult.IsOk())
+                return manaResult;
+            
+            return entity.ApplyImpulse(impulse);
         }
     }
 }

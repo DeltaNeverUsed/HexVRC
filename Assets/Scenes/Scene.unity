@@ -198,7 +198,7 @@ MonoBehaviour:
   m_text: 'If the first argument equals the second, return True. Otherwise, return
     False.
 
-    
+
 
     Inputs: <color=#f097eb>Any</color>, <color=#f097eb>Any</color>
 
@@ -969,7 +969,7 @@ MonoBehaviour:
     the top. If the number is negative, instead moves the top element of the stack
     down that many elements.
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>
 
@@ -1127,7 +1127,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Disintegrates a Vector into it''s components
 
-    
+
 
     Inputs: <color=#f097eb>Vector</color>
 
@@ -1285,7 +1285,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Is the player the instance owner
 
-    
+
 
     Inputs: <color=#f097eb>Player</color>
 
@@ -1443,7 +1443,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Duplicates the top iota of the stack.
 
-    
+
 
     Inputs: <color=#f097eb>Any</color>
 
@@ -1602,6 +1602,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25817218}
   m_CullTransparentMesh: 1
+--- !u!1 &25924996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 25924997}
+  - component: {fileID: 25924999}
+  - component: {fileID: 25924998}
+  m_Layer: 0
+  m_Name: EntityManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &25924997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25924996}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2139255364}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &25924998
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25924996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45115577ef41a5b4ca741ed302693907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextPlacement: {fileID: 0}
+  interactText: Use
+  interactTextGO: {fileID: 0}
+  proximity: 2
+  SynchronizePosition: 0
+  AllowCollisionOwnershipTransfer: 0
+  Reliable: 0
+  _syncMethod: 0
+  serializedProgramAsset: {fileID: 11400000, guid: 5a0e7a57f1ffeee418cec018660df7cb, type: 2}
+  programSource: {fileID: 11400000, guid: b4655826b4d988f4393f5fdc7721384b, type: 2}
+  serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgEAAAAAAAAAAi8CAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAIAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
+  publicVariablesUnityEngineObjects: []
+  publicVariablesSerializationDataFormat: 0
+--- !u!114 &25924999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25924996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a202f18ce573c414e93e3d9e58a39f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _udonSharpBackingUdonBehaviour: {fileID: 25924998}
+  root: {fileID: 2044190834}
 --- !u!1001 &29712140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4669,7 +4750,7 @@ MonoBehaviour:
     question: If I stood at the position and looked in the direction, what position
     would I be looking at?
 
-    
+
 
     Inputs: <color=#f097eb>Vector</color>, <color=#f097eb>Vector</color>
 
@@ -6171,7 +6252,7 @@ MonoBehaviour:
   m_text: 'Copy the top iota of the stack, then put it under the second iota. [0,
     1] becomes [1, 0, 1].
 
-    
+
 
     Inputs: <color=#f097eb>Any</color>, <color=#f097eb>Any</color>
 
@@ -6330,35 +6411,34 @@ MonoBehaviour:
   m_text: 'Remove a list of patterns and a list from the stack, then cast the given
     pattern over each element of the second list.
 
-    
 
-    More specifically,
-    for each element in the second list, it will:
 
-    
+    More specifically, for each
+    element in the second list, it will:
 
-    Create a new stack,
-    with everything on the current stack plus that element
 
-    
 
-    Draw all
-    the patterns in the first list
+    Create a new stack, with everything
+    on the current stack plus that element
 
-    
 
-    Save all the iotas remaining on the
-    stack to a list
 
-    Then, after all is said and done, pushes the list of saved
-    iotas onto the main stack.
+    Draw all the patterns in the first
+    list
 
-    
 
-    Inputs: <color=#f097eb>List</color>, <color=#f097eb>List</color>
 
-    Outputs:
-    List
+    Save all the iotas remaining on the stack to a list
+
+    Then, after
+    all is said and done, pushes the list of saved iotas onto the main stack.
+
+
+
+    Inputs:
+    <color=#f097eb>List</color>, <color=#f097eb>List</color>
+
+    Outputs: List
 
 '
   m_isRightToLeft: 0
@@ -6759,11 +6839,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Negates a boolean
 
-    
+
 
     Inputs: <color=#f097eb>Boolean</color>
 
-    
+
 
     Inputs:
     <color=#f097eb>Number</color>
@@ -6922,7 +7002,7 @@ MonoBehaviour:
   m_text: 'If the first argument equals the second, return True. Otherwise, return
     False.
 
-    
+
 
     Inputs: <color=#f097eb>Any</color>, <color=#f097eb>Any</color>
 
@@ -8553,7 +8633,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Copy the top two iotas of the stack. [0, 1] becomes [0, 1, 0, 1].
 
-    
+
 
     Inputs:
     <color=#f097eb>Any</color>, <color=#f097eb>Any</color>
@@ -9555,7 +9635,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Gets the Index of an element in a List
 
-    
+
 
     Inputs: <color=#f097eb>List</color>,
     <color=#f097eb>Any</color>
@@ -10120,7 +10200,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Returns True if both arguments are true; otherwise returns False.
 
-    
+
 
     Inputs:
     <color=#f097eb>Boolean</color>, <color=#f097eb>Boolean</color>
@@ -12975,7 +13055,7 @@ MonoBehaviour:
   m_text: 'Takes the inverse tangent of a Y and X value, yielding the angle between
     the X-axis and a line from the origin to that point.
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>,
     <color=#f097eb>Number</color>
@@ -14025,21 +14105,21 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Gets the Absolute of a number or the Length of a Vector, List or Boolean
 
-    
+
 
     Inputs:
     <color=#f097eb>Number</color>
 
-    
+
 
     Inputs: <color=#f097eb>Vector</color>
 
-    
+
 
     Inputs:
     <color=#f097eb>List</color>
 
-    
+
 
     Inputs: <color=#f097eb>Boolean</color>
 
@@ -15337,7 +15417,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Transform a player into the direction they are looking at
 
-    
+
 
     Inputs:
     <color=#f097eb>Player</color>
@@ -16012,17 +16092,17 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Takes the modulus of two numbers or vectors
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>,
     <color=#f097eb>Number</color>
 
-    
 
-    Inputs: <color=#f097eb>Vector</color>,
-    <color=#f097eb>Vector</color>
 
-    Outputs: Number | Vector
+    Inputs: <color=#f097eb>Vector</color>, <color=#f097eb>Vector</color>
+
+    Outputs:
+    Number | Vector
 
 '
   m_isRightToLeft: 0
@@ -17321,7 +17401,7 @@ MonoBehaviour:
   m_text: 'If the first argument is less than the second, return True. Otherwise,
     return False.
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>, <color=#f097eb>Number</color>
 
@@ -17554,22 +17634,22 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Multiplies two numbers or vectors
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>,
     <color=#f097eb>Number</color>
 
-    
 
-    Inputs: <color=#f097eb>Vector</color>,
-    <color=#f097eb>Number</color>
 
-    
+    Inputs: <color=#f097eb>Vector</color>, <color=#f097eb>Number</color>
 
-    Inputs: <color=#f097eb>Vector</color>,
-    <color=#f097eb>Vector</color>
 
-    Outputs: Number | Vector
+
+    Inputs:
+    <color=#f097eb>Vector</color>, <color=#f097eb>Vector</color>
+
+    Outputs: Number
+    | Vector
 
 '
   m_isRightToLeft: 0
@@ -17712,6 +17792,10 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 4344661071601240964, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
+    - target: {fileID: 4901929885330821085, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4901929885330821085, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
     - target: {fileID: 5292098288121862174, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
       propertyPath: m_Name
       value: TemporaryStorageMedium (1)
@@ -19352,7 +19436,7 @@ MonoBehaviour:
     the number at the top using the other number as its base. Related to the value
     of e.
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>, <color=#f097eb>Number</color>
 
@@ -20112,7 +20196,7 @@ MonoBehaviour:
     the top. If the number is negative, instead moves the top element of the stack
     down that many elements.
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>
 
@@ -20918,22 +21002,22 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Subtracts two numbers or vectors
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>,
     <color=#f097eb>Number</color>
 
-    
 
-    Inputs: <color=#f097eb>Vector</color>,
-    <color=#f097eb>Number</color>
 
-    
+    Inputs: <color=#f097eb>Vector</color>, <color=#f097eb>Number</color>
 
-    Inputs: <color=#f097eb>Vector</color>,
-    <color=#f097eb>Vector</color>
 
-    Outputs: Number | Vector
+
+    Inputs:
+    <color=#f097eb>Vector</color>, <color=#f097eb>Vector</color>
+
+    Outputs: Number
+    | Vector
 
 '
   m_isRightToLeft: 0
@@ -22340,7 +22424,7 @@ MonoBehaviour:
     upper bound exclusive. For example, the 0, 2 sublist of [0, 1, 2, 3, 4] would
     be [0, 1].
 
-    
+
 
     Inputs: <color=#f097eb>List</color>, <color=#f097eb>Number</color>,
     <color=#f097eb>Number</color>
@@ -25046,7 +25130,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Yanks the top iota to the third position. [0, 1, 2] becomes [2, 0, 1].
 
-    
+
 
     Inputs:
     <color=#f097eb>Any</color>, <color=#f097eb>Any</color>, <color=#f097eb>Any</color>
@@ -25696,22 +25780,22 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Divides two numbers or vectors
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>,
     <color=#f097eb>Number</color>
 
-    
 
-    Inputs: <color=#f097eb>Vector</color>,
-    <color=#f097eb>Number</color>
 
-    
+    Inputs: <color=#f097eb>Vector</color>, <color=#f097eb>Number</color>
 
-    Inputs: <color=#f097eb>Vector</color>,
-    <color=#f097eb>Vector</color>
 
-    Outputs: Number | Vector
+
+    Inputs:
+    <color=#f097eb>Vector</color>, <color=#f097eb>Vector</color>
+
+    Outputs: Number
+    | Vector
 
 '
   m_isRightToLeft: 0
@@ -27342,7 +27426,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Is Drone deployed?
 
-    
+
 
     Inputs: <color=#f097eb>Drone</color>
 
@@ -27810,7 +27894,7 @@ MonoBehaviour:
   m_text: 'Yanks the iota third from the top of the stack to the top. [0, 1, 2] becomes
     [1, 2, 0].
 
-    
+
 
     Inputs: <color=#f097eb>Any</color>, <color=#f097eb>Any</color>,
     <color=#f097eb>Any</color>
@@ -29846,7 +29930,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Get Drone''s facing direction
 
-    
+
 
     Inputs: <color=#f097eb>Drone</color>
 
@@ -32152,7 +32236,7 @@ MonoBehaviour:
     question: If I stood at the position and looked in the direction, what Player
     would I be looking at?
 
-    
+
 
     Inputs: <color=#f097eb>Vector</color>, <color=#f097eb>Vector</color>
 
@@ -33198,12 +33282,12 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Pops the item at the top of the list onto the stack
 
-    
 
-    Inputs:
-    <color=#f097eb>List</color>
 
-    Outputs: Any
+    Inputs: <color=#f097eb>List</color>
+
+    Outputs:
+    Any
 
 '
   m_isRightToLeft: 0
@@ -33490,7 +33574,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Is the player the master
 
-    
+
 
     Inputs: <color=#f097eb>Player</color>
 
@@ -33648,7 +33732,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Appends an item to a list
 
-    
+
 
     Inputs: <color=#f097eb>List</color>,
     <color=#f097eb>Any</color>
@@ -35368,7 +35452,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Creates a vector from 3 numbers(x, y, z)
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>,
     <color=#f097eb>Number</color>, <color=#f097eb>Number</color>
@@ -38443,7 +38527,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Removes the last Symbol from the Symbol list
 
-    
+
 
     Inputs: <color=#f097eb>List</color>
 
@@ -39217,7 +39301,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Get Drone''s velocity
 
-    
+
 
     Inputs: <color=#f097eb>Drone</color>
 
@@ -40261,7 +40345,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Removes the first item of a List and pushes it onto the stack
 
-    
+
 
     Inputs:
     <color=#f097eb>List</color>
@@ -40460,7 +40544,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Remove''s the nth element from a list
 
-    
+
 
     Inputs: <color=#f097eb>List</color>,
     <color=#f097eb>Number</color>
@@ -40752,11 +40836,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Floors a number or vector
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>
 
-    
+
 
     Inputs:
     <color=#f097eb>Vector</color>
@@ -41392,6 +41476,10 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 4344661071601240964, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
+    - target: {fileID: 4901929885330821085, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4901929885330821085, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
     - target: {fileID: 5292098288121862174, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
       propertyPath: m_Name
       value: TemporaryStorageMedium (3)
@@ -42661,7 +42749,7 @@ MonoBehaviour:
     if it enters sleep mode or switches to a different app. While suspended, devices
     don''t run Udon code or respond to network events until the player reopens VRChat.
 
-    
+
 
     Inputs:
     <color=#f097eb>Player</color>
@@ -44623,7 +44711,7 @@ MonoBehaviour:
   m_text: 'If the first argument is less than or equal to the second, return True.
     Otherwise, return False.
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>, <color=#f097eb>Number</color>
 
@@ -47508,7 +47596,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Swaps the top two iotas of the stack.
 
-    
+
 
     Inputs: <color=#f097eb>Any</color>,
     <color=#f097eb>Any</color>
@@ -48481,7 +48569,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Transform a player into their position
 
-    
+
 
     Inputs: <color=#f097eb>Player</color>
 
@@ -48639,7 +48727,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Get Drone position
 
-    
+
 
     Inputs: <color=#f097eb>Drone</color>
 
@@ -50193,6 +50281,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 30501091}
     m_Modifications:
+    - target: {fileID: 1200211071070197597, guid: 009b31250b448a146bf0e07b869cd29e, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1200211071070197597, guid: 009b31250b448a146bf0e07b869cd29e, type: 3}
     - target: {fileID: 3260370771691157142, guid: 009b31250b448a146bf0e07b869cd29e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.931
@@ -50720,6 +50812,8 @@ GameObject:
   - component: {fileID: 1007261801}
   - component: {fileID: 1007261800}
   - component: {fileID: 1007261799}
+  - component: {fileID: 1007261807}
+  - component: {fileID: 1007261806}
   m_Layer: 17
   m_Name: Trinket (1)
   m_TagString: Untagged
@@ -50939,6 +51033,53 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1007261806
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007261796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45115577ef41a5b4ca741ed302693907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextPlacement: {fileID: 0}
+  interactText: Use
+  interactTextGO: {fileID: 0}
+  proximity: 2
+  SynchronizePosition: 0
+  AllowCollisionOwnershipTransfer: 0
+  Reliable: 0
+  _syncMethod: 0
+  serializedProgramAsset: {fileID: 11400000, guid: 9374c60a9c8116347a2fd31c48099d21, type: 2}
+  programSource: {fileID: 11400000, guid: f5efd3997f46302439df8669f3a90b43, type: 2}
+  serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgEAAAAAAAAAAi8CAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAIAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
+  publicVariablesUnityEngineObjects: []
+  publicVariablesSerializationDataFormat: 0
+--- !u!114 &1007261807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007261796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3ba259fc972fd449bbc432b49ea5a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _udonSharpBackingUdonBehaviour: {fileID: 1007261806}
 --- !u!1 &1010525950
 GameObject:
   m_ObjectHideFlags: 0
@@ -51163,7 +51304,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Gets the item at index in list
 
-    
+
 
     Inputs: <color=#f097eb>List</color>,
     <color=#f097eb>Number</color>
@@ -52704,7 +52845,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Transforms a player into it''s height
 
-    
+
 
     Inputs: <color=#f097eb>Player</color>
 
@@ -57427,11 +57568,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Ceils a number or vector
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>
 
-    
+
 
     Inputs:
     <color=#f097eb>Vector</color>
@@ -57818,7 +57959,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Tells you if the player is a valid player or not
 
-    
+
 
     Inputs: <color=#f097eb>Any</color>
 
@@ -60591,7 +60732,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Get player drone
 
-    
+
 
     Inputs: <color=#f097eb>Player</color>
 
@@ -61873,7 +62014,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Inserts an item into the first slot of a List
 
-    
+
 
     Inputs: <color=#f097eb>List</color>,
     <color=#f097eb>Any</color>
@@ -62138,7 +62279,7 @@ MonoBehaviour:
   m_text: 'Copy the second-to-last iota of the stack to the top. [0, 1] becomes [0,
     1, 0].
 
-    
+
 
     Inputs: <color=#f097eb>Any</color>, <color=#f097eb>Any</color>
 
@@ -62495,6 +62636,10 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 4344661071601240964, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
+    - target: {fileID: 4901929885330821085, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4901929885330821085, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
     - target: {fileID: 5292098288121862174, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
       propertyPath: m_Name
       value: TemporaryStorageMedium (2)
@@ -63583,7 +63728,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Removes duplicate entries from a list.
 
-    
+
 
     Inputs: <color=#f097eb>List</color>
 
@@ -64908,7 +65053,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Transform a player into their Eye''s position
 
-    
+
 
     Inputs: <color=#f097eb>Player</color>
 
@@ -68087,6 +68232,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 30501091}
     m_Modifications:
+    - target: {fileID: 1200211071070197597, guid: 009b31250b448a146bf0e07b869cd29e, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1200211071070197597, guid: 009b31250b448a146bf0e07b869cd29e, type: 3}
     - target: {fileID: 3260370771691157142, guid: 009b31250b448a146bf0e07b869cd29e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.192
@@ -69046,7 +69195,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Is the player yourself
 
-    
+
 
     Inputs: <color=#f097eb>Player</color>
 
@@ -69875,22 +70024,21 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Adds two numbers or vectors together or combines two lists
 
-    
+
 
     Inputs:
     <color=#f097eb>Number</color>, <color=#f097eb>Number</color>
 
-    
 
-    Inputs:
-    <color=#f097eb>Vector</color>, <color=#f097eb>Number</color>
 
-    
+    Inputs: <color=#f097eb>Vector</color>,
+    <color=#f097eb>Number</color>
 
-    Inputs:
-    <color=#f097eb>Vector</color>, <color=#f097eb>Vector</color>
 
-    
+
+    Inputs: <color=#f097eb>Vector</color>, <color=#f097eb>Vector</color>
+
+
 
     Inputs:
     <color=#f097eb>List</color>, <color=#f097eb>List</color>
@@ -71884,7 +72032,7 @@ MonoBehaviour:
   m_text: 'If the first argument is greater than the second, return True. Otherwise,
     return False.
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>, <color=#f097eb>Number</color>
 
@@ -76114,7 +76262,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Whether the player is grounded
 
-    
+
 
     Inputs: <color=#f097eb>Player</color>
 
@@ -76925,7 +77073,7 @@ MonoBehaviour:
   m_text: 'If the first argument is True, keeps the second and discards the third;
     otherwise discards the second and keeps the third.
 
-    
+
 
     Inputs: <color=#f097eb>Boolean</color>,
     <color=#f097eb>Any</color>, <color=#f097eb>Any</color>
@@ -79529,7 +79677,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Remove the top of the stack, then push a list containing only that element.
 
-    
+
 
     Inputs:
     <color=#f097eb>Any</color>
@@ -79837,13 +79985,12 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Sets the nth element from a list at a given index
 
-    
 
-    Inputs:
-    <color=#f097eb>List</color>, <color=#f097eb>Number</color>, <color=#f097eb>Any</color>
 
-    Outputs:
-    Any
+    Inputs: <color=#f097eb>List</color>,
+    <color=#f097eb>Number</color>, <color=#f097eb>Any</color>
+
+    Outputs: Any
 
 '
   m_isRightToLeft: 0
@@ -80605,17 +80752,17 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Perform exponentiation or vector projection
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>,
     <color=#f097eb>Number</color>
 
-    
 
-    Inputs: <color=#f097eb>Vector</color>,
-    <color=#f097eb>Vector</color>
 
-    Outputs: Number | Vector
+    Inputs: <color=#f097eb>Vector</color>, <color=#f097eb>Vector</color>
+
+    Outputs:
+    Number | Vector
 
 '
   m_isRightToLeft: 0
@@ -84236,7 +84383,7 @@ MonoBehaviour:
   m_text: 'Rearranges the top elements of the stack based on the given numerical
     code, which is the index of the permutation wanted.
 
-    
+
 
     Inputs: <color=#f097eb>Any</color>
 
@@ -84904,7 +85051,7 @@ MonoBehaviour:
   m_text: 'Returns True if exactly one of the arguments is true; otherwise returns
     False.
 
-    
+
 
     Inputs: <color=#f097eb>Boolean</color>, <color=#f097eb>Boolean</color>
 
@@ -89734,11 +89881,11 @@ MonoBehaviour:
     For a number, return the sign of the number; 1 if positive, -1 if negative. In
     both cases, zero is unaffected.
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>
 
-    
+
 
     Inputs:
     <color=#f097eb>Vector</color>
@@ -90827,6 +90974,10 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 4344661071601240964, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
+    - target: {fileID: 4901929885330821085, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4901929885330821085, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
     - target: {fileID: 5292098288121862174, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
       propertyPath: m_Name
       value: TemporaryStorageMedium (5)
@@ -92599,7 +92750,7 @@ MonoBehaviour:
   m_text: 'If the first argument is greater than or equal to the second, return True.
     Otherwise, return False.
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>, <color=#f097eb>Number</color>
 
@@ -93025,6 +93176,10 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 4344661071601240964, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
+    - target: {fileID: 4901929885330821085, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4901929885330821085, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
     - target: {fileID: 5292098288121862174, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
       propertyPath: m_Name
       value: TemporaryStorageMedium (4)
@@ -94625,7 +94780,7 @@ MonoBehaviour:
     the stack that number of times. (A count of 2 results in two of the iota on the
     stack, not three.)
 
-    
+
 
     Inputs: <color=#f097eb>Any</color>, <color=#f097eb>Number</color>
 
@@ -99357,6 +99512,8 @@ GameObject:
   - component: {fileID: 2011123307}
   - component: {fileID: 2011123306}
   - component: {fileID: 2011123305}
+  - component: {fileID: 2011123313}
+  - component: {fileID: 2011123312}
   m_Layer: 17
   m_Name: Trinket (2)
   m_TagString: Untagged
@@ -99576,6 +99733,53 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2011123312
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011123302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45115577ef41a5b4ca741ed302693907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextPlacement: {fileID: 0}
+  interactText: Use
+  interactTextGO: {fileID: 0}
+  proximity: 2
+  SynchronizePosition: 0
+  AllowCollisionOwnershipTransfer: 0
+  Reliable: 0
+  _syncMethod: 0
+  serializedProgramAsset: {fileID: 11400000, guid: 9374c60a9c8116347a2fd31c48099d21, type: 2}
+  programSource: {fileID: 11400000, guid: f5efd3997f46302439df8669f3a90b43, type: 2}
+  serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgEAAAAAAAAAAi8CAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAIAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
+  publicVariablesUnityEngineObjects: []
+  publicVariablesSerializationDataFormat: 0
+--- !u!114 &2011123313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011123302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3ba259fc972fd449bbc432b49ea5a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _udonSharpBackingUdonBehaviour: {fileID: 2011123312}
 --- !u!1 &2013430020
 GameObject:
   m_ObjectHideFlags: 0
@@ -100429,7 +100633,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Reverse the list at the top of the stack.
 
-    
+
 
     Inputs: <color=#f097eb>List</color>
 
@@ -100587,7 +100791,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Tells you if the player is in VR
 
-    
+
 
     Inputs: <color=#f097eb>Player</color>
 
@@ -101396,12 +101600,11 @@ MonoBehaviour:
   m_text: 'Remove num elements from the stack, then add them to a list at the top
     of the stack.
 
-    
+
 
     Inputs: <color=#f097eb>Number</color>
 
-    Outputs:
-    List
+    Outputs: List
 
 '
   m_isRightToLeft: 0
@@ -101575,6 +101778,8 @@ GameObject:
   - component: {fileID: 2046086816}
   - component: {fileID: 2046086815}
   - component: {fileID: 2046086821}
+  - component: {fileID: 2046086823}
+  - component: {fileID: 2046086822}
   m_Layer: 17
   m_Name: Trinket
   m_TagString: Untagged
@@ -101794,6 +101999,53 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2046086822
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046086812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45115577ef41a5b4ca741ed302693907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextPlacement: {fileID: 0}
+  interactText: Use
+  interactTextGO: {fileID: 0}
+  proximity: 2
+  SynchronizePosition: 0
+  AllowCollisionOwnershipTransfer: 0
+  Reliable: 0
+  _syncMethod: 0
+  serializedProgramAsset: {fileID: 11400000, guid: 9374c60a9c8116347a2fd31c48099d21, type: 2}
+  programSource: {fileID: 11400000, guid: f5efd3997f46302439df8669f3a90b43, type: 2}
+  serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgEAAAAAAAAAAi8CAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAIAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
+  publicVariablesUnityEngineObjects: []
+  publicVariablesSerializationDataFormat: 0
+--- !u!114 &2046086823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046086812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3ba259fc972fd449bbc432b49ea5a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _udonSharpBackingUdonBehaviour: {fileID: 2046086822}
 --- !u!1 &2049446471 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3718074138842689577, guid: 1dea3232580ce1b41bf846ab811d57e6, type: 3}
@@ -104856,7 +105108,7 @@ MonoBehaviour:
   m_text: 'Returns True if at least one of the arguments are True; otherwise returns
     False.
 
-    
+
 
     Inputs: <color=#f097eb>Boolean</color>, <color=#f097eb>Boolean</color>
 
@@ -106534,6 +106786,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 25924997}
   - {fileID: 1387301299}
   - {fileID: 1912269529}
   m_Father: {fileID: 214537075}
@@ -107024,6 +107277,10 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 4344661071601240964, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
+    - target: {fileID: 4901929885330821085, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4901929885330821085, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
     - target: {fileID: 5292098288121862174, guid: ca27d8e60945bae46b935283c31daf6c, type: 3}
       propertyPath: m_Name
       value: TemporaryStorageMedium
