@@ -4,7 +4,8 @@ namespace BefuddledLabs.Magic {
         Ok,
         Garbage,
         Halt,
-        Paused
+        Paused,
+        Busy
     }
     
     public class ExecutionState {
@@ -32,6 +33,11 @@ namespace BefuddledLabs.Magic {
             Error = error;
             Success = critical ? ExecutionError.Halt : ExecutionError.Garbage;
             EarlyReturnDepth = 0;
+        }
+
+        public ExecutionState(ExecutionError error, string message) {
+            Success = error;
+            Error = message;
         }
         
         public bool IsOk() => Success == ExecutionError.Ok;

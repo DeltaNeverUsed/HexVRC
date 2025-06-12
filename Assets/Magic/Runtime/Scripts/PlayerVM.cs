@@ -7,6 +7,7 @@ using UnityEngine;
 using Varneon.VUdon.Logger;
 using VRC.SDK3.UdonNetworkCalling;
 using VRC.SDKBase;
+using VRC.Udon.Common.Enums;
 using VRC.Udon.Common.Interfaces;
 
 /*
@@ -61,7 +62,9 @@ namespace BefuddledLabs.Magic {
         [NonSerialized] public Stack<StackItem[]> StackStack = new Stack<StackItem[]>();
 
         [NonSerialized] public bool EscapeNext;
+        [NonSerialized] public bool Running;
         [NonSerialized] public int IntrospectionDepth = 0;
+        [NonSerialized] public float PauseDelay = 0;
         [NonSerialized] public readonly Stack<int> SkipIndexes = new Stack<int>();
 
         [NonSerialized] public StorageMedium LastInteractedStorageMedium;
@@ -183,40 +186,46 @@ namespace BefuddledLabs.Magic {
         }
 
         public ExecutionState Execute(List<Instruction> instructions) {
+            if (Running)
+                return new ExecutionState(ExecutionError.Busy, "VM is busy");
             SetMana(maxMana);
             CurrentInstructions = instructions;
-            return Execute();
+            Info.CurrentInstructionIndex = 0;
+            return Execute_Internal();
         }
 
-        private ExecutionState Execute() {
+        public ExecutionState Execute_Internal() {
             _localPlayer = Networking.LocalPlayer;
 
             if (!_executionTimer.IsRunning)
                 _executionTimer.Restart();
-
             if (!Utilities.IsValid(_localPlayer) || !Networking.IsOwner(_localPlayer, gameObject))
                 return ExecutionState.Err("Not the owner of this VM");
-
+            
+            Running = true;
+            
             List<int> glyphId = new List<int>();
             List<bool> success = new List<bool>();
             List<string> msg = new List<string>();
 
             ExecutionState result = ExecutionState.Ok();
-
-            for (int index = 0; index < CurrentInstructions.Count; index++) {
-                Info.CurrentInstructionIndex = index;
-                Instruction instruction = CurrentInstructions[index];
-                if (_executionTimer.ElapsedMilliseconds > 500) {
+            while (Info.CurrentInstructionIndex < CurrentInstructions.Count) {
+                if (_executionTimer.ElapsedMilliseconds >= 6f) {
                     _executionTimer.Stop();
-                    glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus),
-                        glyphId.ToArray(), success.ToArray(), msg.ToArray());
-                    return ExecutionState.Err("Max execution time of 500ms reached.");
+                    PauseDelay = 0;
+                    result = new ExecutionState(ExecutionError.Paused, "");
+                    Running = false;
+                    break;
                 }
+                
+                int index = Info.CurrentInstructionIndex;
+                Instruction instruction = CurrentInstructions[index];
 
                 if (_stack.Count > stackSizeLimit) {
                     _executionTimer.Stop();
                     glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus),
                         glyphId.ToArray(), success.ToArray(), msg.ToArray());
+                    Running = false;
                     return ExecutionState.Err("Stack size limit exceeded");
                 }
 
@@ -232,12 +241,14 @@ namespace BefuddledLabs.Magic {
                         instruction.Path, Instructions.EscapingPatterns.Introspection.Path,
                         StringComparison.OrdinalIgnoreCase)) {
                     ((List<StackItem>)_stack.Peek().Value).Add(new StackItem(instruction));
+                    Info.CurrentInstructionIndex++;
                     continue;
                 }
 
                 if (EscapeNext) {
                     EscapeNext = false;
                     _stack.Push(new StackItem(instruction));
+                    Info.CurrentInstructionIndex++;
                     continue;
                 }
 
@@ -250,8 +261,10 @@ namespace BefuddledLabs.Magic {
                     msg.Add(result.IsOk() ? "" : result.Error);
                 }
 
-                if (result.Success == ExecutionError.Halt)
+                if (result.Success == ExecutionError.Halt) {
+                    Info.CurrentInstructionIndex++;
                     break;
+                }
                 if (result.Success == ExecutionError.Garbage)
                     _stack.Push(new StackItem(result.Error));
 
@@ -264,17 +277,18 @@ namespace BefuddledLabs.Magic {
                             int skipIndex = SkipIndexes.Pop();
                             if (skipIndex <= index) // clear out old already passed ones
                                 continue;
-                            index = skipIndex;
+                            Info.CurrentInstructionIndex = skipIndex;
                         }
                         else
                             completelyBreak = true;
-
                         break;
                     }
                     
                     if (completelyBreak)
                         break; // stop completely if not in eval
+                    continue;
                 }
+                Info.CurrentInstructionIndex++;
             }
 
             if (glyphId.Count > 0)
@@ -282,7 +296,12 @@ namespace BefuddledLabs.Magic {
                 glyphId.ToArray(), success.ToArray(), msg.ToArray());
 
             _executionTimer.Stop();
-            return ExecutionState.Ok();
+            if (result.Success == ExecutionError.Paused)
+                SendCustomEventDelayedSeconds(nameof(Execute_Internal), PauseDelay);
+            else
+                Running = false;
+            this.Log($"Execution finished in {_executionTimer.Elapsed.TotalMilliseconds}ms, sleeping until next frame? {result.Success == ExecutionError.Paused}");
+            return result;
         }
 
 
