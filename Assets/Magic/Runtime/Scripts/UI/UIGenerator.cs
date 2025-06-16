@@ -203,9 +203,11 @@ namespace BefuddledLabs.Magic.UI {
             DrawDefaultInspector();
 
             UIGenerator data = target as UIGenerator;
-            if (GUILayout.Button("Clear"))
-                foreach (Transform children in data.groupParent)
-                    DestroyImmediate(children.gameObject);
+            if (GUILayout.Button("Clear")) {
+                int nbChildren = data.groupParent.childCount;
+                for (int i = nbChildren - 1; i >= 0; i--)
+                    DestroyImmediate(data.groupParent.GetChild(i).gameObject);
+            }
 
             if (GUILayout.Button("Generate Images")) {
                 string[] paths = Assembly.GetAssembly(typeof(PlayerVM))
@@ -219,8 +221,9 @@ namespace BefuddledLabs.Magic.UI {
             if (GUILayout.Button("Generate Doc UI")) {
                 if (!data) return;
 
-                foreach (Transform children in data.groupParent)
-                    DestroyImmediate(children.gameObject);
+                int nbChildren = data.groupParent.childCount;
+                for (int i = nbChildren - 1; i >= 0; i--)
+                    DestroyImmediate(data.groupParent.GetChild(i).gameObject);
 
                 _patterns = new Dictionary<string, List<Type>>();
                 List<Type> classes = Assembly.GetAssembly(typeof(PlayerVM))

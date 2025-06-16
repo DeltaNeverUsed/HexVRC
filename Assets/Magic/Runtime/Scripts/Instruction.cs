@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using BefuddledLabs.Magic.Instructions.GreatSpells;
 using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
@@ -713,6 +712,18 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.StackToList.Execute(inf
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "wwwqqqwwwqqeqqwwwqqwqqdqqqqqdqq":
+if (stackSize >= 2) {
+StackItem _param_1 = stack.Pop();
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Entity && _param_1.Type == ItemType.Vector) {
+return BefuddledLabs.Magic.Instructions.GreatSpells.GreaterTeleport.Execute(info, (BefuddledLabs.Magic.Entity)_param_0.Value, (UnityEngine.Vector3)_param_1.Value);
+}
+if (_param_0.Type == ItemType.Player && _param_1.Type == ItemType.Vector) {
+return BefuddledLabs.Magic.Instructions.GreatSpells.GreaterTeleport.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value, (UnityEngine.Vector3)_param_1.Value);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "qqqaw":
 {
 return BefuddledLabs.Magic.Instructions.EscapingPatterns.Escape.Execute(info);
@@ -917,6 +928,16 @@ return BefuddledLabs.Magic.Instructions.BasicPatterns.Impulse.Execute(info, (VRC
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "adaa":
+if (stackSize >= 3) {
+StackItem _param_2 = stack.Pop();
+StackItem _param_1 = stack.Pop();
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Vector && _param_1.Type == ItemType.Number && _param_2.Type == ItemType.Number) {
+return BefuddledLabs.Magic.Instructions.BasicPatterns.PlayNote.Execute(info, (UnityEngine.Vector3)_param_0.Value, (System.Single)_param_1.Value, (System.Single)_param_2.Value);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "de":
 {
 return BefuddledLabs.Magic.Instructions.BasicPatterns.PrintStack.Execute(info);
@@ -946,18 +967,6 @@ StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player && _param_1.Type == ItemType.Number) {
 return BefuddledLabs.Magic.Instructions.BasicPatterns.SetPlayerHeight.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value, (System.Single)_param_1.Value);
-}
-}
-return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "wwwqqqwwwqqeqqwwwqqwqqdqqqqqdqq":
-if (stackSize >= 2) {
-StackItem _param_1 = stack.Pop();
-StackItem _param_0 = stack.Pop();
-if (_param_0.Type == ItemType.Entity && _param_1.Type == ItemType.Vector) {
-return GreaterTeleport.Execute(info, (BefuddledLabs.Magic.Entity)_param_0.Value, (UnityEngine.Vector3)_param_1.Value);
-}
-if (_param_0.Type == ItemType.Player && _param_1.Type == ItemType.Vector) {
-return GreaterTeleport.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value, (UnityEngine.Vector3)_param_1.Value);
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");

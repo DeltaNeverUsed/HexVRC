@@ -52,6 +52,8 @@ namespace BefuddledLabs.Magic {
         private Stack<StackItem> _stack;
 
         public GlyphSpace glyphSpace;
+        
+        public NoteManager noteManager;
 
         public float maxMana;
 
