@@ -9,6 +9,6 @@ namespace BefuddledLabs.Magic {
     public class EntityManager : UdonSharpBehaviour {
         public Transform root;
         
-        [NonSerialized] public Dictionary<int, Entity> Entities = new Dictionary<int, Entity>();
+        [NonSerialized] public readonly Dictionary<int, Entity> Entities = new Dictionary<int, Entity>();
     }
 }

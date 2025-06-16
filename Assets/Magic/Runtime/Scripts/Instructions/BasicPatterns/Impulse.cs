@@ -3,7 +3,7 @@ using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.Player {
+namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
     public static class Impulse {
         public const string Path = "awqqqwaqw";
 

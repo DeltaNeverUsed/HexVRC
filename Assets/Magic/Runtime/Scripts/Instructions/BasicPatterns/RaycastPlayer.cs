@@ -9,10 +9,10 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
         #region Docs
 
         public const string Description =
-            "Combines two vectors (a position and a direction) into the answer to the question: If I stood at the position and looked in the direction, what Player would I be looking at?";
+            "Combines two vectors (a position and a direction) into the answer to the question: If I stood at the position and looked in the direction, what Player or Entity would I be looking at?";
 
         public const string Input = "Vector, Vector";
-        public const string Output = "Player | Null";
+        public const string Output = "Player | Entity | Null";
 
         #endregion
 
@@ -24,6 +24,15 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
                 return ExecutionState.Ok();
             }
 
+            Rigidbody hitBody = hit.rigidbody;
+            if (Utilities.IsValid(hitBody)) {
+                Entity entity = hitBody.GetComponent<Entity>();
+                if (Utilities.IsValid(entity)) {
+                    info.Stack.Push(new StackItem(entity));
+                    return ExecutionState.Ok(); // if we hit an entity we just return early instead of checking every player
+                }
+            }
+            
             Vector3 hitPosition = hit.point;
 
             VRCPlayerApi[] players = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];

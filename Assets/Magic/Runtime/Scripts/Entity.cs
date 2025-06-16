@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using BefuddledLabs.Magic.Debug.VUdon;
 using UdonSharp;
 using UnityEngine;
@@ -47,7 +46,6 @@ namespace BefuddledLabs.Magic {
             _id = Animator.StringToHash(GetGameObjectPath()); // kinda cursed...
 
             _entityManager.Entities[_id] = this;
-            
             _rigidbody = GetComponent<Rigidbody>();
             _hasRigidBody = Utilities.IsValid(_rigidbody);
         }
@@ -56,6 +54,9 @@ namespace BefuddledLabs.Magic {
             _entityManager.Entities.Remove(_id);
         }
 
+        #region EntityFunctions
+
+        #region RigidBody
         public ExecutionState ApplyImpulse(Vector3 impulse) {
             if (!_hasRigidBody)
                 return ExecutionState.Err("Entity is does not possess a RigidBody");
@@ -65,6 +66,24 @@ namespace BefuddledLabs.Magic {
             _rigidbody.AddForce(impulse, ForceMode.Impulse);
             return ExecutionState.Ok();
         }
+        
+        public ExecutionState GreaterTeleport(Vector3 vector) {
+            if (!_hasRigidBody)
+                return ExecutionState.Err("Entity is does not possess a RigidBody");
+
+            Networking.SetOwner(Networking.LocalPlayer, gameObject); // become owner to apply force
+
+            transform.position += vector;
+            return ExecutionState.Ok();
+        }
+
+        
+
+        #endregion
+
+
+        #endregion
+
 
         public int GetId() => _id;
 

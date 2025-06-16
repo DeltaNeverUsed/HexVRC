@@ -36,9 +36,23 @@ MonoBehaviour:
     - _name: __0_isDrone__param
       _type: 9
   - _maxEventsPerSecond: 5
-    _name: SetHeight
+    _name: Blink
     _parameters:
     - _name: __2_playerId__param
+      _type: 11
+    - _name: __0_length__param
+      _type: 10
+  - _maxEventsPerSecond: 5
+    _name: GreaterTeleport
+    _parameters:
+    - _name: __3_playerId__param
+      _type: 11
+    - _name: __0_vector__param
+      _type: 14
+  - _maxEventsPerSecond: 5
+    _name: SetHeight
+    _parameters:
+    - _name: __4_playerId__param
       _type: 11
     - _name: __0_height__param
       _type: 10

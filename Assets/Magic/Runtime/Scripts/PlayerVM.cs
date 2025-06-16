@@ -69,9 +69,9 @@ namespace BefuddledLabs.Magic {
 
         [NonSerialized] public StorageMedium LastInteractedStorageMedium;
         [NonSerialized] public Transform ExecutionTransform;
-        
+
         [NonSerialized] public List<Instruction> CurrentInstructions = new List<Instruction>();
-        
+
 
         private readonly Stopwatch _executionTimer = new Stopwatch();
 
@@ -82,7 +82,7 @@ namespace BefuddledLabs.Magic {
         public ExecutionState SaveStack() {
             if (StackStack.Count >= recursionLimit)
                 return ExecutionState.Err("Recursion limit hit.");
-            
+
             StackStack.Push(_stack.ToArray());
             return ExecutionState.Ok();
         }
@@ -205,9 +205,9 @@ namespace BefuddledLabs.Magic {
                 _executionTimer.Restart();
             if (!Utilities.IsValid(_localPlayer) || !Networking.IsOwner(_localPlayer, gameObject))
                 return ExecutionState.Err("Not the owner of this VM");
-            
+
             Running = true;
-            
+
             List<int> glyphId = new List<int>();
             List<bool> success = new List<bool>();
             List<string> msg = new List<string>();
@@ -221,7 +221,7 @@ namespace BefuddledLabs.Magic {
                     Running = false;
                     break;
                 }
-                
+
                 int index = Info.CurrentInstructionIndex;
                 Instruction instruction = CurrentInstructions[index];
 
@@ -269,6 +269,7 @@ namespace BefuddledLabs.Magic {
                     Info.CurrentInstructionIndex++;
                     break;
                 }
+
                 if (result.Success == ExecutionError.Garbage)
                     _stack.Push(new StackItem(result.Error));
 
@@ -285,26 +286,29 @@ namespace BefuddledLabs.Magic {
                         }
                         else
                             completelyBreak = true;
+
                         break;
                     }
-                    
+
                     if (completelyBreak)
                         break; // stop completely if not in eval
                     continue;
                 }
+
                 Info.CurrentInstructionIndex++;
             }
 
             if (glyphId.Count > 0)
                 glyphSpace.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(glyphSpace.UpdateGlyphStatus),
-                glyphId.ToArray(), success.ToArray(), msg.ToArray());
+                    glyphId.ToArray(), success.ToArray(), msg.ToArray());
 
             _executionTimer.Stop();
             if (result.Success == ExecutionError.Paused)
                 SendCustomEventDelayedSeconds(nameof(Execute_Internal), PauseDelay);
             else
                 Running = false;
-            this.Log($"Execution finished in {_executionTimer.Elapsed.TotalMilliseconds}ms, sleeping until next frame? {result.Success == ExecutionError.Paused}");
+            this.Log(
+                $"Execution finished in {_executionTimer.Elapsed.TotalMilliseconds}ms, sleeping until next frame? {result.Success == ExecutionError.Paused}");
             return result;
         }
 
@@ -328,6 +332,28 @@ namespace BefuddledLabs.Magic {
                 Vector3 velocity = player.GetVelocity();
                 player.SetVelocity(velocity + impulse);
             }
+        }
+
+        [NetworkCallable]
+        public void Blink(int playerId, float length) {
+            VRCPlayerApi player = VRCPlayerApi.GetPlayerById(playerId);
+            if (!Utilities.IsValid(player) || !player.IsValid())
+                return;
+            if (!player.isLocal)
+                return;
+
+            player.TeleportTo(player.GetPosition() + player.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).rotation * Vector3.forward * length, player.GetRotation(), VRC_SceneDescriptor.SpawnOrientation.Default, false);
+        }
+        
+        [NetworkCallable]
+        public void GreaterTeleport(int playerId, Vector3 vector) {
+            VRCPlayerApi player = VRCPlayerApi.GetPlayerById(playerId);
+            if (!Utilities.IsValid(player) || !player.IsValid())
+                return;
+            if (!player.isLocal)
+                return;
+
+            player.TeleportTo(player.GetPosition() + vector, player.GetRotation(), VRC_SceneDescriptor.SpawnOrientation.Default, false);
         }
 
         [NetworkCallable]
