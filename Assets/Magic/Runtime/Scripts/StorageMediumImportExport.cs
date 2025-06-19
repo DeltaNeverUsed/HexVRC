@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
@@ -57,7 +58,7 @@ namespace BefuddledLabs.Magic {
             if (!Utilities.IsValid(_storageMediumInside))
                 return;
 
-            StackItem item = StackItem.Deserialize(textField.text);
+            StackItem item = StackItem.Deserialize(Convert.FromBase64String(textField.text));
             _storageMediumInside.Write(item);
         }
 
@@ -68,7 +69,7 @@ namespace BefuddledLabs.Magic {
                 return;
             }
             textField.readOnly = false;
-            textField.text = _storageMediumInside.Read().Serialize();
+            textField.text = Convert.ToBase64String(_storageMediumInside.Read().Serialize());
 
             _isEditable++;
             SendCustomEventDelayedFrames(nameof(Dec), 2);

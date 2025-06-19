@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine;
 using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
@@ -10,6 +11,8 @@ namespace BefuddledLabs.Magic {
         public readonly string Path;
         public readonly int GlyphId = -1;
         public object ExtraData;
+
+        public readonly int Hash;
 
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
@@ -24,16 +27,19 @@ namespace BefuddledLabs.Magic {
 
         public Instruction(string path) {
             Path = path;
+            Hash = Animator.StringToHash(Path);
         }
 
         public Instruction(string path, object extraData) {
             Path = path;
+            Hash = Animator.StringToHash(Path);
             ExtraData = extraData;
         }
 
         public Instruction(string path, int glyphId) {
             GlyphId = glyphId;
             Path = path;
+            Hash = Animator.StringToHash(Path);
         }
         
         public ExecutionState Execute(ExecutionInfo info) {
@@ -41,8 +47,8 @@ namespace BefuddledLabs.Magic {
             info.GlyphId = GlyphId;
             Stack<StackItem> stack = info.Stack;
             int stackSize = stack.Count;
-            switch (Path) {
-case "ddqaa":
+            switch (Hash) {
+case 229920651:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -51,7 +57,7 @@ return BefuddledLabs.Magic.Instructions.StackManipulation.Bury.Execute(info, (Be
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aadaadaa":
+case -377302242:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -60,7 +66,7 @@ return BefuddledLabs.Magic.Instructions.StackManipulation.Copy.Execute(info, (Be
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aadaa":
+case -395882158:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (true) {
@@ -68,7 +74,7 @@ return BefuddledLabs.Magic.Instructions.StackManipulation.Duplicate.Execute(info
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aaedd":
+case -457688145:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -77,7 +83,7 @@ return BefuddledLabs.Magic.Instructions.StackManipulation.DuplicateSecond.Execut
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aadadaaw":
+case 742610070:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -86,7 +92,7 @@ return BefuddledLabs.Magic.Instructions.StackManipulation.DuplicateTwice.Execute
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ddad":
+case -320396525:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Number) {
@@ -94,7 +100,7 @@ return BefuddledLabs.Magic.Instructions.StackManipulation.Move.Execute(info, (Sy
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aada":
+case -789638912:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Number) {
@@ -102,7 +108,7 @@ return BefuddledLabs.Magic.Instructions.StackManipulation.MoveCopy.Execute(info,
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "a":
+case -390611389:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (true) {
@@ -110,7 +116,7 @@ return BefuddledLabs.Magic.Instructions.StackManipulation.Pop.Execute(info, (Bef
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaawdde":
+case 905332302:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (true) {
@@ -118,7 +124,7 @@ return BefuddledLabs.Magic.Instructions.StackManipulation.Rearrange.Execute(info
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ddqdd":
+case 11095873:
 if (stackSize >= 3) {
 StackItem _param_2 = stack.Pop();
 StackItem _param_1 = stack.Pop();
@@ -128,7 +134,7 @@ return BefuddledLabs.Magic.Instructions.StackManipulation.RotateL.Execute(info, 
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aaeaa":
+case -375047323:
 if (stackSize >= 3) {
 StackItem _param_2 = stack.Pop();
 StackItem _param_1 = stack.Pop();
@@ -138,12 +144,12 @@ return BefuddledLabs.Magic.Instructions.StackManipulation.RotateR.Execute(info, 
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qwaeawqaeaqa":
+case 590124647:
 {
 return BefuddledLabs.Magic.Instructions.StackManipulation.StackSize.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aawdd":
+case -82162511:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -152,7 +158,7 @@ return BefuddledLabs.Magic.Instructions.StackManipulation.Swap.Execute(info, (Be
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aweaqa":
+case 1894055644:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.List) {
@@ -160,12 +166,12 @@ return BefuddledLabs.Magic.Instructions.Sets.Deduplicate.Execute(info, (System.C
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aqqqqq":
+case 558790816:
 {
 return BefuddledLabs.Magic.Instructions.ReadingAndWriting.ReadLast.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "deeeee":
+case 348327965:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (true) {
@@ -173,7 +179,7 @@ return BefuddledLabs.Magic.Instructions.ReadingAndWriting.WriteLast.Execute(info
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaaqqed":
+case 1684830686:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player) {
@@ -181,7 +187,7 @@ return BefuddledLabs.Magic.Instructions.Player.IsInstanceOwner.Execute(info, (VR
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaaqqq":
+case 308394534:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player) {
@@ -189,7 +195,7 @@ return BefuddledLabs.Magic.Instructions.Player.IsLocal.Execute(info, (VRC.SDKBas
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaaqqe":
+case 146501211:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player) {
@@ -197,7 +203,7 @@ return BefuddledLabs.Magic.Instructions.Player.IsMaster.Execute(info, (VRC.SDKBa
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaaqeq":
+case 1020226931:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player) {
@@ -205,7 +211,7 @@ return BefuddledLabs.Magic.Instructions.Player.IsPlayerGrounded.Execute(info, (V
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaaqe":
+case -1008479629:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player) {
@@ -213,7 +219,7 @@ return BefuddledLabs.Magic.Instructions.Player.IsSuspended.Execute(info, (VRC.SD
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaaqqaaq":
+case -294559468:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player) {
@@ -221,7 +227,7 @@ return BefuddledLabs.Magic.Instructions.Player.IsUserInVR.Execute(info, (VRC.SDK
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaaqqqqaq":
+case -372642427:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (true) {
@@ -229,7 +235,7 @@ return BefuddledLabs.Magic.Instructions.Player.IsValid.Execute(info, (BefuddledL
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaaqqdad":
+case -2056829164:
 if (stackSize >= 4) {
 StackItem _param_3 = stack.Pop();
 StackItem _param_2 = stack.Pop();
@@ -240,7 +246,7 @@ return BefuddledLabs.Magic.Instructions.Player.PlayHapticEventInLeftHand.Execute
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaaqeada":
+case 1372210685:
 if (stackSize >= 4) {
 StackItem _param_3 = stack.Pop();
 StackItem _param_2 = stack.Pop();
@@ -251,7 +257,7 @@ return BefuddledLabs.Magic.Instructions.Player.PlayHapticEventInRightHand.Execut
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qqqqqwdeddwe":
+case 679152739:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -260,12 +266,12 @@ return BefuddledLabs.Magic.Instructions.Player.GetPlayersNear.Execute(info, (Uni
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "AddItemToStack":
+case -1881331538:
 {
 return BefuddledLabs.Magic.Instructions.MetaEvaluation.AddItemToStack.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "dwedwaqwedwe":
+case -1350440260:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Number) {
@@ -273,7 +279,7 @@ return BefuddledLabs.Magic.Instructions.MetaEvaluation.Delay.Execute(info, (Syst
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "deaqq":
+case -27555413:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Instruction) {
@@ -284,7 +290,7 @@ return BefuddledLabs.Magic.Instructions.MetaEvaluation.Eval.Execute(info, (Syste
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qwaqde":
+case -793843091:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Instruction) {
@@ -295,12 +301,12 @@ return BefuddledLabs.Magic.Instructions.MetaEvaluation.EvalWithEarlyReturn.Execu
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aqdee":
+case -612431920:
 {
 return BefuddledLabs.Magic.Instructions.MetaEvaluation.Halt.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "dadad":
+case 1357720237:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -309,27 +315,27 @@ return BefuddledLabs.Magic.Instructions.MetaEvaluation.Map.Execute(info, (System
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "RestoreStack":
+case 1449777739:
 {
 return BefuddledLabs.Magic.Instructions.MetaEvaluation.RestoreStack.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "RestoreStackWithRemainingInList":
+case 1247538079:
 {
 return BefuddledLabs.Magic.Instructions.MetaEvaluation.RestoreStackWithRemainingInList.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "SaveStack":
+case 542970291:
 {
 return BefuddledLabs.Magic.Instructions.MetaEvaluation.SaveStack.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "Skip":
+case 1480915523:
 {
 return BefuddledLabs.Magic.Instructions.MetaEvaluation.Skip.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "waaw":
+case 742283351:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -347,7 +353,7 @@ return BefuddledLabs.Magic.Instructions.Mathematics.Add.Execute(info, (System.Si
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qqqqqaww":
+case 2139287459:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Vector) {
@@ -358,7 +364,7 @@ return BefuddledLabs.Magic.Instructions.Mathematics.AxialVectorOrSign.Execute(in
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qwe":
+case -137059949:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Vector) {
@@ -369,7 +375,7 @@ return BefuddledLabs.Magic.Instructions.Mathematics.Ceil.Execute(info, (System.S
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "wdedw":
+case -1200035743:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -384,7 +390,7 @@ return BefuddledLabs.Magic.Instructions.Mathematics.Div.Execute(info, (System.Si
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "wedew":
+case 404608114:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -396,7 +402,7 @@ return BefuddledLabs.Magic.Instructions.Mathematics.ExpOrVectorProjection.Execut
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ewq":
+case -165577150:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Vector) {
@@ -407,7 +413,7 @@ return BefuddledLabs.Magic.Instructions.Mathematics.Floor.Execute(info, (System.
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "wqaqw":
+case -285015804:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Boolean) {
@@ -424,7 +430,7 @@ return BefuddledLabs.Magic.Instructions.Mathematics.Length.Execute(info, (System
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "addwaad":
+case -960576901:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -436,7 +442,7 @@ return BefuddledLabs.Magic.Instructions.Mathematics.Mod.Execute(info, (System.Si
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "waqaw":
+case -369170502:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -451,12 +457,12 @@ return BefuddledLabs.Magic.Instructions.Mathematics.Mult.Execute(info, (System.S
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eqqq":
+case 1772737367:
 {
 return BefuddledLabs.Magic.Instructions.Mathematics.Random01.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "wddw":
+case 1468165881:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -471,7 +477,7 @@ return BefuddledLabs.Magic.Instructions.Mathematics.Sub.Execute(info, (System.Si
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eqqqqq":
+case -1159775562:
 if (stackSize >= 3) {
 StackItem _param_2 = stack.Pop();
 StackItem _param_1 = stack.Pop();
@@ -481,7 +487,7 @@ return BefuddledLabs.Magic.Instructions.Mathematics.VectorConstruct.Execute(info
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qeeeee":
+case 1205371701:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Vector) {
@@ -489,7 +495,7 @@ return BefuddledLabs.Magic.Instructions.Mathematics.VectorDisintegration.Execute
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "wdw":
+case 1628433915:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -498,7 +504,7 @@ return BefuddledLabs.Magic.Instructions.LogicalOperators.And.Execute(info, (Syst
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ad":
+case 2011229528:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -507,7 +513,7 @@ return BefuddledLabs.Magic.Instructions.LogicalOperators.Equals.Execute(info, (B
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "e":
+case -270894502:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -516,7 +522,7 @@ return BefuddledLabs.Magic.Instructions.LogicalOperators.GreaterThan.Execute(inf
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ee":
+case 1686837450:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -525,7 +531,7 @@ return BefuddledLabs.Magic.Instructions.LogicalOperators.GreaterThanEqual.Execut
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aw":
+case -211899258:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (true) {
@@ -536,7 +542,7 @@ return BefuddledLabs.Magic.Instructions.LogicalOperators.IsSomething.Execute(inf
 return BefuddledLabs.Magic.Instructions.LogicalOperators.IsSomething.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "q":
+case -184504793:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -545,7 +551,7 @@ return BefuddledLabs.Magic.Instructions.LogicalOperators.LessThan.Execute(info, 
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qq":
+case 1358896098:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -554,7 +560,7 @@ return BefuddledLabs.Magic.Instructions.LogicalOperators.LessThanEqual.Execute(i
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "dw":
+case -1909892925:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Number) {
@@ -565,7 +571,7 @@ return BefuddledLabs.Magic.Instructions.LogicalOperators.Negate.Execute(info, (S
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "da":
+case 2063461778:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -574,7 +580,7 @@ return BefuddledLabs.Magic.Instructions.LogicalOperators.NotEquals.Execute(info,
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "waw":
+case 477632958:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -583,7 +589,7 @@ return BefuddledLabs.Magic.Instructions.LogicalOperators.Or.Execute(info, (Syste
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "awdd":
+case -1204929971:
 if (stackSize >= 3) {
 StackItem _param_2 = stack.Pop();
 StackItem _param_1 = stack.Pop();
@@ -593,7 +599,7 @@ return BefuddledLabs.Magic.Instructions.LogicalOperators.Ternary.Execute(info, (
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "dwa":
+case -363592687:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -602,12 +608,12 @@ return BefuddledLabs.Magic.Instructions.LogicalOperators.Xor.Execute(info, (Syst
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qqaeaae":
+case -1215500945:
 {
 return BefuddledLabs.Magic.Instructions.ListManipulation.CreateList.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "adeeed":
+case 241801352:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (true) {
@@ -615,7 +621,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.CreateListFromAny.Execu
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "deeed":
+case -1172237623:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -624,7 +630,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.GetIndex.Execute(info, 
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaeaqwded":
+case 677893285:
 if (stackSize >= 3) {
 StackItem _param_2 = stack.Pop();
 StackItem _param_1 = stack.Pop();
@@ -634,7 +640,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.GetSlice.Execute(info, 
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "dedqde":
+case -1370796651:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -643,7 +649,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.IndexOf.Execute(info, (
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ddewedd":
+case -744974091:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -652,7 +658,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.InsertAt0.Execute(info,
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qwaeawq":
+case 1737977816:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.List) {
@@ -660,7 +666,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.ListToStack.Execute(inf
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaeaq":
+case -1796031357:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.List) {
@@ -668,7 +674,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.Pop.Execute(info, (Syst
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "edqde":
+case 1255036519:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -677,7 +683,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.Push.Execute(info, (Sys
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "edqdewaqa":
+case -1617416031:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -686,7 +692,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.RemoveAt.Execute(info, 
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aaqwqaa":
+case 1379867845:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.List) {
@@ -694,7 +700,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.RemoveAt0.Execute(info,
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qqqaede":
+case 577810723:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.List) {
@@ -702,7 +708,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.ReverseList.Execute(inf
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "wqaeaqw":
+case 1831320396:
 if (stackSize >= 3) {
 StackItem _param_2 = stack.Pop();
 StackItem _param_1 = stack.Pop();
@@ -712,7 +718,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.SetIndex.Execute(info, 
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ewdqdwe":
+case -7565781:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Number) {
@@ -720,7 +726,7 @@ return BefuddledLabs.Magic.Instructions.ListManipulation.StackToList.Execute(inf
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "wwwqqqwwwqqeqqwwwqqwqqdqqqqqdqq":
+case -1540197969:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -732,22 +738,22 @@ return BefuddledLabs.Magic.Instructions.GreatSpells.GreaterTeleport.Execute(info
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qqqaw":
+case 916931973:
 {
 return BefuddledLabs.Magic.Instructions.EscapingPatterns.Escape.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qqq":
+case -1152069016:
 {
 return BefuddledLabs.Magic.Instructions.EscapingPatterns.Introspection.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eee":
+case -1810900244:
 {
 return BefuddledLabs.Magic.Instructions.EscapingPatterns.Retrospection.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eeedw":
+case 451169254:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.List) {
@@ -755,7 +761,7 @@ return BefuddledLabs.Magic.Instructions.EscapingPatterns.Undo.Execute(info, (Sys
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ddwwddwa":
+case -1291934417:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player) {
@@ -763,7 +769,7 @@ return BefuddledLabs.Magic.Instructions.Drone.GetDrone.Execute(info, (VRC.SDKBas
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ddwwdded":
+case -1168105101:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Drone) {
@@ -771,7 +777,7 @@ return BefuddledLabs.Magic.Instructions.Drone.GetPosition.Execute(info, (VRC.SDK
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ddwwddwewa":
+case -1464084184:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Drone) {
@@ -779,7 +785,7 @@ return BefuddledLabs.Magic.Instructions.Drone.GetRotation.Execute(info, (VRC.SDK
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ddwwddad":
+case -569580425:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Drone) {
@@ -787,7 +793,7 @@ return BefuddledLabs.Magic.Instructions.Drone.GetVelocity.Execute(info, (VRC.SDK
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ddwwddweqq":
+case -480874806:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Drone) {
@@ -795,72 +801,72 @@ return BefuddledLabs.Magic.Instructions.Drone.IsDeployed.Execute(info, (VRC.SDKB
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aaq":
+case -307207351:
 {
 return BefuddledLabs.Magic.Instructions.Constants.E.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "dedq":
+case -40937078:
 {
 return BefuddledLabs.Magic.Instructions.Constants.False.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "d":
+case -1730327860:
 {
 return BefuddledLabs.Magic.Instructions.Constants.Null.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qdwdq":
+case -1040592918:
 {
 return BefuddledLabs.Magic.Instructions.Constants.Pi.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eawae":
+case 82456226:
 {
 return BefuddledLabs.Magic.Instructions.Constants.Tau.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aqae":
+case -1227652564:
 {
 return BefuddledLabs.Magic.Instructions.Constants.True.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eeeeeqa":
+case 58510699:
 {
 return BefuddledLabs.Magic.Instructions.Constants.VectorXn.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qqqqqea":
+case 1999640648:
 {
 return BefuddledLabs.Magic.Instructions.Constants.VectorXp.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eeeeeqw":
+case -139954118:
 {
 return BefuddledLabs.Magic.Instructions.Constants.VectorYn.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qqqqqew":
+case -2082165479:
 {
 return BefuddledLabs.Magic.Instructions.Constants.VectorYp.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qqqqq":
+case -1794706719:
 {
 return BefuddledLabs.Magic.Instructions.Constants.VectorZero.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eeeeeqd":
+case 1930836452:
 {
 return BefuddledLabs.Magic.Instructions.Constants.VectorZn.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qqqqqed":
+case 123399367:
 {
 return BefuddledLabs.Magic.Instructions.Constants.VectorZp.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "awqqqwaq":
+case -1917246318:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -869,27 +875,27 @@ return BefuddledLabs.Magic.Instructions.BasicPatterns.Blink.Execute(info, (VRC.S
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eeeeedw":
+case -1071800786:
 {
 return BefuddledLabs.Magic.Instructions.BasicPatterns.Clear.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qaq":
+case -241778631:
 {
 return BefuddledLabs.Magic.Instructions.BasicPatterns.GetLocalPlayer.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eeeeawa":
+case 1378861617:
 {
 return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPickupDirection.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eeeeaa":
+case -1130446171:
 {
 return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPickupPosition.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "aa":
+case 126491095:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player) {
@@ -897,7 +903,7 @@ return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPlayerEyePosition.Execu
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "awq":
+case -248981858:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player) {
@@ -905,7 +911,7 @@ return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPlayerHeight.Execute(in
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "wa":
+case 454208512:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player) {
@@ -913,7 +919,7 @@ return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPlayerLookDirection.Exe
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "dd":
+case 177674525:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Player) {
@@ -921,7 +927,7 @@ return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPlayerPosition.Execute(
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "awqqqwaqw":
+case 49234014:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -936,7 +942,7 @@ return BefuddledLabs.Magic.Instructions.BasicPatterns.Impulse.Execute(info, (VRC
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "adaa":
+case -1420613714:
 if (stackSize >= 3) {
 StackItem _param_2 = stack.Pop();
 StackItem _param_1 = stack.Pop();
@@ -946,12 +952,12 @@ return BefuddledLabs.Magic.Instructions.BasicPatterns.PlayNote.Execute(info, (Un
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "de":
+case 2106599819:
 {
 return BefuddledLabs.Magic.Instructions.BasicPatterns.PrintStack.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "weaqa":
+case -995330915:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -960,7 +966,7 @@ return BefuddledLabs.Magic.Instructions.BasicPatterns.RaycastPlayer.Execute(info
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "wqaawdd":
+case 1239766035:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -969,7 +975,7 @@ return BefuddledLabs.Magic.Instructions.BasicPatterns.RaycastPosition.Execute(in
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "dwe":
+case -314982392:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -978,7 +984,7 @@ return BefuddledLabs.Magic.Instructions.BasicPatterns.SetPlayerHeight.Execute(in
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "adeeeee":
+case 363604369:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Number) {
@@ -986,7 +992,7 @@ return BefuddledLabs.Magic.Instructions.AdvancedMathematics.ArcCosine.Execute(in
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "ddeeeee":
+case 1200883254:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Number) {
@@ -994,7 +1000,7 @@ return BefuddledLabs.Magic.Instructions.AdvancedMathematics.ArcSine.Execute(info
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eadeeeeew":
+case 245435333:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Number) {
@@ -1002,7 +1008,7 @@ return BefuddledLabs.Magic.Instructions.AdvancedMathematics.ArcTangent.Execute(i
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "deadeeeeewd":
+case 467526104:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -1011,7 +1017,7 @@ return BefuddledLabs.Magic.Instructions.AdvancedMathematics.ArcTangent2.Execute(
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "qqqqqad":
+case 1664494019:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Number) {
@@ -1019,7 +1025,7 @@ return BefuddledLabs.Magic.Instructions.AdvancedMathematics.Cosine.Execute(info,
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "eqaqe":
+case 110802094:
 if (stackSize >= 2) {
 StackItem _param_1 = stack.Pop();
 StackItem _param_0 = stack.Pop();
@@ -1028,7 +1034,7 @@ return BefuddledLabs.Magic.Instructions.AdvancedMathematics.Log.Execute(info, (S
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "waawqqqqqaa":
+case -519661938:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Number) {
@@ -1036,7 +1042,7 @@ return BefuddledLabs.Magic.Instructions.AdvancedMathematics.Sine.Execute(info, (
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case "wqqqqqadq":
+case -521703713:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (_param_0.Type == ItemType.Number) {

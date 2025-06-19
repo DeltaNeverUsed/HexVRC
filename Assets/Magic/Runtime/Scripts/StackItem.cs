@@ -6,9 +6,19 @@ using VRC.SDKBase;
 using UnityEngine;
 using VRC.SDK3.Data;
 
+/*
+ * serialized format
+ * [
+ *  type, 1b
+ *  size, 4b only if size isn't known by type
+ *  serialized_data
+ * ]
+ */
+
+
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic {
-    public enum ItemType {
+    public enum ItemType : byte {
         Null,
         Vector,
         Number,
@@ -20,6 +30,20 @@ namespace BefuddledLabs.Magic {
         Drone,
         Garbage,
         Entity
+    }
+
+    public enum ItemTypeSizes {
+        Null = 0,
+        Vector = sizeof(float) * 3,
+        Number = sizeof(float),
+        Boolean = 1,
+        Player = -1,
+        Instruction = -1,
+        List = -1,
+        Any = -1,
+        Drone = -1,
+        Garbage = 0,
+        Entity = sizeof(int)
     }
 
     public class StackItem : IEquatable<StackItem> {
@@ -124,66 +148,96 @@ namespace BefuddledLabs.Magic {
 
             return instructions;
         }
-        
-        public static StackItem Deserialize(string json) {
-            bool deserialize = VRCJson.TryDeserializeFromJson(json, out DataToken token);
-            if (!deserialize || token.TokenType != TokenType.DataDictionary)
-                return new StackItem();
-
-            DataDictionary serializedData = token.DataDictionary;
-            return Deserialize(serializedData);
-        }
 
         [RecursiveMethod]
-        private static StackItem Deserialize(DataDictionary serializedData) {
-            ItemType type = (ItemType)(int)serializedData["t"].Number;
+        public static StackItem Deserialize(byte[] data) {
+            int dataSize = data.Length;
+            if (dataSize < 1)
+                return new StackItem();
+            
+            ItemType deserializedType = (ItemType)data[0];
 
-            switch (type) {
+            switch (deserializedType) {
                 case ItemType.Vector:
-                    DataList vectorList = serializedData["v"].DataList;
-                    return new StackItem(new Vector3((float)vectorList[0].Number, (float)vectorList[1].Number,
-                        (float)vectorList[2].Number));
+                    Vector3[] tempVectorArray = new Vector3[1];
+                    Buffer.BlockCopy(data, 1, tempVectorArray, 0, (int)ItemTypeSizes.Vector);
+                    return new StackItem(tempVectorArray[0]);
                 case ItemType.Number:
-                    return new StackItem((float)serializedData["v"].Number);
+                    return new StackItem(BitConverter.ToSingle(data, 1));
                 case ItemType.Player:
+                    string playerName = Encoding.UTF8.GetString(data, 5, data.Length - 5);
                     VRCPlayerApi[] players = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
                     VRCPlayerApi.GetPlayers(players);
                     foreach (VRCPlayerApi player in players) {
                         if (player.IsValid() &&
-                            player.displayName.Equals(serializedData["v"].String,
+                            player.displayName.Equals(playerName,
                                 StringComparison.InvariantCultureIgnoreCase))
                             return new StackItem(player);
                     }
 
                     return new StackItem();
                 case ItemType.List:
-                    DataList serializedList = serializedData["v"].DataList;
-                    List<StackItem> list = new List<StackItem>(serializedList.Count);
+                    int size = BitConverter.ToInt32(data, 1);
+                    StackItem[] arr = new StackItem[size];
 
-                    for (int i = 0; i < serializedList.Count; i++)
-                        list.Add(Deserialize(serializedList[i].DataDictionary));
+                    int currentOffset = 5;
+                    for (int i = 0; i < size; i++) {
+                        int itemByteSize = BitConverter.ToInt32(data, currentOffset);
+                        byte[] subArray = new byte[itemByteSize];
+                        
+                        Buffer.BlockCopy(data, currentOffset + sizeof(int), subArray, 0, subArray.Length);
+                        
+                        currentOffset += subArray.Length + sizeof(int);
+                        arr[i] = Deserialize(subArray);
+                    }
 
-                    return new StackItem(list);
-
+                    return new StackItem(new List<StackItem>(arr));
                 case ItemType.Instruction:
-                    return new StackItem(new Instruction(serializedData["v"].String));
+                    size = BitConverter.ToInt32(data, 1);
+                    char[] path = new char[size];
+                    
+                    for (int i = 0; i < size; i++) {
+                        int index = i / 2;
+                        byte value = (byte)(data[index + 5] >> (i % 2 == 0 ? 0 : 3) & 0b0000_0111);
+                        switch (value) {
+                            case 0:
+                                path[i] = 'a';
+                                break;
+                            case 1:
+                                path[i] = 'q';
+                                break;
+                            case 2:
+                                path[i] = 'w';
+                                break;
+                            case 3:
+                                path[i] = 'e';
+                                break;
+                            case 4:
+                                path[i] = 'd';
+                                break;
+                            default:
+                                path[i] = '?';
+                                break;
+                        }
+                    }
+
+                    return new StackItem(new Instruction(new string(path)));
                 case ItemType.Boolean:
-                    return new StackItem(serializedData["v"].Boolean);
+                    return new StackItem(BitConverter.ToBoolean(data, 1));
                 case ItemType.Drone:
+                    playerName = Encoding.UTF8.GetString(data, 5, data.Length - 5);
                     players = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
                     VRCPlayerApi.GetPlayers(players);
                     foreach (VRCPlayerApi player in players) {
                         if (player.IsValid() &&
-                            player.displayName.Equals(serializedData["v"].String,
+                            player.displayName.Equals(playerName,
                                 StringComparison.InvariantCultureIgnoreCase))
                             return new StackItem(player.GetDrone());
                     }
-
+                    
                     return new StackItem();
-                case ItemType.Garbage:
-                    return new StackItem(serializedData["v"].ToString());
                 case ItemType.Entity:
-                    int entityIndex = (int)serializedData["v"].Number;
+                    int entityIndex = BitConverter.ToInt32(data, 1);
                     if (entityIndex == -1)
                         return new StackItem();
 
@@ -195,96 +249,162 @@ namespace BefuddledLabs.Magic {
 
                     Dictionary<int, Entity> entities = entityManager.Entities;
                     // ReSharper disable once CanSimplifyDictionaryLookupWithTryGetValue
-                    if (entities.ContainsKey(entityIndex)) // can't use try get, because udon doesn't support it in recursive functions
+                    if (entities.ContainsKey(
+                            entityIndex)) // can't use try get, because udon doesn't support it in recursive functions
                         return new StackItem(entities[entityIndex]);
 
                     UnityEngine.Debug.LogError("Entity index out of range");
                     return new StackItem();
+                case ItemType.Garbage:
+                    return new StackItem("");
                 case ItemType.Any:
                 case ItemType.Null:
                 default:
-                    return new StackItem();
+                    break;
             }
-        }
-        
-        public string Serialize() {
-            DataDictionary dict = new DataDictionary();
 
-            Serialize(dict);
-
-            return VRCJson.TrySerializeToJson(dict, JsonExportType.Minify, out DataToken token)
-                ? token.String
-                : token.ToString();
+            return new StackItem();
         }
 
         [RecursiveMethod]
-        private void Serialize(DataDictionary dict) {
-            dict["t"] = new DataToken((int)Type);
+        public byte[] Serialize() {
+            bool appendSize;
+            int valueSize;
+            byte[] valueBytes;
 
             switch (Type) {
                 case ItemType.Vector:
-                    Vector3 tempVector = (Vector3)Value;
-                    DataList tempList = new DataList();
-                    tempList.Add(tempVector.x);
-                    tempList.Add(tempVector.y);
-                    tempList.Add(tempVector.z);
-                    dict["v"] = tempList;
+                    appendSize = false;
+                    valueSize = (int)ItemTypeSizes.Vector;
+                    Vector3[] tempVectorArray = new Vector3[] { (Vector3)Value };
+                    valueBytes = new byte[(int)ItemTypeSizes.Vector];
+                    Buffer.BlockCopy(tempVectorArray, 0, valueBytes, 0, valueSize);
                     break;
                 case ItemType.Number:
-                    dict["v"] = new DataToken((float)Value);
+                    appendSize = false;
+                    valueSize = (int)ItemTypeSizes.Number;
+                    valueBytes = BitConverter.GetBytes((float)Value);
+                    //dict["v"] = new DataToken((float)Value);
                     break;
                 case ItemType.Player:
                     VRCPlayerApi player = (VRCPlayerApi)Value;
                     if (!Utilities.IsValid(player) || !player.IsValid())
-                        dict["v"] = new DataToken("");
+                        valueBytes = Encoding.UTF8.GetBytes("");
                     else
-                        dict["v"] = new DataToken(player.displayName);
+                        valueBytes = Encoding.UTF8.GetBytes(player.displayName);
+
+                    valueSize = valueBytes.Length;
+                    appendSize = true;
                     break;
                 case ItemType.List:
                     List<StackItem> list = (List<StackItem>)Value;
-                    tempList = new DataList();
+                    valueSize = list.Count;
+                    byte[][] temporaryArrayOfSerializedItems = new byte[valueSize][];
 
-                    foreach (StackItem item in list) {
-                        DataDictionary itemDict = new DataDictionary();
-                        item.Serialize(itemDict);
-                        tempList.Add(itemDict);
+                    appendSize = true;
+                    int listByteSize = 0;
+
+                    for (int i = 0; i < valueSize; i++) {
+                        StackItem item = list[i];
+                        byte[] serializedItem = item.Serialize();
+
+                        temporaryArrayOfSerializedItems[i] = serializedItem;
+                        listByteSize += serializedItem.Length;
                     }
-                    
-                    dict["v"] = tempList;
-                    break;
 
+                    valueBytes = new byte[listByteSize + valueSize * sizeof(int)];
+                    int currentOffset = sizeof(int);
+                    for (int i = 0; i < valueSize; i++) {
+                        byte[] arr = temporaryArrayOfSerializedItems[i];
+                        Buffer.BlockCopy(arr, 0, valueBytes, currentOffset, arr.Length);
+                        Buffer.BlockCopy(BitConverter.GetBytes(arr.Length), 0, valueBytes, currentOffset-sizeof(int), sizeof(int));
+                        currentOffset += arr.Length + sizeof(int);
+                    }
+
+                    break;
                 case ItemType.Instruction:
-                    dict["v"] = new DataToken(((Instruction)Value).Path);
+                    string path = ((Instruction)Value).Path;
+                    appendSize = true;
+                    valueSize = path.Length;
+                    valueBytes = new byte[Mathf.CeilToInt(valueSize / 2f)];
+                    for (int i = 0; i < valueSize; i++) {
+                        int index = i / 2;
+                        byte dir;
+                        switch (path[i]) {
+                            case 'a':
+                                dir = 0;
+                                break;
+                            case 'q':
+                                dir = 1;
+                                break;
+                            case 'w':
+                                dir = 2;
+                                break;
+                            case 'e':
+                                dir = 3;
+                                break;
+                            case 'd':
+                                dir = 4;
+                                break;
+                            default:
+                                dir = 5;
+                                break;
+                        }
+
+                        valueBytes[index] |= (byte)(dir << (i % 2 == 0 ? 0 : 3));
+                    }
+
                     break;
                 case ItemType.Boolean:
-                    dict["v"] = new DataToken((bool)Value);
+                    appendSize = false;
+                    valueSize = (int)ItemTypeSizes.Boolean;
+                    valueBytes = BitConverter.GetBytes((bool)Value);
                     break;
                 case ItemType.Drone:
+                    appendSize = true;
                     VRCDroneApi drone = (VRCDroneApi)Value;
                     if (!Utilities.IsValid(drone)) {
-                        dict["t"] = new DataToken((int)ItemType.Null);
+                        valueBytes = Encoding.UTF8.GetBytes("");
+                        valueSize = valueBytes.Length;
                         break;
                     }
 
                     player = drone.GetPlayer();
-
                     if (!Utilities.IsValid(player) || !player.IsValid())
-                        dict["v"] = new DataToken("");
+                        valueBytes = Encoding.UTF8.GetBytes("");
                     else
-                        dict["v"] = new DataToken(player.displayName);
-                    break;
-                case ItemType.Garbage:
-                    dict["v"] = (string)Value;
+                        valueBytes = Encoding.UTF8.GetBytes(player.displayName);
+                    valueSize = valueBytes.Length;
                     break;
                 case ItemType.Entity:
-                    dict["v"] = ((Entity)Value).GetId();
+                    appendSize = false;
+                    valueSize = (int)ItemTypeSizes.Entity;
+                    valueBytes = BitConverter.GetBytes(((Entity)Value).GetId());
                     break;
+                case ItemType.Garbage:
                 case ItemType.Any:
                 case ItemType.Null:
                 default:
-                    dict["t"] = new DataToken((int)ItemType.Null);
+                    appendSize = false;
+                    valueSize = (int)ItemTypeSizes.Null;
+                    valueBytes = new byte[0];
                     break;
             }
+
+            int dataSize = valueBytes.Length + sizeof(byte);
+            int dataOffset = sizeof(byte);
+            if (appendSize) {
+                dataOffset += sizeof(int);
+                dataSize += sizeof(int);
+            }
+
+            byte[] data = new byte[dataSize];
+            data[0] = (byte)Type;
+            if (appendSize)
+                Buffer.BlockCopy(BitConverter.GetBytes(valueSize), 0, data, 1, sizeof(int));
+            Buffer.BlockCopy(valueBytes, 0, data, dataOffset, valueBytes.Length);
+
+            return data;
         }
 
         [RecursiveMethod]

@@ -1,4 +1,5 @@
-﻿using UdonSharp;
+﻿using System;
+using UdonSharp;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
 
@@ -7,7 +8,7 @@ namespace BefuddledLabs.Magic {
     public class TemporaryStorageMedium : StorageMedium {
         public VRCPickup pickup;
         
-        [UdonSynced] private string _data = "";
+        [UdonSynced] private byte[] _data = Array.Empty<byte>();
         private StackItem _item = new StackItem();
 
         public override bool Write(StackItem data) {
