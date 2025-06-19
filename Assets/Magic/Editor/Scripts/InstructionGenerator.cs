@@ -74,9 +74,9 @@ namespace BefuddledLabs.Magic.Editor {
                     methodParamCounts[paramCount].Add(method);
             }
 
-            result.Append("case \"");
-            result.Append(path);
-            result.Append("\":\n");
+            result.Append("case ");
+            result.Append(Animator.StringToHash(path));
+            result.Append(":\n");
 
 
             foreach (int paramCountTemp in methodParamCounts.Keys) {
@@ -176,6 +176,7 @@ namespace BefuddledLabs.Magic.Editor {
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine;
 using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
@@ -184,6 +185,8 @@ namespace BefuddledLabs.Magic {
         public readonly string Path;
         public readonly int GlyphId = -1;
         public object ExtraData;
+
+        public readonly int Hash;
 
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
@@ -198,16 +201,19 @@ namespace BefuddledLabs.Magic {
 
         public Instruction(string path) {
             Path = path;
+            Hash = Animator.StringToHash(Path);
         }
 
         public Instruction(string path, object extraData) {
             Path = path;
+            Hash = Animator.StringToHash(Path);
             ExtraData = extraData;
         }
 
         public Instruction(string path, int glyphId) {
             GlyphId = glyphId;
             Path = path;
+            Hash = Animator.StringToHash(Path);
         }
         
         public ExecutionState Execute(ExecutionInfo info) {
@@ -215,7 +221,7 @@ namespace BefuddledLabs.Magic {
             info.GlyphId = GlyphId;
             Stack<StackItem> stack = info.Stack;
             int stackSize = stack.Count;
-            switch (Path) {
+            switch (Hash) {
 ");
             List<Type> classes = Assembly.GetAssembly(typeof(PlayerVM))
                 .GetTypes()
