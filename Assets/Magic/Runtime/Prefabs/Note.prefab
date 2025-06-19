@@ -56,7 +56,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 8
+  MaxDistance: 64
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Gain: 10
-  Far: 8
+  Far: 64
   Near: 1
   VolumetricRadius: 1
   EnableSpatialization: 1
@@ -171,7 +171,6 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1313251384137661604}
-  manager: {fileID: 0}
   clips:
   - {fileID: 8300000, guid: e346d7eebb13ed7c6864728e5cf930af, type: 3}
   - {fileID: 8300000, guid: 223cc6cca699b074383dddcba5ea4d0d, type: 3}

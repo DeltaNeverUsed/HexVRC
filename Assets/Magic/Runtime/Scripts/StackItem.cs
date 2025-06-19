@@ -124,15 +124,18 @@ namespace BefuddledLabs.Magic {
 
             return instructions;
         }
-
-
-        [RecursiveMethod]
+        
         public static StackItem Deserialize(string json) {
             bool deserialize = VRCJson.TryDeserializeFromJson(json, out DataToken token);
             if (!deserialize || token.TokenType != TokenType.DataDictionary)
                 return new StackItem();
 
             DataDictionary serializedData = token.DataDictionary;
+            return Deserialize(serializedData);
+        }
+
+        [RecursiveMethod]
+        private static StackItem Deserialize(DataDictionary serializedData) {
             ItemType type = (ItemType)(int)serializedData["t"].Number;
 
             switch (type) {
@@ -158,7 +161,7 @@ namespace BefuddledLabs.Magic {
                     List<StackItem> list = new List<StackItem>(serializedList.Count);
 
                     for (int i = 0; i < serializedList.Count; i++)
-                        list.Add(Deserialize(serializedList[i].String));
+                        list.Add(Deserialize(serializedList[i].DataDictionary));
 
                     return new StackItem(list);
 
@@ -203,10 +206,19 @@ namespace BefuddledLabs.Magic {
                     return new StackItem();
             }
         }
-
-        [RecursiveMethod]
+        
         public string Serialize() {
             DataDictionary dict = new DataDictionary();
+
+            Serialize(dict);
+
+            return VRCJson.TrySerializeToJson(dict, JsonExportType.Minify, out DataToken token)
+                ? token.String
+                : token.ToString();
+        }
+
+        [RecursiveMethod]
+        private void Serialize(DataDictionary dict) {
             dict["t"] = new DataToken((int)Type);
 
             switch (Type) {
@@ -232,9 +244,12 @@ namespace BefuddledLabs.Magic {
                     List<StackItem> list = (List<StackItem>)Value;
                     tempList = new DataList();
 
-                    foreach (StackItem item in list)
-                        tempList.Add(item.Serialize());
-
+                    foreach (StackItem item in list) {
+                        DataDictionary itemDict = new DataDictionary();
+                        item.Serialize(itemDict);
+                        tempList.Add(itemDict);
+                    }
+                    
                     dict["v"] = tempList;
                     break;
 
@@ -270,10 +285,6 @@ namespace BefuddledLabs.Magic {
                     dict["t"] = new DataToken((int)ItemType.Null);
                     break;
             }
-
-            return VRCJson.TrySerializeToJson(dict, JsonExportType.Minify, out DataToken token)
-                ? token.String
-                : token.ToString();
         }
 
         [RecursiveMethod]
@@ -317,10 +328,16 @@ namespace BefuddledLabs.Magic {
                 case ItemType.List:
                     List<StackItem> list = (List<StackItem>)Value;
                     sb.Append('[');
-                    for (int i = 0; i < list.Count; i++) {
-                        if (i > 0)
-                            sb.Append(", ");
-                        list[i].ToString(sb);
+
+                    if (list.Count > 100) {
+                        sb.Append("List too long to display!");
+                    }
+                    else {
+                        for (int i = 0; i < list.Count; i++) {
+                            if (i > 0)
+                                sb.Append(", ");
+                            list[i].ToString(sb);
+                        }
                     }
 
                     sb.Append(']');

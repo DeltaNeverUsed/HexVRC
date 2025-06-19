@@ -27,7 +27,7 @@ Assuming that I draw a Bookkeeper's Gambit pattern left-to-right, the number of 
             if (start != 'a' && start != 'w' && start != 'e')
                 return ExecutionState.Err("Path was not a valid instruction.");
 
-            List<bool> keep = new List<bool>(info.Stack.Count);
+            List<bool> keep = new List<bool>();
             bool wasLastSkip = start == 'a'; // if we go left after the first symbol we skip the first one.
             keep.Add(!wasLastSkip);
             

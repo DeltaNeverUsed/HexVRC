@@ -29,7 +29,8 @@ namespace BefuddledLabs.Magic {
         private void UpdatePickup() {
             if (!Utilities.IsValid(pickup))
                 return;
-            pickup.InteractionText = _item.ToString();
+
+            pickup.InteractionText = _data.Length < 500 ? _item.ToString() : "data too long to display";
         }
     }
 }

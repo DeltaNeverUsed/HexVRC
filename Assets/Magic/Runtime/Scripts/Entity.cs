@@ -51,7 +51,7 @@ namespace BefuddledLabs.Magic {
         }
 
         private void OnDestroy() {
-            if (Utilities.IsValid(_entityManager))
+            if (Utilities.IsValid(_entityManager) && Utilities.IsValid(_entityManager.Entities))
                 _entityManager.Entities.Remove(_id);
         }
 

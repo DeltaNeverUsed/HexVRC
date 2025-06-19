@@ -6,7 +6,7 @@ using VRC.SDKBase;
 namespace BefuddledLabs.Magic {
     public class PersistantStorageMedium : StorageMedium {
         public VRCPickup pickup;
-        
+
         [UdonSynced] private string _data = "";
         private StackItem _item = new StackItem();
 
@@ -28,6 +28,7 @@ namespace BefuddledLabs.Magic {
         public override StackItem Read() => _item;
 
         public override void OnPlayerRestored(VRCPlayerApi player) => OnDeserialization();
+
         public override void OnDeserialization() {
             _item = StackItem.Deserialize(_data);
             UpdatePickup();
@@ -36,9 +37,8 @@ namespace BefuddledLabs.Magic {
         private void UpdatePickup() {
             if (!Utilities.IsValid(pickup))
                 return;
-            pickup.InteractionText = _item.ToString();
-        }
 
-        
+            pickup.InteractionText = _data.Length < 500 ? _item.ToString() : "data too long to display";
+        }
     }
 }

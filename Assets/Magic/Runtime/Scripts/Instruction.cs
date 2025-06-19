@@ -265,6 +265,14 @@ case "AddItemToStack":
 return BefuddledLabs.Magic.Instructions.MetaEvaluation.AddItemToStack.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case "dwedwaqwedwe":
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Number) {
+return BefuddledLabs.Magic.Instructions.MetaEvaluation.Delay.Execute(info, (System.Single)_param_0.Value);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case "deaqq":
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
@@ -1037,9 +1045,9 @@ return BefuddledLabs.Magic.Instructions.AdvancedMathematics.Tangent.Execute(info
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 
-            }if (Path.StartsWith("dedd", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.NumberLiterals.NumberLiteralNegative.Execute(info);
+            }if (Path.StartsWith("aqaa", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.NumberLiterals.NumberLiteralPositive.Execute(info);
 }
-if (Path.StartsWith("aqaa", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.NumberLiterals.NumberLiteralPositive.Execute(info);
+if (Path.StartsWith("dedd", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.NumberLiterals.NumberLiteralNegative.Execute(info);
 }
 if (Path.StartsWith("", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.StackManipulation.Mask.Execute(info);
 }

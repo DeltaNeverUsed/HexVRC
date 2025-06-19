@@ -192,6 +192,11 @@ namespace BefuddledLabs.Magic {
         }
 
         public ExecutionState Execute(List<Instruction> instructions) {
+            if (instructions.Count >= 1 && instructions[0].Path == Instructions.BasicPatterns.Clear.Path) {
+                ResetVM();
+                return ExecutionState.Ok();
+            }
+            
             if (Running)
                 return new ExecutionState(ExecutionError.Busy, "VM is busy");
             SetMana(maxMana);
@@ -296,8 +301,10 @@ namespace BefuddledLabs.Magic {
                         break; // stop completely if not in eval
                     continue;
                 }
-
+                
                 Info.CurrentInstructionIndex++;
+                if (result.Success == ExecutionError.Paused)
+                    break;
             }
 
             if (glyphId.Count > 0)

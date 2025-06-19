@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
 // ReSharper disable once CheckNamespace
@@ -17,7 +19,7 @@ There appear to be 16 different instruments and 25 different notes. both being i
         #endregion
 
         public static ExecutionState Execute(ExecutionInfo info, Vector3 position, float instrument, float pitch) {
-            info.VM.noteManager.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(info.VM.noteManager.PlayNote), position, (int)pitch, (int)instrument);
+            info.VM.noteManager.PlayNote(position, (int)pitch, (int)instrument, Networking.GetNetworkDateTime().Ticks, true);
             return ExecutionState.Ok();
         }
     }
