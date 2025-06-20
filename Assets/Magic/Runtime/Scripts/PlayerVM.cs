@@ -114,9 +114,9 @@ namespace BefuddledLabs.Magic {
         }
 
         public void Start() {
-            /*GameObject profiler = GameObject.Find("Profiler");
+            GameObject profiler = GameObject.Find("Profiler");
             if (Utilities.IsValid(profiler))
-                profiler.GetComponent<UdonSharpProfiler.ProfilerDataReader>().Add(this);*/
+                profiler.GetComponent<UdonSharpProfiler.ProfilerDataReader>().targets.Add(this);
 
             _stack = new Stack<StackItem>();
             Info = new ExecutionInfo(this, _stack, "");
@@ -221,7 +221,7 @@ namespace BefuddledLabs.Magic {
 
             ExecutionState result = ExecutionState.Ok();
             while (Info.CurrentInstructionIndex < CurrentInstructions.Count) {
-                if (_executionTimer.ElapsedMilliseconds >= 6f) {
+                if (_executionTimer.ElapsedMilliseconds >= 8f) {
                     _executionTimer.Stop();
                     PauseDelay = 0;
                     result = new ExecutionState(ExecutionError.Paused, "");

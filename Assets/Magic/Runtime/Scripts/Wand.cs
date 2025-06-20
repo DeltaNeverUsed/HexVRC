@@ -86,9 +86,9 @@ namespace BefuddledLabs.Magic {
         }
 
         public void Start() {
-            /*GameObject profiler = GameObject.Find("Profiler");
+            GameObject profiler = GameObject.Find("Profiler");
             if (Utilities.IsValid(profiler))
-                profiler.GetComponent<UdonSharpProfiler.ProfilerDataReader>().Add(this);*/
+                profiler.GetComponent<UdonSharpProfiler.ProfilerDataReader>().targets.Add(this);
             if (Networking.IsOwner(gameObject)) {
                 pickup.transform.position = Networking.LocalPlayer
                     .GetTrackingData(VRCPlayerApi.TrackingDataType.RightHand).position;

@@ -95,12 +95,12 @@ namespace BefuddledLabs.Magic {
         }
 
         public StackItem(float data) {
-            Type = Utilities.IsValid(data) ? ItemType.Number : ItemType.Null;
+            Type = ItemType.Number;
             Value = data;
         }
 
         public StackItem(bool data) {
-            Type = Utilities.IsValid(data) ? ItemType.Boolean : ItemType.Null;
+            Type = ItemType.Boolean;
             Value = data;
         }
 
@@ -154,7 +154,7 @@ namespace BefuddledLabs.Magic {
             int dataSize = data.Length;
             if (dataSize < 1)
                 return new StackItem();
-            
+
             ItemType deserializedType = (ItemType)data[0];
 
             switch (deserializedType) {
@@ -165,7 +165,7 @@ namespace BefuddledLabs.Magic {
                 case ItemType.Number:
                     return new StackItem(BitConverter.ToSingle(data, 1));
                 case ItemType.Player:
-                    string playerName = Encoding.UTF8.GetString(data, 5, data.Length - 5);
+                    string playerName = Encoding.UTF8.GetString(data, 3, data.Length - 3);
                     VRCPlayerApi[] players = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
                     VRCPlayerApi.GetPlayers(players);
                     foreach (VRCPlayerApi player in players) {
@@ -177,28 +177,28 @@ namespace BefuddledLabs.Magic {
 
                     return new StackItem();
                 case ItemType.List:
-                    int size = BitConverter.ToInt32(data, 1);
+                    int size = BitConverter.ToUInt16(data, 1);
                     StackItem[] arr = new StackItem[size];
 
-                    int currentOffset = 5;
+                    int currentOffset = 3;
                     for (int i = 0; i < size; i++) {
                         int itemByteSize = BitConverter.ToInt32(data, currentOffset);
                         byte[] subArray = new byte[itemByteSize];
-                        
+
                         Buffer.BlockCopy(data, currentOffset + sizeof(int), subArray, 0, subArray.Length);
-                        
+
                         currentOffset += subArray.Length + sizeof(int);
                         arr[i] = Deserialize(subArray);
                     }
 
                     return new StackItem(new List<StackItem>(arr));
                 case ItemType.Instruction:
-                    size = BitConverter.ToInt32(data, 1);
+                    size = BitConverter.ToUInt16(data, 1);
                     char[] path = new char[size];
-                    
+
                     for (int i = 0; i < size; i++) {
                         int index = i / 2;
-                        byte value = (byte)(data[index + 5] >> (i % 2 == 0 ? 0 : 3) & 0b0000_0111);
+                        byte value = (byte)(data[index + 3] >> (i % 2 == 0 ? 0 : 3) & 0b0000_0111);
                         switch (value) {
                             case 0:
                                 path[i] = 'a';
@@ -225,7 +225,7 @@ namespace BefuddledLabs.Magic {
                 case ItemType.Boolean:
                     return new StackItem(BitConverter.ToBoolean(data, 1));
                 case ItemType.Drone:
-                    playerName = Encoding.UTF8.GetString(data, 5, data.Length - 5);
+                    playerName = Encoding.UTF8.GetString(data, 3, data.Length - 3);
                     players = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
                     VRCPlayerApi.GetPlayers(players);
                     foreach (VRCPlayerApi player in players) {
@@ -234,7 +234,7 @@ namespace BefuddledLabs.Magic {
                                 StringComparison.InvariantCultureIgnoreCase))
                             return new StackItem(player.GetDrone());
                     }
-                    
+
                     return new StackItem();
                 case ItemType.Entity:
                     int entityIndex = BitConverter.ToInt32(data, 1);
@@ -317,7 +317,8 @@ namespace BefuddledLabs.Magic {
                     for (int i = 0; i < valueSize; i++) {
                         byte[] arr = temporaryArrayOfSerializedItems[i];
                         Buffer.BlockCopy(arr, 0, valueBytes, currentOffset, arr.Length);
-                        Buffer.BlockCopy(BitConverter.GetBytes(arr.Length), 0, valueBytes, currentOffset-sizeof(int), sizeof(int));
+                        Buffer.BlockCopy(BitConverter.GetBytes(arr.Length), 0, valueBytes, currentOffset - sizeof(int),
+                            sizeof(int));
                         currentOffset += arr.Length + sizeof(int);
                     }
 
@@ -394,14 +395,14 @@ namespace BefuddledLabs.Magic {
             int dataSize = valueBytes.Length + sizeof(byte);
             int dataOffset = sizeof(byte);
             if (appendSize) {
-                dataOffset += sizeof(int);
-                dataSize += sizeof(int);
+                dataOffset += sizeof(ushort);
+                dataSize += sizeof(ushort);
             }
 
             byte[] data = new byte[dataSize];
             data[0] = (byte)Type;
             if (appendSize)
-                Buffer.BlockCopy(BitConverter.GetBytes(valueSize), 0, data, 1, sizeof(int));
+                Buffer.BlockCopy(BitConverter.GetBytes((ushort)valueSize), 0, data, 1, sizeof(ushort));
             Buffer.BlockCopy(valueBytes, 0, data, dataOffset, valueBytes.Length);
 
             return data;
