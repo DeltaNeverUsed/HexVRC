@@ -138,12 +138,12 @@ namespace BefuddledLabs.Magic.UI {
 
             List<string> filesToSetImportsFor = new List<string>();
 
-            char[] validCharacters = { 'a', 'q', 'w', 'e', 'd' };
+            char[] validCharacters = { 'a', 'q', 'w', 'e', 'd', '*' };
 
             foreach (string path in paths) {
                 if (path.Count(c => validCharacters.Contains(c)) != path.Length)
                     continue; // invalid path
-                
+
                 Vector3[] points = GetLinePoints(path);
 
                 lineRenderer.positionCount = points.Length;
@@ -178,7 +178,9 @@ namespace BefuddledLabs.Magic.UI {
 
             AssetDatabase.Refresh();
 
-            foreach (TextureImporter importer in filesToSetImportsFor.Select(file => AssetImporter.GetAtPath(file) as TextureImporter).Where(importer => importer)) {
+            foreach (TextureImporter importer in filesToSetImportsFor
+                         .Select(file => AssetImporter.GetAtPath(file) as TextureImporter)
+                         .Where(importer => importer)) {
                 importer.textureType = TextureImporterType.Sprite;
                 importer.alphaSource = TextureImporterAlphaSource.FromInput;
                 importer.alphaIsTransparency = true;
@@ -243,6 +245,7 @@ namespace BefuddledLabs.Magic.UI {
                     }
                 }
 
+                char[] validCharacters = { 'a', 'q', 'w', 'e', 'd', '*' };
                 foreach (KeyValuePair<string, List<Type>> p in _patterns) {
                     GameObject group = Instantiate(data.groupPrefab, data.groupParent);
                     group.GetComponentInChildren<Text>().text = p.Key;
@@ -250,10 +253,13 @@ namespace BefuddledLabs.Magic.UI {
 
                     Transform content = group.transform.Find("Content");
                     foreach (Type patternClass in p.Value) {
+                        string path = GetPath(patternClass);
+                        if (path.Count(c => validCharacters.Contains(c)) != path.Length)
+                            continue;
                         GameObject pattern = Instantiate(data.patternPrefab, content);
                         pattern.name = patternClass.Name;
 
-                        
+
                         Image pathImage = pattern.transform.Find("PatternInfo/PathVisual")
                             .GetComponent<Image>();
                         TextMeshProUGUI name = pattern.transform.Find("PatternInfo/PatternName")
@@ -283,8 +289,8 @@ namespace BefuddledLabs.Magic.UI {
                                 descriptionBuilder.Append("</color>");
                             }
                         }
-                        
-                        notation.text = GetPath(patternClass);
+
+                        notation.text = path;
 
                         descriptionBuilder.Append("\nOutputs: ");
                         descriptionBuilder.AppendLine(patternClass
@@ -294,7 +300,8 @@ namespace BefuddledLabs.Magic.UI {
 
                         description.text = descriptionBuilder.ToString();
 
-                        Sprite pathSprite = AssetDatabase.LoadAssetAtPath<Sprite>(GetAssetPathFromPath(notation.text.Replace("*", "")));
+                        Sprite pathSprite =
+                            AssetDatabase.LoadAssetAtPath<Sprite>(GetAssetPathFromPath(notation.text.Replace("*", "")));
                         if (pathSprite)
                             pathImage.sprite = pathSprite;
 

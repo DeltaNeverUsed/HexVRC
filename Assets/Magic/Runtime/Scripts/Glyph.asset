@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: Glyph
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 14928612508d07d9b883479c77c6ab4e, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: e59572928efc5ed4ab0a7ebf069b8ed6, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 0272e595d577a1044b8754d85d3dcd59, type: 3}

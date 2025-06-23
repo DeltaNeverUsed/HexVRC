@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: PersistantStorageMedium
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 7632677689e84ad80aa08067a4670e44, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 7ace35e06364b20459db64fe90c3a993, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 15e6c7d71bff2bb7bb26e6f2f75538ab, type: 3}
