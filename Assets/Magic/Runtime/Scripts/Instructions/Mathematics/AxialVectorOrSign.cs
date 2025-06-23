@@ -11,7 +11,7 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
             "For a vector, coerce it to its nearest axial direction, a unit vector. For a number, return the sign of the number; 1 if positive, -1 if negative. In both cases, zero is unaffected.";
 
         public const string Input = "Number | Vector";
-        public const string Output = "Number";
+        public const string Output = "Number | Vector";
 
         #endregion
 
@@ -38,11 +38,11 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
             float zAbs = Mathf.Abs(a.z);
 
             if (xAbs >= yAbs && xAbs >= zAbs)
-                info.Stack.Push(new StackItem(new Vector3(a.x, 0, 0)));
+                info.Stack.Push(new StackItem(new Vector3(a.x, 0, 0).normalized));
             else if (yAbs >= xAbs && yAbs >= zAbs)
-                info.Stack.Push(new StackItem(new Vector3(0, a.y, 0)));
+                info.Stack.Push(new StackItem(new Vector3(0, a.y, 0).normalized));
             else
-                info.Stack.Push(new StackItem(new Vector3(0, 0, a.z)));
+                info.Stack.Push(new StackItem(new Vector3(0, 0, a.z).normalized));
 
             return ExecutionState.Ok();
         }
