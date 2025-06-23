@@ -19,7 +19,7 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
         public static ExecutionState Execute(ExecutionInfo info, List<StackItem> stackItems, float number,
             StackItem item) {
             int index = Mathf.RoundToInt(number);
-            if (index < 0 && index >= stackItems.Count)
+            if (index < 0 || index >= stackItems.Count)
                 info.Stack.Push(new StackItem());
             else {
                 stackItems[index] = item;

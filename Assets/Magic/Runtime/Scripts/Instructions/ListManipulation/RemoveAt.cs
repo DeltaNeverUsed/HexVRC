@@ -17,7 +17,7 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         public static ExecutionState Execute(ExecutionInfo info, List<StackItem> l, float indexFloat) {
             int index = Mathf.RoundToInt(indexFloat);
-            if (index < 0 && index >= l.Count)
+            if (index < 0 || index >= l.Count)
                 ExecutionState.Err("Index out of range");
 
             l.RemoveAt(index);

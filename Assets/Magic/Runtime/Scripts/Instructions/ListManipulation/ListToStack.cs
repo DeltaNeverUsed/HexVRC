@@ -11,7 +11,7 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
             "Remove the list at the top of the stack, then push its contents to the stack.";
 
         public const string Input = "List";
-        public const string Output = "";
+        public const string Output = "Many";
 
         #endregion
 
