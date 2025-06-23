@@ -73,6 +73,8 @@ namespace BefuddledLabs.Magic {
         [NonSerialized] public Transform ExecutionTransform;
 
         [NonSerialized] public List<Instruction> CurrentInstructions = new List<Instruction>();
+        
+        [NonSerialized] public StackItem Ravenmind = new StackItem();
 
 
         private readonly Stopwatch _executionTimer = new Stopwatch();
@@ -114,9 +116,9 @@ namespace BefuddledLabs.Magic {
         }
 
         public void Start() {
-            GameObject profiler = GameObject.Find("Profiler");
+            /*GameObject profiler = GameObject.Find("Profiler");
             if (Utilities.IsValid(profiler))
-                profiler.GetComponent<UdonSharpProfiler.ProfilerDataReader>().targets.Add(this);
+                profiler.GetComponent<UdonSharpProfiler.ProfilerDataReader>().targets.Add(this);*/
 
             _stack = new Stack<StackItem>();
             Info = new ExecutionInfo(this, _stack, "");
@@ -183,7 +185,7 @@ namespace BefuddledLabs.Magic {
 
             IntrospectionDepth = 0;
             EscapeNext = false;
-
+            
             _stack.Clear();
             StackStack.Clear();
             CurrentInstructions.Clear();
@@ -199,6 +201,8 @@ namespace BefuddledLabs.Magic {
             
             if (Running)
                 return new ExecutionState(ExecutionError.Busy, "VM is busy");
+            
+            Ravenmind = new StackItem();
             SetMana(maxMana);
             CurrentInstructions = instructions;
             Info.CurrentInstructionIndex = 0;
@@ -317,7 +321,7 @@ namespace BefuddledLabs.Magic {
             else
                 Running = false;
             this.Log(
-                $"Execution finished in {_executionTimer.Elapsed.TotalMilliseconds}ms, sleeping until next frame? {result.Success == ExecutionError.Paused}");
+                $"Execution finished in {_executionTimer.Elapsed.TotalMilliseconds}ms, sleeping until next frame? {result.Success}");
             return result;
         }
 

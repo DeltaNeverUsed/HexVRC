@@ -177,10 +177,10 @@ namespace BefuddledLabs.Magic {
 
                     return new StackItem();
                 case ItemType.List:
-                    int size = BitConverter.ToUInt16(data, 1);
+                    int size = BitConverter.ToInt32(data, 1);
                     StackItem[] arr = new StackItem[size];
 
-                    int currentOffset = 3;
+                    int currentOffset = 5;
                     for (int i = 0; i < size; i++) {
                         int itemByteSize = BitConverter.ToInt32(data, currentOffset);
                         byte[] subArray = new byte[itemByteSize];
@@ -270,6 +270,7 @@ namespace BefuddledLabs.Magic {
         public byte[] Serialize() {
             bool appendSize;
             int valueSize;
+            bool force4Byte = false;
             byte[] valueBytes;
 
             switch (Type) {
@@ -299,6 +300,7 @@ namespace BefuddledLabs.Magic {
                 case ItemType.List:
                     List<StackItem> list = (List<StackItem>)Value;
                     valueSize = list.Count;
+                    force4Byte = true;
                     byte[][] temporaryArrayOfSerializedItems = new byte[valueSize][];
 
                     appendSize = true;
@@ -392,17 +394,24 @@ namespace BefuddledLabs.Magic {
                     break;
             }
 
+            int size = force4Byte ? sizeof(int) : sizeof(ushort);
+
             int dataSize = valueBytes.Length + sizeof(byte);
             int dataOffset = sizeof(byte);
             if (appendSize) {
-                dataOffset += sizeof(ushort);
-                dataSize += sizeof(ushort);
+                dataOffset += size;
+                dataSize += size;
             }
 
             byte[] data = new byte[dataSize];
             data[0] = (byte)Type;
-            if (appendSize)
-                Buffer.BlockCopy(BitConverter.GetBytes((ushort)valueSize), 0, data, 1, sizeof(ushort));
+            if (appendSize) {
+                if (force4Byte)
+                    Buffer.BlockCopy(BitConverter.GetBytes(valueSize), 0, data, 1, sizeof(int));
+                else
+                    Buffer.BlockCopy(BitConverter.GetBytes((ushort)valueSize), 0, data, 1, sizeof(ushort));
+            }
+
             Buffer.BlockCopy(valueBytes, 0, data, dataOffset, valueBytes.Length);
 
             return data;

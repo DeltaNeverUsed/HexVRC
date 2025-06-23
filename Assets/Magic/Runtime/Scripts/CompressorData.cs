@@ -11,7 +11,7 @@ namespace BefuddledLabs.Magic {
         [NonSerialized] public HuffmanNode Root;
         [NonSerialized] public Dictionary<byte, Code> Codes;
 
-        [Header("Double delta encoded")]
+        [Header("Double delta encoded")] 
         public string sampleData = "";
 
         private byte[] _data;
@@ -20,23 +20,11 @@ namespace BefuddledLabs.Magic {
         private void Start() {
             _timer = Stopwatch.StartNew();
             _data = Convert.FromBase64String(sampleData);
-            _timer.Stop();
-            
-            SendCustomEventDelayedFrames(nameof(CreateTree), 1);
-            SendCustomEventDelayedFrames(nameof(CreateCodes), 2);
-        }
-
-        public void CreateTree() {
-            _timer.Start();
             Root = Compressor.CreateHuffmanTree(_data);
-            _timer.Stop();
             _data = new byte[0];
-        }
-
-        public void CreateCodes() {
-            _timer.Start();
             Codes = Compressor.GenerateHuffmanCodes(Root);
             _timer.Stop();
+            
             this.Log($"Compressor Data took: {_timer.Elapsed.TotalMilliseconds} ms");
         }
 

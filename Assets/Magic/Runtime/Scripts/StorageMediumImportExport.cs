@@ -88,11 +88,9 @@ namespace BefuddledLabs.Magic {
 
 
             byte[] serialized = Convert.FromBase64String(textField.text);
-            byte[] huffmanDecoded = Compressor.HuffmanDecode(serialized, compressorData.Root);
-            Compressor.DeltaDecode(ref huffmanDecoded);
-            Compressor.DeltaDecode(ref huffmanDecoded);
+            //byte[] huffmanDecoded = Compressor.HuffmanDecode(serialized, compressorData.Root);
             
-            StackItem item = StackItem.Deserialize(huffmanDecoded);
+            StackItem item = StackItem.Deserialize(serialized);
             _storageMediumInside.Write(item);
         }
 
@@ -107,15 +105,6 @@ namespace BefuddledLabs.Magic {
             
             byte[] serialized = _storageMediumInside.Read().Serialize();
             
-            this.Log(Convert.ToBase64String(serialized));
-            Compressor.DeltaEncode(ref serialized);
-            Compressor.DeltaEncode(ref serialized);
-            byte[] huffmanEncoded = Compressor.HuffmanEncode(serialized, compressorData.Codes);
-            this.Log(Convert.ToBase64String(huffmanEncoded));
-            byte[] huffmanDecoded = Compressor.HuffmanDecode(huffmanEncoded, compressorData.Root);
-            Compressor.DeltaDecode(ref huffmanDecoded);
-            Compressor.DeltaDecode(ref huffmanDecoded);
-            this.Log(Convert.ToBase64String(huffmanDecoded));
             //this.Log(Convert.ToBase64String(serialized));
             
             textField.text = Convert.ToBase64String(serialized);

@@ -6,14 +6,13 @@ using VRC.SDKBase;
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic {
     public class HuffmanNode {
-        public HuffmanNode() { }
 
         public HuffmanNode(byte symbol, int frequency) {
             Symbol = symbol;
             Frequency = frequency;
         }
 
-        public HuffmanNode(int frequency, HuffmanNode left, HuffmanNode right) : this() {
+        public HuffmanNode(int frequency, HuffmanNode left, HuffmanNode right) {
             Frequency = frequency;
             Left = left;
             Right = right;
@@ -118,9 +117,7 @@ namespace BefuddledLabs.Magic {
 
             for (int i = 0; i < 256; i++) {
                 byte b = (byte)i;
-                if (frequencies.TryGetValue(b, out int token))
-                    frequencies[b] = token + 1;
-                else
+                if (!frequencies.ContainsKey(b))
                     frequencies[b] = 1;
             }
 
@@ -155,11 +152,11 @@ namespace BefuddledLabs.Magic {
                     currentByte |= (byte)(((huffmanCode >> i) & 0b1) << bitsLeft);
                     bitsLeft--;
 
-                    if (bitsLeft == -1) {
-                        compressed.Add(currentByte);
-                        currentByte = 0;
-                        bitsLeft = 7;
-                    }
+                    if (bitsLeft != -1)
+                        continue;
+                    compressed.Add(currentByte);
+                    currentByte = 0;
+                    bitsLeft = 7;
                 }
             }
 
@@ -173,7 +170,7 @@ namespace BefuddledLabs.Magic {
         public static byte[] HuffmanDecode(byte[] compressed, HuffmanNode root) {
             List<byte> decoded = new List<byte>();
 
-            int bitsLeft = compressed[0]; // bits *unused* in last byte
+            int bitsLeft = compressed[0]; // bits unused in last byte
             int totalBits = (compressed.Length - 1) * 8 - bitsLeft;
 
             HuffmanNode current = root;
@@ -184,38 +181,48 @@ namespace BefuddledLabs.Magic {
                 for (int bit = 7; bit >= 0; bit--) {
                     if (bitIndex >= totalBits)
                         break;
+                    bitIndex++;
 
-                    int bitVal = (b >> bit) & 1;
+                    int bitVal = (b >> bit) & 0b1;
 
                     current = bitVal == 0 ? current.Left : current.Right;
 
-                    decoded.Add(current.Symbol);
-                    current = root;
-
-                    bitIndex++;
+                    if (!Utilities.IsValid(current.Left) && !Utilities.IsValid(current.Right)) {
+                        // reached a leaf node — output symbol
+                        decoded.Add(current.Symbol);
+                        current = root;
+                    }
                 }
             }
 
             return decoded.ToArray();
         }
 
+
         public static Dictionary<byte, Code> GenerateHuffmanCodes(HuffmanNode root) {
             Dictionary<byte, Code> codes = new Dictionary<byte, Code>();
-            GenerateHuffmanCodes(root, new Code(0, 0), codes);
+            GenerateHuffmanCodesRecursive(root, new Code(0, 0), codes);
             return codes;
         }
 
         [RecursiveMethod]
-        private static void GenerateHuffmanCodes(HuffmanNode node, Code code, Dictionary<byte, Code> codes) {
+        private static void GenerateHuffmanCodesRecursive(HuffmanNode node, Code code, Dictionary<byte, Code> codes) {
             while (true) {
-                if (!Utilities.IsValid(node))
+                if (!Utilities.IsValid(node.Left) && !Utilities.IsValid(node.Right)) {
+                    // It's a leaf — store the code
+                    codes[node.Symbol] = code;
                     return;
+                }
 
-                codes[node.Symbol] = code;
+                if (node.Left != null) GenerateHuffmanCodesRecursive(node.Left, new Code((code.HuffmanCode << 1), code.Length + 1), codes);
 
-                GenerateHuffmanCodes(node.Left, new Code((code.HuffmanCode << 1), code.Length + 1), codes);
-                node = node.Right;
-                code = new Code((code.HuffmanCode << 1) | 0b1, code.Length + 1);
+                if (node.Right != null) {
+                    node = node.Right;
+                    code = new Code((code.HuffmanCode << 1) | 1, code.Length + 1);
+                    continue;
+                }
+
+                break;
             }
         }
     }

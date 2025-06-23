@@ -171,11 +171,24 @@ case 558790816:
 return BefuddledLabs.Magic.Instructions.ReadingAndWriting.ReadLast.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case 158358819:
+{
+return BefuddledLabs.Magic.Instructions.ReadingAndWriting.ReadRavenmind.Execute(info);
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case 348327965:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
 if (true) {
 return BefuddledLabs.Magic.Instructions.ReadingAndWriting.WriteLast.Execute(info, (BefuddledLabs.Magic.StackItem)_param_0);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case -622708792:
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (true) {
+return BefuddledLabs.Magic.Instructions.ReadingAndWriting.WriteRavenmind.Execute(info, (BefuddledLabs.Magic.StackItem)_param_0);
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");

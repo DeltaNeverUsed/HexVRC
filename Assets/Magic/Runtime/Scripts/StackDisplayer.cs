@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using TMPro;
 using UdonSharp;
+using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic {
@@ -16,8 +17,9 @@ namespace BefuddledLabs.Magic {
             StringBuilder sb = new StringBuilder();
             StackItem[] stack = vmManager.localVM.Info.Stack.ToArray();
 
-            for (int index = stack.Length - 1; index >= 0; index--) {
-                sb.AppendLine(stack[index].ToString());
+            int forLen = Mathf.Min(stack.Length, 32);
+            for (int index = 1; index <= forLen; index++) {
+                sb.AppendLine(stack[stack.Length - index].ToString());
             }
             
             stackDisplay.text = sb.ToString();
