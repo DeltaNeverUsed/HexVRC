@@ -44,28 +44,28 @@
       }
     },
     "sh.orels.shaders": {
-      "version": "7.0.0-dev.16",
+      "version": "7.0.0-dev.19",
       "dependencies": {
-        "sh.orels.shaders.generator": "^7.0.0-dev.16",
-        "sh.orels.shaders.inspector": "^7.0.0-dev.16"
+        "sh.orels.shaders.generator": "^7.0.0-dev.19",
+        "sh.orels.shaders.inspector": "^7.0.0-dev.19"
       }
     },
     "sh.orels.shaders.generator": {
-      "version": "7.0.0-dev.16",
+      "version": "7.0.0-dev.19",
       "dependencies": {}
     },
     "sh.orels.shaders.inspector": {
-      "version": "7.0.0-dev.16",
+      "version": "7.0.0-dev.19",
       "dependencies": {}
     },
     "deltaneverused.udonsharpprofiler": {
-      "version": "0.0.7",
+      "version": "0.1.0",
       "dependencies": {
         "com.vrchat.worlds": "^3.6.x"
       }
     },
     "net.ureishi.qvpen": {
-      "version": "3.3.6",
+      "version": "3.3.8",
       "dependencies": {
         "com.vrchat.worlds": "^3.5.0"
       }
