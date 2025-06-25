@@ -5,6 +5,8 @@ namespace BefuddledLabs.Magic {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public abstract class StorageMedium : UdonSharpBehaviour {
         public VMManager vm;
+
+        public bool isWritable = false;
         
         public virtual bool Write(StackItem data) {
             return false;

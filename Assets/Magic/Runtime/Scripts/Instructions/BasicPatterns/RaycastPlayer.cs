@@ -26,7 +26,7 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
 
             Rigidbody hitBody = hit.rigidbody;
             if (Utilities.IsValid(hitBody)) {
-                Entity entity = hitBody.GetComponent<Entity>();
+                Magic.Entity entity = hitBody.GetComponent<Magic.Entity>();
                 if (Utilities.IsValid(entity)) {
                     info.Stack.Push(new StackItem(entity));
                     return ExecutionState.Ok(); // if we hit an entity we just return early instead of checking every player

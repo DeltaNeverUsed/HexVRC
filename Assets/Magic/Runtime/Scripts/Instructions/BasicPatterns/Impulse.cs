@@ -45,7 +45,7 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
             return ExecutionState.Ok();
         }
         
-        public static ExecutionState Execute(ExecutionInfo info, Entity entity, Vector3 impulse) {
+        public static ExecutionState Execute(ExecutionInfo info, Magic.Entity entity, Vector3 impulse) {
             ExecutionState manaResult = info.VM.ConsumeMana(Mathf.Floor(Vector3.Magnitude(impulse) * 3));
             if (!manaResult.IsOk())
                 return manaResult;

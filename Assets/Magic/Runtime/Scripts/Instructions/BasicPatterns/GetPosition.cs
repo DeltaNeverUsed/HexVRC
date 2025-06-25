@@ -2,12 +2,12 @@
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
-    public static class GetPlayerPosition {
+    public static class GetPosition {
         public const string Path = "dd";
 
         #region Docs
 
-        public const string Description = "Transform a player into their position";
+        public const string Description = "Transform a Player or Entity into their position";
         public const string Input = "Player";
         public const string Output = "Vector";
 
@@ -18,6 +18,11 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
                 return ExecutionState.Err("Invalid player");
 
             info.Stack.Push(new StackItem(player.GetPosition()));
+            return ExecutionState.Ok();
+        }
+        
+        public static ExecutionState Execute(ExecutionInfo info, Entity entity) {
+            info.Stack.Push(new StackItem(entity.transform.position));
             return ExecutionState.Ok();
         }
     }

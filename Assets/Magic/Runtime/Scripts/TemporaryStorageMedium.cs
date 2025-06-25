@@ -16,6 +16,7 @@ namespace BefuddledLabs.Magic {
         private CompressorData _compressorData;
         
         public void Start() {
+            isWritable = true;
             _compressorData = CompressorData.Get();
         }
 

@@ -14,8 +14,9 @@ namespace BefuddledLabs.Magic {
         private StackItem _item = new StackItem();
 
         private CompressorData _compressorData;
-
+        
         public void Start() {
+            isWritable = true;
             if (!Utilities.IsValid(pickup))
                 return;
             pickup.pickupable = Networking.IsOwner(gameObject);

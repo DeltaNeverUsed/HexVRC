@@ -774,6 +774,70 @@ return BefuddledLabs.Magic.Instructions.EscapingPatterns.Undo.Execute(info, (Sys
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case -925295379:
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Entity) {
+return BefuddledLabs.Magic.Instructions.Entities.GetScale.Execute(info, (BefuddledLabs.Magic.Entity)_param_0.Value);
+}
+if (_param_0.Type == ItemType.Player) {
+return BefuddledLabs.Magic.Instructions.Entities.GetScale.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case 111524964:
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Entity) {
+return BefuddledLabs.Magic.Instructions.Entities.GetVelocity.Execute(info, (BefuddledLabs.Magic.Entity)_param_0.Value);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case -284469310:
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Entity) {
+return BefuddledLabs.Magic.Instructions.Entities.IsReadable.Execute(info, (BefuddledLabs.Magic.Entity)_param_0.Value);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case -611277185:
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Entity) {
+return BefuddledLabs.Magic.Instructions.Entities.IsWritable.Execute(info, (BefuddledLabs.Magic.Entity)_param_0.Value);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case -1718250521:
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Entity) {
+return BefuddledLabs.Magic.Instructions.Entities.Read.Execute(info, (BefuddledLabs.Magic.Entity)_param_0.Value);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case 1911273980:
+if (stackSize >= 2) {
+StackItem _param_1 = stack.Pop();
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Entity && _param_1.Type == ItemType.Number) {
+return BefuddledLabs.Magic.Instructions.Entities.SetScale.Execute(info, (BefuddledLabs.Magic.Entity)_param_0.Value, (System.Single)_param_1.Value);
+}
+if (_param_0.Type == ItemType.Player && _param_1.Type == ItemType.Number) {
+return BefuddledLabs.Magic.Instructions.Entities.SetScale.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value, (System.Single)_param_1.Value);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case -1106203228:
+if (stackSize >= 2) {
+StackItem _param_1 = stack.Pop();
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Entity && true) {
+return BefuddledLabs.Magic.Instructions.Entities.Write.Execute(info, (BefuddledLabs.Magic.Entity)_param_0.Value, (BefuddledLabs.Magic.StackItem)_param_1);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case -1291934417:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
@@ -893,6 +957,28 @@ case -1071800786:
 return BefuddledLabs.Magic.Instructions.BasicPatterns.Clear.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case 454208512:
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Entity) {
+return BefuddledLabs.Magic.Instructions.BasicPatterns.GetEyeDirection.Execute(info, (BefuddledLabs.Magic.Entity)_param_0.Value);
+}
+if (_param_0.Type == ItemType.Player) {
+return BefuddledLabs.Magic.Instructions.BasicPatterns.GetEyeDirection.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
+case 126491095:
+if (stackSize >= 1) {
+StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Entity) {
+return BefuddledLabs.Magic.Instructions.BasicPatterns.GetEyePosition.Execute(info, (BefuddledLabs.Magic.Entity)_param_0.Value);
+}
+if (_param_0.Type == ItemType.Player) {
+return BefuddledLabs.Magic.Instructions.BasicPatterns.GetEyePosition.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value);
+}
+}
+return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case -241778631:
 {
 return BefuddledLabs.Magic.Instructions.BasicPatterns.GetLocalPlayer.Execute(info);
@@ -908,14 +994,6 @@ case -1130446171:
 return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPickupPosition.Execute(info);
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case 126491095:
-if (stackSize >= 1) {
-StackItem _param_0 = stack.Pop();
-if (_param_0.Type == ItemType.Player) {
-return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPlayerEyePosition.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value);
-}
-}
-return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case -248981858:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
@@ -924,19 +1002,14 @@ return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPlayerHeight.Execute(in
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
-case 454208512:
-if (stackSize >= 1) {
-StackItem _param_0 = stack.Pop();
-if (_param_0.Type == ItemType.Player) {
-return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPlayerLookDirection.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value);
-}
-}
-return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 case 177674525:
 if (stackSize >= 1) {
 StackItem _param_0 = stack.Pop();
+if (_param_0.Type == ItemType.Entity) {
+return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPosition.Execute(info, (BefuddledLabs.Magic.Entity)_param_0.Value);
+}
 if (_param_0.Type == ItemType.Player) {
-return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPlayerPosition.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value);
+return BefuddledLabs.Magic.Instructions.BasicPatterns.GetPosition.Execute(info, (VRC.SDKBase.VRCPlayerApi)_param_0.Value);
 }
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
@@ -1064,9 +1137,9 @@ return BefuddledLabs.Magic.Instructions.AdvancedMathematics.Tangent.Execute(info
 }
 return ExecutionState.Err("Not enough items on Stack for any matching execution function");
 
-            }if (Path.StartsWith("aqaa", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.NumberLiterals.NumberLiteralPositive.Execute(info);
+            }if (Path.StartsWith("dedd", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.NumberLiterals.NumberLiteralNegative.Execute(info);
 }
-if (Path.StartsWith("dedd", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.NumberLiterals.NumberLiteralNegative.Execute(info);
+if (Path.StartsWith("aqaa", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.NumberLiterals.NumberLiteralPositive.Execute(info);
 }
 if (Path.StartsWith("", StringComparison.InvariantCulture)) {return BefuddledLabs.Magic.Instructions.StackManipulation.Mask.Execute(info);
 }
