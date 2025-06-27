@@ -15,8 +15,7 @@ namespace BefuddledLabs.Magic.Instructions.LogicalOperators {
         public const string Output = "Boolean";
 
         #endregion
-
-
+        
         public static ExecutionState Execute(ExecutionInfo info) {
             info.Stack.Push(new StackItem(false));
             return ExecutionState.Ok();
@@ -24,11 +23,6 @@ namespace BefuddledLabs.Magic.Instructions.LogicalOperators {
 
         public static ExecutionState Execute(ExecutionInfo info, StackItem any) {
             switch (any.Type) {
-                case ItemType.Null:
-                    info.Stack.Push(new StackItem(false));
-                    break;
-                case ItemType.Vector:
-                    break;
                 case ItemType.Number:
                     info.Stack.Push(new StackItem((float)any.Value != 0f));
                     break;
@@ -39,13 +33,18 @@ namespace BefuddledLabs.Magic.Instructions.LogicalOperators {
                     VRCPlayerApi player = (VRCPlayerApi)any.Value;
                     info.Stack.Push(new StackItem(Utilities.IsValid(player) && player.IsValid()));
                     break;
-                case ItemType.Instruction:
-                    info.Stack.Push(new StackItem(true));
-                    break;
                 case ItemType.List:
                     List<StackItem> list = (List<StackItem>)any.Value;
                     info.Stack.Push(new StackItem(list.Count > 0));
                     break;
+                case ItemType.Instruction:
+                case ItemType.Vector:
+                case ItemType.Drone:
+                case ItemType.Entity:
+                    info.Stack.Push(new StackItem(true));
+                    break;
+                case ItemType.Null:
+                case ItemType.Garbage:
                 case ItemType.Any:
                 default:
                     info.Stack.Push(new StackItem(false));
