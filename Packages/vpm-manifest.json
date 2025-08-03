@@ -21,26 +21,26 @@
   },
   "locked": {
     "com.vrchat.base": {
-      "version": "3.8.1",
+      "version": "3.8.2",
       "dependencies": {}
     },
     "com.vrchat.worlds": {
-      "version": "3.8.1",
+      "version": "3.8.2",
       "dependencies": {
-        "com.vrchat.base": "3.8.1"
+        "com.vrchat.base": "3.8.2"
       }
     },
     "befuddledlabs.linuxvrchatsdkpatch-worlds": {
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
-        "com.vrchat.worlds": "^3.7.6",
-        "befuddledlabs.linuxvrchatsdkpatch-base": "0.1.0"
+        "befuddledlabs.linuxvrchatsdkpatch-base": "0.2.0",
+        "com.vrchat.worlds": "^3.8.2"
       }
     },
     "befuddledlabs.linuxvrchatsdkpatch-base": {
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
-        "com.vrchat.base": "^3.7.6"
+        "com.vrchat.base": "^3.8.2"
       }
     },
     "sh.orels.shaders": {
@@ -59,7 +59,7 @@
       "dependencies": {}
     },
     "deltaneverused.udonsharpprofiler": {
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "com.vrchat.worlds": "^3.6.x"
       }

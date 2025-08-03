@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: CompressorData
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 43f108c07e532bb44a830edd550fc998, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 23ef1aec4a24a5b6481ebc6ed3958574, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 5d64617082d4f1b4dad627f8ab68f3b9, type: 3}
