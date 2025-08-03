@@ -1,0 +1,360 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SPN_Mat_Grass_0.6m_05
+  m_Shader: {fileID: 4800000, guid: bf467c9d356eccf41bcee574fc86ec5f, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _BLENDWITHTERRAIN_ON
+  - _COLORBLENDINGMODE_A
+  - _COLORMASK1SOURCE_TEXTURE
+  - _COLORS_THREE
+  - _DISTANCEFADE_ON
+  - _MMBENDINGMETHOD_SIMPLE
+  - _SCALEVARIATION_ON
+  - _SLOPECORRECTION_ON
+  m_InvalidKeywords:
+  - _BASICMESH_ON
+  - _BENDING_SIMPLE
+  - _COLORBLENDING_ONE
+  - _COLORINTERPOLATION_METHOD1
+  - _COLORS1_FOUR
+  - _DISTANCEFADEUSEGV_ON
+  - _ENABLEMAINBENDING_ON
+  - _ENABLESLOPEAJUSTMENT_ON
+  - _ENABLESLOPECORRECTION_ON
+  - _FOLIAGERENDERER
+  - _GVAMPLITUDESCALE_ON
+  - _GVBENDINGSCALE_ON
+  - _GVDIRECTIONANGLE_ON
+  - _GVTIME_ON
+  - _MAINBENDING_ON
+  - _MASK1USAGE_A
+  - _MMBENDINGMODE_SIMPLE
+  - _MMSINEWAVEDIRECTION_STATIC
+  - _NEWCOLORBLEND_ON
+  - _SCALEOFFSET_ON
+  - _SCALEVAR_ON
+  - _TERRAINBLEND_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: aafc81ec6c2fc204295f3d9c5ddb8314, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMasc:
+        m_Texture: {fileID: 2800000, guid: beee2c54fae03cb4aa5cab9ecc709a49, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMask1:
+        m_Texture: {fileID: 2800000, guid: beee2c54fae03cb4aa5cab9ecc709a49, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMask2:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMaskTexture:
+        m_Texture: {fileID: 2800000, guid: beee2c54fae03cb4aa5cab9ecc709a49, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorVarNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 0ba2f77a3a58f524989d4849701ae3f8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorVariationTexture:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowerTexture:
+        m_Texture: {fileID: 2800000, guid: 8ea479f0fb19bac448a1850a32dbbd8f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FoliageTexture:
+        m_Texture: {fileID: 2800000, guid: 0ba72943291ea4e4ea5296fbcf36b2fa, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GrassTexture:
+        m_Texture: {fileID: 2800000, guid: 154827705cc367343a336ba55ce7e16d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 154827705cc367343a336ba55ce7e16d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MotionNoise:
+        m_Texture: {fileID: 2800000, guid: aeb84ddb9b6bcbd47aa1a1401776e6b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MotionNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: aeb84ddb9b6bcbd47aa1a1401776e6b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture1:
+        m_Texture: {fileID: 2800000, guid: 512fa11ad89d84543ad8d6c8d9cb6743, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ScaleNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ScaleVarNoise:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ScaleVarNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TerainAlbedo:
+        m_Texture: {fileID: 2800000, guid: 6230db3960a8a954faa20466af73d833, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TerrainAlbedo:
+        m_Texture: {fileID: 2800000, guid: 6230db3960a8a954faa20466af73d833, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _AlphaCutoff1: 0.5
+    - _AnimatedNoiseTiling: 1
+    - _BASICMESH: 1
+    - _BENDING: 0
+    - _BLENDWITHTERRAIN: 1
+    - _BOTTOMFADE: 0
+    - _BWTBottom: 1
+    - _BWTEnd: 1
+    - _BWTMask: 0
+    - _BWTMaskEnd: 1
+    - _BWTMaskStart: 1
+    - _BWTStart: 1
+    - _BWTTop: 0
+    - _BaseScale: 1
+    - _BlendWithTerrain: 1
+    - _BottomFade: 1
+    - _BottomFadeEnd: 0.15
+    - _BottomFadeStart: 0
+    - _ClipTesting: 0
+    - _ClipThreshold: 0.5
+    - _Color2BlendScale: 0
+    - _Color2Opacity: 1
+    - _ColorBlendEnd: 1
+    - _ColorBlendMax: 1
+    - _ColorBlendMin: 0
+    - _ColorBlendMode: 0
+    - _ColorBlendStart: 0
+    - _ColorBlending: 0
+    - _ColorBlendingMode: 0
+    - _ColorContrast: 0.5
+    - _ColorHeightBlendMax: 1
+    - _ColorHeightBlendMin: 0
+    - _ColorHeightBlendMode: 0
+    - _ColorInterpolation: 0
+    - _ColorMask1End: 1
+    - _ColorMask1Source: 0
+    - _ColorMask1Start: 0.3
+    - _ColorMask2GV: 0
+    - _ColorMask2Opacity: 1
+    - _ColorMask2Preview: 0
+    - _ColorMask2SharpnessMax: 0
+    - _ColorMask2SharpnessMin: 0.2
+    - _ColorMask2Speed: 0
+    - _ColorMask2Tiling: 0.02
+    - _ColorMask3End: 1
+    - _ColorMask3Start: 0.3
+    - _ColorMaskEnd: 1
+    - _ColorMaskMax: 1
+    - _ColorMaskMin: 0
+    - _ColorMaskSource: 1
+    - _ColorMaskStart: 0.3
+    - _ColorVarNoiseMax: 0.45
+    - _ColorVarNoiseMin: 0.15
+    - _ColorVarNoisePreview: 0
+    - _ColorVarNoiseSpeed: 0.25
+    - _ColorVarNoiseTiling: 0.05
+    - _ColorVarOpacity: 1
+    - _ColorVariationBlend: 1
+    - _ColorVariationTiling: 0.1
+    - _Colors: 1
+    - _Colors1: 1
+    - _Cull: 0
+    - _DISTANCEFADE: 0
+    - _Debug: 0
+    - _DebugTarget: 0
+    - _DistanceFade: 1
+    - _DistanceFadeGV: 0
+    - _DistanceFadeLength: 30
+    - _DistanceFadeMax: 1
+    - _DistanceFadeMin: 0
+    - _DistanceFadeStart: 70
+    - _DistanceFadeUseGV: 1
+    - _EnableMainBending: 1
+    - _EnableMainBending1: 1
+    - _EnableSlopeAjustment: 1
+    - _EnableSlopeCorrection: 1
+    - _FadeEnd: 0.15
+    - _FadeStart: 0
+    - _Float2: 0
+    - _GVAmplitudeScale: 1
+    - _GVBendingScale: 1
+    - _GVDirectionAngle: 1
+    - _GVTime: 1
+    - _GrassFlower: 0
+    - _MAINBENDING: 1
+    - _MBAmplitude: 6
+    - _MBAmplitudeOffset: 4
+    - _MBDefaultBending: 0
+    - _MBDirection: 0
+    - _MBDirectionShift: 10
+    - _MBDirectionShiftNoiseScale: 1
+    - _MBDirectionShiftOffset: 20
+    - _MBDirectionShiftSpeed: 0.1
+    - _MBDirectionSource: 1
+    - _MBDirectionWaveLength: 6
+    - _MBDirectionWaveOffset: 3
+    - _MBFrequency: 5
+    - _MBFrequencyOffset: 1
+    - _MBGlobalWind: 0
+    - _MBGlobalWind1: 0
+    - _MBLocalWindDir: 0
+    - _MBMaxHeight: 0.6
+    - _MBMaxHeightFromVC: 0
+    - _MBObjectHeight: 0.6
+    - _MBObjectHeightSource: 0
+    - _MBPhase: 1
+    - _MBPhaseShiftScale: 1
+    - _MBPhaseShiftSource: 1
+    - _MBSpeed: 0.4
+    - _MBUseGlobalWindDir: 0
+    - _MBWindDir: 0
+    - _MBWindDir1: 0
+    - _MBWindDirBlend: 0
+    - _MBWindDirOffset: 0
+    - _MBWindDirSource: 0
+    - _MBWindDirVAriation: 20
+    - _MBWindDirection: 0
+    - _MMAmplitude: 6
+    - _MMAmplitudeOffset: 3
+    - _MMBending: 30
+    - _MMBendingMethod: 0
+    - _MMBendingMode: 0
+    - _MMBendingOffset: 10
+    - _MMDirectionAngle: 0
+    - _MMDirectionShift: 20
+    - _MMDirectionShiftNoiseScale: 1
+    - _MMDirectionShiftOffset: 10
+    - _MMDirectionShiftSpeed: 1
+    - _MMLocalPivotSource: 1
+    - _MMObjectHeight: 0.6
+    - _MMObjectHeightSource: 0
+    - _MMPhaseShiftScale: 1
+    - _MMPhaseShiftSource: 1
+    - _MMSineWaveDirection: 0
+    - _MMSineWaveLength: 6
+    - _MMSineWaveOffset: 3
+    - _MMSpeed: 0.4
+    - _Mask1Usage: 0
+    - _Metallic: 0
+    - _MotionSineWavePreview: 0
+    - _NewColorBlend: 1
+    - _SLOPECORRECTION: 0
+    - _SSMax: 1
+    - _SSMin: 0
+    - _Scale: 1
+    - _ScaleNoiseSharpnessMax: 0.437
+    - _ScaleNoiseSharpnessMin: 1
+    - _ScaleNoiseSharpnessMin2: 0.287
+    - _ScaleNoiseTiling: 1
+    - _ScaleOffset: 0.3
+    - _ScaleOffsetMax: 0.2
+    - _ScaleOffsetMin: -0
+    - _ScaleVar: 1
+    - _ScaleVarMax: 0.3
+    - _ScaleVarMin: 0
+    - _ScaleVarNoisePreview: 0
+    - _ScaleVarNoiseSharpMax: 1
+    - _ScaleVarNoiseSharpMin: 0.255
+    - _ScaleVarNoiseSharpnessMax: 1
+    - _ScaleVarNoiseSharpnessMin: 0
+    - _ScaleVarNoiseTiling: 0.1
+    - _ScaleVariation: 1
+    - _SineWavePreview: 0
+    - _SlopeCorrection: 1
+    - _SlopeCorrectionMagnitude: 0.6
+    - _SlopeCorrectionOffset: 0
+    - _Smoothness: 0
+    - _StaticNoiseTiling: 0.1
+    - _T: 1
+    - _TERRAINBLEND: 1
+    - _TerrainBlendBottom: 1
+    - _TerrainBlendTop: 0.5
+    - _TerrainSize: 500
+    - _TransAmbient: 0.2
+    - _TransDirect: 1
+    - _TransNormalDistortion: 0.1
+    - _TransScattering: 2
+    - _TransShadow: 0.9
+    - _Translucency: 1
+    - __dirty: 0
+    - _render_zw: 1
+    m_Colors:
+    - _AnimatedNoiseSpeed: {r: 0.05, g: 0.03, b: 0, a: 0}
+    - _Color0: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 0.8559986, g: 0.9339623, b: 0.6123621, a: 1}
+    - _Color1A: {r: 0.7396372, g: 0.8274932, b: 0.5252685, a: 1}
+    - _Color1B: {r: 0.47058824, g: 0.57254905, b: 0, a: 1}
+    - _Color1Bottom: {r: 0.47058824, g: 0.57254905, b: 0, a: 1}
+    - _Color1Top: {r: 0.6862201, g: 0.7735849, b: 0.4201546, a: 1}
+    - _Color2: {r: 0.41960785, g: 0.50980395, b: 0.101960786, a: 1}
+    - _Color2A: {r: 0.5372549, g: 0.6117647, b: 0.36078432, a: 1}
+    - _Color2B: {r: 0.47058824, g: 0.57254905, b: 0, a: 1}
+    - _Color2Bottom: {r: 0.41960788, g: 0.50980395, b: 0.10196079, a: 1}
+    - _Color2Top: {r: 0.5781725, g: 0.6698113, b: 0.30692163, a: 1}
+    - _MBNoiseTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _MBWindDirOffsetNoiseTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _MBWindDirPannerSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _MBWindDirVariationSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _MBWindDirVariationSpeed1: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _MBWindDirVariationTiling1: {r: 1, g: 1, b: 0, a: 0}
+    - _MBWorldNoiseTiling1: {r: 1, g: 1, b: 0, a: 0}
+    - _NoisePannerSpeed: {r: 0.05, g: 0.03, b: 0, a: 0}
+    - _NoisePannerSpeed1: {r: 0.05, g: 0.03, b: 0, a: 0}
+    - _NoiseTextureTilling: {r: 1, g: 1, b: 1, a: 1}
+    - _TerrainPosition: {r: -250, g: -250, b: 0, a: 0}
+  m_BuildTextureStacks: []

@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 883ff2ed6ef12644bb65f213490b9efb
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _MoonAlbedo: {fileID: 2800000, guid: f333c8bd1aa87fa41953a8bfcb0c2325, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

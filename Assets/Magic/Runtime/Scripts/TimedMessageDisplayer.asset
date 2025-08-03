@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: TimedMessageDisplayer
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 38374da198f76034dbedc8304a9578b8, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 3b5ae9d0d1a24e8489a456822f1f6d94, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: c28f54cd2a65e0642a2059d774974159, type: 3}

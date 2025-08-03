@@ -1,0 +1,197 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SPN_Mat_Water_Lake_01
+  m_Shader: {fileID: 4800000, guid: 0dbe5580eae5ae84691e1c7c87478e78, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _FOAM_ON
+  - _REFRACTION_ON
+  m_InvalidKeywords:
+  - _ENABLEDISTORTION_ON
+  - _ENABLEFOAM_ON
+  - _NORMALS_ON
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _DistortionTexture:
+        m_Texture: {fileID: 2800000, guid: 71ec221c066e0d548b5d4388404fac14, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FoamMap:
+        m_Texture: {fileID: 2800000, guid: 43f59577f594bf24c9b9ddc2c8654495, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FoamMap1:
+        m_Texture: {fileID: 2800000, guid: 43f59577f594bf24c9b9ddc2c8654495, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FoamMap2:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FoamTexture:
+        m_Texture: {fileID: 2800000, guid: 43f59577f594bf24c9b9ddc2c8654495, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FoamTexture1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FoamTexture2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 71ec221c066e0d548b5d4388404fac14, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap1:
+        m_Texture: {fileID: 2800000, guid: 71ec221c066e0d548b5d4388404fac14, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap2:
+        m_Texture: {fileID: 2800000, guid: 71ec221c066e0d548b5d4388404fac14, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ReflectionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RefractionMap:
+        m_Texture: {fileID: 2800000, guid: 71ec221c066e0d548b5d4388404fac14, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _CoastalBlending: 1
+    - _Debug: 0
+    - _Depth: 0.66
+    - _DistanceMax: 176
+    - _DistanceMin: 10
+    - _DistortaionFadeStart: 30
+    - _DistortaionOffset: 30
+    - _Distortion: 0.3
+    - _DistortionFadeLength: 20
+    - _DistortionFadeStart: 20
+    - _DistortionLength: 20
+    - _Distrortion: 0.3
+    - _EdgeBlend: 0.3
+    - _EdgeFade: 0.2
+    - _EdgeFadeDistance: 0.3
+    - _EdgeFadeDistanceOffset: 0.1
+    - _EdgeFadeOffset: 0.03
+    - _EdgeFadeOffsetSpeed: 1.5
+    - _EdgeFadeSpeed: 1.5
+    - _EdgeLength: 15
+    - _Emission: 0.737
+    - _EnableDistortion: 1
+    - _EnableFoam: 1
+    - _FOAM: 1
+    - _Foam1Scale: 8.05
+    - _Foam1Speed: 1
+    - _Foam2Scale: 4.62
+    - _Foam2Speed: 0.5
+    - _FoamCoverage: 0.683
+    - _FoamDepth: 4.9
+    - _FoamDepthOffset: 1
+    - _FoamDistance: 0.983
+    - _FoamEdgeRoughness: 10
+    - _FoamMap1Speed: 0.04
+    - _FoamMap2Speed: -0.03
+    - _FoamMaskDistortion: 10
+    - _FoamMaskOpacity: 0.6
+    - _FoamOpacity: 0.774
+    - _FoamSharpMax: 1
+    - _FoamSharpMin: 0.578
+    - _FoamSharpnessMax: 0.236
+    - _FoamSharpnessMin: 0.9
+    - _FoamSpeed: 2.46
+    - _FoamTiling: 6.3
+    - _FoamWidth: 7.07
+    - _FoamWidthOffsetScale: -2.7
+    - _FoamWidthOffsetScale1: 1
+    - _FresnelBias: -0.14
+    - _FresnelPower: 1.21
+    - _HeightFrequency: 0.2
+    - _Map1Strength: 0.08
+    - _Map2Strength: 0.07
+    - _Met: 1
+    - _Metallic: 0
+    - _NewFoamSpeed: 0.06
+    - _NormalMap1Speed: -0.1
+    - _NormalMap1Strength: 0.18
+    - _NormalMap2Speed: 0.08
+    - _NormalMap2Strength: 0.1
+    - _Normals: 1
+    - _Opacity: 1
+    - _OpacityAbove: 1
+    - _OpacityBack: 0.8
+    - _OpacityUnder: 0.75
+    - _OpacityUnderwater: 0.9
+    - _REFRACTION: 1
+    - _RefractionFadeLength: 30
+    - _RefractionFadeStart: 30
+    - _RefractionStrength: 0.25
+    - _Smoothness: 0.97
+    - _SmoothnessFresnelBias: 0
+    - _SmoothnessFresnelPower: 0.03
+    - _SmoothnessFresnelScale: 0.65
+    - _SmotthnessFresnelPower: 0
+    - _Specular: 0
+    - _SurfaceOpacityUnderwater: 0.8
+    - _TesselationPower: 44.3
+    - _Tiling: 0.15
+    - _UnderwaterSurfaceOpacity: 0.8
+    - _Voronoi1Scale: 10
+    - _Voronoi2Scale: 20
+    - _WaterDepth: 0.9
+    - _WaterOpacity: 1
+    - _WaterReflection: 0
+    - _WaveNormalIntensity: 1
+    - _WaveSpeed: 1
+    - _WavesAmplitude: 0.02
+    - _WavesSpeed: 0.3
+    - __dirty: 0
+    m_Colors:
+    - _DeepWater: {r: 0.111529015, g: 0.3102402, b: 0.4811321, a: 1}
+    - _DeepWaterColor: {r: 0.10980383, g: 0.30980384, b: 0.4823529, a: 0.94509804}
+    - _DistSpeedMap1XYMap2ZW: {r: 0.1, g: -0.1, b: -0.2, a: 0.1}
+    - _DistTilingMap1XYMap2ZW: {r: 0.2, g: 0.2, b: 0.4, a: 0.4}
+    - _FoamColor: {r: 0.7653932, g: 0.9393393, b: 0.9946091, a: 1}
+    - _FoamMap1Tiling: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _FoamMap2Tiling: {r: 0.08, g: 0.08, b: 0, a: 0}
+    - _FoamTiling: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _NewFoamTiling: {r: 0.08, g: 0.08, b: 0, a: 0}
+    - _NormalMap1Tiling: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _NormalMap2Tiling: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _RefSpeedMap1XYMap2ZW: {r: 0.1, g: -0.1, b: -0.2, a: 0.1}
+    - _RefTilingMap1XYMap2ZW: {r: 0.2, g: 0.2, b: 0.4, a: 0.4}
+    - _RefractionMap1Speed: {r: 0.1, g: -0.1, b: 0, a: 0}
+    - _RefractionMap1Tiling: {r: 0.2, g: 0.2, b: 0, a: 0}
+    - _RefractionMap2Speed: {r: -0.2, g: 0.1, b: 0, a: 0}
+    - _RefractionMap2Tiling: {r: 0.4, g: 0.4, b: 0, a: 0}
+    - _ShallowWater: {r: 0.4823529, g: 0.7411765, b: 0.6518884, a: 0.69803923}
+    - _ShallowWaterColor: {r: 0.4776824, g: 0.734, b: 0.6446772, a: 0.8117647}
+    - _SpeedMap1XYMap2ZW: {r: 1, g: 0, b: -1, a: 0.5}
+    - _TilingMap1XYMap2ZW: {r: 0.05, g: 0.1, b: 0.1, a: 0.1}
+    - _VertexOffset: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

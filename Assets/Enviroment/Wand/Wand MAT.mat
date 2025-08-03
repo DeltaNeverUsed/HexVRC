@@ -128,7 +128,7 @@ Material:
     - MOBILE_TONEMAP: 0
     - SHADING_MODE: 0
     - UI_AdvancedSettingsDepthHeader: 1
-    - UI_AdvancedSettingsHeader: 1
+    - UI_AdvancedSettingsHeader: 0
     - UI_AdvancedSettingsStancilHeader: 0
     - UI_ApplyColorCorrectionNote: 0
     - UI_BakedSpecularOcclusionNote: 0
@@ -153,7 +153,7 @@ Material:
     - UI_IgnoreRealtimeGINote: 0
     - UI_InternalHeader: 0
     - UI_LightmappingDocs: 0
-    - UI_LightmappingHeader: 1
+    - UI_LightmappingHeader: 0
     - UI_MainHeader: 1
     - UI_MobileTweaks: 1
     - UI_ParallaxDocs: 0
@@ -273,7 +273,7 @@ Material:
     - _ClothSheenColor: {r: 0.04, g: 0.04, b: 0.04, a: 1}
     - _ClothSubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 2, g: 2, b: 2, a: 1}
     - _MetallicRemap: {r: 0, g: 1, b: 0, a: 1}
     - _SmoothnessRemap: {r: 0, g: 1, b: 0, a: 1}
     - _VolumeInvSize: {r: 1000001, g: 1000001, b: 1000001, a: 1}

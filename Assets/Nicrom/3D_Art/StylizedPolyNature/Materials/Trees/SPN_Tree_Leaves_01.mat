@@ -1,0 +1,499 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SPN_Tree_Leaves_01
+  m_Shader: {fileID: 4800000, guid: 1bf1638125e6de143b9671176c83d8c5, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _COLORBLENDAXIS_Y
+  - _COLORMASK1SOURCE_UVS
+  - _COLORS_FOUR
+  - _DETAILMOTION1_ON
+  - _DETAILMOTION2_ON
+  - _MAINMOTION_ON
+  m_InvalidKeywords:
+  - _AO_ON
+  - _BLENDCOLORSONAXIS_Y
+  - _CECONDCOLOR_ON
+  - _COLORBLENDMODE_BASEDONOBJECTHEIGHT
+  - _COLORBLENDMODE_WORLDPOSITION
+  - _COLORMASK2BLENDAXIS_Y
+  - _COLORVARBLENDAXIS_Y
+  - _COLORVARIATIONAXIS_Y
+  - _COLORVARIATIONBLENDAXIS_Y
+  - _COLORVARIBLENDAXIS_Y
+  - _ENABLEHORIZONTALBENDING_ON
+  - _ENABLEVERTICALBENDING_ON
+  - _GVAMPLITUDESCALE_ON
+  - _GVBENDINGSCALE_ON
+  - _GVDIRECTIONANGLE_ON
+  - _GVTIME_ON
+  - _HORIZONTALBENDING_ON
+  - _HORIZONTALDETAILBENDING_ON
+  - _KEYWORD0_TEXTURE
+  - _MAINBENDING_ON
+  - _SMOOTHNORMALS_ON
+  - _SUBSURFACESCATERING_ON
+  - _VERTICALBENDING_ON
+  - _VERTICALDETAILBENDING_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: de0f3343e767c4f41ab4b8289301f849, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlbedoTexture:
+        m_Texture: {fileID: 2800000, guid: de0f3343e767c4f41ab4b8289301f849, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMask1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMask1Texture:
+        m_Texture: {fileID: 2800000, guid: beee2c54fae03cb4aa5cab9ecc709a49, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMask2Texture:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMaskTexture:
+        m_Texture: {fileID: 2800000, guid: beee2c54fae03cb4aa5cab9ecc709a49, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorVarNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorVariationTexture:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FoliageTexture:
+        m_Texture: {fileID: 2800000, guid: de0f3343e767c4f41ab4b8289301f849, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Gradient:
+        m_Texture: {fileID: 2800000, guid: 91524972155f83b4897eba059ac1fdb3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GradientTex:
+        m_Texture: {fileID: 2800000, guid: beee2c54fae03cb4aa5cab9ecc709a49, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GradientTexture:
+        m_Texture: {fileID: 2800000, guid: beee2c54fae03cb4aa5cab9ecc709a49, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: de0f3343e767c4f41ab4b8289301f849, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: de0f3343e767c4f41ab4b8289301f849, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskNoise:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MotionNoise:
+        m_Texture: {fileID: 2800000, guid: aeb84ddb9b6bcbd47aa1a1401776e6b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MotionNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: aeb84ddb9b6bcbd47aa1a1401776e6b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture:
+        m_Texture: {fileID: 2800000, guid: aeb84ddb9b6bcbd47aa1a1401776e6b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ScaleVarNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AO: 1
+    - _AOMaxRadius: 3
+    - _AOMinRadius: 0.1
+    - _AlphaCutoff: 0.5
+    - _Angle: 0
+    - _AnimatedNoiseTiling: 1
+    - _BlendColorsonAxis: 0
+    - _BlendMax: 1
+    - _BlendMin: 0.689
+    - _BumpScale: 1
+    - _CEColorBlendEnd: 0.17
+    - _CEColorBlendMode: 0
+    - _CEColorBlendStart: 0.372
+    - _CecondColor: 1
+    - _CenterColorEnd: 0.108
+    - _CenterColorStart: 0.464
+    - _Color2: 1
+    - _Color2BlendScale: 1
+    - _Color2BlendScaleOffset: -1
+    - _Color2End: 0.8
+    - _Color2Opacity: 1
+    - _Color2OpacityOffset: -0.1
+    - _Color2Scale: 1
+    - _Color2ScaleOffset: -0.3
+    - _Color2Start: 0.4
+    - _Color2StartOffset: 0.15
+    - _ColorBlend: 1
+    - _ColorBlendAxis: 0
+    - _ColorBlendEnd: 0.8
+    - _ColorBlendMagnitude: 1
+    - _ColorBlendMax: 0.698
+    - _ColorBlendMethod: 0
+    - _ColorBlendMin: 0.407
+    - _ColorBlendMode: 0
+    - _ColorBlendOffset: 0
+    - _ColorBlendScale: 1
+    - _ColorBlendScaleOffset: -0.075
+    - _ColorBlendStart: 0.4
+    - _ColorBlendStartOffset: 0.15
+    - _ColorHeightBlendMax: 0.47
+    - _ColorHeightBlendMin: 0
+    - _ColorHeightBlendMode: 0
+    - _ColorMask1End: 0.5
+    - _ColorMask1FadeEnd: 1
+    - _ColorMask1FadeStart: 0.85
+    - _ColorMask1Source: 1
+    - _ColorMask1Start: 0.1
+    - _ColorMask2Alpha: 1
+    - _ColorMask2AlphaOffset: -0.3
+    - _ColorMask2BlendAxis: 0
+    - _ColorMask2End: 0.8
+    - _ColorMask2Preview: 0
+    - _ColorMask2SharpMax: 1
+    - _ColorMask2SharpMin: 0
+    - _ColorMask2Start: 0.4
+    - _ColorMask2StartOffset: 0.15
+    - _ColorMask2Tiling: 0.05
+    - _ColorMaskBotMax: 0.5
+    - _ColorMaskBotMin: 0.2
+    - _ColorMaskEnd: 0.5
+    - _ColorMaskFadeEnd: 1
+    - _ColorMaskFadeStart: 0.8
+    - _ColorMaskMax: 1
+    - _ColorMaskMaxBot: 0.529
+    - _ColorMaskMaxTop: 1
+    - _ColorMaskMin: 0.7
+    - _ColorMaskMinBot: 0.106
+    - _ColorMaskMinTop: 0.732
+    - _ColorMaskSource: 0
+    - _ColorMaskStart: 0.1
+    - _ColorMaskTopMax: 1
+    - _ColorMaskTopMin: 0.9
+    - _ColorVAriationBlendAxis: 0
+    - _ColorVarBlendAxis: 0
+    - _ColorVarEnd: 0.8
+    - _ColorVarNoiseMax: 0.5
+    - _ColorVarNoiseMin: 0
+    - _ColorVarNoisePreview: 0
+    - _ColorVarNoiseTiling: 0.05
+    - _ColorVarOpacity: 1
+    - _ColorVarOpacityOffset: -0.3
+    - _ColorVarStart: 0.4
+    - _ColorVarStartOffset: 0.15
+    - _ColorVariBlendAxis: 0
+    - _ColorVariationAxis: 0
+    - _ColorVariationBlendAxis: 0
+    - _ColorVariationNoiseMax: 0.5
+    - _ColorVariationNoiseMin: 0
+    - _ColorVariationScale: 1
+    - _ColorVariationScaleOffset: -0.3
+    - _ColorVariationTextureScale: 0.2
+    - _ColorVariationTiling: 0.05
+    - _Colors: 1
+    - _ColorsBlend: 0.706
+    - _Cutoff: 0.5
+    - _DBHAmplitude: 2
+    - _DBHMaxRadius: 2
+    - _DBHSpeed: 1.16
+    - _DBHorizontalAmplitude: 2
+    - _DBHorizontalFrequency: 1.16
+    - _DBHorizontalMaxRadius: 2
+    - _DBHorizontalPhase: 1
+    - _DBVAmplitude: 1
+    - _DBVAmplitudeOffset: 1.2
+    - _DBVFrequency: 1.15
+    - _DBVMaxLength: 2
+    - _DBVerticalAmplitude: 1
+    - _DBVerticalAmplitudeOffset: 1
+    - _DBVerticalFrequency: 1.2
+    - _DBVerticalMaxLength: 2
+    - _DBVerticalPhase: 1
+    - _DETAILMOTION1: 1
+    - _DETAILMOTION2: 1
+    - _DISTANCEFADE: 0
+    - _DM1Amplitude: 0.75
+    - _DM1FoliageLength: 2.5
+    - _DM1Speed: 0.5
+    - _DM2Amplitude: 3
+    - _DM2ObjectRadius: 2.5
+    - _DM2Speed: 0.2
+    - _Debug: 0
+    - _DetailMotion1: 1
+    - _DetailMotion2: 1
+    - _DetailNormalMapScale: 1
+    - _DistanceFade: 0
+    - _DistanceFadeLength: 50
+    - _DistanceFadeStart: 50
+    - _DstBlend: 0
+    - _ECBlendEnd: 0
+    - _ECBlendMethod: 0
+    - _ECBlendStart: 1
+    - _ECColorBlendEnd: 0
+    - _ECColorBlendMethod: 0
+    - _ECColorBlendStart: 1
+    - _EnableHorizontalBending: 1
+    - _EnableVerticalBending: 1
+    - _GVAmplitudeScale: 1
+    - _GVBendingScale: 1
+    - _GVDirectionAngle: 1
+    - _GVTime: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _HBAmplitude: 2
+    - _HBMaxRadius: 2
+    - _HBSpeed: 1
+    - _HDBAmplitude: 3
+    - _HDBMaxRadius: 2
+    - _HDBObjectRadius: 2
+    - _HDBSpeed: 0.2
+    - _HORIZONTALBENDING: 1
+    - _HORIZONTALDETAILBENDING: 1
+    - _HeightFromVertexColors: 0
+    - _HorizontalBending: 1
+    - _Keyword0: 0
+    - _LerpAlpha: 0
+    - _LicalPivot: 4
+    - _LocalPivotSource: 0
+    - _MAINBENDING: 1
+    - _MBAmplitude: 2
+    - _MBAmplitudeOffset: 2
+    - _MBBending: 6
+    - _MBBendingOffset: 3
+    - _MBDefaultBending: 10
+    - _MBDirection: 0
+    - _MBDirectionShift: 20
+    - _MBDirectionShiftNoiseScale: 1
+    - _MBDirectionShiftOffset: 10
+    - _MBDirectionShiftSpeed: 0.4
+    - _MBDirectionSource: 1
+    - _MBDirectionWaveLength: 3
+    - _MBDirectionWaveOffset: 2
+    - _MBFrequency: 1.11
+    - _MBFrequencyOffset: 0.2
+    - _MBGlobalWindDir: 0
+    - _MBLocalWindDir: 0
+    - _MBLocalWindDirOffset: 20
+    - _MBMaxHeight: 10
+    - _MBMaxHeightFromVC: 1
+    - _MBMaxHeightSource: 0
+    - _MBObjectHeight: 10
+    - _MBObjectHeightSource: 1
+    - _MBPhase: 1
+    - _MBPhaseShiftScale: 1
+    - _MBSpeed: 0.2
+    - _MBSpeedOffset: 0
+    - _MBUseGlobalWindDir: 0
+    - _MBWindBlend: 0
+    - _MBWindDir: 0
+    - _MBWindDirOffset: 20
+    - _MBWindDirShift: 0
+    - _MBWindDirShiftSpeed: 1
+    - _MBWindDirShiftSpeedOffset: 1
+    - _MBWindDirSource: 1
+    - _MMAmplitude: 2
+    - _MMAmplitudeOffset: 2
+    - _MMBending: 6
+    - _MMBendingOffset: 3
+    - _MMDirectionAngle: 0
+    - _MMDirectionShift: 20
+    - _MMDirectionShiftNoiseScale: 1
+    - _MMDirectionShiftOffset: 10
+    - _MMDirectionShiftSpeed: 0.4
+    - _MMLocalPivotSource: 0
+    - _MMObjectHeight: 10
+    - _MMObjectHeightSource: 1
+    - _MMPhaseShiftScale: 1
+    - _MMPhaseShiftSource: 1
+    - _MMSineWaveLength: 6
+    - _MMSpeed: 0.2
+    - _MainBemding: 0
+    - _MainBending: 1
+    - _MainMotion: 1
+    - _Mask2End: 0.8
+    - _Mask2Opacity: 1
+    - _Mask2OpacityOffset: -0.3
+    - _Mask2Start: 0.4
+    - _Mask2StartOffset: 0.15
+    - _MaskNoiseSharpMax: 0.5
+    - _MaskNoiseSharpMin: 0.18
+    - _MaskNoiseTiling: 0.05
+    - _Metallic: 0
+    - _Mode: 0
+    - _MotionNoiseTiling: 0.1
+    - _NewF: 0.3
+    - _NoiseRemapMax: 1
+    - _NoiseRemapMin: 0
+    - _NoiseSize: 0
+    - _NormalScale: 1
+    - _NormalTextureScale: 1
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _RotAngle: 0
+    - _SSMax: 0.7
+    - _SSMin: 0.5
+    - _SSSSize: 1.2
+    - _ScaleOffset: 0
+    - _ScaleVarMax: 0.2
+    - _ScaleVarMin: 0
+    - _ScaleVarNoiseSharpMax: 1
+    - _ScaleVarNoiseSharpMin: 0
+    - _ScaleVarNoiseTiling: 1
+    - _ScaleVariation: 0
+    - _SecondColor: 0
+    - _SmoothNormals: 1
+    - _Smoothness: 0.05
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _StaticNoiseTiling: 0.1
+    - _SubsurfaceScatering: 1
+    - _T: 1
+    - _TempName: 0
+    - _TransAmbient: 0
+    - _TransDirect: 1
+    - _TransNormal: 0.5
+    - _TransNormalDistortion: 1
+    - _TransScattering: 50
+    - _TransShadow: 1
+    - _TransStrength: 1
+    - _Translucency: 1.5
+    - _UVSec: 0
+    - _UnitScale: 20
+    - _UseMaxHeight: 0
+    - _VBAmplitude: 2
+    - _VBAmplitudeOffset: 1.2
+    - _VBFrequency: 1.15
+    - _VBMaxLength: 2
+    - _VBSpeed: 1
+    - _VDBAmplitude: 0.75
+    - _VDBAmplitudeOffset: 0
+    - _VDBFoliageLength: 2
+    - _VDBMaxLength: 2
+    - _VDBSpeed: 0.5
+    - _VERTICALBENDING: 1
+    - _VERTICALDETAILBENDING: 1
+    - _VerticalBending: 1
+    - _WindScroll: 0
+    - _Windgitter: 0
+    - _ZWrite: 1
+    - __dirty: 0
+    m_Colors:
+    - _AOColor: {r: 0.32922596, g: 0.46091634, b: 0, a: 1}
+    - _AnimatedNoiseSpeed: {r: 0.05, g: 0.03, b: 0, a: 0}
+    - _Axis: {r: 1, g: 0, b: 0, a: 0}
+    - _BaseColor: {r: 0.5034318, g: 0.6981132, b: 0.00282246, a: 1}
+    - _BaseColor2: {r: 0.5058824, g: 0.09993325, b: 0.015686283, a: 1}
+    - _Color: {r: 0.47306117, g: 0.5309972, b: 0.09088494, a: 1}
+    - _Color0: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1A: {r: 0.46666664, g: 0.6313726, b: 0.24705875, a: 1}
+    - _Color1B: {r: 0.25882348, g: 0.38823527, b: 0.094117604, a: 1}
+    - _Color1Center: {r: 0.25882354, g: 0.38823533, b: 0.09411766, a: 1}
+    - _Color1Edge: {r: 0.4666667, g: 0.6313726, b: 0.24705884, a: 1}
+    - _Color2A: {r: 0.6196079, g: 0.7607843, b: 0.13333327, a: 1}
+    - _Color2B: {r: 0.48627448, g: 0.5960785, b: 0.10588237, a: 1}
+    - _Color2Center: {r: 0.4862745, g: 0.59607846, b: 0.105882354, a: 1}
+    - _Color2Edge: {r: 0.61960787, g: 0.7607843, b: 0.13333334, a: 1}
+    - _ColorBottomCenter: {r: 0.32941175, g: 0.462745, b: 0, a: 1}
+    - _ColorBottomEdge: {r: 0.5019608, g: 0.6980392, b: 0.003921569, a: 1}
+    - _ColorTopCenter: {r: 0.32941175, g: 0.462745, b: 0, a: 1}
+    - _ColorTopEdge: {r: 0.5019608, g: 0.6980392, b: 0.003921569, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _NoisePannerSpeed: {r: 0.05, g: 0.06, b: 0, a: 0}
+    - _NoiseTextureTilling: {r: 0.5, g: 0.5, b: 0.1, a: 0.1}
+    - _PivotPos: {r: 0, g: 1, b: 0, a: 0}
+    - _SSColor: {r: 0.62138534, g: 0.9137466, b: 0.14654413, a: 1}
+    - _TestMP: {r: 0, g: 0, b: 0, a: 0}
+    - _TopColor: {r: 1, g: 0.4602704, b: 0, a: 0}
+    - _TranslucencyColor: {r: 0.576947, g: 1, b: 0, a: 1}
+  m_BuildTextureStacks: []

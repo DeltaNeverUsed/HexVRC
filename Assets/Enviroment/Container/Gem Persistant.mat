@@ -232,7 +232,7 @@ Material:
     - _EnableGSAA: 1
     - _EnableParallax: 0
     - _FlipBumpY: 0
-    - _FloatAmount: 0.001
+    - _FloatAmount: 0.0003
     - _FloatPhaseOffset: 0
     - _FloatPositionOffset: 0
     - _FloatPositionOffsetAxis: 0
@@ -317,7 +317,7 @@ Material:
     - _ClothSheenColor: {r: 0.04, g: 0.04, b: 0.04, a: 1}
     - _ClothSubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0.7677847, b: 1.4142135, a: 1}
+    - _EmissionColor: {r: 0, g: 2.8320546, b: 5.216475, a: 1}
     - _FloatAxis: {r: 0, g: 0.01, b: 0, a: 0}
     - _MetallicRemap: {r: 0, g: 1, b: 0, a: 1}
     - _SmoothnessRemap: {r: 0, g: 1, b: 0, a: 1}

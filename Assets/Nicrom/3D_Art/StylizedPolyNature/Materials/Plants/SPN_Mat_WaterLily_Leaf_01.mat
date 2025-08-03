@@ -1,0 +1,261 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SPN_Mat_WaterLily_Leaf_01
+  m_Shader: {fileID: 4800000, guid: 5492b8f70e2e3d14882dcced7d9cc991, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _COLORMASK1SOURCE_VERTEXPOS
+  - _COLORS_FOUR
+  - _DETAILMOTION1_ON
+  - _MAINMOTION_ON
+  - _SCALEVARIATION_ON
+  m_InvalidKeywords:
+  - _DETAILMOTION_ON
+  - _ENABLEHORIZONTALMOVEMENT_ON
+  - _ENABLEMAINBENDING_ON
+  - _ENABLEROTATION_ON
+  - _GVAMPLITUDESCALE_ON
+  - _GVDIRECTIONANGLE_ON
+  - _GVTIME_ON
+  - _HORIZONTALDETAILBENDING_ON
+  - _HORIZONTALMOVEMENT_ON
+  - _MAINBENDING_ON
+  - _ROTATIONAROUNDLOCALPIVOT_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: 3421ce19ba00e11418603aa0ba39fa0a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMask:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMask2:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowerTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: a7c4eaff1dcba1b43901e670fef0b3a2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 24474770dd82e4d48b6ba514e8cb163e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MotionNoise:
+        m_Texture: {fileID: 2800000, guid: aeb84ddb9b6bcbd47aa1a1401776e6b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MotionNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: aeb84ddb9b6bcbd47aa1a1401776e6b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise:
+        m_Texture: {fileID: 2800000, guid: 7e2d53e64f058964c8707729e9120ea5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture:
+        m_Texture: {fileID: 2800000, guid: aeb84ddb9b6bcbd47aa1a1401776e6b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: e1e818b50aee90a49abfe3f29b1808c6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ScaleVarNoise:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ScaleVarNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 82febdc2f6b03bc4b874f0d22503f3f4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Smoothness:
+        m_Texture: {fileID: 2800000, guid: 8c3b212647eaef04b869f7934f555a4f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SmoothnessTexture:
+        m_Texture: {fileID: 2800000, guid: 8c3b212647eaef04b869f7934f555a4f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StemTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _Amp1: 0.1
+    - _AngTest: 0
+    - _AnimatedNoiseTiling: 1
+    - _ColorMask1EndV: 0.82
+    - _ColorMask1EndVert: 0
+    - _ColorMask1Source: 1
+    - _ColorMask1StartV: 0.32
+    - _ColorMask1StartVert: -2
+    - _ColorMask2SharpMax: 0.425
+    - _ColorMask2SharpMin: 0.099
+    - _ColorMask2Tiling: 0.1
+    - _ColorMaskSharpMax: 0.5
+    - _ColorMaskSharpMin: 0
+    - _ColorMaskTiling: 0.05
+    - _Colors: 2
+    - _DBHorizontalAmplitude: 8
+    - _DBHorizontalFrequency: 1.16
+    - _DBHorizontalMaxDistance: 0.5
+    - _DBHorizontalPhase: 1
+    - _DETAILMOTION: 1
+    - _DETAILMOTION1: 1
+    - _DM1Amplitude: 5
+    - _DM1AmplitudeOffset: 2
+    - _DM1Speed: 0.5
+    - _Debug: 0
+    - _DetailMotion1: 1
+    - _EnableHorizontalMovement: 1
+    - _EnableMainBending: 1
+    - _EnableRotation: 1
+    - _Freq: 2
+    - _GVAmplitudeScale: 1
+    - _GVDirectionAngle: 1
+    - _GVTime: 1
+    - _GlobalWind: 0
+    - _HDBAmplitude: 3
+    - _HDBAmplitudeOffset: 3
+    - _HDBSpeed: 0.5
+    - _HMAmplitude: 0.05
+    - _HMAmplitudeOffset: 0.03
+    - _HMDirection: 0
+    - _HMDirectionShift: 10
+    - _HMDirectionShiftNoiseScale: 1
+    - _HMDirectionShiftOffset: 20
+    - _HMDirectionShiftSpeed: 0.1
+    - _HMDirectionSource: 0
+    - _HMDirectionWaveLength: 6
+    - _HMDirectionWaveOffset: 3
+    - _HMPhaseShiftScale: 1
+    - _HMPhaseShiftSource: 1
+    - _HMSpeed: 0.3
+    - _HORIZONTALDETAILBENDING: 1
+    - _HORIZONTALMOVEMENT: 1
+    - _HorizontalAmplitude: 0.05
+    - _HorizontalAmplitudeOffset: 0.04
+    - _HorizontalDir: 0
+    - _HorizontalDirVariation: 108
+    - _HorizontalFrequency: 2
+    - _HorizontalFrequencyOffset: 2
+    - _HorizontalGlobalWind: 0
+    - _HorizontalPhase: 1
+    - _HorizontalWindDir: 0
+    - _HorizontalWindDirBlend: 0
+    - _HorizontalWindDirOffset: 20
+    - _InnerRadius: 0.1
+    - _MAINBENDING: 1
+    - _MBAmplitude: 0.06
+    - _MBAmplitudeOffset: 0.03
+    - _MBDefaultBending: 0
+    - _MBDirection: 0
+    - _MBDirectionShift: 40
+    - _MBDirectionShiftNoiseScale: 1
+    - _MBDirectionShiftOffset: 10
+    - _MBDirectionShiftSpeed: 0.5
+    - _MBDirectionSource: 1
+    - _MBDirectionWaveLength: 6
+    - _MBDirectionWaveOffset: 3
+    - _MBFrequency: 2
+    - _MBFrequencyOffset: 0
+    - _MBMaxHeight: 1
+    - _MBPhase: 1
+    - _MBPhaseShiftScale: 1
+    - _MBPhaseShiftSource: 1
+    - _MBSpeed: 0.3
+    - _MBWindDir: 0
+    - _MBWindDirVariation: 180
+    - _MMAmplitude: 0.06
+    - _MMAmplitudeOffset: 0.03
+    - _MMDirectionAngle: 0
+    - _MMDirectionShift: 20
+    - _MMDirectionShiftNoiseScale: 1
+    - _MMDirectionShiftOffset: 10
+    - _MMDirectionShiftSpeed: 1
+    - _MMObjectHeight: 3
+    - _MMPhaseShiftScale: 1
+    - _MMPhaseShiftSource: 1
+    - _MMSineWaveLength: 6
+    - _MMSpeed: 0.4
+    - _MainMotion: 1
+    - _Metallic: 0
+    - _MotionNoiseTiling: 1
+    - _NormalScale: 2
+    - _OuterRadius: 0.15
+    - _ROTATIONAROUNDLOCALPIVOT: 1
+    - _RotationAmplitude: 8
+    - _RotationAmplitudeOffset: 5
+    - _RotationFrequency: 0.4
+    - _RotationFrequencyOffset: 0.5
+    - _RotationPhase: 1
+    - _ScaleOffset: 0
+    - _ScaleVarMax: 0.4
+    - _ScaleVarMin: 0.06
+    - _ScaleVarNoiseSharpMax: 1
+    - _ScaleVarNoiseSharpMin: 0
+    - _ScaleVarNoiseTiling: 1
+    - _ScaleVariation: 1
+    - _Smoothness: 1
+    - _SmoothnessScale: 1
+    - _StaticNoiseTiling: 0.2
+    - _TimeSource: 0
+    - _UseGlobalWindDir: 0
+    - _VerticalAmplitude: 0.05
+    - _VerticalAmplitudeOffset: 0.04
+    - _VerticalFrequency: 2
+    - _VerticalFrequencyOffset: 0.5
+    - _VerticalPhase: 1
+    - _WindDir: 0
+    - _WindDirVariation: 180
+    - __dirty: 0
+    m_Colors:
+    - _AnimatedNoiseSpeed: {r: 0.05, g: 0.03, b: 0, a: 0}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 0.9029649, g: 0.6072499, b: 0.8757206, a: 1}
+    - _Color1A: {r: 0.6622305, g: 0.74663067, b: 0.27269122, a: 1}
+    - _Color1B: {r: 1, g: 0.7019608, b: 0, a: 1}
+    - _Color2: {r: 1, g: 0.03247716, b: 0, a: 1}
+    - _Color2A: {r: 0.47058824, g: 0.57254905, b: 0, a: 1}
+    - _Color2B: {r: 1, g: 0.7019608, b: 0, a: 1}
+    - _FlowerColor1: {r: 0.7843137, g: 0.454902, b: 0.14117646, a: 1}
+    - _FlowerColor2: {r: 0.8980392, g: 0.9529411, b: 1, a: 1}
+    - _HorizontalDirVariationSpeed: {r: 0.02, g: 0.022, b: 0, a: 0}
+    - _MBWindDirVariationSpeed: {r: 0.02, g: 0.02, b: 0, a: 0}
+    - _MBWindDirVariationTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _MBWorldNoiseTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _NoisePannerSpeed: {r: 0.05, g: 0.03, b: 0, a: 0}
+    - _NoiseTextureTilling: {r: 1, g: 1, b: 1, a: 1}
+    - _PannerSpeed: {r: 0.01, g: 0.02, b: 0, a: 0}
+    - _StemColor: {r: 0.39607838, g: 0.5647059, b: 0.10196077, a: 1}
+    - _WindDirVariationSpeed: {r: 0.02, g: 0.022, b: 0, a: 0}
+  m_BuildTextureStacks: []

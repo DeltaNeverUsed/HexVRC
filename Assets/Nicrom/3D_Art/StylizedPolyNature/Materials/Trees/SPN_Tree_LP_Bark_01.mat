@@ -1,0 +1,305 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SPN_Tree_LP_Bark_01
+  m_Shader: {fileID: 4800000, guid: 86ad79968cf6a884ab9eca398e988254, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _MAINMOTION_ON
+  m_InvalidKeywords:
+  - _APPLYCOLOR2_ON
+  - _CENTERCOLORTOGGLE_ON
+  - _COLOR2TOGGLE_ON
+  - _GVAMPLITUDESCALE_ON
+  - _GVBENDINGSCALE_ON
+  - _GVDIRECTIONANGLE_ON
+  - _GVTIME_ON
+  - _MAINBENDING_ON
+  - _NORMALMAP
+  - _TRUNKMOSS_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 4d3696225e0ca5041b7e477bb0b1c9de, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 24474770dd82e4d48b6ba514e8cb163e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MossAlbedo:
+        m_Texture: {fileID: 2800000, guid: f3236a7cf88c13d4c998a830b851eedc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MossNormal:
+        m_Texture: {fileID: 2800000, guid: 4764e7cf564286a409d8b27faaa3b1a5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MotionNoise:
+        m_Texture: {fileID: 2800000, guid: aeb84ddb9b6bcbd47aa1a1401776e6b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MotionNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: aeb84ddb9b6bcbd47aa1a1401776e6b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture:
+        m_Texture: {fileID: 2800000, guid: aeb84ddb9b6bcbd47aa1a1401776e6b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 140463681864f97408e188876e8b068c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AO: 0
+    - _AOMaxRadius: 1
+    - _AOMinRadius: 0.1
+    - _AnimatedNoiseTiling: 1
+    - _ApplyCenterColor: 0
+    - _ApplyColor2: 1
+    - _ArtStyle: 0
+    - _BakedLocalPivots: 0
+    - _BlendMax: 1
+    - _BlendMin: 0
+    - _BumpScale: 1
+    - _CenterColorBotRadius: 1
+    - _CenterColorBottomRadius: 1
+    - _CenterColorMaxRadius: 1
+    - _CenterColorMinRadius: 0.1
+    - _CenterColorToggle: 1
+    - _CenterColorTopRadius: 0.1
+    - _Cluster: 0
+    - _Color2BotRadius: 0.1
+    - _Color2MaxRadius: 1
+    - _Color2MinRadius: 0.1
+    - _Color2Toggle: 1
+    - _Color2TopRadius: 1
+    - _Cutoff: 0.5
+    - _CutoffMultiplier: 1.85
+    - _DBHorizontalAmplitude: 2
+    - _DBHorizontalFrequency: 1.16
+    - _DBHorizontalMaxRadius: 2
+    - _DBHorizontalPhase: 1
+    - _DBVerticalAmplitude: 1.5
+    - _DBVerticalAmplitudeOffset: 0.5
+    - _DBVerticalFrequency: 1.15
+    - _DBVerticalMaxLength: 2.5
+    - _DBVerticalPhase: 1
+    - _DETAILMOTION1: 0
+    - _DETAILMOTION2: 0
+    - _DM1Amplitude: 3.2
+    - _DM1FoliageLength: 1
+    - _DM1Speed: 1
+    - _DM2Amplitude: 2
+    - _DM2ObjectRadius: 1
+    - _DM2Speed: 1
+    - _DetailMotion1: 0
+    - _DetailMotion2: 0
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EnableHorizontalBending: 0
+    - _EnableVerticalBending: 0
+    - _Fr1: 0.1
+    - _Fr2: 0.1
+    - _GVAmplitudeScale: 1
+    - _GVBendingScale: 1
+    - _GVDirectionAngle: 1
+    - _GVTime: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0
+    - _GlossyReflections: 1
+    - _HDBAmplitude: 2
+    - _HDBMaxRadius: 2
+    - _HDBObjectRadius: 2
+    - _HDBSpeed: 1.16
+    - _HORIZONTALBENDING: 0
+    - _HORIZONTALDETAILBENDING: 0
+    - _Heightremap: -1.84
+    - _LerpAlpha: 0
+    - _LowPolyModel: 0
+    - _LowPolyTree: 0
+    - _MAINBENDING: 1
+    - _MBAmplitude: 2
+    - _MBAmplitudeOffset: 2
+    - _MBBending: 6
+    - _MBBendingOffset: 3
+    - _MBDefaultBending: 10
+    - _MBDir: 0
+    - _MBDirShift: 15
+    - _MBDirShiftOffset: 15
+    - _MBDirShiftSpeed: 0.1
+    - _MBDirShiftSpeedOffset: 0.05
+    - _MBDirSource: 0
+    - _MBDirection: 0
+    - _MBDirectionShift: 20
+    - _MBDirectionShiftNoiseScale: 1
+    - _MBDirectionShiftOffset: 10
+    - _MBDirectionShiftSpeed: 0.4
+    - _MBDirectionShiftSpeedOffset: 0.05
+    - _MBDirectionSource: 1
+    - _MBDirectionWaveLength: 3
+    - _MBDirectionWaveOffset: 2
+    - _MBFrequency: 1.11
+    - _MBFrequencyOffset: 0
+    - _MBLocalWindDir: 0
+    - _MBMaxHeight: 10
+    - _MBMaxHeightFromVC: 0
+    - _MBMaxHeightSource: 0
+    - _MBObjectHeight: 10
+    - _MBObjectHeightSource: 1
+    - _MBPhase: 1
+    - _MBPhaseShiftScale: 1
+    - _MBSineWaveDirection: 0
+    - _MBSpeed: 0.2
+    - _MBSpeedOffset: 0
+    - _MBUseGlobalWindDir: 0
+    - _MBWindBlend: 0
+    - _MBWindDir: 0
+    - _MBWindDirOffset: 20
+    - _MBWindDirShift: 9
+    - _MBWindDirShiftAmplitude: 9
+    - _MBWindDirShiftSpeed: 1
+    - _MBWindDirShiftSpeedOffset: 1
+    - _MBWindDirSource: 1
+    - _MMAmplitude: 2
+    - _MMAmplitudeOffset: 2
+    - _MMBending: 6
+    - _MMBendingOffset: 3
+    - _MMDirectionAngle: 0
+    - _MMDirectionShift: 20
+    - _MMDirectionShiftNoiseScale: 1
+    - _MMDirectionShiftOffset: 10
+    - _MMDirectionShiftSpeed: 0.4
+    - _MMLocalPivotSource: 0
+    - _MMObjectHeight: 1
+    - _MMObjectHeightSource: 1
+    - _MMPhaseShiftScale: 1
+    - _MMPhaseShiftSource: 1
+    - _MMSineWaveLength: 6
+    - _MMSpeed: 0.2
+    - _MainBending: 1
+    - _MainMotion: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _MoseNoiseStrength: 16.81
+    - _MossCoverageMax: 1
+    - _MossCoverageMin: 0.256
+    - _MossFadeExp: 0.6
+    - _MossFadeExpOffset: -1
+    - _MossFadeLength: 0.8
+    - _MossFadeLengthOffset: 0.1
+    - _MossFadeStart: 0.42
+    - _MossHeight: 1
+    - _MossHeightOffset: 0.8
+    - _MossMax: 1
+    - _MossMin: 0.2
+    - _MossNoiseStrength: 1
+    - _MossNormalScale: 1
+    - _MossOpacity: 0.8
+    - _MossOpacityOffset: 1
+    - _MossPower: 1
+    - _MossPowerExp: 1.47
+    - _MotionNoiseTiling: 0.1
+    - _NoiseStrength: 2.53
+    - _NormalScale: 1
+    - _Occlusion: 0
+    - _OcclusionMaxRadius: 1
+    - _OcclusionMinRadius: 0.1
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Phase1: 1
+    - _Phase2: 1
+    - _SSMax: 1
+    - _SSMin: 0.438
+    - _SecondColor: 0
+    - _Smoothness: 0.1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _StaticNoiseTiling: 0.1
+    - _Step: 0.428
+    - _TRUNKMOSS: 1
+    - _TempName: 0
+    - _TrunkMoos: 0
+    - _TrunkMoss: 0
+    - _UVSec: 0
+    - _UnitScale: 20
+    - _VDBAmplitude: 1
+    - _VDBAmplitudeOffset: 1.2
+    - _VDBFoliageLength: 2
+    - _VDBMaxLength: 2
+    - _VDBSpeed: 1.15
+    - _VERTICALBENDING: 0
+    - _VERTICALDETAILBENDING: 0
+    - _ZWrite: 1
+    - __dirty: 1
+    m_Colors:
+    - _AOColor: {r: 0.4672615, g: 0.6064689, b: 0.23457748, a: 1}
+    - _AnimatedNoiseSpeed: {r: 0.05, g: 0.03, b: 0, a: 0}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _CenterColor: {r: 0.4672615, g: 0.6064689, b: 0.23457748, a: 1}
+    - _Color: {r: 0.33153635, g: 0.25438294, b: 0.13895929, a: 1}
+    - _Color2: {r: 0.4672615, g: 0.6064689, b: 0.23457748, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MossColor: {r: 0.58735603, g: 0.6886792, b: 0.21161571, a: 1}
+    - _MossOffset: {r: 0.58, g: 0, b: 0, a: 0}
+    - _MossTiling: {r: 4, g: 1, b: 0, a: 0}
+    - _NoisePannerSpeed: {r: 0.05, g: 0.06, b: 0, a: 0}
+    - _NoiseTextureTilling: {r: 0.5, g: 0.5, b: 0.1, a: 0.1}
+    - _OcclusionColor: {r: 0.4672615, g: 0.6064689, b: 0.23457748, a: 1}
+    - _TestMP: {r: 0, g: 0, b: 0, a: 0}
+    - _TextureTiling: {r: 2, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []

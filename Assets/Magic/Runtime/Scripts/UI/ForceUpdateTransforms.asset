@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: ForceUpdateTransforms
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: cfbcb01231810414eb950fd16c50a181, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: be80a0b334145c14fa307996d7d6ae04, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 6a4f549726242144a83b973b9625d19c, type: 3}
