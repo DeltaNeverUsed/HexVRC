@@ -38,6 +38,7 @@ namespace BefuddledLabs.Magic {
                 _data = new StackItem().Serialize();
             RequestSerialization();
             UpdatePickup();
+            UpdateCallback("sm_DataUpdated");
             return true;
         }
 
@@ -46,6 +47,7 @@ namespace BefuddledLabs.Magic {
         public override void OnDeserialization() {
             _item = StackItem.Deserialize(_compressed ? Compressor.HuffmanDecode(_data, _compressorData.Root) : _data);
             UpdatePickup();
+            UpdateCallback("sm_DataUpdated");
         }
 
         private void UpdatePickup() {
