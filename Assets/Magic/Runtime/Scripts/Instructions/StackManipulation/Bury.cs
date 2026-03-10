@@ -6,10 +6,9 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description =
             "Copy the top iota of the stack, then put it under the second iota. [0, 1] becomes [1, 0, 1].";
-
-        public const string Input = "Any, Any";
         public const string Output = "Any, Any, Any";
 
         #endregion

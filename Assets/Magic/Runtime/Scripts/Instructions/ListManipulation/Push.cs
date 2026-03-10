@@ -7,9 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.SOUTH_WEST;
         public const string Description = "Appends an item to a list";
-
-        public const string Input = "List, Any";
         public const string Output = "List";
 
         #endregion

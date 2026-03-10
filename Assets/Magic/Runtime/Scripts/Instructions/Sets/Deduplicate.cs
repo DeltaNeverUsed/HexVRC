@@ -7,9 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.Sets {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_EAST;
         public const string Description = "Removes duplicate entries from a list.";
-
-        public const string Input = "List";
         public const string Output = "List";
 
         #endregion

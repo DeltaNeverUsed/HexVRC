@@ -7,10 +7,9 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_WEST;
         public const string Description =
             "For a vector, coerce it to its nearest axial direction, a unit vector. For a number, return the sign of the number; 1 if positive, -1 if negative. In both cases, zero is unaffected.";
-
-        public const string Input = "Number | Vector";
         public const string Output = "Number | Vector";
 
         #endregion

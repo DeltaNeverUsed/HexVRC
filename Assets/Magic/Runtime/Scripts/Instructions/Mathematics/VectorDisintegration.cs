@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Disintegrates a Vector into it's components";
-        public const string Input = "Vector";
         public const string Output = "Number, Number, Number";
 
         #endregion

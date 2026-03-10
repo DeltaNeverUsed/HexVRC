@@ -8,7 +8,6 @@ namespace BefuddledLabs.Magic.Instructions.Drone {
         #region Docs
 
         public const string Description = "Is Drone deployed?";
-        public const string Input = "Drone";
         public const string Output = "Boolean";
 
         #endregion

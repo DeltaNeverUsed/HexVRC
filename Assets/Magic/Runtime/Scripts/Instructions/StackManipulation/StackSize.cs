@@ -7,10 +7,9 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_WEST;
         public const string Description =
             "Pushes the size of the stack as a number to the top of the stack. (For example, a stack of [0, 1] will become [0, 1, 2].)";
-
-        public const string Input = "";
         public const string Output = "Number";
 
         #endregion

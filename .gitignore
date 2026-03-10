@@ -8,7 +8,8 @@
 /[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
-/[Mm]emoryCaptures/
+/[Mm]emory[Cc]aptures/
+/[Uu]ser[Ss]ettings/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -111,3 +112,6 @@ Tools/DocFx/obj/
 Docs/Published
 
 Packages/com.vrchat.UdonSharp/Editor/BuildUtilities/obj/
+
+# VRChat Persistence Data
+/ClientSimStorage

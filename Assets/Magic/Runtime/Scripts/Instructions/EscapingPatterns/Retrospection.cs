@@ -8,8 +8,8 @@ namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Escapes the introspection";
-        public const string Input = "";
         public const string Output = "";
 
         #endregion

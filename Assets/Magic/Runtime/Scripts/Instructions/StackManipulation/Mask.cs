@@ -8,12 +8,11 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description =
             @"An infinite family of actions that keep or remove elements at the top of the stack based on the sequence of dips and lines.
 
 Assuming that I draw a Bookkeeper's Gambit pattern left-to-right, the number of iotas the action will require is determined by the horizontal distance covered by the pattern. From deepest in the stack to shallowest, a flat line will keep the iota, whereas a triangle dipping down will remove it.";
-
-        public const string Input = "Many, Number";
         public const string Output = "Many";
 
         #endregion

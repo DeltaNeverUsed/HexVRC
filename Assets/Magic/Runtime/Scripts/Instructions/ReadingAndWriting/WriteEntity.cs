@@ -1,13 +1,13 @@
 ﻿// ReSharper disable once CheckNamespace
 
-namespace BefuddledLabs.Magic.Instructions.Entities {
-    public static class Write {
+namespace BefuddledLabs.Magic.Instructions.ReadingAndWriting {
+    public static class WriteEntity {
         public const string Path = "wdwewewewewew";
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Writes an item to an entity";
-        public const string Input = "Entity, Any";
         public const string Output = "";
 
         #endregion

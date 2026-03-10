@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_EAST;
         public const string Description = "Adds yourself to the stack";
-        public const string Input = "";
         public const string Output = "Player";
 
         #endregion

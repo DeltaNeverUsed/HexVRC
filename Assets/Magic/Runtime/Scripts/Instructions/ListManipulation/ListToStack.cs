@@ -7,10 +7,9 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_WEST;
         public const string Description =
             "Remove the list at the top of the stack, then push its contents to the stack.";
-
-        public const string Input = "List";
         public const string Output = "Many";
 
         #endregion

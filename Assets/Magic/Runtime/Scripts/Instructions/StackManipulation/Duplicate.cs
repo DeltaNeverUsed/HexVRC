@@ -6,8 +6,8 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Duplicates the top iota of the stack.";
-        public const string Input = "Any";
         public const string Output = "Any, Any";
 
         #endregion

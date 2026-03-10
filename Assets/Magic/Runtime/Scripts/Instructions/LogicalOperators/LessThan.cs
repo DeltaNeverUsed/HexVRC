@@ -6,9 +6,8 @@ namespace BefuddledLabs.Magic.Instructions.LogicalOperators {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.SOUTH_WEST;
         public const string Description = "If the first argument is less than the second, return True. Otherwise, return False.";
-
-        public const string Input = "Number, Number";
         public const string Output = "Boolean";
 
         #endregion

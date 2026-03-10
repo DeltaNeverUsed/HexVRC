@@ -8,8 +8,8 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
         #region Docs
 
-        public const string Description = "Gets the Absolute of a number or the Length of a Vector, List or Boolean";
-        public const string Input = "Number | Vector | List | Boolean";
+        public const HexDir Direction = HexDir.NORTH_EAST;
+        public const string Description = "Gets the Absolute of a number or the magnitude of a vector or the length of a list or converts a boolean to a number (true = 1, false = 0)";
         public const string Output = "Number";
 
         #endregion

@@ -6,12 +6,11 @@ namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.WEST;
         public const string Description = "Adds to next Symbol to the stack instead of trying to execute it";
-        public const string Input = "";
         public const string Output = "";
 
         #endregion
-
 
         public static ExecutionState Execute(ExecutionInfo info) {
             info.VM.EscapeNext = true;

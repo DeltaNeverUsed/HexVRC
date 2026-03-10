@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Removes the first iota from the stack.";
-        public const string Input = "Any";
         public const string Output = "";
 
         #endregion

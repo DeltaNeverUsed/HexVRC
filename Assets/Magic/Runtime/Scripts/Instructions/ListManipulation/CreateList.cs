@@ -7,9 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_EAST;
         public const string Description = "Adds an empty list to the stack";
-
-        public const string Input = "";
         public const string Output = "List";
 
         #endregion

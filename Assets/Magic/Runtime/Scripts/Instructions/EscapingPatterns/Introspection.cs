@@ -7,12 +7,11 @@ namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.WEST;
         public const string Description = "Escapes all symbols until a Retrospection is reached";
-        public const string Input = "";
         public const string Output = "";
 
         #endregion
-
 
         public static ExecutionState Execute(ExecutionInfo info) {
             if (info.VM.IntrospectionDepth == 0)

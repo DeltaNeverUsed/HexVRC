@@ -8,10 +8,9 @@ namespace BefuddledLabs.Magic.Instructions.LogicalOperators {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_EAST;
         public const string Description =
             "Convert an argument to a boolean. The number 0, Null, False, and the empty list become False; everything else becomes True.";
-
-        public const string Input = "Any";
         public const string Output = "Boolean";
 
         #endregion

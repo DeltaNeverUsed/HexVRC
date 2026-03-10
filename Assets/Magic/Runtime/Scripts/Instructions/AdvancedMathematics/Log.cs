@@ -7,10 +7,9 @@ namespace BefuddledLabs.Magic.Instructions.AdvancedMathematics {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_WEST;
         public const string Description =
             "Removes the number at the top of the stack, then takes the logarithm of the number at the top using the other number as its base. Related to the value of e.";
-
-        public const string Input = "Number, Number";
         public const string Output = "Number";
 
         #endregion

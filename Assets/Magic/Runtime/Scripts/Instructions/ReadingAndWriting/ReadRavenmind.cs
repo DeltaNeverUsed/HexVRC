@@ -6,9 +6,8 @@ namespace BefuddledLabs.Magic.Instructions.ReadingAndWriting {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_EAST;
         public const string Description = "Copy the iota out of my ravenmind.";
-
-        public const string Input = "";
         public const string Output = "Any";
 
         #endregion

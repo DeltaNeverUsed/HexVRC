@@ -7,9 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.SOUTH_EAST;
         public const string Description = "Inserts an item into the first slot of a List";
-
-        public const string Input = "List, Any";
         public const string Output = "List";
 
         #endregion

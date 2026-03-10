@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_EAST;
         public const string Description = "Transform a Player or Entity into their position";
-        public const string Input = "Player";
         public const string Output = "Vector";
 
         #endregion

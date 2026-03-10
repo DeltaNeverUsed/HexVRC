@@ -3,15 +3,14 @@ using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
-    public static class RaycastPlayer {
+    public static class RaycastEntity {
         public const string Path = "weaqa";
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description =
             "Combines two vectors (a position and a direction) into the answer to the question: If I stood at the position and looked in the direction, what Player or Entity would I be looking at?";
-
-        public const string Input = "Vector, Vector";
         public const string Output = "Player | Entity | Null";
 
         #endregion

@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Reverse the list at the top of the stack.";
-        public const string Input = "List";
         public const string Output = "List";
 
         #endregion

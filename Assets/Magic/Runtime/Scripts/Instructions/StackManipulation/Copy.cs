@@ -6,10 +6,9 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description =
             "Removes the number at the top of the stack, then copies the top iota of the stack that number of times. (A count of 2 results in two of the iota on the stack, not three.)";
-
-        public const string Input = "Any, Number";
         public const string Output = "Many";
 
         #endregion

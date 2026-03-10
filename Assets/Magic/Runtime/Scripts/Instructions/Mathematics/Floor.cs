@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Floors a number or vector";
-        public const string Input = "Number | Vector";
         public const string Output = "Number | Vector";
 
         #endregion

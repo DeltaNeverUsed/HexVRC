@@ -9,9 +9,9 @@ namespace BefuddledLabs.Magic.Instructions.Player {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.SOUTH_EAST;
         public const string Description =
             "Take a position and maximum distance on the stack, and combine them into a list of players near the position.";
-        public const string Input = "Vector, Numbeer";
         public const string Output = "List";
 
         #endregion

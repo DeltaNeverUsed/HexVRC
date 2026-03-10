@@ -9,7 +9,6 @@ namespace BefuddledLabs.Magic.Instructions.Drone {
         #region Docs
 
         public const string Description = "Get Drone position";
-        public const string Input = "Drone";
         public const string Output = "Vector | Null";
 
         #endregion

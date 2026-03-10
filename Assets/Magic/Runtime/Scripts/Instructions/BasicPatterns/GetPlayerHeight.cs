@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_EAST;
         public const string Description = "Transforms a player into it's height";
-        public const string Input = "Player";
         public const string Output = "Number";
 
         #endregion

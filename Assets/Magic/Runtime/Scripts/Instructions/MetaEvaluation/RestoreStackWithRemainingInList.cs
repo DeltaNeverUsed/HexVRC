@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using static BefuddledLabs.Magic.Constants;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
@@ -8,11 +9,9 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
         #region Docs
 
         public const string Description = "Special Instruction";
-        public const string Input = "";
         public const string Output = "";
 
         #endregion
-
 
         public static ExecutionState Execute(ExecutionInfo info) {
             StackItem[] remaining = info.Stack.ToArray();
@@ -22,14 +21,14 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
                 StackItem stackItem = oldStack.Pop();
                 if (stackItem.Type == ItemType.List) {
                     List<StackItem> stackList = (List<StackItem>)stackItem.Value;
-                    ListHelpers.InsertList(ref stackList, new List<StackItem>(remaining), stackList.Count);
+                    ListHelpers.InsertList(ref stackList, ToList(remaining), stackList.Count);
                     oldStack.Push(new StackItem(stackList));
                 }
                 else
-                    oldStack.Push(new StackItem(new List<StackItem>(remaining))); // this is bad practice... but the TryPop function doesn't work properly
+                    oldStack.Push(new StackItem(ToList(remaining))); // this is bad practice... but the TryPop function doesn't work properly
             }
             else
-                oldStack.Push(new StackItem(new List<StackItem>(remaining)));
+                oldStack.Push(new StackItem(ToList(remaining)));
             return ExecutionState.Ok();
         }
     }

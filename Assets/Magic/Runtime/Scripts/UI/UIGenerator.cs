@@ -1,5 +1,22 @@
 #if !UDONSHARP_COMPILER && UNITY_EDITOR
 
+using BefuddledLabs.Magic.Instructions.AdvancedMathematics;
+using BefuddledLabs.Magic.Instructions.BasicPatterns;
+using BefuddledLabs.Magic.Instructions.BasicSpells;
+using BefuddledLabs.Magic.Instructions.Constants;
+using BefuddledLabs.Magic.Instructions.Drone;
+using BefuddledLabs.Magic.Instructions.Entities;
+using BefuddledLabs.Magic.Instructions.EscapingPatterns;
+using BefuddledLabs.Magic.Instructions.GreatSpells;
+using BefuddledLabs.Magic.Instructions.ListManipulation;
+using BefuddledLabs.Magic.Instructions.LogicalOperators;
+using BefuddledLabs.Magic.Instructions.Mathematics;
+using BefuddledLabs.Magic.Instructions.MetaEvaluation;
+using BefuddledLabs.Magic.Instructions.NumberLiterals;
+using BefuddledLabs.Magic.Instructions.Player;
+using BefuddledLabs.Magic.Instructions.ReadingAndWriting;
+using BefuddledLabs.Magic.Instructions.Sets;
+using BefuddledLabs.Magic.Instructions.StackManipulation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,11 +33,51 @@ using UnityEngine.UI;
 namespace BefuddledLabs.Magic.UI {
     [CustomEditor(typeof(UIGenerator))]
     public class UIGeneratorInspector : Editor {
-        private Dictionary<string, List<Type>> _patterns = new Dictionary<string, List<Type>>();
+        // Defines the order for categories and spells inside of them.
+        // Any spells/categories not present here, will be ordered alphabetically after all present elements.
+        private static List<(string, Type[])> preferredCategoryOrder =
+            new List<(string, Type[])> {
+                ("BasicPatterns", new Type[] { typeof(GetLocalPlayer), typeof(GetEyePosition), typeof(Instructions.BasicPatterns.GetPosition), typeof(GetEyeDirection), typeof(RaycastPosition), typeof(RaycastNormal), typeof(RaycastEntity), typeof(PrintStack), typeof(GetPlayerHeight), typeof(Instructions.BasicPatterns.GetVelocity) } ),
+                ("NumberLiterals", new Type[] { typeof(NumberLiteralPositive), typeof(NumberLiteralNegative) } ),
+                ("Mathematics", new Type[] { typeof(Add), typeof(Sub), typeof(Mult), typeof(Div), typeof(Length), typeof(ExpOrVectorProjection), typeof(Floor), typeof(Ceil),  typeof(VectorConstruct), typeof(VectorDisintegration), typeof(Mod), typeof(AxialVectorOrSign), typeof(Random01) } ),
+                ("Constants", new Type[] { typeof(True), typeof(False), typeof(Null), typeof(VectorZero), typeof(VectorXp), typeof(VectorXn), typeof(VectorYp), typeof(VectorYn), typeof(VectorZp), typeof(VectorZn), typeof(Tau), typeof(Pi), typeof(E) } ),
+                ("StackManipulation", new Type[] { typeof(Instructions.StackManipulation.Pop), typeof(Swap), typeof(RotateL), typeof(RotateR), typeof(Duplicate), typeof(DuplicateSecond), typeof(Bury), typeof(Copy), typeof(DuplicateTwice), typeof(StackSize), typeof(Move), typeof(MoveCopy), typeof(Instructions.StackManipulation.Mask), typeof(Rearrange) } ),
+                ("LogicalOperators", new Type[] { typeof(IsSomething), typeof(Negate), typeof(Or), typeof(And), typeof(Xor), typeof(Ternary), typeof(Equals), typeof(NotEquals), typeof(GreaterThan), typeof(LessThan), typeof(GreaterThanEqual), typeof(LessThanEqual) } ),
+                ("Entities", new Type[] { typeof(GetScale), typeof(SetScale) } ),
+                ("Player", new Type[] { typeof(GetPlayersNear), typeof(IsLocal), typeof(IsValid), typeof(IsPlayerGrounded), typeof(IsUserInVR),  typeof(IsInstanceOwner), typeof(IsMaster), typeof(IsSuspended), typeof(PlayHapticEventInLeftHand), typeof(PlayHapticEventInRightHand) } ),
+                ("Drone", new Type[] { typeof(IsDeployed), typeof(GetDrone), typeof(Instructions.Drone.GetPosition), typeof(GetDirection), typeof(Instructions.Drone.GetVelocity)  } ),
+                ("ListManipulation", new Type[] { typeof(GetIndex), typeof(GetSlice), typeof(Push), typeof(Instructions.ListManipulation.Pop), typeof(CreateList), typeof(CreateListFromAny), typeof(ReverseList), typeof(IndexOf), typeof(RemoveAt), typeof(SetIndex), typeof(StackToList), typeof(ListToStack), typeof(InsertAt0), typeof(RemoveAt0) } ),
+                ("EscapingPatterns", new Type[] { typeof(Escape), typeof(Introspection), typeof(Retrospection), typeof(Instructions.EscapingPatterns.Undo) } ),
+                ("ReadingAndWriting", new Type[] { typeof(ReadLast), typeof(WriteLast), typeof(ReadEntity), typeof(WriteEntity), typeof(IsReadable), typeof(IsEntityReadable), typeof(IsWritable), typeof(IsEntityWritable), typeof(WriteRavenmind), typeof(ReadRavenmind) } ),
+                ("AdvancedMathematics", new Type[] { typeof(Sine), typeof(Cosine), typeof(Tangent), typeof(ArcSine), typeof(ArcCosine), typeof(ArcTangent), typeof(ArcTangent2), typeof(Log) } ),
+                ("Sets", new Type[] { typeof(Deduplicate) } ),
+                ("MetaEvaluation", new Type[] { typeof(Eval), typeof(EvalWithEarlyReturn), typeof(Map), typeof(Halt) } ),
+                ("BasicSpells", new Type[] { typeof(Impulse), typeof(Blink), typeof(PlayNote) } ),
+                ("GreatSpells" , new Type[] { typeof(GreaterTeleport) } ),
+            };
 
         private static string GetPath(Type instructionType) {
             return instructionType.GetField("Path", BindingFlags.Static | BindingFlags.Public)
                 ?.GetRawConstantValue().ToString();
+        }
+
+        private static string GetDescription(Type instructionType) {
+            return instructionType.GetField("Description", BindingFlags.Static | BindingFlags.Public)
+                ?.GetRawConstantValue().ToString();
+        }
+
+        private static string GetOutput(Type instructionType) {
+            return instructionType.GetField("Output", BindingFlags.Static | BindingFlags.Public)
+                ?.GetRawConstantValue().ToString();
+        }
+
+        private static HexDir GetDirection(Type instructionType) {
+            var field = instructionType.GetField("Direction", BindingFlags.Static | BindingFlags.Public);
+            if (field == null)
+            {
+                return HexDir.NORTH_EAST;
+            }
+            return (HexDir) field.GetRawConstantValue();
         }
 
         private static string GetAssetPathFromPath(string path) {
@@ -52,18 +109,43 @@ namespace BefuddledLabs.Magic.UI {
             // Step 3: Scale and translate
 
             return (from p in points
-                select new Vector2(p.x, p.y) - center
+                    select new Vector2(p.x, p.y) - center
                 into shifted
-                select shifted * scaleFactor
+                    select shifted * scaleFactor
                 into scaled
-                select new Vector3(scaled.x, scaled.y, 0)).ToList();
+                    select new Vector3(scaled.x, scaled.y, 0)).ToList();
         }
 
-        private static Vector3[] GetLinePoints(string notation) {
+        private static Vector3[] GetLinePoints(string notation, HexDir initialRotation) {
+            int angle = 0;
+            switch (initialRotation) {
+                case HexDir.NORTH_EAST:
+                    angle = -60;
+                    break;
+                case HexDir.EAST:
+                    angle = 0;
+                    break;
+                case HexDir.SOUTH_EAST:
+                    angle = 60;
+                    break;
+                case HexDir.SOUTH_WEST:
+                    angle = 120;
+                    break;
+                case HexDir.WEST:
+                    angle = 180;
+                    break;
+                case HexDir.NORTH_WEST:
+                    angle = -120;
+                    break;
+                default:
+                    break;
+            }
+
             List<Vector2Int> points = new() {
                 new Vector2Int(0, 0),
-                new Vector2Int(-1, 0),
+                Wand.RotateVector(new Vector2Int(-1, 0), angle),
             };
+
             foreach (char c in notation) {
                 switch (c) {
                     case 'w':
@@ -88,7 +170,7 @@ namespace BefuddledLabs.Magic.UI {
                         break;
                 }
             }
-
+            
             Vector3[] newPoints = new Vector3[points.Count];
             for (int index = 0; index < points.Count; index++) {
                 Vector2Int point = points[index];
@@ -107,14 +189,14 @@ namespace BefuddledLabs.Magic.UI {
             return new Vector2(x, y);
         }
 
-        private void GeneratePathImages(string[] paths) {
+        private void GeneratePathImages((string, HexDir)[] paths) {
             GameObject lineRendererObject = new GameObject("TempRenderer") {
                 layer = LayerMask.NameToLayer("reserved7")
             };
             LineRenderer lineRenderer = lineRendererObject.AddComponent<LineRenderer>();
 
-            lineRenderer.material = ((UIGenerator)target).lineMaterial;
-            lineRenderer.colorGradient = ((UIGenerator)target).lineGradient;
+            lineRenderer.material = ((UIGenerator) target).lineMaterial;
+            lineRenderer.colorGradient = ((UIGenerator) target).lineGradient;
             lineRenderer.textureMode = LineTextureMode.Stretch;
             lineRenderer.widthMultiplier = 0.01f;
             lineRenderer.numCapVertices = 16;
@@ -140,11 +222,11 @@ namespace BefuddledLabs.Magic.UI {
 
             char[] validCharacters = { 'a', 'q', 'w', 'e', 'd', '*' };
 
-            foreach (string path in paths) {
+            foreach ((string path, HexDir initDir) in paths) {
                 if (path.Count(c => validCharacters.Contains(c)) != path.Length)
                     continue; // invalid path
 
-                Vector3[] points = GetLinePoints(path);
+                Vector3[] points = GetLinePoints(path, initDir);
 
                 lineRenderer.positionCount = points.Length;
                 lineRenderer.SetPositions(ScaleToFitXY(points.ToList()).ToArray());
@@ -201,33 +283,41 @@ namespace BefuddledLabs.Magic.UI {
             DestroyImmediate(lineRendererObject);
         }
 
+        public void ClearDocs(UIGenerator data) {
+            int nbChildren = data.groupParent.childCount;
+            for (int i = nbChildren - 1; i >= 0; i--)
+                DestroyImmediate(data.groupParent.GetChild(i).gameObject);
+
+            nbChildren = data.categoryParent.childCount;
+            for (int i = nbChildren - 1; i >= 0; i--)
+                DestroyImmediate(data.categoryParent.GetChild(i).gameObject);
+        }
+
         public override void OnInspectorGUI() {
             DrawDefaultInspector();
 
             UIGenerator data = target as UIGenerator;
             if (GUILayout.Button("Clear")) {
-                int nbChildren = data.groupParent.childCount;
-                for (int i = nbChildren - 1; i >= 0; i--)
-                    DestroyImmediate(data.groupParent.GetChild(i).gameObject);
+                if (!data) return;
+
+                ClearDocs(data);
             }
 
             if (GUILayout.Button("Generate Images")) {
-                string[] paths = Assembly.GetAssembly(typeof(PlayerVM))
+                (string, HexDir)[] paths = Assembly.GetAssembly(typeof(PlayerVM))
                     .GetTypes()
                     .Where(t => t.IsClass && t.Namespace != null &&
                                 t.Namespace.StartsWith("BefuddledLabs.Magic.Instructions"))
-                    .Select(c => GetPath(c).Replace("*", "")).Where(p => !string.IsNullOrWhiteSpace(p)).ToArray();
+                    .Select(c => (GetPath(c).Replace("*", ""), GetDirection(c))).Where(p => !string.IsNullOrWhiteSpace(p.Item1)).ToArray();
                 GeneratePathImages(paths);
             }
 
             if (GUILayout.Button("Generate Doc UI")) {
                 if (!data) return;
 
-                int nbChildren = data.groupParent.childCount;
-                for (int i = nbChildren - 1; i >= 0; i--)
-                    DestroyImmediate(data.groupParent.GetChild(i).gameObject);
+                ClearDocs(data);
 
-                _patterns = new Dictionary<string, List<Type>>();
+                Dictionary<string, List<Type>> patterns = new Dictionary<string, List<Type>>();
                 List<Type> classes = Assembly.GetAssembly(typeof(PlayerVM))
                     .GetTypes()
                     .Where(t => t.IsClass && t.Namespace != null &&
@@ -236,23 +326,54 @@ namespace BefuddledLabs.Magic.UI {
                     if (t.Namespace != null) {
                         string group = t.Namespace.Replace("BefuddledLabs.Magic.Instructions.", "")
                             .Replace("BefuddledLabs.Magic.Instructions", "");
-                        if (!_patterns.ContainsKey(group)) {
-                            _patterns[group] = new List<Type>();
+                        if (!patterns.ContainsKey(group)) {
+                            patterns[group] = new List<Type>();
                         }
 
-                        _patterns[group].Add(t);
-                        UnityEngine.Debug.Log($"{group}, {t.FullName}");
+                        patterns[group].Add(t);
                     }
                 }
+                List<(string, List<Type>)> ordererdPatterns = 
+                    patterns.Select(
+                        pair =>
+                        {
+                            var orderIdx = preferredCategoryOrder.FindIndex(x => x.Item1 == pair.Key);
+                            var values = pair.Value;
+                            if (orderIdx >= 0)
+                            {
+                                var order = preferredCategoryOrder[orderIdx].Item2;
+                                values = values.OrderBy(x =>
+                                {
+                                    var idx = Array.IndexOf(order, x);
+                                    if (idx < 0) return int.MaxValue;
+                                    return idx;
+                                }).ToList();
+                            }
+
+                            return (pair.Key, values);
+                        })
+                    .OrderBy(pair =>
+                    {
+                        var idx = preferredCategoryOrder.FindIndex(x => x.Item1 == pair.Key);
+                        if (idx < 0) return int.MaxValue;
+                        return idx;
+
+                    }).ToList();
 
                 char[] validCharacters = { 'a', 'q', 'w', 'e', 'd', '*' };
-                foreach (KeyValuePair<string, List<Type>> p in _patterns) {
+                foreach ((string groupName, List<Type> groupPatterns) in ordererdPatterns) {
                     GameObject group = Instantiate(data.groupPrefab, data.groupParent);
-                    group.GetComponentInChildren<Text>().text = p.Key;
-                    group.name = p.Key;
+
+                    Transform category = group.transform.Find("Category");
+                    category.SetParent(data.categoryParent, false);
+                    category.GetComponentInChildren<TextMeshProUGUI>().text = groupName;
+                    category.GetComponentInChildren<Toggle>().group = data.categoryGroup;
+
+                    group.name = groupName;
+                    category.name = groupName;
 
                     Transform content = group.transform.Find("Content");
-                    foreach (Type patternClass in p.Value) {
+                    foreach (Type patternClass in groupPatterns) {
                         string path = GetPath(patternClass);
                         if (path.Count(c => validCharacters.Contains(c)) != path.Length)
                             continue;
@@ -270,9 +391,7 @@ namespace BefuddledLabs.Magic.UI {
                             .GetComponent<TextMeshProUGUI>();
 
                         StringBuilder descriptionBuilder = new StringBuilder();
-                        descriptionBuilder.Append(patternClass
-                            .GetField("Description", BindingFlags.Static | BindingFlags.Public)
-                            ?.GetRawConstantValue().ToString());
+                        descriptionBuilder.Append(GetDescription(patternClass));
 
                         foreach (MethodInfo method in patternClass.GetMethods()
                                      .Where(m => string.Equals(m.Name, "Execute", StringComparison.OrdinalIgnoreCase))
@@ -293,9 +412,7 @@ namespace BefuddledLabs.Magic.UI {
                         notation.text = path;
 
                         descriptionBuilder.Append("\nOutputs: ");
-                        descriptionBuilder.AppendLine(patternClass
-                            .GetField("Output", BindingFlags.Static | BindingFlags.Public)
-                            ?.GetRawConstantValue().ToString());
+                        descriptionBuilder.AppendLine(GetOutput(patternClass));
 
 
                         description.text = descriptionBuilder.ToString();
@@ -328,6 +445,9 @@ namespace BefuddledLabs.Magic.UI {
         public GameObject patternPrefab;
 
         public Transform groupParent;
+        public Transform categoryParent;
+
+        public ToggleGroup categoryGroup;
 
         public Material lineMaterial;
         public Gradient lineGradient;
