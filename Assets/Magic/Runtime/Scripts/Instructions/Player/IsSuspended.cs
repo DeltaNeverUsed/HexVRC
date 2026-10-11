@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.Player {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Tells you if the player's device is suspended. A device is suspended if it enters sleep mode or switches to a different app. While suspended, devices don't run Udon code or respond to network events until the player reopens VRChat.";
-        public const string Input = "Player";
         public const string Output = "Boolean";
 
         #endregion

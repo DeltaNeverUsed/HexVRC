@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.WEST;
         public const string Description = "Pauses the execution for an amount of seconds between 0 and 5 seconds";
-        public const string Input = "Number";
         public const string Output = "";
 
         #endregion

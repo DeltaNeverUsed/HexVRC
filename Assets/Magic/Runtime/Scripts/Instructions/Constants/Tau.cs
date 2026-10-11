@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.Constants {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_WEST;
         public const string Description = "Tau";
-        public const string Input = "";
         public const string Output = "Number";
 
         #endregion

@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_EAST;
         public const string Description = "Yanks the top iota to the third position. [0, 1, 2] becomes [2, 0, 1].";
-        public const string Input = "Any, Any, Any";
         public const string Output = "Any, Any, Any";
 
         #endregion

@@ -8,8 +8,8 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Transform a Player or Entity into the direction they are looking at";
-        public const string Input = "Player | Entity";
         public const string Output = "Vector";
 
         #endregion

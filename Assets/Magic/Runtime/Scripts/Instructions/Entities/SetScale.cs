@@ -8,8 +8,8 @@ namespace BefuddledLabs.Magic.Instructions.Entities {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_EAST;
         public const string Description = "Set the scale of the entity, passing in a proportion of their normal size.";
-        public const string Input = "Player | Entity, Number";
         public const string Output = "";
 
         #endregion

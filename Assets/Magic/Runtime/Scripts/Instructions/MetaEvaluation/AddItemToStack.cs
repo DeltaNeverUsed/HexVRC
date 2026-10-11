@@ -10,7 +10,6 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
         #region Docs
 
         public const string Description = "Special Instruction";
-        public const string Input = "";
         public const string Output = "";
 
         #endregion

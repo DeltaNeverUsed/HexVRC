@@ -8,10 +8,9 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_WEST;
         public const string Description =
             "Evaluates a list of symbols or a singular symbol, but adds a special skip instruction to the stack, that when executed will skip the rest of the patterns in the pattern list";
-
-        public const string Input = "[Symbol] | symbol";
         public const string Output = "";
 
         #endregion

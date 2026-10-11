@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Creates a vector from 3 numbers(x, y, z)";
-        public const string Input = "Number, Number, Number";
         public const string Output = "Vector";
 
         #endregion

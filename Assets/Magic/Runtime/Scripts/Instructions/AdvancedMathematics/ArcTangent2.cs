@@ -7,10 +7,9 @@ namespace BefuddledLabs.Magic.Instructions.AdvancedMathematics {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.WEST;
         public const string Description =
             "Takes the inverse tangent of a Y and X value, yielding the angle between the X-axis and a line from the origin to that point.";
-
-        public const string Input = "Number, Number";
         public const string Output = "Number";
 
         #endregion

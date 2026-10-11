@@ -2,14 +2,14 @@
 using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.Entities {
+namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
     public static class GetVelocity {
         public const string Path = "wq";
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Transforms an Entity or Player on the stack into the direction in which it's moving, with the speed of that movement as that direction's magnitude.";
-        public const string Input = "Entity";
         public const string Output = "Vector | Garbage";
 
         #endregion

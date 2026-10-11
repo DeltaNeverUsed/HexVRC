@@ -6,8 +6,8 @@ namespace BefuddledLabs.Magic.Instructions.StackManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Copy the top two iotas of the stack. [0, 1] becomes [0, 1, 0, 1].";
-        public const string Input = "Any, Any";
         public const string Output = "Any, Any, Any, Any";
 
         #endregion

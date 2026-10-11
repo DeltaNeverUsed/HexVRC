@@ -7,10 +7,9 @@ namespace BefuddledLabs.Magic.Instructions.AdvancedMathematics {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_EAST;
         public const string Description =
             "Takes the inverse tangent of a value, yielding the angle whose tangent is that value. Related to the values of π and τ.";
-
-        public const string Input = "Number";
         public const string Output = "Number";
 
         #endregion

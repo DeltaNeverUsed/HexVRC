@@ -7,12 +7,11 @@ namespace BefuddledLabs.Magic.Instructions.Constants {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.SOUTH_WEST;
         public const string Description = "Vector (0,0,-1)";
-        public const string Input = "";
         public const string Output = "Vector";
 
         #endregion
-
 
         public static ExecutionState Execute(ExecutionInfo info) {
             info.Stack.Push(new StackItem(new Vector3(0,0,-1)));

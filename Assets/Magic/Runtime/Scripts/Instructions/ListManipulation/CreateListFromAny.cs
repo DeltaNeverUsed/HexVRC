@@ -7,9 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Remove the top of the stack, then push a list containing only that element.";
-
-        public const string Input = "Any";
         public const string Output = "List";
 
         #endregion

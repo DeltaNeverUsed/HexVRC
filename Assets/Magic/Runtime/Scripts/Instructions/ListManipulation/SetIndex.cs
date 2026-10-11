@@ -8,10 +8,9 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_WEST;
         public const string Description =
             "Sets the nth element from a list at a given index";
-
-        public const string Input = "List, Number, Any";
         public const string Output = "Any";
 
         #endregion

@@ -8,10 +8,9 @@ namespace BefuddledLabs.Magic.Instructions.Player {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description =
             "Vibrate the Player's Haptic controllers if they have them. The float inputs should be in the range 0-1. duration is the amount of time that they vibrate, amplitude is the strength with which they vibrate, and frequency is the speed at which they vibrate. The feeling can vary quite a bit between controllers.";
-
-        public const string Input = "Player, Number, Number, Number";
         public const string Output = "";
 
         #endregion

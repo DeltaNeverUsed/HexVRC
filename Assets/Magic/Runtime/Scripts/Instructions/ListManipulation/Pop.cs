@@ -7,9 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_WEST;
         public const string Description = "Pops the item at the top of the list onto the stack";
-
-        public const string Input = "List";
         public const string Output = "Any";
 
         #endregion

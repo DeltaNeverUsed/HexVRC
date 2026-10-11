@@ -15,14 +15,25 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
         #endregion
 
 
-        public static ExecutionState Execute(ExecutionInfo info, float a, float b) {
+        public static ExecutionState Execute(ExecutionInfo info, float a, float b)
+        {
             if (b == 0)
                 return ExecutionState.Err("Division by zero");
 
             info.Stack.Push(new StackItem(a % b));
             return ExecutionState.Ok();
         }
-        
+
+        public static ExecutionState Execute(ExecutionInfo info, Vector3 a, float b)
+        {
+            return Execute(info, a, new Vector3(b, b, b));
+        }
+
+        public static ExecutionState Execute(ExecutionInfo info, float a, Vector3 b)
+        {
+            return Execute(info, new Vector3(a, a, a), b);
+        }
+
         public static ExecutionState Execute(ExecutionInfo info, Vector3 a, Vector3 b) {
             if (b.x == 0 || b.y == 0 || b.z == 0)
                 return ExecutionState.Err("Division by zero");

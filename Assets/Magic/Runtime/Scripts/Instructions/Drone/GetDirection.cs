@@ -3,13 +3,12 @@ using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.Drone {
-    public static class GetRotation {
+    public static class GetDirection {
         public const string Path = "ddwwddwewa";
 
         #region Docs
 
         public const string Description = "Get Drone's facing direction";
-        public const string Input = "Drone";
         public const string Output = "Vector | Null";
 
         #endregion

@@ -9,8 +9,8 @@ namespace BefuddledLabs.Magic.Instructions.GreatSpells {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Far more powerful than Blink, this spell lets me teleport nearly anywhere in the entire world! There does seem to be a limit, but it is much greater than the normal radius of influence I am used to.\n\nThe entity will be teleported by the given vector. Curiously, this vector seems to be an offset, not an absolute position in the world; for example, if I use Vector Reflection +X, the entity will end up precisely one block east of its original position. No matter the distance";
-        public const string Input = "Player | Entity, Vector";
         public const string Output = "";
 
         #endregion

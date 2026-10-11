@@ -3,14 +3,14 @@ using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
+namespace BefuddledLabs.Magic.Instructions.BasicSpells {
     public static class Blink {
         public const string Path = "awqqqwaq";
 
         #region Docs
 
+        public const HexDir Direction = HexDir.SOUTH_WEST;
         public const string Description = "Remove an Player and length from the stack, then teleport the given Player along its look vector by the given length.";
-        public const string Input = "Player, Number";
         public const string Output = "";
 
         #endregion

@@ -8,8 +8,8 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.SOUTH_EAST;
         public const string Description = "Evaluates a list of symbols or a singular symbol";
-        public const string Input = "[Symbol] | symbol";
         public const string Output = "";
 
         #endregion

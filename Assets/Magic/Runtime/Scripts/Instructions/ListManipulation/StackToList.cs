@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using static BefuddledLabs.Magic.Constants;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.ListManipulation {
@@ -7,10 +8,9 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.SOUTH_WEST;
         public const string Description =
             "Remove num elements from the stack, then add them to a list at the top of the stack.";
-
-        public const string Input = "Number";
         public const string Output = "List";
 
         #endregion
@@ -39,7 +39,7 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
             }
 
             // Push the list onto the stack
-            info.Stack.Push(new StackItem(new List<StackItem>(array)));
+            info.Stack.Push(new StackItem(ToList(array)));
             return ExecutionState.Ok();
         }
     }

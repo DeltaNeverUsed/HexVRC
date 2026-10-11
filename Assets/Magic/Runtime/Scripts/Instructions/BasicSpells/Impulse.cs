@@ -3,14 +3,14 @@ using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
+namespace BefuddledLabs.Magic.Instructions.BasicSpells {
     public static class Impulse {
         public const string Path = "awqqqwaqw";
 
         #region Docs
 
+        public const HexDir Direction = HexDir.SOUTH_WEST;
         public const string Description = "Remove an Player, Drone, or Entity and a direction from the stack, then give a shove to the given entity in the given direction. The strength of the impulse is determined by the length of the vector.";
-        public const string Input = "Player | Drone | Entity, Vector";
         public const string Output = "";
 
         #endregion

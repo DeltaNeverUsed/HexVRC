@@ -7,9 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.ListManipulation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Gets the Index of an element in a List";
-
-        public const string Input = "List, Any";
         public const string Output = "Number";
 
         #endregion

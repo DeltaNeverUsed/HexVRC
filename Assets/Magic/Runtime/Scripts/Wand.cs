@@ -10,6 +10,10 @@ using VRC.Udon.Common.Enums;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic {
+    public enum HexDir {
+        NORTH_EAST, EAST, SOUTH_EAST, SOUTH_WEST, WEST, NORTH_WEST
+    }
+
     public enum RotationDirection {
         Straight,
         Left,

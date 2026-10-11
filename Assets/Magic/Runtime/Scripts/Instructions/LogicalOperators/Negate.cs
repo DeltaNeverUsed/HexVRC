@@ -6,13 +6,11 @@ namespace BefuddledLabs.Magic.Instructions.LogicalOperators {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_WEST;
         public const string Description = "Negates a boolean";
-
-        public const string Input = "Boolean | Number";
         public const string Output = "Boolean | Number";
 
         #endregion
-
 
         public static ExecutionState Execute(ExecutionInfo info, bool value) {
             info.Stack.Push(new StackItem(!value));

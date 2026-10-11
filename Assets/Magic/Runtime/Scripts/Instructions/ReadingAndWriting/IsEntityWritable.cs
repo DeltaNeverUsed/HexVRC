@@ -1,13 +1,13 @@
 ﻿// ReSharper disable once CheckNamespace
 
-namespace BefuddledLabs.Magic.Instructions.Entities {
-    public static class IsReadable {
-        public const string Path = "wawqwqwqwqwqwew";
+namespace BefuddledLabs.Magic.Instructions.ReadingAndWriting {
+    public static class IsEntityWritable {
+        public const string Path = "wdwewewewewewqw";
 
         #region Docs
 
-        public const string Description = "Gets the readablity of an entity";
-        public const string Input = "Entity";
+        public const HexDir Direction = HexDir.EAST;
+        public const string Description = "Gets the writablity of an entity";
         public const string Output = "Boolean";
 
         #endregion

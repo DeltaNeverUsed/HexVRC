@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.Player {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Is the player the instance owner";
-        public const string Input = "Player";
         public const string Output = "Boolean";
 
         #endregion

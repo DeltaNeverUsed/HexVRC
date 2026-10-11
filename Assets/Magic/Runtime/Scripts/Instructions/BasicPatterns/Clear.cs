@@ -3,11 +3,11 @@
 namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
     public static class Clear {
         public const string Path = "eeeeedw";
-        
+
         #region Docs
-        
+
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Clears the stack and the Glyph space";
-        public const string Input = "";
         public const string Output = "";
 
         #endregion

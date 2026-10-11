@@ -7,10 +7,9 @@ namespace BefuddledLabs.Magic.Instructions.AdvancedMathematics {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.SOUTH_EAST;
         public const string Description =
             "Takes the inverse sine of a value with absolute value 1 or less, yielding the angle whose sine is that value. Related to the values of π and τ.";
-
-        public const string Input = "Number";
         public const string Output = "Number";
 
         #endregion

@@ -4,16 +4,16 @@ using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
 // ReSharper disable once CheckNamespace
-namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
+namespace BefuddledLabs.Magic.Instructions.BasicSpells {
     public static class PlayNote {
         public const string Path = "adaa";
 
         #region Docs
 
+        public const HexDir Direction = HexDir.WEST;
         public const string Description = @"Remove a vector and two numbers from the stack. Plays an instrument defined by the first number at the given location, with a note defined by the second number.
 
 There appear to be 16 different instruments and 25 different notes. both being indexed from 0";
-        public const string Input = "";
         public const string Output = "";
 
         #endregion

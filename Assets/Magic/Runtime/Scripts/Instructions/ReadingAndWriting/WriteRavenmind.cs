@@ -6,10 +6,9 @@ namespace BefuddledLabs.Magic.Instructions.ReadingAndWriting {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_WEST;
         public const string Description =
             "Removes the top iota from the stack, and saves it to my ravenmind, storing it there until I stop casting the Hex.";
-
-        public const string Input = "Any";
         public const string Output = "";
 
         #endregion

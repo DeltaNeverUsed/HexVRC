@@ -5,11 +5,11 @@ using VRC.SDKBase;
 namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
     public static class GetPickupPosition {
         public const string Path = "eeeeaa";
-        
+
         #region Docs
-        
+
+        public const HexDir Direction = HexDir.NORTH_WEST;
         public const string Description = "Gets the position of the casting object your holding";
-        public const string Input = "";
         public const string Output = "Vector";
 
         #endregion

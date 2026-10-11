@@ -8,12 +8,11 @@ namespace BefuddledLabs.Magic.Instructions.EscapingPatterns {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Removes the last Symbol from the Symbol list";
-        public const string Input = "List";
         public const string Output = "List";
 
         #endregion
-
 
         public static ExecutionState Execute(ExecutionInfo info, List<StackItem> patterns) {
             if (patterns.Count - 1 < 0 || patterns.Count - 1 >= patterns.Count)

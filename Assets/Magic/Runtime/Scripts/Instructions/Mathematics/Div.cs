@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
 
         #region Docs
 
-        public const string Description = "Divides two numbers or vectors";
-        public const string Input = "Number | Vector, Number | Vector";
+        public const HexDir Direction = HexDir.NORTH_EAST;
+        public const string Description = "Divides two numbers or a vector and a number or performs a cross product if two vectors are provided.";
         public const string Output = "Number | Vector";
 
         #endregion
@@ -22,11 +22,19 @@ namespace BefuddledLabs.Magic.Instructions.Mathematics {
             return ExecutionState.Ok();
         }
 
-        public static ExecutionState Execute(ExecutionInfo info, Vector3 a, float b) {
+        public static ExecutionState Execute(ExecutionInfo info, Vector3 a, float b)
+        {
             if (b == 0)
                 return ExecutionState.Err("Division by zero");
-
             info.Stack.Push(new StackItem(new Vector3(a.x / b, a.y / b, a.z / b)));
+            return ExecutionState.Ok();
+        }
+
+        public static ExecutionState Execute(ExecutionInfo info, float a, Vector3 b)
+        {
+            if (b.x == 0 || b.y == 0 || b.z == 0)
+                return ExecutionState.Err("Division by zero");
+            info.Stack.Push(new StackItem(new Vector3(a / b.x, a / b.y, a / b.z)));
             return ExecutionState.Ok();
         }
 

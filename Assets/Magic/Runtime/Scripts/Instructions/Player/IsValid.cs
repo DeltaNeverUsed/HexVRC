@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.Player {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.EAST;
         public const string Description = "Tells you if the player is a valid player or not";
-        public const string Input = "Player";
         public const string Output = "Boolean";
 
         #endregion

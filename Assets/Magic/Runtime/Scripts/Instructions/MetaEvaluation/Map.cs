@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using static BefuddledLabs.Magic.Constants;
 
 // ReSharper disable once CheckNamespace
 namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
@@ -8,6 +9,7 @@ namespace BefuddledLabs.Magic.Instructions.MetaEvaluation {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_EAST;
         public const string Description =
             @"Remove a list of patterns and a list from the stack, then cast the given pattern over each element of the second list.
 
@@ -19,8 +21,6 @@ Draw all the patterns in the first list
 
 Save all the iotas remaining on the stack to a list
 Then, after all is said and done, pushes the list of saved iotas onto the main stack.";
-
-        public const string Input = "[Symbol], List";
         public const string Output = "List";
 
         #endregion
@@ -50,7 +50,7 @@ Then, after all is said and done, pushes the list of saved iotas onto the main s
                     perItemInstructions.Length);
                 info.VM.SkipIndexes.Push(info.CurrentInstructionIndex + instructionsToInsert.Length - start);
             }
-            ListHelpers.InsertList(ref info.VM.CurrentInstructions, new List<Instruction>(instructionsToInsert), info.VM.CurrentInstructions.Count);
+            ListHelpers.InsertList(ref info.VM.CurrentInstructions, ToList(instructionsToInsert), info.VM.CurrentInstructions.Count);
             return ExecutionState.Ok();
         }
     }

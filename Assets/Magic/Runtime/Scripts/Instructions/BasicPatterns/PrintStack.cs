@@ -7,8 +7,8 @@ namespace BefuddledLabs.Magic.Instructions.BasicPatterns {
 
         #region Docs
 
+        public const HexDir Direction = HexDir.NORTH_EAST;
         public const string Description = "Debug.Logs the stack to the console";
-        public const string Input = "";
         public const string Output = "";
 
         #endregion
